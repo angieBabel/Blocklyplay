@@ -5,18 +5,34 @@
   <title>Document</title>
 </head>
 <body>
-  <canvas width="400" height="300" id="lienzo">
+  <canvas width="800" height="500" id="lienzo">
     <script>
       var cv, cx, objetos, objetoActual= null;
       var inicioX=0, inicioY=0;
       function actualizar() {
         cx.fillStyle = '#f0f0f0';
-        cx.fillRect(0,0,400,300);
+        cx.fillRect(0,0,800,500);
         for (var i = 0; i < objetos.length; i++) {
           cx.fillStyle = objetos[i].color;
           cx.fillRect(objetos[i].x, objetos[i].y, objetos[i].width, objetos[i].height);
         }
-      }
+
+
+      };
+
+      function moverAuto(){
+
+        if(objetoActual!= null){
+
+          for (var i = 0; i< lienzo.width; i+2) {
+            objetoActual.x= inicioX + i;
+            actualizar();
+            //objetoActual.y = objetos[3].y + i;
+          }
+        }
+        };
+
+
       window.onload = function() {
         objetos = [];
         cv= document.getElementById('lienzo');
@@ -43,6 +59,7 @@
 
         actualizar();
 
+
         cv.onmousedown = function(event){
           for(var i= 0; i < objetos.length; i++){
             if (objetos[i].x < event.clientX && (objetos[i].width + objetos[i].x > event.clientX) &&
@@ -50,6 +67,7 @@
               objetoActual= objetos[i];
               inicioY= event.clientY - objetos[i].y;
               inicioX= event.clientX - objetos[i].x;
+              moverAuto();
               break;
             }
           }

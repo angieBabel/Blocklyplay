@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" >
+	<head>
+		<meta charset="UTF-8" />
+
+		<title>
+			Animación Canvas
+		</title>
+
+
+		<script type="text/javascript">
+
+		var imagenes;
+
+		//Posiciones iniciales.
+		var imagenX = 0;
+		var imagenY = 100;
+		var imagen2X = 0;
+		var imagen2Y = 170;
+
+		//Imagenes.
+		var img = new Image;
+		img.src = "plane.png";
+		img.id = "imagenes";
+
+
+		/*img.style.height=5;
+		img.style.width=5;*/
+
+
+
+		function comenzar(){
+			imagenes= document.getElementById('imagenes');
+
+
+ 			lienzo = document.getElementById('lienzo');
+ 			lienzo.style.background='#A7DBD8';
+ 			ctx = lienzo.getContext('2d');
+
+ 			//Llamar a la función cada 30 milisegundos.
+ 			//Recordar que 1000 milisegundos = 1 segundo
+ 			setInterval(mover, 2000);
+
+
+		}
+
+		function mover(){
+
+
+
+			//ctx.fill();
+
+
+			ctx.strokeStyle = "gray";//Color
+			//ctx.fillStyle = "#6ab150";
+			ctx.setLineDash([10, 6]);//cuando incia la continua y la descotinua
+			ctx.lineDashOffset = 0;
+			ctx.beginPath();
+
+			var aux, auy;
+			var numx= Math.floor(Math.random() * (900 - 1)) + 1;
+			var numy= Math.floor(Math.random() * (400 - 1)) + 1;
+			ctx.moveTo(imagenX+10, imagenY);
+			ctx.arc(imagenX,imagenY,10,0,2*Math.PI);
+
+
+			//movimiento aleatorio
+			if ((imagenX+numx) > 900) {
+				aux= (imagenX + numx) - 900;
+				imagenX = imagenX - aux;
+			} else {
+				imagenX = imagenX + numx;
+			};
+
+			if ((imagenY+numy) > 400){
+				auy = (imagenY + numy) - 400;
+				imagenY = imagenY - auy;
+			}
+			else{
+				imagenY = imagenY + numy;
+			}
+
+		 	//Borro todo lo que haya en nuestro lienzo
+		 	ctx.clearRect(0,0,lienzo.width,lienzo.height);
+
+ 			//Dibujo las imágenes en la nueva posición
+			ctx.drawImage(img, imagenX, imagenY);
+			//ctx.drawImage(img2, imagen2X, imagen2Y);
+
+			//
+			ctx.fillStyle = "black";
+			ctx.fill();
+
+			ctx.lineTo(imagenX + 35, imagenY + 73);
+
+
+
+			ctx.stroke();
+
+
+
+		}
+
+
+
+		</script>
+
+	</head>
+<!--Este código ha sido realizado por @eneakao, puedes utilizarlo libremente-->
+	<body onload="comenzar()">
+		<h1>Ejemplo de Animación</h1>
+		<canvas id="lienzo" width="1000" height="500">
+
+		</canvas>
+	</body>
+
+</html>
