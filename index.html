@@ -5,7 +5,7 @@
   <title>Document</title>
 </head>
 <body>
-  <canvas width="800" height="500" id="lienzo">
+  <canvas width="800" height="500" id="lienzo" name:"lienzo">
     <script>
       var cv, cx, objetos, objetoActual= null;
       var inicioX=0, inicioY=0;
@@ -20,23 +20,21 @@
 
       };
 
-      function moverAuto(){
 
-        if(objetoActual!= null){
-
-          for (var i = 0; i< lienzo.width; i+2) {
-            objetoActual.x= inicioX + i;
-            actualizar();
-            //objetoActual.y = objetos[3].y + i;
-          }
-        }
-        };
 
 
       window.onload = function() {
         objetos = [];
         cv= document.getElementById('lienzo');
         cx = cv.getContext('2d');
+
+        //
+        document.onkeypress = function (e){
+          var evento = window.event || e;
+          var tecla = evento.keyCode;
+          alert('entro '+ tecla);
+
+        };
 
         //Objetos de prueba
         objetos.push({
