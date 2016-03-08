@@ -33,8 +33,25 @@
       lienzo = document.getElementById('lienzo');
       lienzo.style.background='#A7DBD8';
       ctx = lienzo.getContext('2d');
+<<<<<<< HEAD
       circulo();
       rectangulo();
+=======
+      ctx.beginPath();
+      var X = lienzo.width/2;
+      var Y = lienzo.height/2;
+      var r = 8;
+      ctx.strokeStyle = "gray";
+      ctx.fillStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.arc(X,Y,r,0,2*Math.PI);
+      ctx.fill();
+
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#00f";
+      ctx.fillStyle = "#ff0";
+      ctx.rect(X, Y-100, 100, 100);
+>>>>>>> origin/pageBlockly
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
