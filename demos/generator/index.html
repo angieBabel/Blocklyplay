@@ -27,52 +27,51 @@
     var X;
     var Y;
     var r;
+    var Xaux;
 
     function comenzar(){
 
       lienzo = document.getElementById('lienzo');
       lienzo.style.background='#A7DBD8';
       ctx = lienzo.getContext('2d');
+      X = lienzo.width/2;
+      Y = lienzo.height/2;
+      r = 10;
+      Xaux = X;
       circulo();
       rectangulo();
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
-      setInterval(limpiar, 2000);
+      setInterval(moverx, 100);
     }
-    function mover(){
-      var Xaux= X;
-      var Yaux= Y;
-      var aux, auxy;
-      //ctx.fill();
-      ctx.strokeStyle = "gray";
-      ctx.fillStyle = "black";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      Xaux = Xaux+20;
-      ctx.moveTo(X+10, Y);
 
-
-
-      //Borro todo lo que haya en nuestro lienzo
-      //ctx.clearRect(0,0,lienzo.width,lienzo.height);
-      //Dibujo las imágenes en la nueva posición
-      ctx.arc(Xaux,Yaux,r,0,2*Math.PI);
-      ctx.fill();
-      ctx.stroke();
-    }
     function moverx(){
+      //alert(Xaux);
 
+        ctx.beginPath();
+        if(Xaux<400){
+          Xaux=Xaux+20;
+          ctx.clearRect(0,0,lienzo.width,lienzo.height);
+          ctx.arc(Xaux,Y,r,0,2*Math.PI);
+          ctx.fill();
+
+          ctx.stroke();
+          rectangulo();
+
+
+        }
+
+        //limpiar();
+      //}
     }
     function limpiar() {
       ctx.clearRect(0,0,lienzo.width,lienzo.height);
+
       rectangulo();
     }
     function circulo(){
       ctx.beginPath();
-      X = lienzo.width/2;
-      Y = lienzo.height/2;
-      r = 10;
       ctx.strokeStyle = "#006400";
       ctx.fillStyle = "#6ab150";
       ctx.lineWidth = 2;
