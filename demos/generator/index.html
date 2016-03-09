@@ -27,7 +27,7 @@
     var X;
     var Y;
     var r;
-    var Xaux;
+    var Xaux,Yaux;
 
     function comenzar(){
 
@@ -38,32 +38,42 @@
       Y = lienzo.height/2;
       r = 10;
       Xaux = X;
+      Yaux= Y;
       circulo();
       rectangulo();
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
-      setInterval(moverx, 100);
+      setInterval(movery, 1000);
     }
 
     function moverx(){
-      //alert(Xaux);
-
         ctx.beginPath();
         if(Xaux<400){
           Xaux=Xaux+20;
           ctx.clearRect(0,0,lienzo.width,lienzo.height);
           ctx.arc(Xaux,Y,r,0,2*Math.PI);
           ctx.fill();
-
           ctx.stroke();
           rectangulo();
-
-
+        }
+        if(Xaux===400){
+          movery();
         }
 
-        //limpiar();
-      //}
+    }
+
+    function movery(){
+      //alert(Yaux);
+      ctx.beginPath();
+      if(Yaux<150){
+        Yaux=Yaux-20;
+        ctx.clearRect(0,0,lienzo.width,lienzo.height);
+        ctx.arc(X,Yaux,r,0,2*Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        rectangulo();
+      }
     }
     function limpiar() {
       ctx.clearRect(0,0,lienzo.width,lienzo.height);
