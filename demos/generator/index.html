@@ -27,7 +27,7 @@
     var X;
     var Y;
     var r;
-    var Xaux,Yaux;
+    var Xaux,Yaux,limx,limy;
 
     function comenzar(){
 
@@ -44,12 +44,13 @@
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
-      setInterval(movery, 1000);
+      setInterval(Atras,50);
     }
 
-    function moverx(){
+    function Adelante(){
+      limx=X+100;
         ctx.beginPath();
-        if(Xaux<400){
+        if(Xaux<limx){
           Xaux=Xaux+20;
           ctx.clearRect(0,0,lienzo.width,lienzo.height);
           ctx.arc(Xaux,Y,r,0,2*Math.PI);
@@ -57,16 +58,25 @@
           ctx.stroke();
           rectangulo();
         }
-        if(Xaux===400){
-          movery();
+    }
+    function Atras(){
+      limx=X-100;
+        ctx.beginPath();
+        if(Xaux>limx){
+          Xaux=Xaux-20;
+          ctx.clearRect(0,0,lienzo.width,lienzo.height);
+          ctx.arc(Xaux,Y,r,0,2*Math.PI);
+          ctx.fill();
+          ctx.stroke();
+          rectangulo();
         }
-
     }
 
-    function movery(){
+    function Arriba(){
+      limy=Y-100;
       //alert(Yaux);
       ctx.beginPath();
-      if(Yaux<150){
+      if(Yaux>150){
         Yaux=Yaux-20;
         ctx.clearRect(0,0,lienzo.width,lienzo.height);
         ctx.arc(X,Yaux,r,0,2*Math.PI);
@@ -75,11 +85,21 @@
         rectangulo();
       }
     }
-    function limpiar() {
-      ctx.clearRect(0,0,lienzo.width,lienzo.height);
 
-      rectangulo();
+    function Abajo(){
+      limy=Y+100;
+      //alert(Yaux);
+      ctx.beginPath();
+      if(Yaux<limy){
+        Yaux=Yaux+20;
+        ctx.clearRect(0,0,lienzo.width,lienzo.height);
+        ctx.arc(X,Yaux,r,0,2*Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        rectangulo();
+      }
     }
+
     function circulo(){
       ctx.beginPath();
       ctx.strokeStyle = "#006400";
