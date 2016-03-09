@@ -27,77 +27,120 @@
     var X;
     var Y;
     var r;
-    var Xaux,Yaux,limx,limy;
+    var Xaux=0,Yaux=0,limx,limy;
+    var stepsize=20;
+    var initX=0,initY=0;
+    var j=0;
+
 
     function comenzar(){
 
       lienzo = document.getElementById('lienzo');
-      lienzo.style.background='#A7DBD8';
+      //lienzo.style.background='#A7DBD8';
+      lienzo.style.border='1px solid black';
       ctx = lienzo.getContext('2d');
       X = lienzo.width/2;
       Y = lienzo.height/2;
       r = 10;
       Xaux = X;
       Yaux= Y;
+      plano();
       circulo();
       rectangulo();
+      Adelante(4);
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
-      setInterval(Atras,50);
+      /*var intervalo=setInterval(function(){
+        //j++;
+        //alert("Entro "+ j);
+        Adelante(5)},3000);*/
     }
 
-    function Adelante(){
-      limx=X+100;
-        ctx.beginPath();
-        if(Xaux<limx){
-          Xaux=Xaux+20;
-          ctx.clearRect(0,0,lienzo.width,lienzo.height);
-          ctx.arc(Xaux,Y,r,0,2*Math.PI);
+    function plano(){
+      while(initX<lienzo.width-stepsize){
+        initX=initX+stepsize;
+        while(initY<lienzo.height-stepsize){
+          initY=initY+stepsize;
+          ctx.beginPath();
+          ctx.fillStyle = "#E3E2E2";
+          ctx.arc(initX,initY,1.5,0,2*Math.PI);
           ctx.fill();
-          ctx.stroke();
-          rectangulo();
         }
+        initY=0;
+      }
+      initX=0;
     }
-    function Atras(){
-      limx=X-100;
+
+    function Adelante(nosteps){
+      alert("Entro");
+      limx = X + (nosteps*stepsize);
+      i=0;
+      while(i<nosteps){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
         ctx.beginPath();
+          if(Xaux<limx){
+            Xaux=Xaux+stepsize;
+            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.arc(Xaux,Y,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        plano();
+        rectangulo();
+        i++;
+      }
+
+    }
+
+     function Atras(nosteps){
+      limx=X-(nosteps*stepsize);
+      ctx.strokeStyle = "#006400";
+      ctx.fillStyle = "#6ab150";
+      ctx.beginPath();
         if(Xaux>limx){
-          Xaux=Xaux-20;
+          Xaux=Xaux-stepsize;
           ctx.clearRect(0,0,lienzo.width,lienzo.height);
+          plano();
           ctx.arc(Xaux,Y,r,0,2*Math.PI);
           ctx.fill();
           ctx.stroke();
-          rectangulo();
         }
+      plano();
+      rectangulo();
     }
 
-    function Arriba(){
+    function Arriba(nosteps){
       limy=Y-100;
-      //alert(Yaux);
+      ctx.strokeStyle = "#006400";
+      ctx.fillStyle = "#6ab150";
       ctx.beginPath();
-      if(Yaux>150){
-        Yaux=Yaux-20;
-        ctx.clearRect(0,0,lienzo.width,lienzo.height);
-        ctx.arc(X,Yaux,r,0,2*Math.PI);
-        ctx.fill();
-        ctx.stroke();
-        rectangulo();
-      }
+        if(Yaux>150){
+          Yaux=Yaux-stepsize;
+          ctx.clearRect(0,0,lienzo.width,lienzo.height);
+          ctx.arc(X,Yaux,r,0,2*Math.PI);
+          ctx.fill();
+          ctx.stroke();
+        }
+      plano();
+      rectangulo();
     }
 
-    function Abajo(){
+    function Abajo(nosteps){
       limy=Y+100;
-      //alert(Yaux);
+      ctx.strokeStyle = "#006400";
+      ctx.fillStyle = "#6ab150";
       ctx.beginPath();
-      if(Yaux<limy){
-        Yaux=Yaux+20;
-        ctx.clearRect(0,0,lienzo.width,lienzo.height);
-        ctx.arc(X,Yaux,r,0,2*Math.PI);
-        ctx.fill();
-        ctx.stroke();
-        rectangulo();
-      }
+        if(Yaux<limy){
+          Yaux=Yaux+stepsize;
+          ctx.clearRect(0,0,lienzo.width,lienzo.height);
+          ctx.arc(X,Yaux,r,0,2*Math.PI);
+          ctx.fill();
+          ctx.stroke();
+        }
+      plano();
+      rectangulo();
     }
 
     function circulo(){
@@ -458,7 +501,7 @@
     </div>
 
     <div class="pure-u-1-2">
-      <canvas id="lienzo" height=500 width=600></canvas>
+      <canvas id="lienzo" height=500 width=600 ></canvas>
     </div>
   </div>
 
