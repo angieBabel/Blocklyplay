@@ -31,33 +31,33 @@
     var stepsize=20;
     var initX=0,initY=0;
     var j=0;
-    var intervalo;
+    var interval;
 
 
     function comenzar(){
 
-      lienzo = document.getElementById('lienzo');
-      //lienzo.style.background='#A7DBD8';
-      lienzo.style.border='1px solid black';
-      ctx = lienzo.getContext('2d');
-      X = lienzo.width/2;
-      Y = lienzo.height/2;
+      canvas = document.getElementById('canvas');
+      //canvas.style.background='#A7DBD8';
+      canvas.style.border='1px solid black';
+      ctx = canvas.getContext('2d');
+      X = canvas.width/2;
+      Y = canvas.height/2;
       r = 10;
       Xaux = X;
       Yaux= Y;
-      plano();
-      circulo();
-      rectangulo();
+      panel();
+      Avatar();
+      path();
       Adelante(5);
     }
     function limpiar(){
-      clearInterval(intervalo);
+      clearInterval(interval);
     }
 
-    function plano(){
-      while(initX<lienzo.width-stepsize){
+    function panel(){
+      while(initX<canvas.width-stepsize){
         initX=initX+stepsize;
-        while(initY<lienzo.height-stepsize){
+        while(initY<canvas.height-stepsize){
           initY=initY+stepsize;
           ctx.beginPath();
           ctx.fillStyle = "#E3E2E2";
@@ -72,19 +72,19 @@
     function Adelante(nosteps){
       limx = X + (nosteps*stepsize);
       i=0;
-      intervalo= setInterval(function(){
+      interval= setInterval(function(){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
           if(Xaux<limx){
             Xaux=Xaux+stepsize;
-            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(Xaux,Y,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
-        plano();
-        rectangulo();
+        panel();
+        path();
         i++;
         if(i==nosteps){
           limpiar();
@@ -95,20 +95,20 @@
      function Atras(nosteps){
       limx=X-(nosteps*stepsize);
       i=0;
-      intervalo= setInterval(function (){
+      interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
           if(Xaux>limx){
             Xaux=Xaux-stepsize;
-            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             plano();
             ctx.arc(Xaux,Y,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
-        plano();
-        rectangulo();
+        panel();
+        path();
         i++;
         if (i==nosteps) {
           limpiar();
@@ -119,19 +119,19 @@
     function Arriba(nosteps){
       limy=Y-(nosteps*stepsize);
       i=0;
-      intervalo= setInterval(function (){
+      interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
           if(Yaux>150){
             Yaux=Yaux-stepsize;
-            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(X,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
-        plano();
-        rectangulo();
+        panel();
+        path();
         i++;
         if (i==nosteps) {
           limpiar();
@@ -148,21 +148,21 @@
         ctx.beginPath();
           if(Yaux<limy){
             Yaux=Yaux+stepsize;
-            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(X,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
-        plano();
-        rectangulo();
+        panel();
+        path();
         i++;
         if (i==nosteps) {
           limpiar();
         }
       },300);
     }
-
-    function circulo(){
+    //Avatar
+    function Avatar(){
       ctx.beginPath();
       ctx.strokeStyle = "#006400";
       ctx.fillStyle = "#6ab150";
@@ -171,8 +171,8 @@
       ctx.fill();
       ctx.stroke();
     }
-
-    function rectangulo(){
+    //Recorrido
+    function path(){
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "gray";
@@ -520,7 +520,7 @@
     </div>
 
     <div class="pure-u-1-2">
-      <canvas id="lienzo" height=500 width=600 ></canvas>
+      <canvas id="canvas" height=500 width=600 ></canvas>
     </div>
   </div>
 
