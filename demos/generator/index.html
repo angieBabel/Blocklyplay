@@ -94,51 +94,72 @@
 
      function Atras(nosteps){
       limx=X-(nosteps*stepsize);
-      ctx.strokeStyle = "#006400";
-      ctx.fillStyle = "#6ab150";
-      ctx.beginPath();
-        if(Xaux>limx){
-          Xaux=Xaux-stepsize;
-          ctx.clearRect(0,0,lienzo.width,lienzo.height);
-          plano();
-          ctx.arc(Xaux,Y,r,0,2*Math.PI);
-          ctx.fill();
-          ctx.stroke();
+      i=0;
+      intervalo= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Xaux>limx){
+            Xaux=Xaux-stepsize;
+            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            plano();
+            ctx.arc(Xaux,Y,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        plano();
+        rectangulo();
+        i++;
+        if (i==nosteps) {
+          limpiar();
         }
-      plano();
-      rectangulo();
+      },300);
     }
 
     function Arriba(nosteps){
-      limy=Y-100;
-      ctx.strokeStyle = "#006400";
-      ctx.fillStyle = "#6ab150";
-      ctx.beginPath();
-        if(Yaux>150){
-          Yaux=Yaux-stepsize;
-          ctx.clearRect(0,0,lienzo.width,lienzo.height);
-          ctx.arc(X,Yaux,r,0,2*Math.PI);
-          ctx.fill();
-          ctx.stroke();
+      limy=Y-(nosteps*stepsize);
+      i=0;
+      intervalo= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux>150){
+            Yaux=Yaux-stepsize;
+            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.arc(X,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        plano();
+        rectangulo();
+        i++;
+        if (i==nosteps) {
+          limpiar();
         }
-      plano();
-      rectangulo();
+      },300);
     }
 
     function Abajo(nosteps){
-      limy=Y+100;
-      ctx.strokeStyle = "#006400";
-      ctx.fillStyle = "#6ab150";
-      ctx.beginPath();
-        if(Yaux<limy){
-          Yaux=Yaux+stepsize;
-          ctx.clearRect(0,0,lienzo.width,lienzo.height);
-          ctx.arc(X,Yaux,r,0,2*Math.PI);
-          ctx.fill();
-          ctx.stroke();
+      limy=Y+(nosteps*stepsize);
+      i=0;
+      intervalo= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux<limy){
+            Yaux=Yaux+stepsize;
+            ctx.clearRect(0,0,lienzo.width,lienzo.height);
+            ctx.arc(X,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        plano();
+        rectangulo();
+        i++;
+        if (i==nosteps) {
+          limpiar();
         }
-      plano();
-      rectangulo();
+      },300);
     }
 
     function circulo(){
