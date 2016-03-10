@@ -22,19 +22,19 @@
   </style>
 
     <script type="text/javascript">
-    var imagenes;
+    var image;
     //Posiciones iniciales.
     var X;
     var Y;
     var r;
-    var Xaux=0,Yaux=0,limx,limy;
+    var Xaux=0,Yaux=0,limtX,limtY;
     var stepsize=20;
     var initX=0,initY=0;
     var j=0;
     var interval;
 
 
-    function comenzar(){
+    function begin(){
 
       canvas = document.getElementById('canvas');
       //canvas.style.background='#A7DBD8';
@@ -48,9 +48,9 @@
       panel();
       Avatar();
       path();
-      Adelante(5);
+      forward(5);
     }
-    function limpiar(){
+    function stopTimer(){
       clearInterval(interval);
     }
 
@@ -69,14 +69,14 @@
       initX=0;
     }
 
-    function Adelante(nosteps){
-      limx = X + (nosteps*stepsize);
+    function forward(nosteps){
+      limtX = X + (nosteps*stepsize);
       i=0;
       interval= setInterval(function(){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
-          if(Xaux<limx){
+          if(Xaux<limtX){
             Xaux=Xaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(Xaux,Y,r,0,2*Math.PI);
@@ -87,19 +87,19 @@
         path();
         i++;
         if(i==nosteps){
-          limpiar();
+          stopTimer();
         }
       },300);
     }
 
-     function Atras(nosteps){
-      limx=X-(nosteps*stepsize);
+     function backward(nosteps){
+      limtX=X-(nosteps*stepsize);
       i=0;
       interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
-          if(Xaux>limx){
+          if(Xaux>limtX){
             Xaux=Xaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             plano();
@@ -111,19 +111,19 @@
         path();
         i++;
         if (i==nosteps) {
-          limpiar();
+          stopTimer();
         }
       },300);
     }
 
-    function Arriba(nosteps){
-      limy=Y-(nosteps*stepsize);
+    function upward(nosteps){
+      limtY=Y-(nosteps*stepsize);
       i=0;
       interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
-          if(Yaux>150){
+          if(Yaux>limtY){
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(X,Yaux,r,0,2*Math.PI);
@@ -134,19 +134,19 @@
         path();
         i++;
         if (i==nosteps) {
-          limpiar();
+          stopTimer();
         }
       },300);
     }
 
-    function Abajo(nosteps){
-      limy=Y+(nosteps*stepsize);
+    function downward(nosteps){
+      limtY=Y+(nosteps*stepsize);
       i=0;
-      intervalo= setInterval(function (){
+      interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
-          if(Yaux<limy){
+          if(Yaux<limtY){
             Yaux=Yaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             ctx.arc(X,Yaux,r,0,2*Math.PI);
@@ -157,7 +157,7 @@
         path();
         i++;
         if (i==nosteps) {
-          limpiar();
+          stopTimer();
         }
       },300);
     }
@@ -182,7 +182,7 @@
     }
     </script>
 </head>
-<body onload="comenzar()">
+<body onload="begin()">
   <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
       <a href="../index.html">Demos</a> &gt; Generating JavaScript
   </h1>
