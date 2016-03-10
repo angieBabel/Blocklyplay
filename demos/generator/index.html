@@ -31,6 +31,7 @@
     var stepsize=20;
     var initX=0,initY=0;
     var j=0;
+    var intervalo;
 
 
     function comenzar(){
@@ -47,14 +48,17 @@
       plano();
       circulo();
       rectangulo();
-      Adelante(4);
+      Adelante(5);
 
       //Llamar a la función cada 30 milisegundos.
       //Recordar que 1000 milisegundos = 1 segundo
-      /*var intervalo=setInterval(function(){
+      /*intervalo=setInterval(function(){
         //j++;
         //alert("Entro "+ j);
         Adelante(5)},3000);*/
+    }
+    function limpiar(){
+      clearInterval(intervalo);
     }
 
     function plano(){
@@ -73,10 +77,9 @@
     }
 
     function Adelante(nosteps){
-      alert("Entro");
       limx = X + (nosteps*stepsize);
       i=0;
-      while(i<nosteps){
+      var inter= setInterval(function(){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
@@ -90,8 +93,10 @@
         plano();
         rectangulo();
         i++;
-      }
-
+        if(i==nosteps){
+          limpiar();
+        }
+      },3000);
     }
 
      function Atras(nosteps){
