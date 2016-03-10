@@ -49,13 +49,6 @@
       circulo();
       rectangulo();
       Adelante(5);
-
-      //Llamar a la función cada 30 milisegundos.
-      //Recordar que 1000 milisegundos = 1 segundo
-      /*intervalo=setInterval(function(){
-        //j++;
-        //alert("Entro "+ j);
-        Adelante(5)},3000);*/
     }
     function limpiar(){
       clearInterval(intervalo);
@@ -79,7 +72,7 @@
     function Adelante(nosteps){
       limx = X + (nosteps*stepsize);
       i=0;
-      var inter= setInterval(function(){
+      intervalo= setInterval(function(){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
@@ -96,7 +89,7 @@
         if(i==nosteps){
           limpiar();
         }
-      },3000);
+      },300);
     }
 
      function Atras(nosteps){
