@@ -31,13 +31,10 @@
     var initX=0,initY=0;
     var interval;
 
-    function positionObj(pX,pY){
-
-    }
     var positionObj = {
-      var objX=X;
-      var objY=Y;
-    }
+      objX: X,
+      objY: Y,
+    };
 
 
     function begin(){
@@ -95,6 +92,9 @@
           stopTimer();
         }
       },300);
+      positionObj.objY=Y;
+      positionObj.objX=Xaux;
+      //alert(positionObj.objX +" "+positionObj.objY);
     }
 
      function backward(nosteps){
@@ -119,6 +119,8 @@
           stopTimer();
         }
       },300);
+      positionObj.objY=Y;
+      positionObj.objX=Xaux;
     }
 
     function upward(nosteps){
@@ -142,6 +144,8 @@
           stopTimer();
         }
       },300);
+      positionObj.objX=X;
+      positionObj.objY=Yaux;
     }
 
     function downward(nosteps){
@@ -165,6 +169,8 @@
           stopTimer();
         }
       },300);
+      positionObj.objX=X;
+      positionObj.objY=Yaux;
     }
     //Drawing avatar
     function Avatar(){
