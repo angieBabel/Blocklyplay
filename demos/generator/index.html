@@ -51,7 +51,10 @@
       panel();
       Avatar();
       path();
-      forward(5);
+      //forward(5);
+      //backward(5);
+      //upward(5);
+      //downward(5);
     }
 
     function stopTimer(){
@@ -72,9 +75,13 @@
       }
       initX=0;
     }
+
+    //function sipin
+    function spin(grade){
+
+    }
     //motion functions
     function forward(nosteps){
-      //alert('h');
       limtX = positionObj.objX + (nosteps*stepsize);
 
       i=0;
@@ -96,23 +103,20 @@
           stopTimer();
         }
       },300);
-      positionObj.objY=Y;
       positionObj.objX=Xaux;
-      //alert(positionObj.objX +" "+positionObj.objY);
     }
 
      function backward(nosteps){
-      limtX=X-(nosteps*stepsize);
+      limtX= positionObj.objX - (nosteps*stepsize);
       i=0;
-      interval= setInterval(function (){
+      interval= setInterval(function(){
         ctx.strokeStyle = "#006400";
         ctx.fillStyle = "#6ab150";
         ctx.beginPath();
           if(Xaux>limtX){
-            Xaux=Xaux-stepsize;
+            Xaux=Xaux -stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            plano();
-            ctx.arc(Xaux,Y,r,0,2*Math.PI);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
@@ -123,12 +127,11 @@
           stopTimer();
         }
       },300);
-      positionObj.objY=Y;
       positionObj.objX=Xaux;
     }
 
     function upward(nosteps){
-      limtY=Y-(nosteps*stepsize);
+      limtY=positionObj.objY-(nosteps*stepsize);
       i=0;
       interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
@@ -137,7 +140,7 @@
           if(Yaux>limtY){
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(X,Yaux,r,0,2*Math.PI);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
@@ -148,12 +151,11 @@
           stopTimer();
         }
       },300);
-      positionObj.objX=X;
       positionObj.objY=Yaux;
     }
 
     function downward(nosteps){
-      limtY=Y+(nosteps*stepsize);
+      limtY=positionObj.objY+(nosteps*stepsize);
       i=0;
       interval= setInterval(function (){
         ctx.strokeStyle = "#006400";
@@ -162,7 +164,7 @@
           if(Yaux<limtY){
             Yaux=Yaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(X,Yaux,r,0,2*Math.PI);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
@@ -173,7 +175,6 @@
           stopTimer();
         }
       },300);
-      positionObj.objX=X;
       positionObj.objY=Yaux;
     }
     //Drawing avatar
