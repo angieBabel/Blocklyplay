@@ -51,7 +51,7 @@
       panel();
       Avatar();
       path();
-      //forward(5);
+      //forward(2);
       //backward(5);
       //upward(5);
       //downward(5);
@@ -82,6 +82,7 @@
     }
     //motion functions
     function forward(nosteps){
+      alert(positionObj.objX+","+positionObj.objY);
       limtX = positionObj.objX + (nosteps*stepsize);
 
       i=0;
@@ -95,15 +96,16 @@
             ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
+            positionObj.objX=Xaux;
           }
         panel();
         path();
         i++;
         if(i==nosteps){
+          //alert(positionObj.objX+","+positionObj.objY);
           stopTimer();
         }
       },300);
-      positionObj.objX=Xaux;
     }
 
      function backward(nosteps){
@@ -119,6 +121,7 @@
             ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
+            positionObj.objX=Xaux;
           }
         panel();
         path();
@@ -127,7 +130,6 @@
           stopTimer();
         }
       },300);
-      positionObj.objX=Xaux;
     }
 
     function upward(nosteps){
@@ -143,6 +145,7 @@
             ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
+            positionObj.objY=Yaux;
           }
         panel();
         path();
@@ -151,7 +154,6 @@
           stopTimer();
         }
       },300);
-      positionObj.objY=Yaux;
     }
 
     function downward(nosteps){
@@ -167,6 +169,7 @@
             ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
+            positionObj.objY=Yaux;
           }
         panel();
         path();
@@ -175,7 +178,6 @@
           stopTimer();
         }
       },300);
-      positionObj.objY=Yaux;
     }
     //Drawing avatar
     function Avatar(){
