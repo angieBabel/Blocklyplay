@@ -32,8 +32,8 @@
     var interval;
 
     var positionObj = {
-      objX: X,
-      objY: Y,
+      objX: 0,
+      objY: 0,
     };
 
 
@@ -44,8 +44,10 @@
       X = canvas.width/2;
       Y = canvas.height/2;
       r = 10;
-      Xaux = X;
-      Yaux= Y;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
       panel();
       Avatar();
       path();
@@ -72,7 +74,9 @@
     }
     //motion functions
     function forward(nosteps){
-      limtX = X + (nosteps*stepsize);
+      //alert('h');
+      limtX = positionObj.objX + (nosteps*stepsize);
+
       i=0;
       interval= setInterval(function(){
         ctx.strokeStyle = "#006400";
@@ -81,7 +85,7 @@
           if(Xaux<limtX){
             Xaux=Xaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(Xaux,Y,r,0,2*Math.PI);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();
           }
