@@ -23,21 +23,25 @@
 
     <script type="text/javascript">
     var image;
-    //Posiciones iniciales.
     var X;
     var Y;
     var r;
     var Xaux=0,Yaux=0,limtX,limtY;
     var stepsize=20;
     var initX=0,initY=0;
-    var j=0;
     var interval;
+
+    function positionObj(pX,pY){
+
+    }
+    var positionObj = {
+      var objX=X;
+      var objY=Y;
+    }
 
 
     function begin(){
-
       canvas = document.getElementById('canvas');
-      //canvas.style.background='#A7DBD8';
       canvas.style.border='1px solid black';
       ctx = canvas.getContext('2d');
       X = canvas.width/2;
@@ -50,6 +54,7 @@
       path();
       forward(5);
     }
+
     function stopTimer(){
       clearInterval(interval);
     }
@@ -68,7 +73,7 @@
       }
       initX=0;
     }
-
+    //motion functions
     function forward(nosteps){
       limtX = X + (nosteps*stepsize);
       i=0;
@@ -161,7 +166,7 @@
         }
       },300);
     }
-    //Avatar
+    //Drawing avatar
     function Avatar(){
       ctx.beginPath();
       ctx.strokeStyle = "#006400";
@@ -171,7 +176,7 @@
       ctx.fill();
       ctx.stroke();
     }
-    //Recorrido
+    //path forward
     function path(){
       ctx.beginPath();
       ctx.lineWidth = 2;
