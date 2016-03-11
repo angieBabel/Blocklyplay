@@ -22,79 +22,183 @@
   </style>
 
     <script type="text/javascript">
-    var imagenes;
-    //Posiciones iniciales.
-    var imagenX = 0;
-    var imagenY = 100;
-    //Imagenes.
+    var image;
+    var X;
+    var Y;
+    var r;
+    var Xaux=0,Yaux=0,limtX,limtY;
+    var stepsize=20;
+    var initX=0,initY=0;
+    var interval;
 
-    /*img.style.height=5;
-    img.style.width=5;*/
-    function comenzar(){
+    var positionObj = {
+      objX: 0,
+      objY: 0,
+    };
 
-      lienzo = document.getElementById('lienzo');
-      lienzo.style.background='#A7DBD8';
-      ctx = lienzo.getContext('2d');
+
+    function begin(){
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      ctx = canvas.getContext('2d');
+      X = canvas.width/2;
+      Y = canvas.height/2;
+      r = 10;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
+      panel();
+      Avatar();
+      path();
+      //forward(5);
+      //backward(5);
+      //upward(5);
+      //downward(5);
+    }
+
+    function stopTimer(){
+      clearInterval(interval);
+    }
+
+    function panel(){
+      while(initX<canvas.width-stepsize){
+        initX=initX+stepsize;
+        while(initY<canvas.height-stepsize){
+          initY=initY+stepsize;
+          ctx.beginPath();
+          ctx.fillStyle = "#E3E2E2";
+          ctx.arc(initX,initY,1.5,0,2*Math.PI);
+          ctx.fill();
+        }
+        initY=0;
+      }
+      initX=0;
+    }
+
+    //function sipin
+    function spin(grade){
+
+    }
+    //motion functions
+    function forward(nosteps){
+      limtX = positionObj.objX + (nosteps*stepsize);
+
+      i=0;
+      interval= setInterval(function(){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Xaux<limtX){
+            Xaux=Xaux+stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if(i==nosteps){
+          stopTimer();
+        }
+      },300);
+      positionObj.objX=Xaux;
+    }
+
+     function backward(nosteps){
+      limtX= positionObj.objX - (nosteps*stepsize);
+      i=0;
+      interval= setInterval(function(){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Xaux>limtX){
+            Xaux=Xaux -stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objX=Xaux;
+    }
+
+    function upward(nosteps){
+      limtY=positionObj.objY-(nosteps*stepsize);
+      i=0;
+      interval= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux>limtY){
+            Yaux=Yaux-stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objY=Yaux;
+    }
+
+    function downward(nosteps){
+      limtY=positionObj.objY+(nosteps*stepsize);
+      i=0;
+      interval= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux<limtY){
+            Yaux=Yaux+stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objY=Yaux;
+    }
+    //Drawing avatar
+    function Avatar(){
       ctx.beginPath();
-      var X = lienzo.width/2;
-      var Y = lienzo.height/2;
-      var r = 8;
-      ctx.strokeStyle = "gray";
-      ctx.fillStyle = "black";
+      ctx.strokeStyle = "#006400";
+      ctx.fillStyle = "#6ab150";
       ctx.lineWidth = 2;
       ctx.arc(X,Y,r,0,2*Math.PI);
       ctx.fill();
-
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "#00f";
-      ctx.fillStyle = "#ff0";
-      ctx.rect(X, Y-100, 100, 100);
-
       ctx.stroke();
-      //Llamar a la función cada 30 milisegundos.
-      //Recordar que 1000 milisegundos = 1 segundo
-      //setInterval(mover, 2000);
     }
-    function mover(){
-      //ctx.fill();
-      ctx.strokeStyle = "gray";//Color
-      //ctx.fillStyle = "#6ab150";
-      ctx.setLineDash([10, 6]);//cuando incia la continua y la descotinua
-      ctx.lineDashOffset = 0;
+    //path forward
+    function path(){
       ctx.beginPath();
-      var aux, auy;
-      var numx= Math.floor(Math.random() * (900 - 1)) + 1;
-      var numy= Math.floor(Math.random() * (400 - 1)) + 1;
-      ctx.moveTo(imagenX+10, imagenY);
-      ctx.arc(imagenX,imagenY,10,0,2*Math.PI);
-      //movimiento aleatorio
-      if ((imagenX+numx) > 900) {
-        aux= (imagenX + numx) - 900;
-        imagenX = imagenX - aux;
-      } else {
-        imagenX = imagenX + numx;
-      };
-      if ((imagenY+numy) > 400){
-        auy = (imagenY + numy) - 400;
-        imagenY = imagenY - auy;
-      }
-      else{
-        imagenY = imagenY + numy;
-      }
-      //Borro todo lo que haya en nuestro lienzo
-      ctx.clearRect(0,0,lienzo.width,lienzo.height);
-      //Dibujo las imágenes en la nueva posición
-      ctx.drawImage(img, imagenX, imagenY);
-      //ctx.drawImage(img2, imagen2X, imagen2Y);
-      //
-      ctx.fillStyle = "black";
-      ctx.fill();
-      ctx.lineTo(imagenX + 35, imagenY + 73);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "gray";
+      ctx.rect(X, Y-100, 100, 100);
       ctx.stroke();
+
     }
     </script>
 </head>
-<body onload="comenzar()">
+<body onload="begin()">
   <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
       <a href="../index.html">Demos</a> &gt; Generating JavaScript
   </h1>
@@ -432,7 +536,7 @@
     </div>
 
     <div class="pure-u-1-2">
-      <canvas id="lienzo" height=500 width=600></canvas>
+      <canvas id="canvas" height=500 width=600 ></canvas>
     </div>
   </div>
 
