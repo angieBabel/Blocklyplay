@@ -35,6 +35,9 @@
       objX: 0,
       objY: 0,
     };
+    var movimiento ={
+
+    }
 
 
     function begin(){
@@ -49,8 +52,8 @@
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
       panel();
-      Avatar();
       path();
+      Avatar();
       //forward(2);
       //backward(5);
       //upward(5);
@@ -78,6 +81,15 @@
 
     //function sipin
     function spin(grade){
+      switch(grade){
+        case 90:
+          backward();
+          break;
+        case 180:
+        case 270:
+
+
+      }
 
     }
     //motion functions
@@ -188,6 +200,13 @@
       ctx.arc(X,Y,r,0,2*Math.PI);
       ctx.fill();
       ctx.stroke();
+      /*ctx.rotate(Math.PI/9);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#00f";
+      ctx.fillStyle = "#ff0";
+      ctx.rect(X, Y, 10, 10);
+      ctx.fill();
+      ctx.stroke();*/
     }
     //path forward
     function path(){
