@@ -50,7 +50,7 @@
       panel();
       path();
       Avatar();
-      move("forward (1),upward (5),backward (5),downward (5)");
+      move("forward (5),upward (5),backward (5),downward (5)");
       //forward(2);
       //backward(5);
       //upward(5);
@@ -77,15 +77,43 @@
     }
 
     //function sipin
-    function spin(orientation){
-      switch(orientation){
-        case 'rigth':
-          backward();
+    function rigth(laststep, angle){
+      switch(angle){
+        case 90:
+          previus= laststep.split(" ");
+          switch(laststep){
+            case 'forward':
+
+              break;
+            case 'backward':
+              break;
+            case 'downward':
+              break;
+            case 'upward':
+              break;
+          }
           break;
-        case 'left':
-          forward();
+        case 180:
+         break;
+        case 270:
+          break;
+        case 360:
           break;
       }
+    }
+    function left(laststep, angle){
+      switch(angle){
+        case 90:
+          break;
+        case 180:
+         break;
+        case 270:
+          break;
+        case 360:
+          break;
+
+      }
+
     }
     function move(allsteps){
       steps = allsteps.split(",");
@@ -108,6 +136,12 @@
             break
           case 'downward':
             downward(quantity);
+            break;
+          case 'right':
+            rigth(steps[c-1],quantity);
+            break;
+          case 'left':
+            left(steps[c-1],quantity);
             break;
         }
         c++;
