@@ -29,7 +29,7 @@
     var Xaux=0,Yaux=0,limtX,limtY;
     var stepsize=20;
     var initX=0,initY=0;
-    var interval;
+    var interval, time = 1500;
 
     var positionObj = {
       objX: 0,
@@ -54,7 +54,7 @@
       panel();
       path();
       Avatar();
-      move("forward (5),upward (5),backward (5),downward (5)");
+      move("forward (6),upward (5),backward (5),downward (5)");
       //forward(2);
       //backward(5);
       //upward(5);
@@ -99,6 +99,7 @@
         motion= steps[c].split(" ");
           type=motion[0];
           quantity= motion[1].substring(1,2);
+          time = 300 * quantity;
         switch(type){
           case 'forward':
             forward(quantity);
@@ -114,11 +115,12 @@
             break;
         }
         c++;
+        //alert(time);
         if(c==steps.length){
           clearInterval(standby);
         }
 
-      }, 2000);
+      }, time);
     }
     //motion functions
     function forward(nosteps){
@@ -145,7 +147,7 @@
           //alert(positionObj.objX+","+positionObj.objY);
           stopTimer();
         }
-      },300);
+      },200);
     }
 
      function backward(nosteps){
@@ -169,7 +171,7 @@
         if (i==nosteps) {
           stopTimer();
         }
-      },300);
+      },200);
     }
 
     function upward(nosteps){
@@ -193,7 +195,7 @@
         if (i==nosteps) {
           stopTimer();
         }
-      },300);
+      },200);
     }
 
     function downward(nosteps){
@@ -217,7 +219,7 @@
         if (i==nosteps) {
           stopTimer();
         }
-      },300);
+      },200);
     }
     //Drawing avatar
     function Avatar(){
