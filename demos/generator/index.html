@@ -54,6 +54,7 @@
       panel();
       path();
       Avatar();
+      move("forward (5),upward (5),backward (5),downward (5)");
       //forward(2);
       //backward(5);
       //upward(5);
@@ -80,21 +81,48 @@
     }
 
     //function sipin
-    function spin(grade){
-      switch(grade){
-        case 90:
+    function spin(orientation){
+      switch(orientation){
+        case 'rigth':
           backward();
           break;
-        case 180:
-        case 270:
-
-
+        case 'left':
+          forward();
+          break;
       }
+    }
+    function move(allsteps){
+      steps = allsteps.split(",");
+      //alert(steps.length);
+      c=0;
+      standby= setInterval(function(){
+        motion= steps[c].split(" ");
+          type=motion[0];
+          quantity= motion[1].substring(1,2);
+        switch(type){
+          case 'forward':
+            forward(quantity);
+            break;
+          case 'backward':
+            backward(quantity);
+            break
+          case 'upward':
+            upward(quantity);
+            break
+          case 'downward':
+            downward(quantity);
+            break;
+        }
+        c++;
+        if(c==steps.length){
+          clearInterval(standby);
+        }
 
+      }, 2000);
     }
     //motion functions
     function forward(nosteps){
-      alert(positionObj.objX+","+positionObj.objY);
+      //alert(positionObj.objX+","+positionObj.objY);
       limtX = positionObj.objX + (nosteps*stepsize);
 
       i=0;
@@ -200,13 +228,7 @@
       ctx.arc(X,Y,r,0,2*Math.PI);
       ctx.fill();
       ctx.stroke();
-      /*ctx.rotate(Math.PI/9);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "#00f";
-      ctx.fillStyle = "#ff0";
-      ctx.rect(X, Y, 10, 10);
-      ctx.fill();
-      ctx.stroke();*/
+
     }
     //path forward
     function path(){
