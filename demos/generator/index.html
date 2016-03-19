@@ -22,7 +22,8 @@
   </style>
 
     <script type="text/javascript">
-    var image;
+    //var image;
+    var img= new Image();
     var X;
     var Y;
     var r;
@@ -50,8 +51,9 @@
       panel();
       path();
       Avatar();
-      move("forward (5),upward (5),backward (5),downward (5)");
-      //forward(2);
+      //giro();
+      //move("forward (5),upward (5),backward (5),downward (5)");
+      //forward(5);
       //backward(5);
       //upward(5);
       //downward(5);
@@ -60,6 +62,11 @@
     function stopTimer(){
       clearInterval(interval);
     }
+    function giro(){
+      img.rotate = 90;
+      //ctx.translate(X,Y);
+      //ctx.rotate(Math.PI/9);
+    }
 
     function panel(){
       while(initX<canvas.width-stepsize){
@@ -67,7 +74,7 @@
         while(initY<canvas.height-stepsize){
           initY=initY+stepsize;
           ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
+          ctx.fillStyle = "#4C4C4C";
           ctx.arc(initX,initY,1.5,0,2*Math.PI);
           ctx.fill();
         }
@@ -165,9 +172,10 @@
           if(Xaux<limtX){
             Xaux=Xaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
-            ctx.stroke();
+            ctx.stroke();*/
             positionObj.objX=Xaux;
           }
         panel();
@@ -180,7 +188,7 @@
       },200);
     }
 
-     function backward(nosteps){
+    function backward(nosteps){
       limtX= positionObj.objX - (nosteps*stepsize);
       i=0;
       interval= setInterval(function(){
@@ -253,13 +261,23 @@
     }
     //Drawing avatar
     function Avatar(){
-      ctx.beginPath();
-      ctx.strokeStyle = "#006400";
+
+      img.src = '../../media/carro.png';
+      img.id = 'imagen';
+      img.onload = function() {
+
+          ctx.drawImage(img,X-20,Y-10,40,20);
+          alert(document.getElementById('canvas'));
+          //img.rotate(90);
+      }
+
+      //ctx.beginPath();
+      /*ctx.strokeStyle = "#006400";
       ctx.fillStyle = "#6ab150";
       ctx.lineWidth = 2;
       ctx.arc(X,Y,r,0,2*Math.PI);
       ctx.fill();
-      ctx.stroke();
+      ctx.stroke();*/
 
     }
     //path forward
