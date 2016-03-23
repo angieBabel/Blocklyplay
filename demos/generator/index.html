@@ -51,7 +51,7 @@
       panel();
       path();
       Avatar();
-      //giro();
+      giro();
       //move("forward (5),upward (5),backward (5),downward (5)");
       //forward(5);
       //backward(5);
@@ -61,11 +61,6 @@
 
     function stopTimer(){
       clearInterval(interval);
-    }
-    function giro(){
-      img.rotate = 90;
-      //ctx.translate(X,Y);
-      //ctx.rotate(Math.PI/9);
     }
 
     function panel(){
@@ -198,9 +193,10 @@
           if(Xaux>limtX){
             Xaux=Xaux -stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
-            ctx.stroke();
+            ctx.stroke();*/
             positionObj.objX=Xaux;
           }
         panel();
@@ -222,9 +218,10 @@
           if(Yaux>limtY){
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
-            ctx.stroke();
+            ctx.stroke();*/
             positionObj.objY=Yaux;
           }
         panel();
@@ -246,9 +243,10 @@
           if(Yaux<limtY){
             Yaux=Yaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
-            ctx.stroke();
+            ctx.stroke();*/
             positionObj.objY=Yaux;
           }
         panel();
@@ -265,19 +263,11 @@
       img.src = '../../media/carro.png';
       img.id = 'imagen';
       img.onload = function() {
-
           ctx.drawImage(img,X-20,Y-10,40,20);
-          alert(document.getElementById('canvas'));
-          //img.rotate(90);
+          //giro();
+          girando();
       }
 
-      //ctx.beginPath();
-      /*ctx.strokeStyle = "#006400";
-      ctx.fillStyle = "#6ab150";
-      ctx.lineWidth = 2;
-      ctx.arc(X,Y,r,0,2*Math.PI);
-      ctx.fill();
-      ctx.stroke();*/
 
     }
     //path forward
@@ -289,6 +279,33 @@
       ctx.stroke();
 
     }
+
+    function giro() {
+      var TO_RADIANS = Math.PI/180;
+      var w=40,h=20;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      panel();
+      path();
+      ctx.save();
+      ctx.translate(positionObj.objX,positionObj.objY);
+      ctx.rotate(90 * TO_RADIANS);
+      ctx.drawImage(img, -w/2, -h/2,40,20);
+      ctx.restore();
+
+    }
+    function girando(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      panel();
+      path();
+      ctx.save();
+      var w=40,h=20;
+      ctx.translate(positionObj.objX,positionObj.objY);
+      ctx.rotate(-30 * (Math.PI/180));
+      ctx.drawImage(img,-w/2, -h/2,40,20);
+      ctx.restore();
+    }
+
+
     </script>
 </head>
 <body onload="begin()">
