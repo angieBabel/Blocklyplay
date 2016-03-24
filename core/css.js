@@ -303,12 +303,12 @@ Blockly.Css.CONTENT = [
 
   '.blocklyMutatorBackground {',
     'fill: #fff;',
-    'stroke: #ddd;',
+    'stroke: #FFF3E5;',
     'stroke-width: 1;',
   '}',
 
   '.blocklyFlyoutBackground {',
-    'fill: #ddd;',
+    'fill: #E5E5E5;',
     'fill-opacity: .8;',
   '}',
 
@@ -391,7 +391,8 @@ Blockly.Css.CONTENT = [
 
   /* Category tree in Toolbox. */
   '.blocklyToolboxDiv {',
-    'background-color: #ddd;',
+    'background-color: #FFFFFF;',
+    'border-right:  1px solid #E8D7D1;',
     'overflow-x: visible;',
     'overflow-y: auto;',
     'position: absolute;',
@@ -411,6 +412,7 @@ Blockly.Css.CONTENT = [
     'margin-bottom: 3px;',
     'padding-right: 8px;',
     'white-space: nowrap;',
+    'border-bottom: 1px solid #E5E5E5;',
   '}',
 
   '.blocklyToolboxDiv[dir="RTL"] .blocklyTreeRow {',
@@ -418,7 +420,7 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyTreeRow:not(.blocklyTreeSelected):hover {',
-    'background-color: #e4e4e4;',
+    'background-color: #E5E5E5;',
   '}',
 
   '.blocklyTreeSeparator {',
@@ -466,8 +468,8 @@ Blockly.Css.CONTENT = [
   '.blocklyTreeLabel {',
     'cursor: default;',
     'font-family: sans-serif;',
-    'font-size: 16px;',
-    'padding: 0 3px;',
+    'font-size: 20px;',
+
     'vertical-align: middle;',
   '}',
 
