@@ -9,6 +9,7 @@
   <script src="../../javascript_compressed.js"></script>
   <script src="../../msg/js/en.js"></script>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
   <style>
     body {
@@ -19,9 +20,24 @@
       font-weight: normal;
       font-size: 140%;
     }
+    .button-success,
+    .button-error,
+    .button-warning,
+    .button-secondary {
+      color: white;
+      border-radius: 20px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      margin-left: 20px;
+    }
+
+    .button-success {
+      background: rgb(28, 184, 65); /* this is a green */
+    }
+
+
   </style>
 
-    <script type="text/javascript">
+  <script type="text/javascript">
     //var image;
     var img= new Image();
     var X;
@@ -35,6 +51,7 @@
     var positionObj = {
       objX: 0,
       objY: 0,
+      objZ:0,
     };
 
     function begin(){
@@ -78,45 +95,7 @@
       initX=0;
     }
 
-    //function sipin
-    function rigth(laststep, angle){
-      switch(angle){
-        case 90:
-          previus= laststep.split(" ");
-          switch(laststep){
-            case 'forward':
 
-              break;
-            case 'backward':
-              break;
-            case 'downward':
-              break;
-            case 'upward':
-              break;
-          }
-          break;
-        case 180:
-         break;
-        case 270:
-          break;
-        case 360:
-          break;
-      }
-    }
-    function left(laststep, angle){
-      switch(angle){
-        case 90:
-          break;
-        case 180:
-         break;
-        case 270:
-          break;
-        case 360:
-          break;
-
-      }
-
-    }
     function move(allsteps){
       steps = allsteps.split(",");
       //alert(steps.length);
@@ -265,7 +244,7 @@
       img.onload = function() {
           ctx.drawImage(img,X-20,Y-10,40,20);
           //giro();
-          girando();
+          giro(90);
       }
 
 
@@ -280,46 +259,36 @@
 
     }
 
-    function giro() {
-      var TO_RADIANS = Math.PI/180;
-      var w=40,h=20;
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      panel();
-      path();
-      ctx.save();
-      ctx.translate(positionObj.objX,positionObj.objY);
-      ctx.rotate(90 * TO_RADIANS);
-      ctx.drawImage(img, -w/2, -h/2,40,20);
-      ctx.restore();
-
-    }
-    function girando(){
+    //function sipin
+    function giro(angulo) {
+      if (positionObj.objZ=!angulo) {
+        positionObj,objZ= angulo;
+      }
       ctx.clearRect(0,0,canvas.width,canvas.height);
       panel();
       path();
       ctx.save();
       var w=40,h=20;
       ctx.translate(positionObj.objX,positionObj.objY);
-      ctx.rotate(-30 * (Math.PI/180));
+      ctx.rotate(angulo * (Math.PI/180));
       ctx.drawImage(img,-w/2, -h/2,40,20);
       ctx.restore();
     }
 
 
     </script>
+
 </head>
+
 <body onload="begin()">
   <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
       <a href="../index.html">Demos</a> &gt; Generating JavaScript
   </h1>
-  <p>
-    <button onclick="showCode()">Show JavaScript</button>
-    <button onclick="runCode()">Run JavaScript</button>
-  </p>
+
 
   <div class="pure-g">
-    <div class="pure-u-1-2">
-      <div id="blocklyDiv" style="height: 500px;" >
+    <div class="pure-u-1-2" id="blocklyArea">
+      <div id="blocklyDiv" style="position: absolute" >
         <xml id="toolbox" style="display: none">
           <category name="Logic" colour="210">
             <block type="controls_if"></block>
@@ -646,18 +615,43 @@
     </div>
 
     <div class="pure-u-1-2">
-      <canvas id="canvas" height=500 width=600 ></canvas>
+      <canvas id="canvas" height=800 width=600 ></canvas>
     </div>
+<!--
+    <div class="pure-u-1-1">
+        <button onclick="runCode()" class="button-success pure-button">
+          Run JavaScript <i class="fa fa-play"></i>
+        </button>
+    </div> -->
+
+
   </div>
 
 
 
   <script>
-    var workspace = Blockly.inject('blocklyDiv',
-        {media: '../../media/',
-         toolbox: document.getElementById('toolbox')});
-    Blockly.Xml.domToWorkspace(workspace,
-        document.getElementById('startBlocks'));
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var workspace = Blockly.inject(blocklyDiv,
+        {toolbox: document.getElementById('toolbox')});
+    var onresize = function(e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    };
+    window.addEventListener('resize', onresize, false);
+    onresize();
 
     function showCode() {
       // Generate JavaScript code and display it.
