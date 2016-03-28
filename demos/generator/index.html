@@ -36,9 +36,13 @@
       background: rgb(28, 184, 65); /* this is a green */
     }
     canvas {
-     height: 85vh;
-     width: 49vw;
+     height: 100%;
+     width: 99%;
     }
+    #divCanvas{
+      height: 80%;
+    }
+
 
 
   </style>
@@ -64,6 +68,14 @@
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
       ctx = canvas.getContext('2d');
+      ////
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      //alert("ancho: "+ ancho + "alto" + alto);
+      canvas.width= ancho;
+      canvas.height = alto;
+       ////
+
       X = canvas.width/2;
       Y = canvas.height/2;
       r = 10;
@@ -612,8 +624,8 @@
       </div>
     </div>
 
-    <div class="pure-u-1-2">
-      <canvas id="canvas" height=800 width=600 ></canvas>
+    <div class="pure-u-1-2" id="divCanvas">
+      <canvas id="canvas"></canvas>
     </div>
 <!--
     <div class="pure-u-1-1">
@@ -630,6 +642,7 @@
   <script>
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
+    var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
         {toolbox: document.getElementById('toolbox')});
     var onresize = function(e) {
@@ -642,11 +655,16 @@
         y += element.offsetTop;
         element = element.offsetParent;
       } while (element);
+      //alert(blocklyArea.offsetWidth)
+      //blocklyArea.style.height='80%';
+      blocklyDiv.style.height='80%';
       // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
       blocklyDiv.style.top = y + 'px';
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+      //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+
+      blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
     };
     window.addEventListener('resize', onresize, false);
     onresize();
