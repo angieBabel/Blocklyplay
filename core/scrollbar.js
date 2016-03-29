@@ -183,9 +183,9 @@ Blockly.Scrollbar = function(workspace, horizontal, opt_pair) {
  * Increase the size of scrollbars on touch devices.
  * Don't define if there is no document object (e.g. node.js).
  */
-Blockly.Scrollbar.scrollbarThickness = 15;
+Blockly.Scrollbar.scrollbarThickness = 1;
 if (goog.events.BrowserFeature.TOUCH_ENABLED) {
-  Blockly.Scrollbar.scrollbarThickness = 25;
+  Blockly.Scrollbar.scrollbarThickness = 1;
 }
 
 /**
@@ -315,7 +315,7 @@ Blockly.Scrollbar.prototype.createDom_ = function() {
   this.svgGroup_ = Blockly.createSvgElement('g', {'class': className}, null);
   this.svgBackground_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyScrollbarBackground'}, this.svgGroup_);
-  var radius = Math.floor((Blockly.Scrollbar.scrollbarThickness - 5) / 2);
+  var radius = Math.floor((Blockly.Scrollbar.scrollbarThickness - 5) / 8);
   this.svgKnob_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyScrollbarKnob', 'rx': radius, 'ry': radius},
       this.svgGroup_);
