@@ -262,7 +262,7 @@
       img.onload = function() {
           ctx.drawImage(img,X-20,Y-10,40,20);
           //giro();
-          giro(90);
+          //giro(90);
       }
 
 
@@ -627,12 +627,12 @@
     <div class="pure-u-1-2" id="divCanvas">
       <canvas id="canvas"></canvas>
     </div>
-<!--
+
     <div class="pure-u-1-1">
         <button onclick="runCode()" class="button-success pure-button">
           Run JavaScript <i class="fa fa-play"></i>
         </button>
-    </div> -->
+    </div>
 
 
   </div>
@@ -644,7 +644,9 @@
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
-        {toolbox: document.getElementById('toolbox')});
+        { media: '../../media/',
+          maxBlocks: 5,
+          toolbox: document.getElementById('toolbox')});
     var onresize = function(e) {
       // Compute the absolute coordinates and dimensions of blocklyArea.
       var element = blocklyArea;
@@ -657,7 +659,7 @@
       } while (element);
       //alert(blocklyArea.offsetWidth)
       //blocklyArea.style.height='80%';
-      blocklyDiv.style.height='80%';
+      blocklyDiv.style.height='85%';
       // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
       blocklyDiv.style.top = y + 'px';
@@ -689,6 +691,11 @@
         alert(e);
       }
     }
+
+    function onchange() {
+      document.getElementById('capacity').innerHTML = workspace.remainingCapacity();
+    }
+
   </script>
 
 </body>
