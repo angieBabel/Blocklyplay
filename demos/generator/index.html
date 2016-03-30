@@ -8,6 +8,7 @@
   <script src="../../blocks_compressed.js"></script>
   <script src="../../javascript_compressed.js"></script>
   <script src="../../core/css.js"></script>
+  <script src="../../core/blockly.js"></script>
   <script src="../../msg/js/en.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
@@ -57,6 +58,9 @@
     var stepsize=20;
     var initX=0,initY=0;
     var interval, time = 1500;
+    var himg=40, wimg=20;
+    var roadpaint = [];
+    var count=0;
 
     var positionObj = {
       objX: 0,
@@ -81,14 +85,18 @@
       r = 10;
       positionObj.objX=X;
       positionObj.objY=Y;
+      roadpaint.push(X+","+Y);
+      alert(roadpaint.length);
+      //alert(roadpaint.pop(0));
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
       panel();
       path();
       Avatar();
-      giro();
+      //paint()
+      //giro(90);
       //move("forward (5),upward (5),backward (5),downward (5)");
-      //forward(5);
+      forward(2);
       //backward(5);
       //upward(5);
       //downward(5);
@@ -154,6 +162,7 @@
     //motion functions
     function forward(nosteps){
       //alert(positionObj.objX+","+positionObj.objY);
+      alert(roadpaint.length);
       limtX = positionObj.objX + (nosteps*stepsize);
 
       i=0;
@@ -164,18 +173,23 @@
           if(Xaux<limtX){
             Xaux=Xaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
+            //alert(roadpaint.length);
+            paint(Xaux,positionObj.objY);
+            path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+
             /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
             positionObj.objX=Xaux;
           }
         panel();
-        path();
+
         i++;
         if(i==nosteps){
           //alert(positionObj.objX+","+positionObj.objY);
           stopTimer();
+          //giro(90);
         }
       },200);
     }
@@ -215,7 +229,9 @@
           if(Yaux>limtY){
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            paint(positionObj.objX,Yaux);
+            ctx.drawImage(img, positionObj.objX-20, Yaux-10,40,20);
+            giro(270);
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
@@ -260,11 +276,25 @@
       img.src = '../../media/carro.png';
       img.id = 'imagen';
       img.onload = function() {
-          ctx.drawImage(img,X-20,Y-10,40,20);
+          ctx.drawImage(img,X-20,Y-10,himg,wimg);
           //giro();
-          //giro(90);
+          //giro(270);
       }
 
+
+    }
+    function paint(Xend,Yend){
+      //roadpaint.push(positionObj.objX + ','+ positionObj.objY);
+
+
+      alert(roadpaint.length);
+
+      ctx.beginPath();
+        ctx.strokeStyle = "#63FFB2";
+        ctx.lineWidth = wimg;
+        ctx.moveTo(X, Y);//(x,y)
+        ctx.lineTo(Xend, Yend);
+        ctx.stroke();
 
     }
     //path forward
@@ -695,6 +725,7 @@
     function onchange() {
       document.getElementById('capacity').innerHTML = workspace.remainingCapacity();
     }
+
 
   </script>
 
