@@ -186,7 +186,7 @@
         i++;
         if(i==nosteps){
           stopTimer();
-          upward(4);
+          upward(3);
           //giro(90);
         }
       },200);
@@ -202,6 +202,8 @@
           if(Xaux>limtX){
             Xaux=Xaux -stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
+            paint(Xaux,positionObj.objY,nosteps);
+            //path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
             /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
@@ -209,7 +211,7 @@
             positionObj.objX=Xaux;
           }
         panel();
-        path();
+
         i++;
         if (i==nosteps) {
           stopTimer();
@@ -228,7 +230,7 @@
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             paint(positionObj.objX,Yaux,nosteps);
-            path();
+            //path();
             ctx.drawImage(img, positionObj.objX-20, Yaux-10,40,20);
             //giro(270);
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
@@ -241,6 +243,7 @@
         i++;
         if (i==nosteps) {
           stopTimer();
+          backward(2);
         }
       },200);
     }
@@ -286,26 +289,55 @@
       //roadpaint.push(positionObj.objX + ','+ positionObj.objY);
       var srt;
       var res;
+      var yinit, xinit;
       //alert(no_steps);
 
       //alert(roadpaint.length);
       ctx.beginPath();
       ctx.strokeStyle = "#63FFB2";
       ctx.lineWidth = wimg;
+      var exe=wimg/2;
 
       if (roadpaint.length==1) {
         srt= roadpaint[0];
       }else{
 
         for (var i = 0; i < roadpaint.length-1; i++) {
-          srt=roadpaint[i];
-          res=srt.split(",");
-          ctx.moveTo(res[0],res[1]);
+          //alert(roadpaint.length);
+          //alert(i);
+          MT=roadpaint[i];
+          resMT=MT.split(",");
+          ctx.moveTo(parseFloat(resMT[0]),resMT[1]);
 
-          srt=roadpaint[i+1];
-          res=srt.split(",");
-          ctx.lineTo(res[0],res[1]);
+          LT=roadpaint[i+1];
+          resLT=LT.split(",");
+          //alert(parseFloat(resMT[0]) + " a "+ parseFloat(resLT[0]));
+          //alert(parseFloat(resMT[1]) + " a "+ parseFloat(resLT[1]));
+
+          if (parseFloat(resMT[0]) > parseFloat(resLT[0])) {
+            xinit= parseFloat(resLT[0]) - exe;
+            yinit= parseFloat(resLT[1]);
+          }
+          if (parseFloat(resMT[0]) < parseFloat(resLT[0])){
+            xinit= parseFloat(resLT[0]) + exe;
+            yinit= parseFloat(resLT[1]);
+          }
+
+          if (parseFloat(resMT[1]) > parseFloat(resLT[1])) {
+           xinit= parseFloat(resLT[0]) ;
+            yinit= parseFloat(resLT[1])- exe;
+          }
+          if (parseFloat(resMT[1]) < parseFloat(resLT[1])){
+            xinit= parseFloat(resLT[0]) ;
+            yinit= parseFloat(resLT[1]) + exe;
+          }
+
+          //alert(xinit);
+          //alert(i);
+          ctx.lineTo(xinit,yinit);
           ctx.stroke();
+
+
         }
         srt=roadpaint[roadpaint.length-1];
 
@@ -313,7 +345,7 @@
       res = srt.split(",");
 
 
-      ctx.moveTo(res[0], res[1]);//(x,y)
+      ctx.moveTo(parseFloat(res[0]), res[1]);//(x,y)
       ctx.lineTo(Xend, Yend);
       count++;
 
