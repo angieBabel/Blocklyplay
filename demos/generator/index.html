@@ -86,8 +86,7 @@
       positionObj.objX=X;
       positionObj.objY=Y;
       roadpaint.push(X+","+Y);
-      alert(roadpaint.length);
-      //alert(roadpaint.pop(0));
+
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
       panel();
@@ -162,7 +161,7 @@
     //motion functions
     function forward(nosteps){
       //alert(positionObj.objX+","+positionObj.objY);
-      alert(roadpaint.length);
+      //alert(roadpaint.length);
       limtX = positionObj.objX + (nosteps*stepsize);
 
       i=0;
@@ -174,7 +173,7 @@
             Xaux=Xaux+stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
             //alert(roadpaint.length);
-            paint(Xaux,positionObj.objY);
+            paint(Xaux,positionObj.objY,nosteps);
             path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
 
@@ -189,6 +188,7 @@
         if(i==nosteps){
           //alert(positionObj.objX+","+positionObj.objY);
           stopTimer();
+          upward(2);
           //giro(90);
         }
       },200);
@@ -229,7 +229,8 @@
           if(Yaux>limtY){
             Yaux=Yaux-stepsize;
             ctx.clearRect(0,0,canvas.width,canvas.height);
-            paint(positionObj.objX,Yaux);
+            paint(positionObj.objX,Yaux,nosteps);
+            path();
             ctx.drawImage(img, positionObj.objX-20, Yaux-10,40,20);
             giro(270);
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
@@ -238,7 +239,7 @@
             positionObj.objY=Yaux;
           }
         panel();
-        path();
+
         i++;
         if (i==nosteps) {
           stopTimer();
@@ -283,17 +284,35 @@
 
 
     }
-    function paint(Xend,Yend){
+    function paint(Xend,Yend, no_steps){
       //roadpaint.push(positionObj.objX + ','+ positionObj.objY);
+      var srt;
+      var res;
+      //alert(no_steps);
 
-
-      alert(roadpaint.length);
-
+      //alert(srt);
       ctx.beginPath();
-        ctx.strokeStyle = "#63FFB2";
-        ctx.lineWidth = wimg;
-        ctx.moveTo(X, Y);//(x,y)
-        ctx.lineTo(Xend, Yend);
+      ctx.strokeStyle = "#63FFB2";
+      ctx.lineWidth = wimg;
+
+      if (roadpaint.length==1) {
+        srt= roadpaint[0];
+      }else{
+
+        srt=roadpaint[roadpaint.length-1];
+      }
+      res = srt.split(",");
+
+      ctx.moveTo(res[0], res[1]);//(x,y)
+      ctx.lineTo(Xend, Yend);
+      count++;
+
+      if (count==no_steps) {
+        roadpaint.push(Xend+","+Yend);
+        count=0;
+      }
+
+
         ctx.stroke();
 
     }
