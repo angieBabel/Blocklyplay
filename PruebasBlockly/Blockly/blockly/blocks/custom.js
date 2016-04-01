@@ -11,8 +11,25 @@ Blockly.Blocks['mover'] = {
         .appendField("move")
         .appendField(new Blockly.FieldTextInput("0"), "nosteps")
         .appendField("to")
-        .appendField(new Blockly.FieldDropdown([["Upward", "up"], ["Downward", "down"], ["Forward", "front"], ["Backward", "back"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["Forward", "front"], ["Backward", "back"]]), "direction");
     this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(330);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['mover_pintando'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("move")
+        .appendField(new Blockly.FieldTextInput("0"), "pasos")
+        .appendField("to")
+        .appendField(new Blockly.FieldDropdown([["Forward", "front"], ["Backward", "back"]]), "directio")
+        .appendField("painting")
+        .appendField(new Blockly.FieldColour("#ff0000"), "color");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(330);

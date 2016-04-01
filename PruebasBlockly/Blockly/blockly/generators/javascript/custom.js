@@ -10,18 +10,26 @@ Blockly.JavaScript['mover'] = function(block) {
   var code = '';
   // TODO: Assemble JavaScript into code variable.
  var nosteps = parseInt(text_nosteps);
-  if (dropdown_direction=="up") {
-    return code = "upward ("+nosteps+");";
-  }
-  if (dropdown_direction=="down") {
-    return code= "downward ("+nosteps+");";
-  }
   if (dropdown_direction=="front") {
     return code=  "forward ("+nosteps+");";
   }
   if (dropdown_direction=="back") {
     return code= "backward ("+nosteps+");";
+  }
+};
 
+Blockly.JavaScript['mover_pintando'] = function(block) {
+  var text_pasos = block.getFieldValue('pasos');
+  var dropdown_directio = block.getFieldValue('directio');
+  var colour_color = block.getFieldValue('color');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '';
+  var pasos = parseInt(text_pasos);
+  if (dropdown_directio=="front") {
+    return code= "forwardPaint ("+pasos+",'"+colour_color+"');";
+  }
+  if (dropdown_directio=="back") {
+    return code= "backwardPaint ("+pasos+",'"+colour_color+"');";
   }
 };
 
@@ -30,7 +38,7 @@ Blockly.JavaScript['girar'] = function(block) {
   var dropdown_side = block.getFieldValue('side');
   var code = '';
   var angulo=parseInt(angle_grades);
-  return  code= "rotar(" + angulo +", '"+dropdown_side+"');\n";
+  return  code= "rotar(" + angulo +",'"+dropdown_side+"');\n";
 };
 
 Blockly.JavaScript['wait'] = function(block) {
