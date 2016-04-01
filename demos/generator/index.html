@@ -233,7 +233,10 @@
             paint(positionObj.objX,Yaux,nosteps);
             path();
             ctx.drawImage(img, positionObj.objX-20, Yaux-10,40,20);
+
             giro(270);
+
+
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
@@ -262,6 +265,7 @@
             paint(positionObj.objX,Yaux,nosteps);
             path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            giro(90);
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
@@ -311,13 +315,23 @@
       }
       res = srt.split(",");
 
-
+      //alert(count);
       ctx.moveTo(parseFloat(res[0]), res[1]);//(x,y)
       ctx.lineTo(Xend, Yend);
-      count++;
 
-      if (count===no_steps) {
+      if(count===0){
         roadpaint.push(Xend+","+Yend);
+        //count++;
+        //alert(roadpaint.length);
+      }
+      if(count<no_steps){
+        //alert(roadpaint.length-1);
+        roadpaint[roadpaint.length-1]=(Xend+','+Yend);
+        //count++;
+
+      }
+      count++;
+      if(count==no_steps){
         count=0;
       }
 
@@ -389,10 +403,12 @@
       ctx.clearRect(0,0,canvas.width,canvas.height);
       panel();
 
+
+
       path();
-      painroad();
       ctx.save();
       var w=40,h=20;
+      painroad();
       ctx.translate(positionObj.objX,positionObj.objY);
       ctx.rotate(angulo * (Math.PI/180));
       ctx.drawImage(img,-w/2, -h/2,40,20);
