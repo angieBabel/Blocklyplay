@@ -4,8 +4,8 @@ var degreesToRadian = function (deg) {
 //motion functions
 function forward(nosteps){
   acabo=0;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
+  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsize);
+  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsize);
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
@@ -42,7 +42,7 @@ function forward(nosteps){
       }
     }
     /*ctx.clearRect(0,0,canvas.width,canvas.height);*/
-    painroad(colorPath);
+    /*painroad(colorPath);*/
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
@@ -97,7 +97,7 @@ function backward(nosteps){
         Yaux=Yaux-(distY/nosteps);
       }
     }
-    painroad(colorPath);
+    /*painroad(colorPath);*/
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
@@ -292,6 +292,9 @@ function paint(Xend,Yend,no_steps,color){
   var srt;
   var res;
   var yinit, xinit;
+  //alert(no_steps);
+
+  //alert(roadpaint.length);
   ctx.beginPath();
   ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
@@ -301,30 +304,38 @@ function paint(Xend,Yend,no_steps,color){
     srt= roadpaint[0];
   }else{
 
-    /*painroad(color);*/
+    painroad();
     srt=roadpaint[roadpaint.length-1];
 
   }
   res = srt.split(",");
 
-
+  //alert(count);
   ctx.moveTo(parseFloat(res[0]), res[1]);//(x,y)
   ctx.lineTo(Xend, Yend);
-  count++;
 
-  if (count==no_steps) {
+  if(count===0){
     roadpaint.push(Xend+","+Yend);
+    //count++;
+    //alert(roadpaint.length);
+  }
+  if(count<no_steps){
+    //alert(roadpaint.length-1);
+    roadpaint[roadpaint.length-1]=(Xend+','+Yend);
+    //count++;
+
+  }
+  count++;
+  if(count==no_steps){
     count=0;
   }
-
-
-    ctx.stroke();
+  ctx.stroke();
 
 }
 function painroad(color){
   var yinit, xinit;
   ctx.beginPath();
-  ctx.strokeStyle = color;
+  ctx.strokeStyle = "#63FFB2";
   ctx.lineWidth = wimg;
   var exe=wimg/2;
 
@@ -362,6 +373,8 @@ function painroad(color){
       //alert(i);
       ctx.lineTo(xinit,yinit);
       ctx.stroke();
+
+
   }
 }
 
