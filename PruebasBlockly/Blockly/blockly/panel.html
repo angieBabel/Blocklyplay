@@ -7,142 +7,130 @@
   <script src="acorn_interpreter.js"></script>
   <script src="acorn.js"></script>
   <script src="interpreter.js"></script>
-  <!-- <script src="/storage.js"></script> -->
+  <!-- necesidades de blockly -->
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
   <script src="javascript_compressed.js"></script>
+  <!-- estilos css -->
+  <script src="/core/css.js"></script>
+  <script src="/core/blockly.js"></script>
+
   <script src="msg/js/en.js"></script>
   <script src="blocks/custom.js"></script>
   <script src="generators/javascript/custom.js"></script>
   <script type="text/javascript" src="moves.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
   <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    .button-success,
+    .button-error,
+    .button-warning,
+    .button-secondary {
+      color: white;
+      border-radius: 20px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      margin-left: 20px;
+    }
+
+    .button-success {
+      background: rgb(28, 184, 65); /* this is a green */
+    }
     canvas {
-        background: #fff;
+     height: 100%;
+     width: 99%;
+    }
+    #divCanvas{
+      height: 80%;
     }
   </style>
-<script type="text/javascript">
-    /*var image;*/
-    var img= new Image();
-    var X;
-    var Y;
-    var r;
-    var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsize=20;
-    var initX=0,initY=0;
-    var interval,time=2000;
-    var c=0,acabo=1;
-    var road [];
+  <script type="text/javascript">
+  //var image;
+  var img= new Image();
+  var X;
+  var Y;
+  var r;
+  var Xaux=0,Yaux=0,limtX,limtY;
+  var stepsize=20;
+  var initX=0,initY=0;
+  var interval, time = 1500;
+  var himg=40, wimg=20;
+  var roadpaint = [];
+  var count=0;
 
-    var positionObj = {
-      objX: 0,
-      objY: 0,
-      objZ: 0,
-    };
-    function begin(){
-      canvas = document.getElementById('canvas');
-      canvas.style.border='1px solid black';
-      ctx = canvas.getContext('2d');
-      X = canvas.width/2;
-      Y = canvas.height/2;
-      r = 10;
-      positionObj.objX=X;
-      positionObj.objY=Y;
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
-      panel();
-      Avatar();
-      path();
-    }
+  var positionObj = {
+    objX: 0,
+    objY: 0,
+    objZ:0,
+  };
 
-    function stopTimer(){
-      clearInterval(interval);
-    }
+  function begin(){
+    canvas = document.getElementById('canvas');
+    canvas.style.border='1px solid black';
+    ctx = canvas.getContext('2d');
+    ////
+    ancho = document.getElementById('divCanvas').offsetWidth;
+    alto = document.getElementById('divCanvas').offsetHeight;
+    //alert("ancho: "+ ancho + "alto" + alto);
+    canvas.width= ancho;
+    canvas.height = alto;
+     ////
 
-    function panel(){
-      while(initX<canvas.width-stepsize){
-        initX=initX+stepsize;
-        while(initY<canvas.height-stepsize){
-          initY=initY+stepsize;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,1.5,0,2*Math.PI);
-          ctx.fill();
-        }
-        initY=0;
+    X = canvas.width/2;
+    Y = canvas.height/2;
+    r = 10;
+    positionObj.objX=X;
+    positionObj.objY=Y;
+    roadpaint.push(X+","+Y);
+
+    Xaux = positionObj.objX;
+    Yaux= positionObj.objY;
+    panel();
+    path();
+    Avatar();
+  }
+
+  function stopTimer(){
+    clearInterval(interval);
+  }
+
+  function panel(){
+    while(initX<canvas.width-stepsize){
+      initX=initX+stepsize;
+      while(initY<canvas.height-stepsize){
+        initY=initY+stepsize;
+        ctx.beginPath();
+        ctx.fillStyle = "#4C4C4C";
+        ctx.arc(initX,initY,1.5,0,2*Math.PI);
+        ctx.fill();
       }
-      initX=0;
+      initY=0;
     }
+    initX=0;
+  }
 
-    function paintroad(){
-      for (var i = 0; i <road.length; i++) {
-        ctx.moveTo(road[i]);
-        ctx.lineTo(road[i+1]);
-      };
+  //Drawing avatar
+  function Avatar(){
+
+    img.src = '../../media/carro.png';
+    img.id = 'imagen';
+    img.onload = function() {
+        ctx.drawImage(img,X-20,Y-10,himg,wimg);
+        //giro();
+        //giro(270);
     }
-
-    /*function move(allsteps){
-      steps = allsteps.split(",");
-      acabo=0;
-      //alert(steps.length);
-          motion= steps[c].split(" ");
-          type=motion[0];
-          quantity= motion[1].substring(1,2);
-          time = 300 * quantity;
-        switch(type){
-          case 'forward':
-            forward(quantity);
-            break;
-          case 'backward':
-            backward(quantity);
-            break
-          case 'upward':
-            upward(quantity);
-            break
-          case 'downward':
-            downward(quantity);
-            break;
-        }
-        c++;
-        setTimeout(function(){
-          if(acabo==1){
-            if (c!=steps.length-1) {
-             move(allsteps);
-            }else{
-              c=0;
-            }
-          }
-        }, time);
-    }*/
-    //Drawing avatar
-    /*function Avatar(){
-      ctx.beginPath();
-      ctx.strokeStyle = "#006400";
-      ctx.fillStyle = "#6ab150";
-      ctx.lineWidth = 2;
-      ctx.arc(X,Y,r,0,2*Math.PI);
-      ctx.fill();
-      ctx.stroke();
-    }*/
-
-    function Avatar(){
-
-      img.src = 'media/carro.png';
-      img.id = 'imagen';
-      img.onload = function() {
-      ctx.drawImage(img,X-20,Y-10,40,20);
-      }
-    }
-
-    //path forward
-    function path(){
-      ctx.beginPath();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "gray";
-      ctx.rect(X, Y-100, 100, 100);
-      ctx.stroke();
-    }
-</script>
-<script type="text/javascript">
+  }
+  </script>
+  <script type="text/javascript">
     var myInterpreter=null;
     function initAlert(interpreter, scope) {
       var wrapper = function(text) {
@@ -224,84 +212,342 @@
       workspace.highlightBlock(id);
       highlightPause = true;
     }
-</script>
+  </script>
 </head>
 <body onload="begin()">
-<table>
+  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+      <a href="../index.html">Demos</a> &gt; Generating JavaScript
+  </h1>
+  <div class="pure-g">
+    <div class="pure-u-1-2" id="blocklyArea">
+      <div id="blocklyDiv" style="position: absolute" >
+        <xml id="toolbox" style="display: none">
+          <category name="Logic" colour="210">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+          </category>
 
-<button onclick="showCode()">Show JavaScript</button>
-<button onclick="runCode()">Run JavaScript</button>
-  <td><canvas id="canvas" height="480" width="600" ></canvas></td>
-  <td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-</td>
-</table>
+
+          <category name="Loops" colour="120">
+            <block type="controls_repeat_ext">
+              <value name="TIMES">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+              <value name="FROM">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="TO">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+              <value name="BY">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+          </category>
 
 
-<xml id="toolbox" style="display: none">
-    <category name="Logic">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-    </category>
-    <category name="Loops">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
-      <block type="controls_whileUntil"></block>
-    </category>
-    <category name="Math">
-      <block type="math_number"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
-    </category>
-    <category name="Text">
-      <block type="text"></block>
-      <block type="text_length"></block>
-      <block type="text_print"></block>
-    </category>
-    <category name="Variables" custom="VARIABLE"></category>
-    <category name="custom">
-      <block type="mover"></block>
-      <block type="girar"></block>
-      <block type="wait"></block>
-      <block type="stop"></block>
-      <block type="blinker"></block>
-      <block type="lights"></block>
-      <block type="sonido"></block>
-    </category>
-</xml>
-<xml id="startBlocks" style="display: none">
-    <block type="mover" inline="true">
-      <field name="nosteps">5</field>
-      <field name="direction"><!-- Forward --></field>
-      <next>
-        <block type="mover" >
-          <field name="nosteps">5</field>
-          <field name="direction"><!-- Upward --></field>
-           <next>
-              <block type="mover" >
-                <field name="nosteps">5</field>
-                <field name="direction"><!-- Backward --></field>
-                <next>
-                  <block type="mover" >
-                    <field name="nosteps">5</field>
-                    <field name="direction"><!-- Downward --></field>
-                  </block>
-                </next>
-              </block>
-          </next>
-        </block>
+          <category name="Math" colour="230">
+            <block type="math_number" gap="32"></block>
+            <block type="math_arithmetic">
+              <value name="A">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="B">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_single">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">9</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_trig">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">45</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_constant"></block>
+            <block type="math_number_property">
+              <value name="NUMBER_TO_CHECK">
+                <shadow type="math_number">
+                  <field name="NUM">0</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_change">
+              <value name="DELTA">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_round">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">3.1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo">
+              <value name="DIVIDEND">
+                <shadow type="math_number">
+                  <field name="NUM">64</field>
+                </shadow>
+              </value>
+              <value name="DIVISOR">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_constrain">
+              <value name="VALUE">
+                <shadow type="math_number">
+                  <field name="NUM">50</field>
+                </shadow>
+              </value>
+              <value name="LOW">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="HIGH">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_random_int">
+              <value name="FROM">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="TO">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_random_float"></block>
+          </category>
 
-      </next>
 
-    </block>
-</xml>
+          <category name="Text" colour="160">
+            <block type="text"></block>
+            <block type="text_join"></block>
+            <block type="text_append">
+              <value name="TEXT">
+                <shadow type="text"></shadow>
+              </value>
+            </block>
+            <block type="text_length">
+              <value name="VALUE">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_isEmpty">
+              <value name="VALUE">
+                <shadow type="text">
+                  <field name="TEXT"></field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_indexOf">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+              <value name="FIND">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_charAt">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+            </block>
+            <block type="text_getSubstring">
+              <value name="STRING">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+            </block>
+            <block type="text_changeCase">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_trim">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_print">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_prompt_ext">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+
+          <category name="Lists" colour="260">
+            <block type="lists_create_with">
+              <mutation items="0"></mutation>
+            </block>
+            <block type="lists_create_with"></block>
+            <block type="lists_repeat">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">5</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="lists_indexOf">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_getIndex">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_setIndex">
+              <value name="LIST">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_getSublist">
+              <value name="LIST">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_split">
+              <value name="DELIM">
+                <shadow type="text">
+                  <field name="TEXT">,</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+
+          <category name="Colour" colour="20">
+            <block type="colour_picker"></block>
+            <block type="colour_random"></block>
+            <block type="colour_rgb">
+              <value name="RED">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+              <value name="GREEN">
+                <shadow type="math_number">
+                  <field name="NUM">50</field>
+                </shadow>
+              </value>
+              <value name="BLUE">
+                <shadow type="math_number">
+                  <field name="NUM">0</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="colour_blend">
+              <value name="COLOUR1">
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#ff0000</field>
+                </shadow>
+              </value>
+              <value name="COLOUR2">
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#3333ff</field>
+                </shadow>
+              </value>
+              <value name="RATIO">
+                <shadow type="math_number">
+                  <field name="NUM">0.5</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+
+          <category name="Variables" colour="330" custom="VARIABLE"></category>
+
+
+          <category name="Functions" colour="290" custom="PROCEDURE"></category>
+
+        </xml>
+      </div>
+    </div>
+
+    <div class="pure-u-1-2" id="divCanvas">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="pure-u-1-1">
+        <button onclick="runCode()" class="button-success pure-button">
+          Run JavaScript <i class="fa fa-play"></i>
+        </button>
+    </div>
+  </div>
 <script type="text/javascript">
   var workspace = Blockly.inject('blocklyDiv',
       {media: 'media/',
@@ -321,7 +567,7 @@
     highlightPause = false;
     workspace.traceOn(true);
     workspace.highlightBlock(null);
-    alert(code);
+    /*alert(code);*/
 
   }
   function nextStep() {
@@ -357,6 +603,9 @@
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
     window.localStorage.setItem("panel", domToPretty);
   }
+  function onchange() {
+      document.getElementById('capacity').innerHTML = workspace.remainingCapacity();
+    }
 </script>
 </body>
 </html>
