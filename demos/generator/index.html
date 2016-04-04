@@ -43,9 +43,6 @@
     #divCanvas{
       height: 80%;
     }
-
-
-
   </style>
 
   <script type="text/javascript">
@@ -95,9 +92,10 @@
       //paint()
       //giro(90);
       //move("forward (5),upward (5),backward (5),downward (5)");
-      //forward(5);
+      forward(5);
       //backward(5);
-      upward(5);
+      luces(X,Y);
+      /*upward(5);*/
       //downward(5);
     }
 
@@ -175,14 +173,14 @@
             paint(Xaux,positionObj.objY,nosteps);
             path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
-
+            giro(0);
             /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
+
             positionObj.objX=Xaux;
           }
         panel();
-
         i++;
         if(i==nosteps){
           stopTimer();
@@ -205,6 +203,7 @@
             paint(Xaux,positionObj.objY,nosteps);
             path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            giro(180);
             /*ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
             ctx.fill();
             ctx.stroke();*/
@@ -233,7 +232,6 @@
             paint(positionObj.objX,Yaux,nosteps);
             path();
             ctx.drawImage(img, positionObj.objX-20, Yaux-10,40,20);
-
             giro(270);
 
 
@@ -265,6 +263,7 @@
             paint(positionObj.objX,Yaux,nosteps);
             path();
             ctx.drawImage(img, Xaux-20, positionObj.objY-10,40,20);
+            luces(positionObj.objX,Yaux+20);
             giro(90);
             /*ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
             ctx.fill();
@@ -289,8 +288,6 @@
           //giro();
           //giro(270);
       }
-
-
     }
     function paint(Xend,Yend, no_steps){
       //roadpaint.push(positionObj.objX + ','+ positionObj.objY);
@@ -337,7 +334,6 @@
 
 
         ctx.stroke();
-
     }
     function painroad(){
 
@@ -392,35 +388,84 @@
       ctx.strokeStyle = "gray";
       ctx.rect(X, Y-100, 100, 100);
       ctx.stroke();
-
     }
 
     //function sipin
     function giro(angulo) {
       if (positionObj.objZ=!angulo) {
-        positionObj,objZ= angulo;
+        positionObj.objZ= angulo;
       }
       ctx.clearRect(0,0,canvas.width,canvas.height);
       panel();
-
-
-
       path();
       ctx.save();
       var w=40,h=20;
       painroad();
       ctx.translate(positionObj.objX,positionObj.objY);
       ctx.rotate(angulo * (Math.PI/180));
+      luces(0,0);
       ctx.drawImage(img,-w/2, -h/2,40,20);
-
       ctx.restore();
+    }
+
+    function luces(Xx,Yy){
+      //cuadrante inf derecho
+      if (positionObj.objZ>=0 && positionObj.objZ<90) {
+        Xx=20;
+      }
+      //cuadrante inf izq
+      if (positionObj.objZ>=90 && positionObj.objZ<180) {
+        Yy=20;
+      }
+      //cuadrante superior izquierdo
+      if (positionObj.objZ>=180 && positionObj.objZ<270) {
+        Xx=-20;
+      }
+      //cuadrante superior derecho
+      if (positionObj.objZ>=270 && positionObj.objZ<360) {
+        Yy=-20;
+      }
+
+      var R = 13;
+      // El ángulo de partida ap y el ángulo final af
+      var ap = (Math.PI / 180) * -20;
+      var af = (Math.PI / 180) * 20;
+      // Las coordenadas del punto de partida en la circunferencia
+      var Xap = Xx+R * Math.cos(ap);
+      var Yap = Yy+R * Math.sin(ap);
+      // estilos
+      ctx.fillStyle = "#abcdef";
+      ctx.strokeStyle = "#1E90FF";
+      ctx.lineWidth = 2;
+
+      // empezamos a dibujar
+      //Luz izquierda
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy);
+      ctx.lineTo(Xap,Yap);
+      ctx.arc(Xx,Yy,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+
+      /*// Las coordenadas del punto de partida en la circunferencia
+      var Xap = Xx+R * Math.cos(ap);
+      var Yap = Yy+R * Math.sin(ap);
+
+      // Luz derecha
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy-5);
+      ctx.lineTo(Xap,Yap-5);
+      ctx.arc(Xx,Yy,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();*/
 
 
 
     }
 
-
-    </script>
+  </script>
 
 </head>
 
