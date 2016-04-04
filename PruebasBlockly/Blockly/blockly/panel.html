@@ -15,6 +15,9 @@
 <script src="blocks/custom.js"></script>
 <script src="generators/javascript/custom.js"></script>
 <script type="text/javascript" src="moves.js"></script>
+<script type="text/javascript" src="filesaver.js"></script>
+<script type="text/javascript" src="Blob.js"></script>
+
 <style>
   canvas {
       background: #fff;
@@ -198,6 +201,7 @@
 <table>
 
 <button onclick="showCode()">Show JavaScript</button>
+<button onclick="saveXML()">Save as XML</button>
 <button onclick="runCode()">Run JavaScript</button>
 <td><canvas id="canvas" height="480" width="600" ></canvas></td>
 <td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -298,7 +302,41 @@ function runCode() {
   intervalo= setInterval(function(){finish();},15)
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var domToPretty = Blockly.Xml.domToPrettyText(xml);
+
   window.localStorage.setItem("panel", domToPretty);
+}
+
+function saveXML(){
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var mappingData = window.localStorage.getItem('mappingBlock');
+  var conditionData = window.localStorage.getItem('conditionBlock');
+
+  /*var mappingElem = new Element('mapping', {
+    'html': mappingData
+  });
+  var conditionElem = new Element('condition', {
+    'html': conditionData
+  });
+
+  $(xml).grab(mappingElem);
+  $(xml).grab(conditionElem);
+*/
+  var data = Blockly.Xml.domToPrettyText(xml);
+  console.log(data);
+  //return;
+
+  // Store data in blob.
+  //var builder = new BlobBuilder();
+  //builder.append(data);
+  //console.log(builder);
+  //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+  var name = prompt("Name of this file", "blocks");
+  if (name) {
+    var blob = new Blob([data], {
+      type: "text/plain;charset=utf-8"
+    });
+    saveAs(blob, name + '.xml');
+  }
 }
 </script>
 </body>
