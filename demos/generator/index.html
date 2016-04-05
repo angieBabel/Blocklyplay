@@ -58,7 +58,7 @@
     var himg=40, wimg=20;
     var roadpaint = [];
     var count=0;
-    var luz=1;
+    var luz=1,luzTrasera=1;
 
     var positionObj = {
       objX: 0,
@@ -406,13 +406,15 @@
       if (luz==1) {
         luces(20,0);
       }
+      if (luzTrasera==1) {
+        lucesTraceras(-20,0);
+      }
+      ctx.globalAlpha=1;
       ctx.drawImage(img,-w/2, -h/2,40,20);
       ctx.restore();
     }
-
+    //Funciones de luces
     function luces(Xx,Yy){
-      // Xx=20;
-
       var R = 13;
       // El ángulo de partida ap y el ángulo final af
       var ap = (Math.PI / 180) * -30;
@@ -423,6 +425,7 @@
       var Xap = Xx+R * Math.cos(ap);
       var Yap = Yy-5+R * Math.sin(ap);
       // estilos
+      ctx.globalAlpha=0.75;
       ctx.fillStyle = "#abcdef";
       ctx.strokeStyle = "#1E90FF";
       ctx.lineWidth = 10;
@@ -451,18 +454,17 @@
       ctx.stroke();
     }
     function lucesTraceras(Xx,Yy){
-      // Xx=20;
-
-      var R = 13;
+      var R = 5;
       // El ángulo de partida ap y el ángulo final af
-      var ap = (Math.PI / 180) * -30;
-      var af = (Math.PI / 180) * 30;
+      var ap = (Math.PI / 180) * 150;
+      var af = (Math.PI / 180) * 210;
 
       //Luz izquierda
       // Las coordenadas del punto de partida en la circunferencia
       var Xap = Xx+R * Math.cos(ap);
       var Yap = Yy-5+R * Math.sin(ap);
       // estilos
+      ctx.globalAlpha=0.75;
       ctx.fillStyle = "#abcdef";
       ctx.strokeStyle = "#1E90FF";
       ctx.lineWidth = 10;
