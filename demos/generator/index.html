@@ -10,6 +10,7 @@
   <script src="../../core/css.js"></script>
   <script src="../../core/blockly.js"></script>
   <script src="../../msg/js/en.js"></script>
+  <script src="../interpreter/acorn_interpreter.js"></script>
   <script src="https://apis.google.com/js/api.js"></script>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -413,7 +414,7 @@
       ctx.drawImage(img,-w/2, -h/2,40,20);
       ctx.restore();
     }
-    //Funciones de luces
+    //Funciones de luces,
     function luces(Xx,Yy){
       var R = 13;
       // El ángulo de partida ap y el ángulo final af
@@ -492,9 +493,38 @@
       ctx.fill();
       ctx.stroke();
     }
-
   </script>
 
+
+<script type="text/javascript">
+    var myInterpreter=null;
+    function initApi(interpreter, scope) {
+      // Add an API function for the alert() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(alert(text));
+      };
+      interpreter.setProperty(scope, 'alert',
+          interpreter.createNativeFunction(wrapper));
+
+      // Add an API function for the prompt() block.
+      wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(prompt(text));
+      };
+      interpreter.setProperty(scope, 'prompt',
+          interpreter.createNativeFunction(wrapper));
+      // Add an API function for highlighting blocks.
+      var wrapper = function(id) {
+        id = id ? id.toString() : '';
+        return interpreter.createPrimitive(workspace.highlightBlock(id));
+      };
+      interpreter.setProperty(scope, 'highlightBlock',
+          interpreter.createNativeFunction(wrapper));
+
+    }
+
+</script>
 </head>
 
 <body onload="begin()">
@@ -818,7 +848,6 @@
 
 
           <category name="Functions" colour="290" custom="PROCEDURE"></category>
-
         </xml>
       </div>
     </div>
@@ -830,6 +859,9 @@
     <div class="pure-u-1-1">
         <button onclick="runCode()" class="button-success pure-button">
           Run JavaScript <i class="fa fa-play"></i>
+        </button>
+        <button onclick="runParallel()" class="button-success pure-button">
+          Run JavaScript paralel<i class="fa fa-play"></i>
         </button>
     </div>
 
@@ -844,7 +876,7 @@
     var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
         { media: '../../media/',
-          maxBlocks: 5,
+          /*maxBlocks: 5,*/
           toolbox: document.getElementById('toolbox')});
     var onresize = function(e) {
       // Compute the absolute coordinates and dimensions of blocklyArea.
@@ -890,6 +922,29 @@
         alert(e);
       }
     }
+
+    function runParallel(){
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      var allXml = Blockly.Xml.workspaceToDom(workspace);
+      var allCode = [];
+      for (var i = 0; xml = allXml[i]; i++) {
+        var headless = new Blockly.Workspace();
+        Blockly.Xml.domToWorkspace(headless, xml);
+        allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+        headless.dispose();
+        alert('entro al ciclo');
+        myInterpreter = new Interpreter(allCode[i], initApi);
+      }
+      nextStep();
+    }
+
+    function nextStep() {
+      if (myInterpreter.step()) {
+        window.setTimeout(nextStep, 10);
+      }
+    }
+
 
     function onchange() {
       document.getElementById('capacity').innerHTML = workspace.remainingCapacity();
