@@ -496,35 +496,34 @@
   </script>
 
 
-<script type="text/javascript">
-    var myInterpreter=null;
-    function initApi(interpreter, scope) {
-      // Add an API function for the alert() block.
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
+  <script type="text/javascript">
+      var myInterpreter=null;
+      function initApi(interpreter, scope) {
+        // Add an API function for the alert() block.
+        var wrapper = function(text) {
+          text = text ? text.toString() : '';
+          return interpreter.createPrimitive(alert(text));
+        };
+        interpreter.setProperty(scope, 'alert',
+            interpreter.createNativeFunction(wrapper));
 
-      // Add an API function for the prompt() block.
-      wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(prompt(text));
-      };
-      interpreter.setProperty(scope, 'prompt',
-          interpreter.createNativeFunction(wrapper));
-      // Add an API function for highlighting blocks.
-      var wrapper = function(id) {
-        id = id ? id.toString() : '';
-        return interpreter.createPrimitive(workspace.highlightBlock(id));
-      };
-      interpreter.setProperty(scope, 'highlightBlock',
-          interpreter.createNativeFunction(wrapper));
+        // Add an API function for the prompt() block.
+        wrapper = function(text) {
+          text = text ? text.toString() : '';
+          return interpreter.createPrimitive(prompt(text));
+        };
+        interpreter.setProperty(scope, 'prompt',
+            interpreter.createNativeFunction(wrapper));
+        // Add an API function for highlighting blocks.
+        var wrapper = function(id) {
+          id = id ? id.toString() : '';
+          return interpreter.createPrimitive(workspace.highlightBlock(id));
+        };
+        interpreter.setProperty(scope, 'highlightBlock',
+            interpreter.createNativeFunction(wrapper));
 
-    }
-
-</script>
+      }
+  </script>
 </head>
 
 <body onload="begin()">
@@ -849,6 +848,55 @@
 
           <category name="Functions" colour="290" custom="PROCEDURE"></category>
         </xml>
+        <xml id="startBlocks" style="display: none">
+          <block type="variables_set" inline="true" x="20" y="20">
+            <field name="VAR">n</field>
+            <value name="VALUE">
+              <block type="math_number">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_ext" inline="true">
+                <value name="TIMES">
+                  <block type="math_number">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set" inline="true">
+                    <field name="VAR">n</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" inline="true">
+                        <field name="OP">MULTIPLY</field>
+                        <value name="A">
+                          <block type="variables_get">
+                            <field name="VAR">n</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number">
+                            <field name="NUM">2</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="text_print" inline="false">
+                    <value name="TEXT">
+                      <block type="variables_get">
+                        <field name="VAR">n</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </xml>
+
       </div>
     </div>
 
@@ -864,11 +912,7 @@
           Run JavaScript paralel<i class="fa fa-play"></i>
         </button>
     </div>
-
-
   </div>
-
-
 
   <script>
     var blocklyArea = document.getElementById('blocklyArea');
@@ -878,6 +922,8 @@
         { media: '../../media/',
           /*maxBlocks: 5,*/
           toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(workspace,
+        document.getElementById('startBlocks'));
     var onresize = function(e) {
       // Compute the absolute coordinates and dimensions of blocklyArea.
       var element = blocklyArea;
@@ -927,15 +973,23 @@
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
       var allXml = Blockly.Xml.workspaceToDom(workspace);
-      var allCode = [];
-      for (var i = 0; xml = allXml[i]; i++) {
+       console.log(allXml);
+       xml=allXml.childNodes;
+       console.log('<xml>'+xml[0].outerHTML+'</xml>');
+
+       var allCode = [];
+      for (var i = 0; i<xml.length; i++) {
+        alert('entro al ciclo');
         var headless = new Blockly.Workspace();
-        Blockly.Xml.domToWorkspace(headless, xml);
+        Blockly.Xml.domToWorkspace(headless, '<xml>'+xml[i].outerHTML+'</xml>');
         allCode.push(Blockly.JavaScript.workspaceToCode(headless));
         headless.dispose();
-        alert('entro al ciclo');
+
+
         myInterpreter = new Interpreter(allCode[i], initApi);
       }
+
+      alert(allCode.length);
       nextStep();
     }
 
