@@ -67,6 +67,12 @@
     #divCanvas{
       height: 80%;
     }
+    #level{
+      color: white;
+      border-radius: 100%;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      font-size: 12px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -120,6 +126,13 @@
     }
 
     function panel(){
+      var imgback = new Image();
+      imgback.src = "media/mapa_casa.png";
+      imgback.onload = function() {
+        ctx.drawImage(imgback, 0, 0,ancho,alto);
+      }
+
+
       while(initX<canvas.width-stepsize){
         initX=initX+stepsize;
         while(initY<canvas.height-stepsize){
@@ -250,8 +263,18 @@
 </head>
 <body onload="begin()">
   <div class="pure-g">
-    <div class="pure-u-1-1">
-      <p>Blockly play</p>
+    <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
+      <p class="pure-menu-heading pure-menu-link">Blockly play</p>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><button onclick="panel()"  class="button-secondary pure-button" id="level">1</button></li>
+        <li class="pure-menu-item"><button onclick="palel()"  class="button-secondary pure-button" id="level">2</button></li>
+        <li class="pure-menu-item"><button onclick="panel()"  class="button-secondary pure-button" id="level">3</button></li>
+        <li class="pure-menu-item"><button onclick="panel()"  class="button-secondary pure-button" id="level">4</button></li>
+      </ul>
+
+
+
+
     </div>
     <div class="pure-u-1-2" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
@@ -590,7 +613,7 @@
   </category>
 </xml>
 <script type="text/javascript">
-var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
@@ -635,6 +658,24 @@ function showCode() {
   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
+  //////
+  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
+
+  var allCode = [];
+  console.log(allXml);
+  xml = allXml;
+  for (var i = 0, xml; xml = allXml[i]; i++) {
+
+    var headless = new Blockly.Workspace();
+
+    Blockly.Xml.domToWorkspace(headless, xml);
+    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+    headless.dispose();
+    console.log(allCode.length);
+
+  }*/
+
+  //////
   myInterpreter = new Interpreter(code, initAlert);
   highlightPause = false;
   workspace.traceOn(true);
@@ -708,6 +749,7 @@ function saveXML(){
     });
     saveAs(blob, name + '.xml');
   }
+
 }
 </script>
 </body>
