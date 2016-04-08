@@ -117,25 +117,34 @@
        roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-      panel();
-      Avatar();
-      path();
+      panel(0);
+      //Avatar();
+      //path();
     }
 
     function stopTimer(){
       clearInterval(interval);
     }
 
-    function panel(){
+    function panel(level){
       var imgback = new Image();
       switch(level){
         case 1:
+            imgback.src = "media/mapa_casa.png";
+            break;
         case 2:
+            imgback.src = "media/mapa_semaforo.png";
+            break;
         case 3:
+            imgback.src = "media/elevador.png";
+            break;
         case 4:
-        defauld:
+            imgback.src = "media/puente.png";
+            break;
+        default:
+              imgback.src = "media/panelPrincipal.png";
       }
-      imgback.src = "media/mapa_casa.png";
+
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
       }
