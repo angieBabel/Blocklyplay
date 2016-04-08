@@ -128,6 +128,13 @@
 
     function panel(){
       var imgback = new Image();
+      switch(level){
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        defauld:
+      }
       imgback.src = "media/mapa_casa.png";
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
