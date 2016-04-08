@@ -496,8 +496,8 @@
   </script>
 
 
-  <script type="text/javascript">
-      var myInterpreter=null;
+  <!-- <script type="text/javascript">
+        var myInterpreter=null;
       function initApi(interpreter, scope) {
         // Add an API function for the alert() block.
         var wrapper = function(text) {
@@ -508,22 +508,28 @@
             interpreter.createNativeFunction(wrapper));
 
         // Add an API function for the prompt() block.
-        wrapper = function(text) {
+        var wrapper = function(text) {
           text = text ? text.toString() : '';
           return interpreter.createPrimitive(prompt(text));
         };
         interpreter.setProperty(scope, 'prompt',
             interpreter.createNativeFunction(wrapper));
+
         // Add an API function for highlighting blocks.
         var wrapper = function(id) {
           id = id ? id.toString() : '';
-          return interpreter.createPrimitive(workspace.highlightBlock(id));
+          return interpreter.createPrimitive(highlightBlock(id));
         };
         interpreter.setProperty(scope, 'highlightBlock',
             interpreter.createNativeFunction(wrapper));
-
       }
-  </script>
+
+      var highlightPause = false;
+      function highlightBlock(id) {
+        workspace.highlightBlock(id);
+        highlightPause = true;
+      }
+  </script> -->
 </head>
 
 <body onload="begin()">
@@ -905,7 +911,7 @@
     </div>
 
     <div class="pure-u-1-1">
-        <button onclick="runCode()" class="button-success pure-button">
+        <button onclick="showCode()" class="button-success pure-button">
           Run JavaScript <i class="fa fa-play"></i>
         </button>
         <button onclick="runParallel()" class="button-success pure-button">
@@ -947,12 +953,62 @@
     };
     window.addEventListener('resize', onresize, false);
     onresize();
+    var myInterpreter = null;
+
+    function initApi(interpreter, scope) {
+      // Add an API function for the alert() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(alert(text));
+      };
+      interpreter.setProperty(scope, 'alert',
+          interpreter.createNativeFunction(wrapper));
+
+      // Add an API function for the prompt() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(prompt(text));
+      };
+      interpreter.setProperty(scope, 'prompt',
+          interpreter.createNativeFunction(wrapper));
+
+      // Add an API function for highlighting blocks.
+      var wrapper = function(id) {
+        id = id ? id.toString() : '';
+        return interpreter.createPrimitive(highlightBlock(id));
+      };
+      interpreter.setProperty(scope, 'highlightBlock',
+          interpreter.createNativeFunction(wrapper));
+    }
+
+    var highlightPause = false;
+
+    function highlightBlock(id) {
+      id=parseInt(id);
+      id-=10;
+      workspace.highlightBlock(id.toString());
+      highlightPause = true;
+    }
 
     function showCode() {
       // Generate JavaScript code and display it.
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.JavaScript.workspaceToCode(workspace);
-      alert(code);
+       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var allXml = Blockly.Xml.workspaceToDom(workspace);
+       xml=allXml.childNodes;
+       var allCode = [];
+      for (var i = 0; i<xml.length; i++) {
+        var headless = new Blockly.Workspace();
+        var codigo=Blockly.Xml.textToDom('<xml>'+xml[i].outerHTML+'</xml>');
+        Blockly.Xml.domToWorkspace(headless,codigo);
+        allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+        myInterpreter= new Interpreter(allCode[i], initApi);
+      }
+      highlightPause = false;
+      workspace.traceOn(true);
+      workspace.highlightBlock(null);
     }
 
     function runCode() {
@@ -972,32 +1028,49 @@
     function runParallel(){
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
+      /*var code = Blockly.JavaScript.workspaceToCode(workspace);
+      myInterpreter = new Interpreter(code, initApi);*/
       var allXml = Blockly.Xml.workspaceToDom(workspace);
-       console.log(allXml);
        xml=allXml.childNodes;
-       console.log('<xml>'+xml[0].outerHTML+'</xml>');
-
        var allCode = [];
       for (var i = 0; i<xml.length; i++) {
-        alert('entro al ciclo');
         var headless = new Blockly.Workspace();
-        Blockly.Xml.domToWorkspace(headless, '<xml>'+xml[i].outerHTML+'</xml>');
+        var codigo=Blockly.Xml.textToDom('<xml>'+xml[i].outerHTML+'</xml>');
+        Blockly.Xml.domToWorkspace(headless,codigo);
         allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-        headless.dispose();
+        myInterpreter= new Interpreter(allCode[i], initApi);
 
-
-        myInterpreter = new Interpreter(allCode[i], initApi);
       }
+      alert(allCode[0]);
 
-      alert(allCode.length);
-      nextStep();
+      highlightPause = false;
+      workspace.traceOn(true);
+      workspace.highlightBlock(null);
+
+      intervalo= setInterval(function(){nextStep();},15)
+    }
+    /*function finish(){
+      if(acabo==1){
+            nextStep();
+          }
+    }*/
+
+   function nextStep() {
+      if (highlightPause) {
+        // A block has been highlighted.  Pause execution here.
+        highlightPause = false;
+
+      } else {
+        // Keep executing until a highlight statement is reached.
+
+        /*stepCode();*/
+      }
+      if (!myInterpreter.step()) {
+        /*window.setTimeout(finish, 15);*/
+        clearInterval(intervalo);
+      }
     }
 
-    function nextStep() {
-      if (myInterpreter.step()) {
-        window.setTimeout(nextStep, 10);
-      }
-    }
 
 
     function onchange() {
