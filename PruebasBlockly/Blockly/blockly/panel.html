@@ -91,6 +91,7 @@
     var wimg=20;
     var roadpaint = [];
     var count=0;
+    var luz=0,luzTrasera=0;
 
     /*var road [];*/
 
@@ -215,6 +216,21 @@
         }
         interpreter.setProperty(scope, 'backward',
             interpreter.createNativeFunction(wrapper));
+
+        //Move upward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(upward(nosteps));
+        }
+        interpreter.setProperty(scope, 'upward',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move downward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(downward(nosteps));
+        }
+        interpreter.setProperty(scope, 'downward',
+            interpreter.createNativeFunction(wrapper));
+
         //Move forwardPainting
 
         var wrapper = function(nosteps,color) {

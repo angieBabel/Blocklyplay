@@ -16,6 +16,12 @@ Blockly.JavaScript['mover'] = function(block) {
   if (dropdown_direction=="back") {
     return code= "backward ("+nosteps+");";
   }
+  if (dropdown_direction=="up") {
+    return code=  "upward ("+nosteps+");";
+  }
+  if (dropdown_direction=="down") {
+    return code= "downward ("+nosteps+");";
+  }
 };
 
 Blockly.JavaScript['mover_pintando'] = function(block) {

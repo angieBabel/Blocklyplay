@@ -11,7 +11,7 @@ Blockly.Blocks['mover'] = {
         .appendField("move")
         .appendField(new Blockly.FieldTextInput("0"), "nosteps")
         .appendField("to")
-        .appendField(new Blockly.FieldDropdown([["Forward", "front"], ["Backward", "back"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["Forward", "front"], ["Backward", "back"],["Upward", "up"],["Downward", "down"]]), "direction");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

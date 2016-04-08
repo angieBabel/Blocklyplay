@@ -2,6 +2,7 @@ var degreesToRadian = function (deg) {
    return deg * Math.PI / 180;
 };
 //motion functions
+//mover adelante sin pintar
 function forward(nosteps){
   acabo=0;
   distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsize);
@@ -46,8 +47,6 @@ function forward(nosteps){
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
-    panel();
-    path();
     i++;
     if(i==nosteps){
       stopTimer();
@@ -56,7 +55,7 @@ function forward(nosteps){
   },300);
   /*road.push(positionObj.objX+","+positionObj.objY);*/
 }
-
+//mover hacia atras sin pintar
 function backward(nosteps){
   acabo=0;
   distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
@@ -101,9 +100,6 @@ function backward(nosteps){
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
-    panel();
-    path();
-
     i++;
     if(i==nosteps){
       stopTimer();
@@ -128,7 +124,7 @@ function giro(angulo) {
   ctx.drawImage(img,-w/2, -h/2,40,20);
   ctx.restore();
 }
-
+//funcion para dibujar el avatar volteando a la dirección correcta
 function rotar(angulo,side){
   if (side=='left') {
     angulo*= -1;
@@ -157,28 +153,46 @@ function rotar(angulo,side){
   ctx.save();
   ctx.translate(positionObj.objX,positionObj.objY);
   ctx.rotate(positionObj.objZ * (Math.PI/180));
+  if (luz==1) {
+        luces(20,0);
+      }
+  if (luzTrasera==1) {
+    lucesTraceras(-20,0);
+  }
+  ctx.globalAlpha=1;
   ctx.drawImage(img, -20,-10,40,20);
   ctx.restore();
 }
-
+//Función para ejecutar sonidos de acuerdo a la elección del usuario
 function sound(sonido){
   var audio = new Audio('audios/'+sonido);
   audio.play();
 }
-
+//funcion para que se espere X segundos
 function wait(secs){
   acabo=0;
   intermitentes=setInterval(function(){
-    alert('prende/apaga luces');
+    if (luz==1) {
+        luz=0;
+    }else{
+      luz=1;
+    }
+    if (luzTrasera==1) {
+      luzTrasera=0;
+    }else{
+      luzTrasera=1;
+    }
+    rotar(positionObj.objZ, '"stay"');
+    /*alert('prende/apaga luces')*/;
   },100);
+
   interv= setInterval(function(){
     acabo=1;
     clearInterval(intermitentes);
     clearInterval(interv);
   },secs*1000);
 }
-
-/*paint(Xaux,positionObj.objY,nosteps);*/
+//Funciones para moverse hacia adelante pintando
 function forwardPaint(nosteps,color){
   colorPath=color;
   acabo=0;
@@ -287,7 +301,7 @@ function backwardPaint(nosteps,color){
     }
   },300);
 }
-
+//Funciones para pintar paso a paso
 function paint(Xend,Yend,no_steps,color){
   var srt;
   var res;
@@ -330,7 +344,7 @@ function paint(Xend,Yend,no_steps,color){
     count=0;
   }
   ctx.stroke();
-
+//Función para pintar el camino que ha dejado
 }
 function painroad(color){
   var yinit, xinit;
@@ -377,25 +391,86 @@ function painroad(color){
 
   }
 }
+//Funciones de luces,
+function luces(Xx,Yy){
+  var R = 13;
+  // El ángulo de partida ap y el ángulo final af
+  var ap = (Math.PI / 180) * -30;
+  var af = (Math.PI / 180) * 30;
 
-//function sipin
-function giro(angulo) {
-  if (positionObj.objZ=!angulo) {
-    positionObj,objZ= angulo;
-  }
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel();
+  //Luz izquierda
+  // Las coordenadas del punto de partida en la circunferencia
+  var Xap = Xx+R * Math.cos(ap);
+  var Yap = Yy-5+R * Math.sin(ap);
+  // estilos
+  ctx.globalAlpha=0.75;
+  ctx.fillStyle = "#abcdef";
+  ctx.strokeStyle = "#1E90FF";
+  ctx.lineWidth = 10;
 
-  path();
-  painroad();
-  ctx.save();
-  var w=40,h=20;
-  ctx.translate(positionObj.objX,positionObj.objY);
-  ctx.rotate(angulo * (Math.PI/180));
-  ctx.drawImage(img,-w/2, -h/2,40,20);
-  ctx.restore();
+  // empezamos a dibujar
+  //Luz izquierda
+  ctx.beginPath();
+  ctx.moveTo(Xx,Yy-5);
+  ctx.lineTo(Xap,Yap);
+  ctx.arc(Xx,Yy-5,R,ap,af);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Luz derecha
+  // Las coordenadas del punto de partida en la circunferencia
+ /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
+  Yap = Yy+5+R * Math.sin(ap);
+  ctx.strokeStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(Xx,Yy+5);
+  ctx.lineTo(Xap,Yap);
+  ctx.arc(Xx,Yy+5,R,ap,af);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
 }
+function lucesTraceras(Xx,Yy){
+  var R = 5;
+  // El ángulo de partida ap y el ángulo final af
+  var ap = (Math.PI / 180) * 150;
+  var af = (Math.PI / 180) * 210;
 
+  //Luz izquierda
+  // Las coordenadas del punto de partida en la circunferencia
+  var Xap = Xx+R * Math.cos(ap);
+  var Yap = Yy-5+R * Math.sin(ap);
+  // estilos
+  ctx.globalAlpha=0.75;
+  ctx.fillStyle = "#abcdef";
+  ctx.strokeStyle = "#1E90FF";
+  ctx.lineWidth = 10;
+
+  // empezamos a dibujar
+  //Luz izquierda
+  ctx.beginPath();
+  ctx.moveTo(Xx,Yy-5);
+  ctx.lineTo(Xap,Yap);
+  ctx.arc(Xx,Yy-5,R,ap,af);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Luz derecha
+  // Las coordenadas del punto de partida en la circunferencia
+ /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
+  Yap = Yy+5+R * Math.sin(ap);
+  ctx.strokeStyle = "yellow";
+  ctx.beginPath();
+  ctx.moveTo(Xx,Yy+5);
+  ctx.lineTo(Xap,Yap);
+  ctx.arc(Xx,Yy+5,R,ap,af);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+}
+//funciones para mover hacia arriba y hacia abajo
 function upward(nosteps){
   acabo=0;
   limtY=positionObj.objY-(nosteps*stepsize);
