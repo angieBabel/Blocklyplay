@@ -113,7 +113,7 @@ function giro(angulo) {
     positionObj,objZ= angulo;
   }
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel();
+  panel(1);
 
   path();
   painroad();
@@ -146,8 +146,8 @@ function rotar(angulo,side){
       positionObj.objZ-=360;
     }
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel();
-  path();
+  panel(1);
+  //path();
   /*alert("color"+color);*/
   painroad(colorPath);
   ctx.save();
@@ -238,7 +238,7 @@ function forwardPaint(nosteps,color){
     positionObj.objY=Yaux;
     paint(positionObj.objX,positionObj.objY,nosteps,color);
     rotar(positionObj.objZ,'"ahead"',color);
-    panel();
+    panel(1);
     path();
     i++;
     if(i==nosteps){
