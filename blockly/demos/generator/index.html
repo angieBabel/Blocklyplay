@@ -947,8 +947,9 @@
     var highlightPause = false;
 
     function highlightBlock(id) {
-      id=parseInt(id);
-      id-=10;
+        id=parseInt(id);
+        id-=10;
+      /*workspace.getBlockById(id).setColour(300);*/
       workspace.highlightBlock(id.toString());
       highlightPause = true;
     }
@@ -993,6 +994,9 @@
       Blockly.JavaScript.addReservedWords('highlightBlock');
       /*var code = Blockly.JavaScript.workspaceToCode(workspace);
       myInterpreter = new Interpreter(code, initApi);*/
+      highlightPause = false;
+      workspace.traceOn(true);
+      workspace.highlightBlock(null);
       var allXml = Blockly.Xml.workspaceToDom(workspace);
        xml=allXml.childNodes;
        var allCode = [];
@@ -1001,24 +1005,41 @@
         var codigo=Blockly.Xml.textToDom('<xml>'+xml[i].outerHTML+'</xml>');
         Blockly.Xml.domToWorkspace(headless,codigo);
         allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-        myInterpreter= new Interpreter(allCode[i], initApi);
-
       }
-      alert(allCode[0]);
+      //creando interpretes
+      var stacks = workspace.getTopBlocks();
+      for (var i=0; i<stacks.length; i++) {
+        stacks[i]=new Interpreter(allCode[i], initApi);
+        stacks[i].run();
+        nextStep(stacks[i]);
+      }
+      /*intervalo= setInterval(function(){nextStep();},15)*/
+    }
 
-      highlightPause = false;
+    /*function runParallel(){
       workspace.traceOn(true);
       workspace.highlightBlock(null);
 
+      Blockly.JavaScript.init(workspace);
+
+      // before each stack, reset the time
+      // this allows multiple stacks to play in parallel
+      var code = '';
+      var stacks = workspace.getTopBlocks();
+      for (var i=0; i<stacks.length; i++) {
+        var stack = stacks[i];
+        code += Blockly.JavaScript.blockToCode(stack);
+      }
+
+      // prepend variable and function definitions
+      code = Blockly.JavaScript.finish(code);
+
+      myInterpreter = new Interpreter(code, initApi);
       intervalo= setInterval(function(){nextStep();},15)
-    }
-    /*function finish(){
-      if(acabo==1){
-            nextStep();
-          }
+
     }*/
 
-   function nextStep() {
+   function nextStep(stack) {
       if (highlightPause) {
         // A block has been highlighted.  Pause execution here.
         highlightPause = false;
@@ -1028,9 +1049,9 @@
 
         /*stepCode();*/
       }
-      if (!myInterpreter.step()) {
+      if (!stack.step()) {
         /*window.setTimeout(finish, 15);*/
-        clearInterval(intervalo);
+        /*clearInterval(intervalo);*/
       }
     }
 
@@ -1039,8 +1060,6 @@
     function onchange() {
       document.getElementById('capacity').innerHTML = workspace.remainingCapacity();
     }
-
-
   </script>
 
 </body>
