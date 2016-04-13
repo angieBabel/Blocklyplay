@@ -146,22 +146,11 @@ function rotar(angulo,side){
       positionObj.objZ-=360;
     }
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel(1);
+  //  panel();
   //path();
   /*alert("color"+color);*/
+  panel();
   painroad(colorPath);
-  ctx.save();
-  ctx.translate(positionObj.objX,positionObj.objY);
-  ctx.rotate(positionObj.objZ * (Math.PI/180));
-  if (luz==1) {
-        luces(20,0);
-      }
-  if (luzTrasera==1) {
-    lucesTraceras(-20,0);
-  }
-  ctx.globalAlpha=1;
-  ctx.drawImage(img, -20,-10,40,20);
-  ctx.restore();
 }
 //Función para ejecutar sonidos de acuerdo a la elección del usuario
 function sound(sonido){
