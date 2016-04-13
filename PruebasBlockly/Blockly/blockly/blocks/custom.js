@@ -15,7 +15,7 @@ Blockly.Blocks['mover'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(330);
+    this.setColour(79);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -32,7 +32,7 @@ Blockly.Blocks['mover_pintando'] = {
         .appendField(new Blockly.FieldColour("#ff0000"), "color");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(330);
+    this.setColour(79);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -47,7 +47,7 @@ Blockly.Blocks['girar'] = {
         .appendField(new Blockly.FieldDropdown([["Left", "left"], ["Right", "right"]]), "side");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(330);
+    this.setColour(79);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -61,7 +61,7 @@ Blockly.Blocks['wait'] = {
         .appendField("seconds");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(120);
+    this.setColour(355);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -73,7 +73,7 @@ Blockly.Blocks['stop'] = {
         .appendField("Stop");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(120);
+    this.setColour(355);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -86,7 +86,7 @@ Blockly.Blocks['blinker'] = {
         .appendField("Blinker");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(230);
+    this.setColour(176);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -102,7 +102,7 @@ Blockly.Blocks['lights'] = {
         .appendField(new Blockly.FieldCheckbox("FALSE"), "backtlight");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(230);
+    this.setColour(176);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
