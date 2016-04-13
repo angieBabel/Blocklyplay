@@ -117,7 +117,7 @@
        roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-      panel(0);
+      panel(1);
       //Avatar(1);
       //path();
     }
@@ -128,32 +128,11 @@
 
     function panel(level){
       var imgback = new Image();
-      var avatar;
-      switch(level){
-        case 1:
-            imgback.src = "media/mapa_casa.png";
-            avatar=1;
-            break;
-        case 2:
-            imgback.src = "media/mapa_semaforo.png";
-            avatar=2;
-            break;
-        case 3:
-            imgback.src = "media/elevador.png";
-            avatar=3;
-            break;
-        case 4:
-            imgback.src = "media/puente.png";
-            avatar=1;
-            break;
-        default:
-              imgback.src = "media/panelPrincipal.png";
-              avatar=0;
-      }
 
+            imgback.src = "media/mapa_casa.png";
      imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
-        Avatar(avatar);
+        Avatar();
       }
 
 
@@ -183,36 +162,15 @@
     }
     //Drawing avatar
 
-    function Avatar(noAvatar){
+    function Avatar(){
       var avatarheight, avatarwith;
       var positionX, positionY;
 
       img.id = 'imagen';
 
-      switch(noAvatar){
-        case 1:
           img.src = 'media/pincel.png';
           avatarwith=40;avatarheight=40;
           positionX=20; positionY=60;
-          break;
-        case 2:
-          img.src = 'media/carro.png';
-          avatarwith=40;avatarheight=20;
-          positionX=20; positionY=60;
-          break;
-        case 3:
-          img.src = 'media/elevador.png';
-          break;
-        case 4:
-          img.src = 'media/pincel.png';
-          avatarwith=40;avatarheight=40;
-          positionX=20; positionY=60;
-          break;
-        default:
-          img.src = 'media/avatar.png';
-          avatarwith=100;avatarheight=130;
-          positionX=X-(avatarwith/2); positionY=canvas.height-250;
-      }
 
       img.onload = function() {
         ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
@@ -333,10 +291,11 @@
     <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
       <p class="pure-menu-heading pure-menu-link">Blockly play</p>
       <ul class="pure-menu-list">
-        <li class="pure-menu-item"><button onclick="panel(1)"  class="button-secondary pure-button" id="level">1</button></li>
-        <li class="pure-menu-item"><button onclick="panel(2)"  class="button-secondary pure-button" id="level">2</button></li>
-        <li class="pure-menu-item"><button onclick="panel(3)"  class="button-secondary pure-button" id="level">3</button></li>
-        <li class="pure-menu-item"><button onclick="panel(4)"  class="button-secondary pure-button" id="level">4</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
       </ul>
 
 

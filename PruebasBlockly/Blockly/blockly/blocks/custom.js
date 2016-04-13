@@ -61,7 +61,7 @@ Blockly.Blocks['wait'] = {
         .appendField("seconds");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(285);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -73,7 +73,7 @@ Blockly.Blocks['stop'] = {
         .appendField("Stop");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(285);
+    this.setColour(120);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -86,7 +86,7 @@ Blockly.Blocks['blinker'] = {
         .appendField("Blinker");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(285);
+    this.setColour(230);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -102,7 +102,7 @@ Blockly.Blocks['lights'] = {
         .appendField(new Blockly.FieldCheckbox("FALSE"), "backtlight");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(285);
+    this.setColour(230);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -115,7 +115,7 @@ Blockly.Blocks['sonido'] = {
         .appendField(new Blockly.FieldDropdown([["Cat", "gato.mp3"], ["Dog", "perro.mp3"], ["Lion", "leon.mp3"], ["Chicken", "pollo.mp3"]]), "sonido");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(330);
+    this.setColour(290);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
