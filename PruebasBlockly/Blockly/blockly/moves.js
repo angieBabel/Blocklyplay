@@ -112,7 +112,7 @@ function giro(angulo) {
   if (positionObj.objZ=!angulo) {
     positionObj,objZ= angulo;
   }
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  //ctx.clearRect(0,0,canvas.width,canvas.height);
   panel(1);
 
   path();
@@ -145,7 +145,7 @@ function rotar(angulo,side){
   if (positionObj.objZ>=360) {
       positionObj.objZ-=360;
     }
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  //ctx.clearRect(0,0,canvas.width,canvas.height);
   //  panel();
   //path();
   /*alert("color"+color);*/
@@ -470,7 +470,7 @@ function upward(nosteps){
     ctx.beginPath();
       if(Yaux>limtY){
         Yaux=Yaux-stepsize;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        //ctx.clearRect(0,0,canvas.width,canvas.height);
         /*positionObj.objZ=270;*/
         if ((positionObj.objZ % 270)==0 || (positionObj.objZ % 90)==0 ) {
           rotar(positionObj.objZ);
@@ -504,7 +504,7 @@ function downward(nosteps){
     ctx.beginPath();
       if(Yaux<limtY){
         Yaux=Yaux+stepsize;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        //ctx.clearRect(0,0,canvas.width,canvas.height);
         /*positionObj.objZ=90;*/
         if ((positionObj.objZ % 270)==0 || (positionObj.objZ % 90)==0 ) {
           rotar(positionObj.objZ);
