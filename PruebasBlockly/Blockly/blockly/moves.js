@@ -159,7 +159,7 @@ function sound(sonido){
 //funcion para que se espere X segundos
 function wait(secs){
   acabo=0;
-  /*intermitentes=setInterval(function(){
+  intermitentes=setInterval(function(){
     if (luz==1) {
         luz=0;
     }else{
@@ -171,7 +171,7 @@ function wait(secs){
       luzTrasera=1;
     }
     rotar(positionObj.objZ, '"stay"');
-  },100);*/
+  },100);
 
   interv= setInterval(function(){
     acabo=1;
