@@ -10,7 +10,6 @@
 <script src="acorn_interpreter.js"></script>
 <script src="acorn.js"></script>
 <script src="interpreter.js"></script>
-<!-- <script src="/storage.js"></script> -->
 <script src="blockly_compressed.js"></script>
 <script src="blocks_compressed.js"></script>
 <script src="javascript_compressed.js"></script>
@@ -76,7 +75,6 @@
 </style>
 
 <script type="text/javascript">
-    /*var image;*/
     var img= new Image();
     var X;
     var Y;
@@ -92,8 +90,6 @@
     var roadpaint = [];
     var count=0;
     var luz=0,luzTrasera=0;
-
-    /*var road [];*/
 
     var positionObj = {
       objX: 0,
@@ -111,11 +107,8 @@
 
       X = canvas.width/2;
       Y = canvas.height/2;
-      r = 10;
 
       panel();
-      //Avatar(1);
-      //path();
     }
 
     function stopTimer(){
@@ -165,13 +158,20 @@
       positionX=350; positionY=105;
 
       img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
+
+        ctx.globalAlpha=1;
         ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
+        ctx.restore();
+
       }
-      positionObj.objX=positionX;
+      /*positionObj.objX=positionX;
       positionObj.objY=positionY;
-       roadpaint.push(positionObj.objX+","+positionObj.objY);
+      roadpaint.push(positionObj.objX+","+positionObj.objY);
       Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
+      Yaux= positionObj.objY;*/
     }
 
     //path forward

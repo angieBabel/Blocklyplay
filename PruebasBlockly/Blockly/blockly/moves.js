@@ -113,7 +113,7 @@ function giro(angulo) {
     positionObj,objZ= angulo;
   }
   //ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel(1);
+  panel();
 
   path();
   painroad();
