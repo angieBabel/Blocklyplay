@@ -137,7 +137,11 @@
       Yaux= positionObj.objY;
       semaforos.push("24,21");
       semaforos.push("24,4");
-      semaforos.push("13,4");
+      semaforos.push("12,4");
+      semaforos.push("12,14");
+      semaforos.push("3,14");
+      semaforos.push("3,21");
+      semaforos.push("1,21");
       panel();
     }
   //para detener el intervalo del paso
@@ -170,9 +174,13 @@
        var semaforo = new Image();
             semaforo.src = "media/semaforo.png";
        semaforo.onload = function() {
-          ctx.drawImage(semaforo, (stepsizeX*24),(stepsizeY*21),stepsizeX,stepsizeY*2);
-          ctx.drawImage(semaforo, (stepsizeX*24),(stepsizeY*4),stepsizeX,stepsizeY*2);
-          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*4),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         }
     }
   //Drawing avatar
@@ -212,12 +220,11 @@
     function checkStops(){
       var coincidencias=0;
       for (var i = 0; i < semaforos.length; i++) {
-        alert(semaforos[i]+'   '+altos[i]);
         if (semaforos[i]==altos[i]) {
           coincidencias+=1;
         }
       }
-      if (coincidencias==3) {
+      if (coincidencias==semaforos.length) {
         alert('Felicidades haz realizado correctamente el puzzle')
       }else{
         alert('Te ha faltado hacer una parada')
