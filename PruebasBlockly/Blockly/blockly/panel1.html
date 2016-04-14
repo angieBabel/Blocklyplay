@@ -112,12 +112,8 @@
       X = canvas.width/2;
       Y = canvas.height/2;
       r = 10;
-      positionObj.objX=X;
-      positionObj.objY=Y;
-       roadpaint.push(X+","+Y);
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
-      panel(1);
+
+      panel();
       //Avatar(1);
       //path();
     }
@@ -126,11 +122,10 @@
       clearInterval(interval);
     }
 
-    function panel(level){
+    function panel(){
       var imgback = new Image();
-
-            imgback.src = "media/mapa_casa.png";
-     imgback.onload = function() {
+      imgback.src = "media/mapa_casa.png";
+      imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
         Avatar();
       }
@@ -167,11 +162,16 @@
       img.id = 'imagen';
       img.src = 'media/pincel.png';
       avatarwith=40;avatarheight=40;
-      positionX=20; positionY=60;
+      positionX=350; positionY=105;
 
       img.onload = function() {
         ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
       }
+      positionObj.objX=positionX;
+      positionObj.objY=positionY;
+       roadpaint.push(positionObj.objX+","+positionObj.objY);
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
     }
 
     //path forward
