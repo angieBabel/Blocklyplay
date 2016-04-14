@@ -77,33 +77,45 @@
 
 <script type="text/javascript">
     /*var image;*/
-    //inicialización de las variables
-    var img= new Image();
-    var X;
-    var Y;
-    var r,n=0;
-    var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsizeX;
-    var stepsizeY;
+  //inicialización de las variables
+    var img= new Image();//variable de imagen del avatar
+    //coordenadas donde comienza el avatar
+    var X,Y;
+    //variables auxiliares para mover el avatar
+    var Xaux=0,Yaux=0;
+    //variables de hasta donde llegara el avatar (para hacer el conteo de pasos)
+    var limtX,limtY;
+    //tamaño de paso de X y Y
+    var stepsizeX,stepsizeY;
+    //variables para controlar donde poner los puntos del grid
     var initX=0,initY=0;
-    var interval,time=2000;
-    var c=0,acabo=1;
+    //intervalo de tiempo de cada paso
+    var interval;
+    //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
+    var acabo=1;
+    //Variable para guardar el color del camino
     var colorPath='';
-    var himg=40;
-    var wimg=20;
-    var roadpaint = [];
-    var count=0;
-    var luz=0,luzTrasera=0;
+    //Tamaño de ancho y alto del avatar
     var avatarheight, avatarwith;
+    //tamaño del ancho de la linea que dibuja el avatar
+    var wimg=20;
+    //vector del camino que ha pintado
+    var roadpaint = [];
+    //vector de posiciones done estaban los semaforos y donde hizo un alto
+    var semaforos=[],altos=[];
+    //variables para saber si las luces estan encendidas
+    var luz=0,luzTrasera=0;
+    //variable de contador para la funcion de pintar
+    var count=0;
 
     /*var road [];*/
-    //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
+  //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {
       objX: 0,
       objY: 0,
       objZ: 0,
     };
-    //primer funcion donde se inicializan todo el canvas
+  //primer funcion donde se inicializan todo el canvas
     function begin(){
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
@@ -118,23 +130,22 @@
 
       X = stepsizeX*15;
       Y = stepsizeY*21;
-      //alert('medida X '+X+' medida Y'+ Y);
-      r = 10;
       positionObj.objX=X;
       positionObj.objY=Y;
-      roadpaint.push(X+","+Y);
+      //roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-
+      semaforos.push("24,21");
+      semaforos.push("24,4");
+      semaforos.push("13,4");
       panel();
-      //Avatar();
-      //path();
     }
+  //para detener el intervalo del paso
 
     function stopTimer(){
       clearInterval(interval);
     }
-
+  //dibuja el panel
     function panel(){
       var imgback = new Image();
             imgback.src = "media/mapa_semaforo.png";
@@ -156,23 +167,16 @@
         painroad(colorPath);
         Avatar();
       }
-
-
+       var semaforo = new Image();
+            semaforo.src = "media/semaforo.png";
+       semaforo.onload = function() {
+          ctx.drawImage(semaforo, (stepsizeX*24),(stepsizeY*21),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*24),(stepsizeY*4),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*4),stepsizeX,stepsizeY*2);
+        }
     }
-
-    function paintroad(){
-      for (var i = 0; i <road.length; i++) {
-        ctx.strokeStyle = "#f00";
-        ctx.beginPath();
-        ctx.moveTo(road[i]);
-        ctx.lineTo(road[i+1]);
-        ctx.stroke();
-      };
-    }
-    //Drawing avatar
-
+  //Drawing avatar
     function Avatar(){
-      /*var avatarheight, avatarwith;*/
       var positionX, positionY;
 
       img.id = 'imagen';
@@ -189,20 +193,35 @@
           lucesTraceras(-20,0);
         }*/
         ctx.globalAlpha=1;
-        ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
+        ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
         ctx.restore();
         /*ctx.drawImage(img,positionObj.objX, positionObj.objY,avatarwith,avatarheight);*/
         //rotar(positionObj.objZ);
       }
     }
 
-    //path forward
+  //path forward
     function path(){
       ctx.beginPath();
       ctx.lineWidth = 2;
       ctx.strokeStyle = "gray";
       ctx.rect(X, Y-100, 100, 100);
       ctx.stroke();
+    }
+  //Compara si las paradas que hizo el niño estuvieron bien
+    function checkStops(){
+      var coincidencias=0;
+      for (var i = 0; i < semaforos.length; i++) {
+        alert(semaforos[i]+'   '+altos[i]);
+        if (semaforos[i]==altos[i]) {
+          coincidencias+=1;
+        }
+      }
+      if (coincidencias==3) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Te ha faltado hacer una parada')
+      }
     }
 </script>
 <script type="text/javascript">
@@ -530,24 +549,6 @@ function showCode() {
   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
-  //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
-
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
-
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
-
-  //////
   myInterpreter = new Interpreter(code, initAlert);
   highlightPause = false;
   workspace.traceOn(true);
@@ -566,13 +567,7 @@ function nextStep() {
   if (!myInterpreter.step()) {
     /*window.setTimeout(finish, 15);*/
     clearInterval(intervalo);
-    if (positionObj.objY==Y && positionObj.objX==X) {
-      alert('Felicidades, haz completado correctamente el puzzle');
-    }
-    else{
-      alert('Esta vez no lo conseguiste, intenta de nuevo');
-      //location.reload();
-    }
+    checkStops();
   }
 }
 function finish(){

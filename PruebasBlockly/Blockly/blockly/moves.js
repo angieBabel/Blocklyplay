@@ -159,7 +159,7 @@ function sound(sonido){
 //funcion para que se espere X segundos
 function wait(secs){
   acabo=0;
-  intermitentes=setInterval(function(){
+  /*intermitentes=setInterval(function(){
     if (luz==1) {
         luz=0;
     }else{
@@ -171,11 +171,12 @@ function wait(secs){
       luzTrasera=1;
     }
     rotar(positionObj.objZ, '"stay"');
-    /*alert('prende/apaga luces')*/;
-  },100);
+  },100);*/
 
   interv= setInterval(function(){
     acabo=1;
+    altos.push(Math.round(positionObj.objX/stepsizeX)+","+Math.round(positionObj.objY/stepsizeY));
+    /*roadpaint.push(positionObj.objX+","+positionObj.objY);*/
     clearInterval(intermitentes);
     clearInterval(interv);
   },secs*1000);
@@ -189,6 +190,7 @@ function forwardPaint(nosteps,color){
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
+  roadpaint.push(positionObj.objX+","+positionObj.objY);
   interval= setInterval(function(){
     /*ctx.strokeStyle = "#006400";
     ctx.fillStyle = "#6ab150";*/
@@ -334,7 +336,7 @@ function paint(Xend,Yend,no_steps,color){
 function painroad(color){
   var yinit, xinit;
   ctx.beginPath();
-  ctx.strokeStyle = "#63FFB2";
+  ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
   var exe=wimg/2;
 
@@ -372,8 +374,6 @@ function painroad(color){
       //alert(i);
       ctx.lineTo(xinit,yinit);
       ctx.stroke();
-
-
   }
 }
 //Funciones de luces,
@@ -489,7 +489,6 @@ function upward(nosteps){
     }
   },300);
 }
-
 function downward(nosteps){
   acabo=0;
   limtY=positionObj.objY+(nosteps*stepsize);
