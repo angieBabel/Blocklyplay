@@ -83,7 +83,8 @@
     var Y;
     var r,n=0;
     var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsize=20;
+    var stepsizeX;
+    var stepsizeY;
     var initX=0,initY=0;
     var interval,time=2000;
     var c=0,acabo=1;
@@ -111,10 +112,12 @@
       alto = document.getElementById('divCanvas').offsetHeight;
       canvas.width= ancho;
       canvas.height = alto;
-/*canvas.width/2;*/
 
-      X = canvas.width/1.5;
-      Y = canvas.height/1.5;
+      stepsizeX=canvas.width/30;
+      stepsizeY=canvas.height/30;
+
+      X = stepsizeX*15;
+      Y = stepsizeY*21;
       //alert('medida X '+X+' medida Y'+ Y);
       r = 10;
       positionObj.objX=X;
@@ -138,21 +141,22 @@
 
      imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
+        while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "#E3E2E2";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
+        }
+        initX=0;
         Avatar();
       }
 
-      /*while(initX<canvas.width-stepsize){
-        initX=initX+stepsize;
-        while(initY<canvas.height-stepsize){
-          initY=initY+stepsize;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,1.5,0,2*Math.PI);
-          ctx.fill();
-        }
-        initY=0;
-      }
-      initX=0;*/
+
     }
 
     function paintroad(){
@@ -184,7 +188,7 @@
           lucesTraceras(-20,0);
         }*/
         ctx.globalAlpha=1;
-        ctx.drawImage(img,0,0,avatarwith,avatarheight);
+        ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
         ctx.restore();
         /*ctx.drawImage(img,positionObj.objX, positionObj.objY,avatarwith,avatarheight);*/
         //rotar(positionObj.objZ);
