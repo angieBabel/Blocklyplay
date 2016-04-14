@@ -5,8 +5,8 @@ var degreesToRadian = function (deg) {
 //mover adelante sin pintar
 function forward(nosteps){
   acabo=0;
-  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsize);
-  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsize);
+  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
+  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
@@ -58,8 +58,8 @@ function forward(nosteps){
 //mover hacia atras sin pintar
 function backward(nosteps){
   acabo=0;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
+  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
+  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;
@@ -185,8 +185,8 @@ function wait(secs){
 function forwardPaint(nosteps,color){
   colorPath=color;
   acabo=0;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
+  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
+  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
@@ -239,8 +239,8 @@ function forwardPaint(nosteps,color){
 function backwardPaint(nosteps,color){
   acabo=0;
   colorPath=color;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsize);
+  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
+  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;
