@@ -135,8 +135,6 @@
         Avatar();
       }
 
-
-
       /*while(initX<canvas.width-stepsize){
         initX=initX+stepsize;
         while(initY<canvas.height-stepsize){
@@ -160,17 +158,16 @@
         ctx.stroke();
       };
     }
-    //Drawing avatar
 
+    //Drawing avatar
     function Avatar(){
       var avatarheight, avatarwith;
       var positionX, positionY;
 
       img.id = 'imagen';
-
-          img.src = 'media/pincel.png';
-          avatarwith=40;avatarheight=40;
-          positionX=20; positionY=60;
+      img.src = 'media/pincel.png';
+      avatarwith=40;avatarheight=40;
+      positionX=20; positionY=60;
 
       img.onload = function() {
         ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
@@ -286,6 +283,7 @@
     }
 </script>
 </head>
+
 <body onload="begin()">
   <div class="pure-g">
     <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
@@ -298,10 +296,8 @@
         <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
       </ul>
 
-
-
-
     </div>
+
     <div class="pure-u-1-2" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
     </div>
@@ -319,149 +315,148 @@
     </div>
   </div>
 
+  <xml id="toolbox" style="display: none">
+    <category name="Control" colour="355">
+      <block type="wait"></block>
+      <block type="stop"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
 
+    <category name="Move" colour="79">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
 
-<xml id="toolbox" style="display: none">
-  <category name="Control" colour="355">
-    <block type="wait"></block>
-    <block type="stop"></block>
-    <block type="controls_repeat_ext">
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="controls_whileUntil"></block>
-    <block type="controls_for">
-      <value name="FROM">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="TO">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="BY">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="controls_flow_statements"></block>
-  </category>
+    <category name="Lights" colour="176">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
 
-  <category name="Move" colour="79">
-    <block type="mover"></block>
-    <block type="mover_pintando"></block>
-    <block type="girar"></block>
-  </category>
+    <category name="Sounds" colour="290">
+      <block type="sonido"></block>
+    </category>
 
-  <category name="Lights" colour="176">
-    <block type="blinker"></block>
-    <block type="lights"></block>
-  </category>
+    <category name="Math" colour="190">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Sounds" colour="290">
-    <block type="sonido"></block>
-  </category>
+    <category name="Text" colour="210">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Math" colour="190">
-    <block type="math_number" gap="32"></block>
-    <block type="math_arithmetic">
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Logic" colour="25">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
 
-  <category name="Text" colour="210">
-    <block type="text"></block>
-    <block type="text_isEmpty">
-      <value name="VALUE">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_print">
-      <value name="TEXT">
-        <shadow type="text">
-          <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_prompt_ext">
-      <value name="TEXT">
-        <shadow type="text">
-           <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Colour" colour="160">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Logic" colour="25">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean"></block>
-  </category>
+    <sep></sep>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="46" custom="PROCEDURE"></category>
 
-  <category name="Colour" colour="160">
-    <block type="colour_picker"></block>
-    <block type="colour_random"></block>
-    <block type="colour_rgb">
-      <value name="RED">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-      <value name="GREEN">
-        <shadow type="math_number">
-          <field name="NUM">50</field>
-        </shadow>
-      </value>
-      <value name="BLUE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="colour_blend">
-      <value name="COLOUR1">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#ff0000</field>
-        </shadow>
-      </value>
-      <value name="COLOUR2">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#3333ff</field>
-        </shadow>
-      </value>
-      <value name="RATIO">
-        <shadow type="math_number">
-          <field name="NUM">0.5</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+  </xml>
 
-  <sep></sep>
-  <category name="Variables" colour="330" custom="VARIABLE"></category>
-  <category name="Functions" colour="46" custom="PROCEDURE"></category>
-
-</xml>
-<script type="text/javascript">
+  <script type="text/javascript">
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
@@ -469,138 +464,121 @@
         { media: 'media/',
           toolbox: document.getElementById('toolbox')});
     var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      //alert(blocklyArea.offsetWidth)
-      //blocklyArea.style.height='80%';
-      blocklyDiv.style.height='85%';
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-
-      blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    //alert(blocklyArea.offsetWidth)
+    //blocklyArea.style.height='80%';
+    blocklyDiv.style.height='85%';
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
     };
+
     window.addEventListener('resize', onresize, false);
     onresize();
 
-
-/*var workspace = Blockly.inject('blocklyDiv',
+    /*var workspace = Blockly.inject('blocklyDiv',
     {media: 'media/',
      toolbox: document.getElementById('toolbox')});*/
-  var program = window.localStorage.getItem("panel");
-  Blockly.mainWorkspace.clear();
-  var textToDom = Blockly.Xml.textToDom(program);
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+    var program = window.localStorage.getItem("panel");
+    Blockly.mainWorkspace.clear();
+    var textToDom = Blockly.Xml.textToDom(program);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-function showCode() {
-  // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-  Blockly.JavaScript.addReservedWords('highlightBlock');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
+    function showCode() {
+      // Generate JavaScript code and display it.
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      Blockly.JavaScript.addReservedWords('highlightBlock');
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
 
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
+      myInterpreter = new Interpreter(code, initAlert);
+      highlightPause = false;
+      workspace.traceOn(true);
+      workspace.highlightBlock(null);
+      alert(code);
 
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
-
-  //////
-  myInterpreter = new Interpreter(code, initAlert);
-  highlightPause = false;
-  workspace.traceOn(true);
-  workspace.highlightBlock(null);
-  alert(code);
-
-}
-function nextStep() {
-  if (highlightPause) {
-    // A block has been highlighted.  Pause execution here.
-    highlightPause = false;
-  } else {
-    // Keep executing until a highlight statement is reached.
-    /*stepCode();*/
-  }
-  if (!myInterpreter.step()) {
-    /*window.setTimeout(finish, 15);*/
-    clearInterval(intervalo);
-    if (positionObj.objY==Y && positionObj.objX==X) {
-      alert('Felicidades, haz completado correctamente el puzzle');
     }
-    else{
-      alert('Esta vez no lo conseguiste, intenta de nuevo');
-      //location.reload();
-    }
-  }
-}
-function finish(){
-  if(acabo==1){
-        nextStep();
+
+    function nextStep() {
+      if (highlightPause) {
+        // A block has been highlighted.  Pause execution here.
+        highlightPause = false;
+      } else {
+        // Keep executing until a highlight statement is reached.
+        /*stepCode();*/
       }
-}
+      if (!myInterpreter.step()) {
+        /*window.setTimeout(finish, 15);*/
+        clearInterval(intervalo);
+        if (positionObj.objY==Y && positionObj.objX==X) {
+          alert('Felicidades, haz completado correctamente el puzzle');
+        }
+        else{
+          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          //location.reload();
+        }
+      }
+    }
 
-function runCode() {
-  showCode();
-  intervalo= setInterval(function(){finish();},15)
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    function finish(){
+      if(acabo==1){
+            nextStep();
+          }
+    }
 
-  window.localStorage.setItem("panel", domToPretty);
-}
+    function runCode() {
+      showCode();
+      intervalo= setInterval(function(){finish();},15)
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var domToPretty = Blockly.Xml.domToPrettyText(xml);
 
-function saveXML(){
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var mappingData = window.localStorage.getItem('mappingBlock');
-  var conditionData = window.localStorage.getItem('conditionBlock');
+      window.localStorage.setItem("panel", domToPretty);
+    }
 
-  /*var mappingElem = new Element('mapping', {
-    'html': mappingData
-  });
-  var conditionElem = new Element('condition', {
-    'html': conditionData
-  });
+    function saveXML(){
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var mappingData = window.localStorage.getItem('mappingBlock');
+      var conditionData = window.localStorage.getItem('conditionBlock');
 
-  $(xml).grab(mappingElem);
-  $(xml).grab(conditionElem);
-*/
-  var data = Blockly.Xml.domToPrettyText(xml);
-  console.log(data);
-  //return;
+      /*var mappingElem = new Element('mapping', {
+        'html': mappingData
+      });
+      var conditionElem = new Element('condition', {
+        'html': conditionData
+      });
 
-  // Store data in blob.
-  //var builder = new BlobBuilder();
-  //builder.append(data);
-  //console.log(builder);
-  //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-  var name = prompt("Name of this file", "blocks");
-  if (name) {
-    var blob = new Blob([data], {
-      type: "text/plain;charset=utf-8"
-    });
-    saveAs(blob, name + '.xml');
-  }
+      $(xml).grab(mappingElem);
+      $(xml).grab(conditionElem);
+    */
+      var data = Blockly.Xml.domToPrettyText(xml);
+      console.log(data);
+      //return;
 
-}
-</script>
+      // Store data in blob.
+      //var builder = new BlobBuilder();
+      //builder.append(data);
+      //console.log(builder);
+      //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+      var name = prompt("Name of this file", "blocks");
+      if (name) {
+        var blob = new Blob([data], {
+          type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, name + '.xml');
+      }
+    }
+  </script>
 </body>
 </html>
 
