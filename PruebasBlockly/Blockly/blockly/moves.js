@@ -150,7 +150,6 @@ function rotar(angulo,side){
   //path();
   /*alert("color"+color);*/
   panel();
-  painroad(colorPath);
 }
 //Función para ejecutar sonidos de acuerdo a la elección del usuario
 function sound(sonido){
@@ -225,10 +224,10 @@ function forwardPaint(nosteps,color){
     /*ctx.clearRect(0,0,canvas.width,canvas.height);*/
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
-    paint(positionObj.objX,positionObj.objY,nosteps,color);
+
     rotar(positionObj.objZ,'"ahead"',color);
-    panel(1);
-    path();
+    /*panel();*/
+    paint(positionObj.objX,positionObj.objY,nosteps,color);
     i++;
     if(i==nosteps){
       stopTimer();
@@ -295,9 +294,6 @@ function paint(Xend,Yend,no_steps,color){
   var srt;
   var res;
   var yinit, xinit;
-  //alert(no_steps);
-
-  //alert(roadpaint.length);
   ctx.beginPath();
   ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
@@ -333,8 +329,8 @@ function paint(Xend,Yend,no_steps,color){
     count=0;
   }
   ctx.stroke();
-//Función para pintar el camino que ha dejado
 }
+//Función para pintar el camino que ha dejado
 function painroad(color){
   var yinit, xinit;
   ctx.beginPath();
