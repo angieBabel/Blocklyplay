@@ -107,23 +107,7 @@ function backward(nosteps){
     }
   },300);
 }
-//function sipin
-function giro(angulo) {
-  if (positionObj.objZ=!angulo) {
-    positionObj,objZ= angulo;
-  }
-  //ctx.clearRect(0,0,canvas.width,canvas.height);
-  panel();
 
-  path();
-  painroad();
-  ctx.save();
-  var w=40,h=20;
-  ctx.translate(positionObj.objX,positionObj.objY);
-  ctx.rotate(angulo * (Math.PI/180));
-  ctx.drawImage(img,-w/2, -h/2,40,20);
-  ctx.restore();
-}
 //funcion para dibujar el avatar volteando a la dirección correcta
 function rotar(angulo,side){
   if (side=='left') {
