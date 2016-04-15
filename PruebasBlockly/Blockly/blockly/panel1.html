@@ -80,13 +80,15 @@
     var Y;
     var r,n=0;
     var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsize=20;
+
+    //tamaño de paso de X y Y
+    var stepsizeX=20,stepsizeY=20;//var stepsize=20;
     var initX=0,initY=0;
     var interval,time=2000;
     var c=0,acabo=1;
     var colorPath='';
-    var himg=40;
-    var wimg=20;
+    var himg=20;
+    var wimg=8;
     var roadpaint = [];
     var count=0;
     var luz=0,luzTrasera=0;
@@ -107,6 +109,12 @@
 
       X = canvas.width/2;
       Y = canvas.height/2;
+      //se inicializa la posicion del objeto, aqui es donde se pintara la linea
+      positionObj.objX=350;
+      positionObj.objY=145;
+      //se inicializan los valores auxiliares para poder pintar
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
 
       panel();
     }
@@ -120,6 +128,8 @@
       imgback.src = "media/mapa_casa.png";
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
+        //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
+        painroad(colorPath);
         Avatar();
       }
 
@@ -155,15 +165,16 @@
       img.id = 'imagen';
       img.src = 'media/pincel.png';
       avatarwith=40;avatarheight=40;
-      positionX=350; positionY=105;
 
       img.onload = function() {
         ctx.save();
+        //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
         ctx.translate(positionObj.objX,positionObj.objY);
-        ctx.rotate(positionObj.objZ * (Math.PI/180));
+        //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
 
         ctx.globalAlpha=1;
-        ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
+        //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+        ctx.drawImage(img,-40, -40,avatarwith,avatarheight);
         ctx.restore();
 
       }
