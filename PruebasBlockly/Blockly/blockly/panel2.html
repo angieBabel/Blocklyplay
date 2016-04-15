@@ -545,7 +545,7 @@
 /*var workspace = Blockly.inject('blocklyDiv',
     {media: 'media/',
      toolbox: document.getElementById('toolbox')});*/
-  var program = window.localStorage.getItem("panel");
+  var program = window.localStorage.getItem("panel2");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
@@ -589,7 +589,7 @@ function runCode() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var domToPretty = Blockly.Xml.domToPrettyText(xml);
 
-  window.localStorage.setItem("panel", domToPretty);
+  window.localStorage.setItem("panel2", domToPretty);
 }
 
 function saveXML(){
