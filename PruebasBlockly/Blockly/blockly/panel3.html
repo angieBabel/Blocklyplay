@@ -77,21 +77,38 @@
 
 <script type="text/javascript">
     /*var image;*/
-    var img= new Image();
-    var X;
-    var Y;
-    var r,n=0;
-    var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsize=20;
+    //inicialización de las variables
+    var img= new Image();//variable de imagen del avatar
+    //coordenadas donde comienza el avatar
+    var X,Y;
+    //variables auxiliares para mover el avatar
+    var Xaux=0,Yaux=0;
+    //variables de hasta donde llegara el avatar (para hacer el conteo de pasos)
+    var limtX,limtY;
+    //tamaño de paso de X y Y
+    var stepsizeX,stepsizeY;
+    //variables para controlar donde poner los puntos del grid
     var initX=0,initY=0;
-    var interval,time=2000;
-    var c=0,acabo=1;
+    //intervalo de tiempo de cada paso
+    var interval;
+    //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
+    var acabo=1;
+    //Variable para guardar el color del camino
     var colorPath='';
-    var himg=40;
+    //Tamaño de ancho y alto del avatar
+    var avatarheight, avatarwith;
+    //tamaño del ancho de la linea que dibuja el avatar
     var wimg=20;
+    //vector del camino que ha pintado
     var roadpaint = [];
-    var count=0;
+    //vector de posiciones done estaban los semaforos y donde hizo un alto
+    var semaforos=[],altos=[];
+    //variables para saber si las luces estan encendidas
     var luz=0,luzTrasera=0;
+    //variable de contador para la funcion de pintar
+    var count=0;
+
+    /*var road [];*/
 
     /*var road [];*/
 
@@ -106,116 +123,90 @@
       ctx = canvas.getContext('2d');
       ancho = document.getElementById('divCanvas').offsetWidth;
       alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.addEventListener("mousedown", getPosition, false);
       canvas.width= ancho;
       canvas.height = alto;
+      stepsizeX=canvas.width/30;
+      stepsizeY=canvas.height/30;
 
-      X = canvas.width/2;
-      Y = canvas.height/2;
-      r = 10;
+      X = stepsizeX*15;
+      Y = stepsizeY*21;
       positionObj.objX=X;
       positionObj.objY=Y;
-       roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-      panel(0);
+      panel();
       //Avatar(1);
       //path();
+    }
+    function getPosition(event){
+      var xX,yY;
+      if(event.offsetX){
+       xX= event.clientX;
+       yY= event.clientY;
+       xX -= canvas.offsetLeft;
+       yY -= canvas.offsetTop;
+      }
+      if(event.clientX){
+       xX= event.clientX;
+       yY= event.clientY;
+       xX -= canvas.offsetLeft;
+       yY -= canvas.offsetTop;
+      }
+
+      alert("x:" + xX + " y:" + yY);
     }
 
     function stopTimer(){
       clearInterval(interval);
     }
-
-    function panel(level){
-      var imgback = new Image();
-      var avatar;
-      switch(level){
-        case 1:
-            imgback.src = "media/mapa_casa.png";
-            avatar=1;
-            break;
-        case 2:
+    function panel(){
+      while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "#E3E2E2";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
+        }
+        initX=0;
+      Avatar();
+      /*var imgback = new Image();
             imgback.src = "media/mapa_semaforo.png";
-            avatar=2;
-            break;
-        case 3:
-            imgback.src = "media/elevador.png";
-            avatar=3;
-            break;
-        case 4:
-            imgback.src = "media/puente.png";
-            avatar=1;
-            break;
-        default:
-              imgback.src = "media/panelPrincipal.png";
-              avatar=0;
-      }
 
      imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
-        Avatar(avatar);
-      }
 
-
-
-      /*while(initX<canvas.width-stepsize){
-        initX=initX+stepsize;
-        while(initY<canvas.height-stepsize){
-          initY=initY+stepsize;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,1.5,0,2*Math.PI);
-          ctx.fill();
-        }
-        initY=0;
-      }
-      initX=0;*/
-    }
-
-    function paintroad(){
-      for (var i = 0; i <road.length; i++) {
-        ctx.strokeStyle = "#f00";
-        ctx.beginPath();
-        ctx.moveTo(road[i]);
-        ctx.lineTo(road[i+1]);
-        ctx.stroke();
-      };
+        painroad(colorPath);
+        Avatar();
+      }*/
     }
     //Drawing avatar
 
-    function Avatar(noAvatar){
-      var avatarheight, avatarwith;
+    function Avatar(){
       var positionX, positionY;
 
       img.id = 'imagen';
-
-      switch(noAvatar){
-        case 1:
-          img.src = 'media/pincel.png';
-          avatarwith=40;avatarheight=40;
-          positionX=20; positionY=60;
-          break;
-        case 2:
-          img.src = 'media/carro.png';
-          avatarwith=40;avatarheight=20;
-          positionX=20; positionY=60;
-          break;
-        case 3:
-          img.src = 'media/elevador.png';
-          break;
-        case 4:
-          img.src = 'media/pincel.png';
-          avatarwith=40;avatarheight=40;
-          positionX=20; positionY=60;
-          break;
-        default:
-          img.src = 'media/avatar.png';
-          avatarwith=100;avatarheight=130;
-          positionX=X-(avatarwith/2); positionY=canvas.height-250;
-      }
-
+      img.src = 'media/carro.png';
+      avatarwith=40;avatarheight=20;
       img.onload = function() {
-        ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
+        /*if (luz==1) {
+              luces(20,0);
+            }
+        if (luzTrasera==1) {
+          lucesTraceras(-20,0);
+        }*/
+        ctx.globalAlpha=1;
+        ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
+        ctx.restore();
+        /*ctx.drawImage(img,positionObj.objX, positionObj.objY,avatarwith,avatarheight);*/
+        //rotar(positionObj.objZ);
       }
     }
 
@@ -318,6 +309,15 @@
         }
         interpreter.setProperty(scope, 'wait',
             interpreter.createNativeFunction(wrapper));
+        //Prueba para leer evento
+        var wrapper = function(ev) {
+          return interpreter.createPrimitive(getPosition(ev));
+        }
+        interpreter.setProperty(scope, 'getPosition',
+            interpreter.createNativeFunction(wrapper));
+
+
+
 
 
     }
@@ -509,7 +509,6 @@
   <sep></sep>
   <category name="Variables" colour="330" custom="VARIABLE"></category>
   <category name="Functions" colour="46" custom="PROCEDURE"></category>
-
 </xml>
 <script type="text/javascript">
     var blocklyArea = document.getElementById('blocklyArea');
@@ -542,11 +541,7 @@
     window.addEventListener('resize', onresize, false);
     onresize();
 
-
-/*var workspace = Blockly.inject('blocklyDiv',
-    {media: 'media/',
-     toolbox: document.getElementById('toolbox')});*/
-  var program = window.localStorage.getItem("panel");
+  var program = window.localStorage.getItem("panel3");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
@@ -557,24 +552,7 @@ function showCode() {
   Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
   Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
-  //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
 
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
-
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
-
-  //////
   myInterpreter = new Interpreter(code, initAlert);
   highlightPause = false;
   workspace.traceOn(true);
@@ -614,7 +592,7 @@ function runCode() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var domToPretty = Blockly.Xml.domToPrettyText(xml);
 
-  window.localStorage.setItem("panel", domToPretty);
+  window.localStorage.setItem("panel3", domToPretty);
 }
 
 function saveXML(){
@@ -653,7 +631,3 @@ function saveXML(){
 </script>
 </body>
 </html>
-
-
-
-
