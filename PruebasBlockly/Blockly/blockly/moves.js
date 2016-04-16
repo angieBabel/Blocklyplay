@@ -91,7 +91,7 @@ function backward(nosteps){
     }
     //cuadrante superior derecho
     if (positionObj.objZ>=270 && positionObj.objZ<360) {
-      if(Xaux<limtX || Yaux>limtY){
+      if(Xaux<limtX || Yaux<limtY){
         Xaux=Xaux-(distX/nosteps);
         Yaux=Yaux-(distY/nosteps);
       }
@@ -174,7 +174,10 @@ function forwardPaint(nosteps,color){
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
-  roadpaint.push(positionObj.objX+","+positionObj.objY);
+  if(roadpaint.length===0){
+    roadpaint.push(positionObj.objX+","+positionObj.objY);
+  }
+
   interval= setInterval(function(){
     /*ctx.strokeStyle = "#006400";
     ctx.fillStyle = "#6ab150";*/
@@ -229,6 +232,9 @@ function backwardPaint(nosteps,color){
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;
+  if(roadpaint.length===0){
+    roadpaint.push(positionObj.objX+","+positionObj.objY);
+  }
   interval= setInterval(function(){
     ctx.strokeStyle = "#006400";
     ctx.fillStyle = "#6ab150";
@@ -257,7 +263,8 @@ function backwardPaint(nosteps,color){
     }
     //cuadrante superior derecho
     if (positionObj.objZ>=270 && positionObj.objZ<360) {
-      if(Xaux<limtX || Yaux>limtY){
+      //alert(positionObj.objZ);
+      if(Xaux<limtX || Yaux<limtY){
         Xaux=Xaux-(distX/nosteps);
         Yaux=Yaux-(distY/nosteps);
       }
@@ -266,8 +273,8 @@ function backwardPaint(nosteps,color){
     positionObj.objY=Yaux;
     paint(positionObj.objX,positionObj.objY,nosteps,color);
     rotar(positionObj.objZ, '"ahead"',color);
-    panel();
-    path();
+    //panel();
+    //path();
     i++;
     if(i==nosteps){
       stopTimer();
@@ -275,6 +282,27 @@ function backwardPaint(nosteps,color){
     }
   },300);
 }
+
+
+function decimalAdjust(type, value, exp) {
+    // Si el exp no está definido o es cero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+      return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // Si el valor no es un número o el exp no es un entero...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+      return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  }
+
 //Funciones para pintar paso a paso
 function paint(Xend,Yend,no_steps,color){
   var srt;
@@ -284,6 +312,13 @@ function paint(Xend,Yend,no_steps,color){
   ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
   var exe=wimg/2;
+
+
+  if (!Math.round10) {
+    Math.round10 = function(value, exp) {
+      return decimalAdjust('round', value, exp);
+    };
+  }
 
   if (roadpaint.length==1) {
     srt= roadpaint[0];
@@ -300,13 +335,13 @@ function paint(Xend,Yend,no_steps,color){
   ctx.lineTo(Xend, Yend);
 
   if(count===0){
-    roadpaint.push(Xend+","+Yend);
+    roadpaint.push(Math.round10(Xend,-2)+","+Math.round10(Yend,-2));
     //count++;
     //alert(roadpaint.length);
   }
   if(count<no_steps){
     //alert(roadpaint.length-1);
-    roadpaint[roadpaint.length-1]=(Xend+','+Yend);
+    roadpaint[roadpaint.length-1]=(Math.round10(Xend,-2)+','+Math.round10(Yend,-2));
     //count++;
 
   }

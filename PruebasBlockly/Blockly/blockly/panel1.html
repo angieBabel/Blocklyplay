@@ -109,7 +109,8 @@
       canvas.width= ancho;
       canvas.height = alto;
 
-      stepsizeX=canvas.width/20;
+      stepsizeX
+      =canvas.width/20;
       stepsizeY=canvas.height/20;
 
       X = stepsizeX*10;
@@ -130,9 +131,10 @@
       solution.push(X + "," + Y);//1
       solution.push((X+(stepsizeX*4)) +","+ Y);//2
       solution.push((X+(stepsizeX*4))+","+ (Y+(stepsizeY*5)));//3
-      solution.push((X-(stepsizeX*3))+","+ (Y+(stepsizeY*5))); //4
-      solution.push((X-(stepsizeX*3))+","+ Y); //5
+      solution.push((X-(stepsizeX*2))+","+ (Y+(stepsizeY*5))); //4
+      solution.push((X-(stepsizeX*2))+","+ Y); //5
       solution.push(X+ "," + Y); //6
+
     }
 
     function stopTimer(){
@@ -194,6 +196,15 @@
         //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
         ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
         ctx.restore();
+        /*for (var i = 0; i < solution.length; i++) {
+        var divi=solution[i].split(',');
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(divi[0],divi[1],2,0,2*Math.PI);
+        ctx.fill();
+
+      }*/
 
       }
 
@@ -561,17 +572,21 @@
           verific=verific+1;
         }
       }
-      alert(verific);
-      if (verific===2) {
+      //alert(verific);
+      if(verific==2) {
         verific=0;
-        for (var i = solution.length-1; i === 0; i--) {
-          if(roadpaint[i] === solution[i]){
+        //alert(solution.length);
+        for (var i = solution.length-1; i >= 0; i--) {
+          //alert(i);
+          //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
+          if(roadpaint[solution.length-1-i] === solution[i]){
             verific=verific+1;
           }
         }
       }
       if(verific===6){
           alert('Felicidades, haz completado correctamente el puzzle');
+          roadpaint.splice(0,roadpaint.length);
         }else{
           alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
