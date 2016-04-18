@@ -140,23 +140,30 @@
     //Avatar(1);
     //path();
   }
+  //Funcion que agrega el EventListener para el canvas
   function listener() {
+    //se agrega el eventlistener
     canvas.addEventListener("mousedown", getPosition, false);
+    //se pone la variable acabo en 0 para que espere hasta que un boton sea presionado
     acabo=0;
   }
+  //funcion que obtiene las coordenadas del click del usuario
   function getPosition(event){
+    //si es para chorme
     if(event.offsetX){
      clickX= event.clientX;
      clickY= event.clientY;
      clickX -= canvas.offsetLeft;
      clickY -= canvas.offsetTop;
     }
+    //si es para firefox
     if(event.clientX){
      clickX= event.clientX;
      clickY= event.clientY;
      clickX -= canvas.offsetLeft;
      clickY -= canvas.offsetTop;
     }
+    //se divide la coordenada entre el número de pasos para obtener la ubicación en el grid generado
     clickX=clickX/stepsizeX;
     clickY=clickY/stepsizeY;
     piso=0;
