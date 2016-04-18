@@ -129,6 +129,7 @@ function rotar(angulo,side){
   if (positionObj.objZ>=360) {
       positionObj.objZ-=360;
     }
+    //alert(positionObj.objZ);
   //ctx.clearRect(0,0,canvas.width,canvas.height);
   //  panel();
   //path();
@@ -169,8 +170,9 @@ function wait(secs){
 function forwardPaint(nosteps,color){
   colorPath=color;
   acabo=0;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
+  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
+  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
+  alert(distX+","+ distY);
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
@@ -227,8 +229,8 @@ function forwardPaint(nosteps,color){
 function backwardPaint(nosteps,color){
   acabo=0;
   colorPath=color;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
+  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
+  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;

@@ -44,6 +44,7 @@ Blockly.JavaScript['girar'] = function(block) {
   var dropdown_side = block.getFieldValue('side');
   var code = '';
   var angulo=parseInt(angle_grades);
+  //alert(angulo);
   return  code= "rotar(" + angulo +",'"+dropdown_side+"');\n";
 };
 
