@@ -88,7 +88,6 @@ Blockly.JavaScript['sonido'] = function(block) {
 Blockly.JavaScript['eventos'] = function(block) {
   var statements_codigo = Blockly.JavaScript.statementToCode(block, 'codigo');
   // TODO: Assemble JavaScript into code variable.
-
-  var code = '...';
+  var code = "listener();\n"+statements_codigo;
   return code;
 };
