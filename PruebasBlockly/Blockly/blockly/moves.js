@@ -58,8 +58,8 @@ function forward(nosteps){
 //mover hacia atras sin pintar
 function backward(nosteps){
   acabo=0;
-  distX=Math.round(Math.cos(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeX);
-  distY=Math.round(Math.sin(degreesToRadian(positionObj.objZ)))*(nosteps*stepsizeY);
+  distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
+  distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;
@@ -172,7 +172,7 @@ function forwardPaint(nosteps,color){
   acabo=0;
   distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
   distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
-  alert(distX+","+ distY);
+
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;

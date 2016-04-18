@@ -113,7 +113,7 @@
       stepsizeX=canvas.width/30;
       stepsizeY=canvas.height/30;
 
-      X = stepsizeX-10;
+      X = stepsizeX-12;
       Y = stepsizeY*14;
       initX=0;
       initY=0;
@@ -597,11 +597,11 @@ function nextStep() {
     clearInterval(intervalo);
     if (positionObj.objY==Y && positionObj.objX==X) {
       alert('Felicidades, haz completado correctamente el puzzle');
-      location.reload();
+      //location.reload();
     }
     else{
       alert('Esta vez no lo conseguiste, intenta de nuevo');
-      location.reload();
+      //location.reload();
     }
   }
 }
