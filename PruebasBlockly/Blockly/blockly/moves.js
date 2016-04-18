@@ -477,30 +477,30 @@ function lucesTraceras(Xx,Yy){
 //funciones para mover hacia arriba y hacia abajo
 function upward(nosteps){
   acabo=0;
-  limtY=positionObj.objY-(nosteps*stepsize);
+  limtY=positionObj.objY-(nosteps*stepsizeY);
   i=0;
   interval= setInterval(function (){
-    ctx.strokeStyle = "#006400";
-    ctx.fillStyle = "#6ab150";
+    /*ctx.strokeStyle = "#006400";
+    ctx.fillStyle = "#6ab150";*/
     ctx.beginPath();
       if(Yaux>limtY){
-        Yaux=Yaux-stepsize;
+        Yaux=Yaux-stepsizeY;
         //ctx.clearRect(0,0,canvas.width,canvas.height);
         /*positionObj.objZ=270;*/
-        if ((positionObj.objZ % 270)==0 || (positionObj.objZ % 90)==0 ) {
+       /* if ((positionObj.objZ % 270)==0 || (positionObj.objZ % 90)==0 ) {
           rotar(positionObj.objZ);
         } else {
           alert('Debes de rotar el vehiculo hacía arriba');
           stopTimer();
          location.reload()
         }
-        /*ctx.drawImage(img,positionObj.objX-10,Yaux-20,40,20);*/
+        ctx.drawImage(img,positionObj.objX-10,Yaux-20,40,20);*/
         /*ctx.fill();
         ctx.stroke();*/
         positionObj.objY=Yaux;
       }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     panel();
-    path();
     i++;
     if (i==nosteps) {
       stopTimer();
