@@ -113,7 +113,7 @@
       stepsizeX=canvas.width/30;
       stepsizeY=canvas.height/30;
 
-      X = stepsizeX*6;
+      X = stepsizeX-10;
       Y = stepsizeY*14;
       initX=0;
       initY=0;
@@ -196,7 +196,6 @@
         //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
         ctx.translate(positionObj.objX,positionObj.objY);
         //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-        //ctx.rotate(positionObj.objZ * (Math.PI/180));
 
         ctx.globalAlpha=1;
         //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
