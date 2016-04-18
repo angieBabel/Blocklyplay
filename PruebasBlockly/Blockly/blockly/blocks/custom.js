@@ -120,3 +120,14 @@ Blockly.Blocks['sonido'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+Blockly.Blocks['eventos'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("On click button");
+    this.appendStatementInput("codigo");
+    this.setColour(75);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    Blockly.BlockSvg.START_HAT = true;
+  }
+};

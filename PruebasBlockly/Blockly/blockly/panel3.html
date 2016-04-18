@@ -76,7 +76,7 @@
 </style>
 
 <script type="text/javascript">
-    /*var image;*/
+  /*var image;*/
   //inicialización de las variables
     var img= new Image();//variable de imagen del avatar
     //coordenadas donde comienza el avatar
@@ -110,136 +110,131 @@
     //Posisiones recolectadas por el click
     var clickX,clickY
 
-    //Variables para saber que piso presiono
-    var pisos=0;
+  //Variables para saber que piso presiono
+  var pisos=0;
+  var positionObj = {
+    objX: 0,
+    objY: 0,
+    objZ: 0,
+  };
+  function begin(){
+    canvas = document.getElementById('canvas');
+    canvas.style.border='1px solid black';
+    ctx = canvas.getContext('2d');
+    ancho = document.getElementById('divCanvas').offsetWidth;
+    alto = document.getElementById('divCanvas').offsetHeight;
+    canvas.addEventListener("mousedown", getPosition, false);
+    canvas.width= ancho;
+    canvas.height = alto;
+    stepsizeX=canvas.width/9;
+    stepsizeY=canvas.height/9;
 
-    /*var road [];*/
-
-    /*var road [];*/
-
-    var positionObj = {
-      objX: 0,
-      objY: 0,
-      objZ: 0,
-    };
-    function begin(){
-      canvas = document.getElementById('canvas');
-      canvas.style.border='1px solid black';
-      ctx = canvas.getContext('2d');
-      ancho = document.getElementById('divCanvas').offsetWidth;
-      alto = document.getElementById('divCanvas').offsetHeight;
-      canvas.addEventListener("mousedown", getPosition, false);
-      canvas.width= ancho;
-      canvas.height = alto;
-      stepsizeX=canvas.width/9;
-      stepsizeY=canvas.height/9;
-
-      X = stepsizeX*4;
-      Y = stepsizeY*8;
-      positionObj.objX=X;
-      positionObj.objY=Y;
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
-      panel();
-      //Avatar(1);
-      //path();
+    X = stepsizeX*4;
+    Y = stepsizeY*8;
+    positionObj.objX=X;
+    positionObj.objY=Y;
+    Xaux = positionObj.objX;
+    Yaux= positionObj.objY;
+    panel();
+    //Avatar(1);
+    //path();
+  }
+  function getPosition(event){
+    if(event.offsetX){
+     clickX= event.clientX;
+     clickY= event.clientY;
+     clickX -= canvas.offsetLeft;
+     clickY -= canvas.offsetTop;
     }
-    function getPosition(event){
-      if(event.offsetX){
-       clickX= event.clientX;
-       clickY= event.clientY;
-       clickX -= canvas.offsetLeft;
-       clickY -= canvas.offsetTop;
+    if(event.clientX){
+     clickX= event.clientX;
+     clickY= event.clientY;
+     clickX -= canvas.offsetLeft;
+     clickY -= canvas.offsetTop;
+    }
+    clickX=clickX/stepsizeX;
+    clickY=clickY/stepsizeY;
+    piso=0;
+    //Validar los click para saber donde presiono
+    if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
+      piso=1;
+      alert(piso);
+      runCode();
+    } else if (clickX>7 && clickX<8 && clickY>=6 && clickY<7){//Validar boton piso 2
+      piso=2;
+      alert(piso);
+      runCode();
+    } else if (clickX>7 && clickX<8 && clickY>=5 && clickY<6){ //Validar boton piso 3
+      piso=3;
+      alert(piso);
+      runCode();
+    } else {
+      alert('debes presionar un boton')
+    }
+  }
+
+  function stopTimer(){
+    clearInterval(interval);
+  }
+  function panel(){
+    Avatar();
+    while(initX<canvas.width-stepsizeX){
+        initX=initX+stepsizeX;
+          while(initY<canvas.height-stepsizeY){
+            initY=initY+stepsizeY;
+            ctx.beginPath();
+            ctx.fillStyle = "blue";
+            ctx.arc(initX,initY,1.5,0,2*Math.PI);
+            ctx.fill();
+          }
+          initY=0;
       }
-      if(event.clientX){
-       clickX= event.clientX;
-       clickY= event.clientY;
-       clickX -= canvas.offsetLeft;
-       clickY -= canvas.offsetTop;
+      initX=0;
+      var boton = new Image();
+          boton.src = "media/boton.jpg";
+     boton.onload = function() {
+        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*7),stepsizeX,stepsizeY);
+        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*6),stepsizeX,stepsizeY);
+        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*5),stepsizeX,stepsizeY);
       }
-      clickX=clickX/stepsizeX;
-      clickY=clickY/stepsizeY;
-      piso=0;
-      //Validar los click para saber donde presiono
-      if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
-        piso=1;
-        alert(piso);
-        runCode();
-      } else if (clickX>7 && clickX<8 && clickY>=6 && clickY<7){//Validar boton piso 2
-        piso=2;
-        alert(piso);
-        runCode();
-      } else if (clickX>7 && clickX<8 && clickY>=5 && clickY<6){ //Validar boton piso 3
-        piso=3;
-        alert(piso);
-        runCode();
-      } else {
-        alert('debes presionar un boton')
+  }
+  //Drawing avatar
+
+  function Avatar(){
+    var positionX, positionY;
+
+    img.id = 'imagen';
+    img.src = 'media/persona.png';
+    //avatarwith=40;avatarheight=20;
+    img.onload = function() {
+      ctx.drawImage(img,positionObj.objX,positionObj.objY,stepsizeX*.8,stepsizeY*.8);
+    }
+  }
+  function checkFloor(){
+    //Validar los click para saber donde presiono
+    if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
+      if (positionObj.objY==stepsizeY*7) {
+        alert('Felicidades haz completado correctamente el puzzle');
       }
-    }
-
-    function stopTimer(){
-      clearInterval(interval);
-    }
-    function panel(){
-      Avatar();
-      while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "blue";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
-            }
-            initY=0;
-        }
-        initX=0;
-        var boton = new Image();
-            boton.src = "media/boton.jpg";
-       boton.onload = function() {
-          ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*7),stepsizeX,stepsizeY);
-          ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*6),stepsizeX,stepsizeY);
-          ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*5),stepsizeX,stepsizeY);
-        }
-    }
-    //Drawing avatar
-
-    function Avatar(){
-      var positionX, positionY;
-
-      img.id = 'imagen';
-      img.src = 'media/persona.png';
-      //avatarwith=40;avatarheight=20;
-      img.onload = function() {
-        ctx.drawImage(img,positionObj.objX,positionObj.objY,stepsizeX*.8,stepsizeY*.8);
+      else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo');
       }
-    }
-    function checkFloor(){
-      //Validar los click para saber donde presiono
-      if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
-        if (positionObj.objY==stepsizeY*7) {
+    } else if (clickX>7 && clickX<8 && clickY>=6 && clickY<7){//Validar boton piso 2
+        if (positionObj.objY==stepsizeY*6) {
           alert('Felicidades haz completado correctamente el puzzle');
         }
         else{
           alert('Esta vez no lo conseguiste, intenta de nuevo');
         }
-      } else if (clickX>7 && clickX<8 && clickY>=6 && clickY<7){//Validar boton piso 2
-          if (positionObj.objY==stepsizeY*6) {
-            alert('Felicidades haz completado correctamente el puzzle');
-          }
-          else{
-            alert('Esta vez no lo conseguiste, intenta de nuevo');
-          }
-      } else /*if (clickX>7 && clickX<8 && clickY>=5 && clickY<6)*/{ //Validar boton piso 3
-          if (positionObj.objY==stepsizeY*5) {
-            alert('Felicidades haz completado correctamente el puzzle');
-          }
-          else{
-            alert('Esta vez no lo conseguiste, intenta de nuevo');
-          }
-      }
+    } else /*if (clickX>7 && clickX<8 && clickY>=5 && clickY<6)*/{ //Validar boton piso 3
+        if (positionObj.objY==stepsizeY*5) {
+          alert('Felicidades haz completado correctamente el puzzle');
+        }
+        else{
+          alert('Esta vez no lo conseguiste, intenta de nuevo');
+        }
     }
+  }
 </script>
 <script type="text/javascript">
     var myInterpreter=null;

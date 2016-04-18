@@ -84,3 +84,11 @@ Blockly.JavaScript['sonido'] = function(block) {
   /*return code= "downward ("+nosteps+");";*/
   return  code= "sound('"+dropdown_sonido+"');\n";
 };
+
+Blockly.JavaScript['eventos'] = function(block) {
+  var statements_codigo = Blockly.JavaScript.statementToCode(block, 'codigo');
+  // TODO: Assemble JavaScript into code variable.
+
+  var code = '...';
+  return code;
+};
