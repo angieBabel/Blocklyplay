@@ -120,6 +120,7 @@ Blockly.Blocks['sonido'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
 Blockly.Blocks['eventos'] = {
   init: function() {
     this.appendDummyInput()
@@ -129,5 +130,16 @@ Blockly.Blocks['eventos'] = {
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
     Blockly.BlockSvg.START_HAT = true;
+  }
+};
+
+Blockly.Blocks['floor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Piso");
+    this.setOutput(true);
+    this.setColour(20);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
   }
 };

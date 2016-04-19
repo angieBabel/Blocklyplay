@@ -91,3 +91,10 @@ Blockly.JavaScript['eventos'] = function(block) {
   var code = "listener();\n"+statements_codigo;
   return code;
 };
+//bloque para que el niño use la variable de piso
+Blockly.JavaScript['floor'] = function(block) {
+  // TODO: Assemble JavaScript into code variable.
+  var code = "getFloor()";
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};

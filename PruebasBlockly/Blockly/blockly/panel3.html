@@ -112,7 +112,7 @@
     var canvas;
 
   //Variables para saber que piso presiono
-  var pisos=0;
+  var piso=0;
   var positionObj = {
     objX: 0,
     objY: 0,
@@ -166,7 +166,7 @@
     //se divide la coordenada entre el número de pasos para obtener la ubicación en el grid generado
     clickX=clickX/stepsizeX;
     clickY=clickY/stepsizeY;
-    piso=0;
+    /*piso=0;*/
     //Validar los click para saber donde presiono
     if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
       piso=1;
@@ -222,6 +222,11 @@
       ctx.drawImage(img,positionObj.objX,positionObj.objY,stepsizeX*.8,stepsizeY*.8);
     }
   }
+
+  function getFloor() {
+    return piso;
+  }
+
   function checkFloor(){
     //Validar los click para saber donde presiono
     if (clickX>7 && clickX<8 && clickY>=7 && clickY<8){//Validar boton piso 1
@@ -349,6 +354,12 @@
           return interpreter.createPrimitive(getPosition(ev));
         }
         interpreter.setProperty(scope, 'getPosition',
+            interpreter.createNativeFunction(wrapper));
+        //Para obtener el valor del piso
+        var wrapper = function() {
+          return interpreter.createPrimitive(getFloor());
+        }
+        interpreter.setProperty(scope, 'getFloor',
             interpreter.createNativeFunction(wrapper));
     }
     var highlightPause = false;
@@ -494,6 +505,7 @@
     <block type="logic_operation"></block>
     <block type="logic_negate"></block>
     <block type="logic_boolean"></block>
+    <block type="floor"></block>
   </category>
 
   <category name="Colour" colour="160">
@@ -536,39 +548,62 @@
   </category>
 
   <sep></sep>
-  <category name="Variables" colour="330" custom="VARIABLE"></category>
+  <category name="Variables" colour="330" custom="VARIABLE">
+  </category>
   <category name="Functions" colour="46" custom="PROCEDURE"></category>
 </xml>
 <script type="text/javascript">
-    var blocklyArea = document.getElementById('blocklyArea');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    var blocklyCanvas = document.getElementById('divCanvas');
-    var workspace = Blockly.inject(blocklyDiv,
-        { media: 'media/',
-          toolbox: document.getElementById('toolbox')});
-    var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      //alert(blocklyArea.offsetWidth)
-      //blocklyArea.style.height='80%';
-      blocklyDiv.style.height='85%';
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+  var blocklyArea = document.getElementById('blocklyArea');
+  var blocklyDiv = document.getElementById('blocklyDiv');
+  var blocklyCanvas = document.getElementById('divCanvas');
+  var workspace = Blockly.inject(blocklyDiv,
+      { media: 'media/',
+        zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
+        toolbox: document.getElementById('toolbox')});
 
-      blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
-    };
-    window.addEventListener('resize', onresize, false);
-    onresize();
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    //alert(blocklyArea.offsetWidth)
+    //blocklyArea.style.height='80%';
+    blocklyDiv.style.height='85%';
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+
+    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
+
+ /*function onFirstComment(event) {
+  if (event.type == Blockly.Events.CHANGE &&
+      event.element == 'comment' &&
+      !event.oldValue && event.newValue) {
+    alert('Congratulations on creating your first comment!')
+
+    workspace.removeChangeListener(onFirstComment);
+  }
+    console.log(event.type);
+    console.log(event.)
+}
+workspace.addChangeListener(onFirstComment);*/
+
 
   var program = window.localStorage.getItem("panel3");
   Blockly.mainWorkspace.clear();
@@ -614,7 +649,6 @@ function runCode() {
   intervalo= setInterval(function(){finish();},15)
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var domToPretty = Blockly.Xml.domToPrettyText(xml);
-
   window.localStorage.setItem("panel3", domToPretty);
 }
 
