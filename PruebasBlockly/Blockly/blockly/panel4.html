@@ -367,9 +367,9 @@
     <div class="pure-u-1-1">
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
       <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
-      <button onclick="runCode()" class="button-success pure-button">
-        Run JavaScript
-      </button>
+      <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+      <button onclick="loadXML()"  class="button-warning pure-button">Load XML</button>
+      <input type="file" id="your-files" multiple>
     </div>
   </div>
 <!-- <table>
@@ -561,10 +561,6 @@
     window.addEventListener('resize', onresize, false);
     onresize();
 
-
-/*var workspace = Blockly.inject('blocklyDiv',
-    {media: 'media/',
-     toolbox: document.getElementById('toolbox')});*/
   var program = window.localStorage.getItem("panel4");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
@@ -572,34 +568,8 @@
 
 function showCode() {
   // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-  Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
-  //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
-
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
-
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
-
-  //////
-  myInterpreter = new Interpreter(code, initAlert);
-  highlightPause = false;
-  workspace.traceOn(true);
-  workspace.highlightBlock(null);
   alert(code);
-
 }
 function nextStep() {
   if (highlightPause) {
@@ -629,11 +599,24 @@ function finish(){
 }
 
 function runCode() {
-  showCode();
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  //permite que funcione el resaltar bloque
+  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+  Blockly.JavaScript.addReservedWords('highlightBlock');
+  //lee lo que hay en el workspaces y lo guarda como codigo
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  //se crea un interprete con el codigo obtenido
+  myInterpreter = new Interpreter(code, initAlert);
+  //se pone en pausa la funcion de resaltar el bloque
+  highlightPause = false;
+  //se habilita la funcion para rastrear el workspace
+  workspace.traceOn(true);
+  workspace.highlightBlock(null);
+  //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
   intervalo= setInterval(function(){finish();},15)
+  //se guarda lo que hay en el workspaces en el almcaneamiento local
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var domToPretty = Blockly.Xml.domToPrettyText(xml);
-
   window.localStorage.setItem("panel4", domToPretty);
 }
 
@@ -670,6 +653,27 @@ function saveXML(){
   }
 
 }
+//Variable para controlar la subida de archivos
+var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+//funcion que carga un archivo XML
+function loadXML() {
+  //se define la funcion Reader, de tipo FileReader
+  var reader = new FileReader();
+  reader.onload = function(event) {
+      var contents = event.target.result;//se almacena el resultado en una variable llamada content
+      console.log("File contents: " + contents);
+      Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+      var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+  };
+  //en caso de haber error, lo lanza
+  reader.onerror = function(event) {
+      console.error("File could not be read! Code " + event.target.error.code);
+  };
+  //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+  reader.readAsText(control.files[0]);
+}
+
 </script>
 </body>
 </html>

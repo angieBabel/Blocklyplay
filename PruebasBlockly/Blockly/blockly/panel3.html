@@ -406,6 +406,8 @@
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
       <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
       <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+      <button onclick="loadXML()"  class="button-warning pure-button">Load XML</button>
+      <input type="file" id="your-files" multiple>
     </div>
   </div>
 <!-- <table>
@@ -600,98 +602,138 @@
   window.addEventListener('resize', onresize, false);
   onresize();
 
- /*function onFirstComment(event) {
-  if (event.type == Blockly.Events.CHANGE &&
-      event.element == 'comment' &&
-      !event.oldValue && event.newValue) {
-    alert('Congratulations on creating your first comment!')
+   /*function onFirstComment(event) {
+    if (event.type == Blockly.Events.CHANGE &&
+        event.element == 'comment' &&
+        !event.oldValue && event.newValue) {
+      alert('Congratulations on creating your first comment!')
 
-    workspace.removeChangeListener(onFirstComment);
+      workspace.removeChangeListener(onFirstComment);
+    }
+      console.log(event.type);
+      console.log(event.)
   }
-    console.log(event.type);
-    console.log(event.)
-}
-workspace.addChangeListener(onFirstComment);*/
+  workspace.addChangeListener(onFirstComment);*/
   var program = window.localStorage.getItem("panel3");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-function showCode() {
-  // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-  Blockly.JavaScript.addReservedWords('highlightBlock');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  function showCode() {
+    // Generate JavaScript code and display it.
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    alert(code);
+  }
 
-  myInterpreter = new Interpreter(code, initAlert);
-  highlightPause = false;
-  workspace.traceOn(true);
-  workspace.highlightBlock(null);
-  alert(code);
+  function nextStep() {
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
+    }
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+      checkFloor();
+    }
+  }
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
+  }
 
-}
-function nextStep() {
-  if (highlightPause) {
-    // A block has been highlighted.  Pause execution here.
+  function runCode() {
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    //permite que funcione el resaltar bloque
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    //lee lo que hay en el workspaces y lo guarda como codigo
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    //se crea un interprete con el codigo obtenido
+    myInterpreter = new Interpreter(code, initAlert);
+    //se pone en pausa la funcion de resaltar el bloque
     highlightPause = false;
-  } else {
-    // Keep executing until a highlight statement is reached.
-    /*stepCode();*/
+    //se habilita la funcion para rastrear el workspace
+    workspace.traceOn(true);
+    workspace.highlightBlock(null);
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+    intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    window.localStorage.setItem("panel4", domToPretty);
   }
-  if (!myInterpreter.step()) {
-    /*window.setTimeout(finish, 15);*/
-    clearInterval(intervalo);
-    checkFloor();
-  }
-}
-function finish(){
-  if(acabo==1){
-        nextStep();
-      }
-}
+  //funcion que guarda el XML como texto
+  function saveXML(){
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var mappingData = window.localStorage.getItem('mappingBlock');
+    var conditionData = window.localStorage.getItem('conditionBlock');
 
-function runCode() {
-  showCode();
-  intervalo= setInterval(function(){finish();},15)
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var domToPretty = Blockly.Xml.domToPrettyText(xml);
-  window.localStorage.setItem("panel3", domToPretty);
-}
-
-function saveXML(){
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var mappingData = window.localStorage.getItem('mappingBlock');
-  var conditionData = window.localStorage.getItem('conditionBlock');
-
-  /*var mappingElem = new Element('mapping', {
-    'html': mappingData
-  });
-  var conditionElem = new Element('condition', {
-    'html': conditionData
-  });
-
-  $(xml).grab(mappingElem);
-  $(xml).grab(conditionElem);
-*/
-  var data = Blockly.Xml.domToPrettyText(xml);
-  console.log(data);
-  //return;
-
-  // Store data in blob.
-  //var builder = new BlobBuilder();
-  //builder.append(data);
-  //console.log(builder);
-  //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-  var name = prompt("Name of this file", "blocks");
-  if (name) {
-    var blob = new Blob([data], {
-      type: "text/plain;charset=utf-8"
+    /*var mappingElem = new Element('mapping', {
+      'html': mappingData
     });
-    saveAs(blob, name + '.xml');
-  }
+    var conditionElem = new Element('condition', {
+      'html': conditionData
+    });
 
-}
+    $(xml).grab(mappingElem);
+    $(xml).grab(conditionElem);
+    */
+    var data = Blockly.Xml.domToPrettyText(xml);
+    console.log(data);
+    //return;
+
+    // Store data in blob.
+    //var builder = new BlobBuilder();
+    //builder.append(data);
+    //console.log(builder);
+    //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+    var name = prompt("Name of this file", "blocks");
+    if (name) {
+      var blob = new Blob([data], {
+        type: "text/plain;charset=utf-8"
+      });
+      saveAs(blob, name + '.xml');
+    }
+  }
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+    /*Esto no es es necesario, salvo que se pretenda conocer algo
+      control.addEventListener("change", function(event) {
+        // When the control has changed, there are new files
+        //para
+        var i = 0,
+            files = control.files,
+            len = files.length;
+
+        for (; i < len; i++) {
+            console.log("Filename: " + files[i].name);
+            console.log("Type: " + files[i].type);
+            console.log("Size: " + files[i].size + " bytes");
+        }
+
+    }, false);*/
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
 </script>
 </body>
 </html>
