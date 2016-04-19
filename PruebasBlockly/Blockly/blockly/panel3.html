@@ -406,7 +406,7 @@
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
       <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
       <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
-      <button onclick="loadXML()"  class="button-warning pure-button">Load XML</button>
+      <button onclick="loadXML()"  id="loadbutton" disabled="true" class="button-warning pure-button">Load XML</button>
       <input type="file" id="your-files" multiple>
     </div>
   </div>
@@ -701,8 +701,11 @@
   }
   //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-    /*Esto no es es necesario, salvo que se pretenda conocer algo
+    //se agrega un EventListener, para saber que se ha acceido a el
       control.addEventListener("change", function(event) {
+
+         var buttonload=document.getElementById('loadbutton').disabled=false;
+/*
         // When the control has changed, there are new files
         //para
         var i = 0,
@@ -713,9 +716,9 @@
             console.log("Filename: " + files[i].name);
             console.log("Type: " + files[i].type);
             console.log("Size: " + files[i].size + " bytes");
-        }
+        }*/
 
-    }, false);*/
+    }, false);
   //funcion que carga un archivo XML
   function loadXML() {
     //se define la funcion Reader, de tipo FileReader
