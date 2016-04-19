@@ -110,11 +110,11 @@
       canvas.width= ancho;
       canvas.height = alto;
 
-      stepsizeX=canvas.width/30;
-      stepsizeY=canvas.height/30;
+      stepsizeX=canvas.width/40;
+      stepsizeY=canvas.height/40;
 
-      X = stepsizeX-12;
-      Y = stepsizeY*14;
+      X = stepsizeX*2;
+      Y = stepsizeY*19;
       initX=0;
       initY=0;
       //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -146,6 +146,15 @@
       imgback.src = "media/puente.png";
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
+        ctx.beginPath();
+        /*ctx.lineWidth = 2;
+        ctx.strokeStyle = "red";
+        ctx.setLineDash([3, stepsizeY]);
+          ctx.moveTo(initX, initY);
+          ctx.lineTo(stepsizeX*3.2, stepsizeY*7);
+          ctx.moveTo(stepsizeX*3.2, stepsizeY*7.5);
+          ctx.lineTo(stepsizeX*6.2, stepsizeY*14);
+        ctx.stroke();*/
         //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
         while(initX<canvas.width){
         initX=initX+stepsizeX;
@@ -161,11 +170,12 @@
           ctx.fill();
 
         }
-        //initY=0;
+        initY=0;
         initY=0;
       }
       initX=0;
         painroad(colorPath);
+
         Avatar();
       }
 
