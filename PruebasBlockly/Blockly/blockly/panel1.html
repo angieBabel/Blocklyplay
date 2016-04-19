@@ -94,12 +94,29 @@
     var luz=0,luzTrasera=0;
     var pasitos=4;
     var solution=[];
+    /*var solutionObj= {
+      soX: 0;
+      soY: 0;
+      soZ: 0;
+      soColor: 0;
+    }*/
 
     var positionObj = {
       objX: 0,
       objY: 0,
       objZ: 0,
     };
+    function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+      /*this.example = function(){
+        var contexto=this;
+        alert(this);
+      }*/
+
+    }
     function begin(){
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
@@ -128,12 +145,20 @@
 
     }
     function answer(){
-      solution.push(X + "," + Y);//1
+      solution.push(new solutionObj(X,Y,0,0));
+
+      solutionObj.example= function(){
+        alert(this.soZ);
+      }
+      //console.log(this);
+      console.log(solution[0]);
+
+      /*solution.push(X + "," + Y);//1
       solution.push((X+(stepsizeX*4)) +","+ Y);//2
       solution.push((X+(stepsizeX*4))+","+ (Y+(stepsizeY*5)));//3
       solution.push((X-(stepsizeX*2))+","+ (Y+(stepsizeY*5))); //4
       solution.push((X-(stepsizeX*2))+","+ Y); //5
-      solution.push(X+ "," + Y); //6
+      solution.push(X+ "," + Y); //6*/
 
     }
 
