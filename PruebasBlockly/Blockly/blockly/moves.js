@@ -370,6 +370,7 @@ function painroad(color){
       MT=roadpaint[i];
       //resMT=MT.split(",");
       ctx.moveTo(MT.poX,MT.poY);
+      //alert(MT.poX + ", "+ MT.poY);
 
       LT=roadpaint[i+1];
       //resLT=LT.split(",");
