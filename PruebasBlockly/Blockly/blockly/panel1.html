@@ -603,7 +603,7 @@
         //alert(solution.length);
         for (var i = 0; i < solution.length; i++) {
           //alert(solution[i]+'='+roadpaint[i]);
-        if(roadpaint[i] === solution[i]){
+        if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
           verific=verific+1;
         }
       }
@@ -614,11 +614,12 @@
         for (var i = solution.length-1; i >= 0; i--) {
           //alert(i);
           //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-          if(roadpaint[solution.length-1-i] === solution[i]){
+          if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
             verific=verific+1;
           }
         }
       }
+      //alert(verific);
       if(verific===6){
           alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
