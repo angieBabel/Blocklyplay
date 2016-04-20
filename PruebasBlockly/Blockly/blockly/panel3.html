@@ -389,19 +389,13 @@
         <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
         <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
       </ul>
-
-
-
-
     </div>
     <div class="pure-u-1-2" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
     </div>
-
     <div class="pure-u-1-2" id="divCanvas">
       <canvas id="canvas"></canvas>
     </div>
-
     <div class="pure-u-1-1">
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
       <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
@@ -419,7 +413,6 @@
 <td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 </td>
 </table> -->
-
 
 <xml id="toolbox" style="display: none">
   <category name="Control" colour="355">
@@ -705,7 +698,7 @@
       control.addEventListener("change", function(event) {
 
          var buttonload=document.getElementById('loadbutton').disabled=false;
-/*
+      /*
         // When the control has changed, there are new files
         //para
         var i = 0,

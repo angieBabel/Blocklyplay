@@ -207,7 +207,6 @@
         //rotar(positionObj.objZ);
       }
     }
-
   //path forward
     function path(){
       ctx.beginPath();
@@ -506,7 +505,6 @@
   <sep></sep>
   <category name="Variables" colour="330" custom="VARIABLE"></category>
   <category name="Functions" colour="46" custom="PROCEDURE"></category>
-
 </xml>
 <script type="text/javascript">
   var blocklyArea = document.getElementById('blocklyArea');
@@ -632,7 +630,7 @@
   //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
   //se agrega un EventListener, para saber que se ha acceido a el
-      control.addEventListener("change", function(event) {
+    control.addEventListener("change", function(event) {
          var buttonload=document.getElementById('loadbutton').disabled=false;
     }, false);
   //funcion que carga un archivo XML
