@@ -373,7 +373,7 @@ function painroad(color){
 
       LT=roadpaint[i+1];
       //resLT=LT.split(",");
-      //alert(parseFloat(resMT[0]) + " a "+ parseFloat(resLT[0]));
+
       //alert(parseFloat(resMT[1]) + " a "+ parseFloat(resLT[1]));
 
       if (MT.poX > LT.poX) {

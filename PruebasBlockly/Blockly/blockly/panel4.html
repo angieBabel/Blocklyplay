@@ -129,9 +129,9 @@
     }
     function answer(){
       solution.push(X + "," + Y);//1
-      solution.push((X+(stepsizeX*4)) +","+ Y);//2
-      solution.push((X+(stepsizeX*4))+","+ (Y+(stepsizeY*5)));//3
-      solution.push((X-(stepsizeX*2))+","+ (Y+(stepsizeY*5))); //4
+      solution.push((X+(stepsizeX*3)) +","+(Y+(stepsizeY*9)));//2
+      solution.push((X+(stepsizeX*7))+","+ Y);//3
+      solution.push((X-(stepsizeX*11))+","+ (Y+(stepsizeY*9))); //4
       solution.push((X-(stepsizeX*2))+","+ Y); //5
       solution.push(X+ "," + Y); //6
 
@@ -582,6 +582,7 @@
         verific=verific+1;
       }
     }
+  }
     //alert(verific);
     if(verific==2) {
       verific=0;
