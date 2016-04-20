@@ -1,6 +1,14 @@
+var roadpaint = [];
+
 var degreesToRadian = function (deg) {
    return deg * Math.PI / 180;
 };
+function paintingObj(x,y,z,color){
+      this.poX= x;
+      this.poY = y;
+      this.poZ = z;
+      this.poColor = color;
+}
 //motion functions
 //mover adelante sin pintar
 function forward(nosteps){
@@ -177,7 +185,8 @@ function forwardPaint(nosteps,color){
   limtY = positionObj.objY + distY;
   i=0;
   if(roadpaint.length===0){
-    roadpaint.push(positionObj.objX+","+positionObj.objY);
+    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    //roadpaint.push(positionObj.objX+","+positionObj.objY);
   }
 
   interval= setInterval(function(){
@@ -235,11 +244,12 @@ function backwardPaint(nosteps,color){
   limtY = positionObj.objY - distY;
   i=0;
   if(roadpaint.length===0){
-    roadpaint.push(positionObj.objX+","+positionObj.objY);
+    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    //roadpaint.push(positionObj.objX+","+positionObj.objY);
   }
   interval= setInterval(function(){
-    ctx.strokeStyle = "#006400";
-    ctx.fillStyle = "#6ab150";
+    /*ctx.strokeStyle = "#006400";
+    ctx.fillStyle = "#6ab150";*/
     ctx.beginPath();
     //cuadrante inf derecho
     if (positionObj.objZ>=0 && positionObj.objZ<90) {
@@ -326,24 +336,27 @@ function paint(Xend,Yend,no_steps,color){
     srt= roadpaint[0];
   }else{
 
-    painroad();
+    painroad(color);
     srt=roadpaint[roadpaint.length-1];
 
   }
-  res = srt.split(",");
+
+  //res = srt.split(",");
 
   //alert(count);
-  ctx.moveTo(parseFloat(res[0]), res[1]);//(x,y)
+  //poX,poY
+  ctx.moveTo(srt.poX,srt.poY);//(x,y)
   ctx.lineTo(Xend, Yend);
 
   if(count===0){
-    roadpaint.push(Math.round10(Xend,-2)+","+Math.round10(Yend,-2));
+    //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    roadpaint.push(new paintingObj(Math.round10(Xend,-2),Math.round10(Yend,-2),0,color));
     //count++;
     //alert(roadpaint.length);
   }
   if(count<no_steps){
     //alert(roadpaint.length-1);
-    roadpaint[roadpaint.length-1]=(Math.round10(Xend,-2)+','+Math.round10(Yend,-2));
+    roadpaint[roadpaint.length-1]=(new paintingObj(Math.round10(Xend,-2),Math.round10(Yend,-2),0,color));
     //count++;
 
   }
@@ -365,30 +378,30 @@ function painroad(color){
       //alert(roadpaint.length);
       //alert(i);
       MT=roadpaint[i];
-      resMT=MT.split(",");
-      ctx.moveTo(parseFloat(resMT[0]),resMT[1]);
+      //resMT=MT.split(",");
+      ctx.moveTo(MT.poX,MT.poY);
 
       LT=roadpaint[i+1];
-      resLT=LT.split(",");
+      //resLT=LT.split(",");
       //alert(parseFloat(resMT[0]) + " a "+ parseFloat(resLT[0]));
       //alert(parseFloat(resMT[1]) + " a "+ parseFloat(resLT[1]));
 
-      if (parseFloat(resMT[0]) > parseFloat(resLT[0])) {
-        xinit= parseFloat(resLT[0]) - exe;
-        yinit= parseFloat(resLT[1]);
+      if (MT.poX > LT.poX) {
+        xinit= LT.poX - exe;
+        yinit= LT.poY;
       }
-      if (parseFloat(resMT[0]) < parseFloat(resLT[0])){
-        xinit= parseFloat(resLT[0]) + exe;
-        yinit= parseFloat(resLT[1]);
+      if (MT.poX < LT.poX){
+        xinit= LT.poX + exe;
+        yinit= LT.poY;
       }
 
-      if (parseFloat(resMT[1]) > parseFloat(resLT[1])) {
-       xinit= parseFloat(resLT[0]) ;
-        yinit= parseFloat(resLT[1])- exe;
+      if (MT.poY > LT.poY) {
+       xinit= LT.poX ;
+        yinit= LT.poY- exe;
       }
-      if (parseFloat(resMT[1]) < parseFloat(resLT[1])){
-        xinit= parseFloat(resLT[0]) ;
-        yinit= parseFloat(resLT[1]) + exe;
+      if (MT.poY < LT.poY){
+        xinit= LT.poX;
+        yinit= LT.poY + exe;
       }
 
       //alert(xinit);

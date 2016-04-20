@@ -89,7 +89,7 @@
     var colorPath='';
     var himg=20;
     var wimg=8;
-    var roadpaint = [];
+
     var count=0;
     var luz=0,luzTrasera=0;
     var pasitos=4;
@@ -145,20 +145,22 @@
 
     }
     function answer(){
-      solution.push(new solutionObj(X,Y,0,0));
 
-      solutionObj.example= function(){
-        alert(this.soZ);
-      }
-      //console.log(this);
-      console.log(solution[0]);
-
-      /*solution.push(X + "," + Y);//1
-      solution.push((X+(stepsizeX*4)) +","+ Y);//2
-      solution.push((X+(stepsizeX*4))+","+ (Y+(stepsizeY*5)));//3
-      solution.push((X-(stepsizeX*2))+","+ (Y+(stepsizeY*5))); //4
-      solution.push((X-(stepsizeX*2))+","+ Y); //5
-      solution.push(X+ "," + Y); //6*/
+      //acceder a un valor solution[0].soY
+      solution.push(new solutionObj(X,Y,0,0));//1
+      //console.log(solution[0]);
+      solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
+      //console.log(solution[1]);
+      solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
+      //console.log(solution[2]);
+      solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
+      //console.log(solution[3]);
+      solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
+      //console.log(solution[4]);
+      solution.push(new solutionObj(X,Y,0,0)); //6
+      //console.log(solution[6]);
+      /*var example= solution[0];
+      alert(example.soX);*/
 
     }
 
@@ -172,7 +174,7 @@
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
         //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-        while(initX<canvas.width-(stepsizeX*7)){
+        while(initX<canvas.width-(stepsizeX*6)){
         initX=initX+stepsizeX;
         while(initY<canvas.height-(stepsizeY*10)){
           initY=initY+stepsizeY;
@@ -587,6 +589,7 @@
 
     function nextStep() {
       var verific=0;
+
       if (highlightPause) {
         // A block has been highlighted.  Pause execution here.
         highlightPause = false;
