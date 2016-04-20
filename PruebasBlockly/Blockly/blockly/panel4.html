@@ -576,15 +576,32 @@
     if (!myInterpreter.step()) {
       /*window.setTimeout(finish, 15);*/
       clearInterval(intervalo);
-      if (positionObj.objY==Y && positionObj.objX==X) {
-        alert('Felicidades, haz completado correctamente el puzzle');
-        //location.reload();
-      }
-      else{
-        alert('Esta vez no lo conseguiste, intenta de nuevo');
-        //location.reload();
+      for (var i = 0; i < solution.length; i++) {
+        //alert(solution[i]+'='+roadpaint[i]);
+      if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+        verific=verific+1;
       }
     }
+    //alert(verific);
+    if(verific==2) {
+      verific=0;
+      //alert(solution.length);
+      for (var i = solution.length-1; i >= 0; i--) {
+        //alert(i);
+        //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
+        if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
+          verific=verific+1;
+        }
+      }
+    }
+    //alert(verific);
+    if(verific===6){
+        alert('Felicidades, haz completado correctamente el puzzle');
+        roadpaint.splice(0,roadpaint.length);
+      }else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo');
+        location.reload();
+      }
   }
   function finish(){
     if(acabo==1){
