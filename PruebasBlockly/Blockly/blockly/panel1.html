@@ -250,7 +250,6 @@
       ctx.rect(X, Y-100, 100, 100);
       ctx.stroke();
     }
-
 </script>
 <script type="text/javascript">
     var myInterpreter=null;
@@ -376,11 +375,11 @@
     </div>
 
     <div class="pure-u-1-1">
-      <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
+       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
       <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
-      <button onclick="runCode()" class="button-success pure-button">
-        Run JavaScript
-      </button>
+      <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+      <button onclick="loadXML()" id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
+      <input type="file" id="your-files" multiple>
     </div>
   </div>
 
@@ -524,171 +523,194 @@
     <category name="Functions" colour="46" custom="PROCEDURE"></category>
 
   </xml>
+<script type="text/javascript">
+  var blocklyArea = document.getElementById('blocklyArea');
+  var blocklyDiv = document.getElementById('blocklyDiv');
+  var blocklyCanvas = document.getElementById('divCanvas');
+  var workspace = Blockly.inject(blocklyDiv,
+      { media: 'media/',
+        zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
+        toolbox: document.getElementById('toolbox')});
+  var onresize = function(e) {
+  // Compute the absolute coordinates and dimensions of blocklyArea.
+  var element = blocklyArea;
+  var x = 0;
+  var y = 0;
+  do {
+    x += element.offsetLeft;
+    y += element.offsetTop;
+    element = element.offsetParent;
+  } while (element);
+  //alert(blocklyArea.offsetWidth)
+  //blocklyArea.style.height='80%';
+  blocklyDiv.style.height='85%';
+  // Position blocklyDiv over blocklyArea.
+  blocklyDiv.style.left = x + 'px';
+  blocklyDiv.style.top = y + 'px';
+  blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+  //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+  blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+  };
 
-  <script type="text/javascript">
-    var blocklyArea = document.getElementById('blocklyArea');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    var blocklyCanvas = document.getElementById('divCanvas');
-    var workspace = Blockly.inject(blocklyDiv,
-        { media: 'media/',
-          zoom:
-             {controls: true,
-              wheel: true,
-              startScale: 1.0,
-              maxScale: 3,
-              minScale: 0.3,
-              scaleSpeed: 1.2},
-          toolbox: document.getElementById('toolbox')});
-    var onresize = function(e) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    var element = blocklyArea;
-    var x = 0;
-    var y = 0;
-    do {
-      x += element.offsetLeft;
-      y += element.offsetTop;
-      element = element.offsetParent;
-    } while (element);
-    //alert(blocklyArea.offsetWidth)
-    //blocklyArea.style.height='80%';
-    blocklyDiv.style.height='85%';
-    // Position blocklyDiv over blocklyArea.
-    blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
-    };
+  window.addEventListener('resize', onresize, false);
+  onresize();
 
-    window.addEventListener('resize', onresize, false);
-    onresize();
+  /*var workspace = Blockly.inject('blocklyDiv',
+  {media: 'media/',
+   toolbox: document.getElementById('toolbox')});*/
+  var program = window.localStorage.getItem("panel1");
+  Blockly.mainWorkspace.clear();
+  var textToDom = Blockly.Xml.textToDom(program);
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-    /*var workspace = Blockly.inject('blocklyDiv',
-    {media: 'media/',
-     toolbox: document.getElementById('toolbox')});*/
-    var program = window.localStorage.getItem("panel1");
-    Blockly.mainWorkspace.clear();
-    var textToDom = Blockly.Xml.textToDom(program);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+  function showCode() {
+    // Generate JavaScript code and display it.
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
 
-    function showCode() {
-      // Generate JavaScript code and display it.
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-      Blockly.JavaScript.addReservedWords('highlightBlock');
-      var code = Blockly.JavaScript.workspaceToCode(workspace);
+    myInterpreter = new Interpreter(code, initAlert);
+    highlightPause = false;
+    workspace.traceOn(true);
+    workspace.highlightBlock(null);
+    alert(code);
 
-      myInterpreter = new Interpreter(code, initAlert);
+  }
+
+
+  function nextStep() {
+    var verific=0;
+
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
       highlightPause = false;
-      workspace.traceOn(true);
-      workspace.highlightBlock(null);
-      alert(code);
-
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
     }
-
-
-    function nextStep() {
-      var verific=0;
-
-      if (highlightPause) {
-        // A block has been highlighted.  Pause execution here.
-        highlightPause = false;
-      } else {
-        // Keep executing until a highlight statement is reached.
-        /*stepCode();*/
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+      //alert(solution.length);
+      for (var i = 0; i < solution.length; i++) {
+        //alert(solution[i]+'='+roadpaint[i]);
+      if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+        verific=verific+1;
       }
-      if (!myInterpreter.step()) {
-        /*window.setTimeout(finish, 15);*/
-        clearInterval(intervalo);
-        //alert(solution.length);
-        for (var i = 0; i < solution.length; i++) {
-          //alert(solution[i]+'='+roadpaint[i]);
-        if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+    }
+    //alert(verific);
+    if(verific==2) {
+      verific=0;
+      //alert(solution.length);
+      for (var i = solution.length-1; i >= 0; i--) {
+        //alert(i);
+        //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
+        if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
           verific=verific+1;
         }
       }
-      //alert(verific);
-      if(verific==2) {
-        verific=0;
-        //alert(solution.length);
-        for (var i = solution.length-1; i >= 0; i--) {
-          //alert(i);
-          //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-          if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-            verific=verific+1;
-          }
-        }
-      }
-      //alert(verific);
-      if(verific===6){
-          alert('Felicidades, haz completado correctamente el puzzle');
-          roadpaint.splice(0,roadpaint.length);
-        }else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
-          location.reload();
-        }
-
-
-        /*if (positionObj.objY==Y && positionObj.objX==X) {
-          alert('Felicidades, haz completado correctamente el puzzle');
-        }
-        else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
-          //location.reload();
-        }*/
+    }
+    //alert(verific);
+    if(verific===6){
+        alert('Felicidades, haz completado correctamente el puzzle');
+        roadpaint.splice(0,roadpaint.length);
+      }else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo');
+        location.reload();
       }
 
 
+      /*if (positionObj.objY==Y && positionObj.objX==X) {
+        alert('Felicidades, haz completado correctamente el puzzle');
+      }
+      else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo');
+        //location.reload();
+      }*/
     }
 
-    function finish(){
-      if(acabo==1){
-            nextStep();
-          }
-    }
 
-    function runCode() {
-      showCode();
-      intervalo= setInterval(function(){finish();},15)
-      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      var domToPretty = Blockly.Xml.domToPrettyText(xml);
+  }
 
-      window.localStorage.setItem("panel1", domToPretty);
-    }
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
+  }
 
-    function saveXML(){
-      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      var mappingData = window.localStorage.getItem('mappingBlock');
-      var conditionData = window.localStorage.getItem('conditionBlock');
+  function runCode() {
+    showCode();
+    intervalo= setInterval(function(){finish();},15)
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
 
-      /*var mappingElem = new Element('mapping', {
-        'html': mappingData
+    window.localStorage.setItem("panel1", domToPretty);
+  }
+
+  function saveXML(){
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var mappingData = window.localStorage.getItem('mappingBlock');
+    var conditionData = window.localStorage.getItem('conditionBlock');
+
+    /*var mappingElem = new Element('mapping', {
+      'html': mappingData
+    });
+    var conditionElem = new Element('condition', {
+      'html': conditionData
+    });
+
+    $(xml).grab(mappingElem);
+    $(xml).grab(conditionElem);
+   */
+    var data = Blockly.Xml.domToPrettyText(xml);
+    console.log(data);
+    //return;
+
+    // Store data in blob.
+    //var builder = new BlobBuilder();
+    //builder.append(data);
+    //console.log(builder);
+    //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+    var name = prompt("Name of this file", "blocks");
+    if (name) {
+      var blob = new Blob([data], {
+        type: "text/plain;charset=utf-8"
       });
-      var conditionElem = new Element('condition', {
-        'html': conditionData
-      });
-
-      $(xml).grab(mappingElem);
-      $(xml).grab(conditionElem);
-    */
-      var data = Blockly.Xml.domToPrettyText(xml);
-      console.log(data);
-      //return;
-
-      // Store data in blob.
-      //var builder = new BlobBuilder();
-      //builder.append(data);
-      //console.log(builder);
-      //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-      var name = prompt("Name of this file", "blocks");
-      if (name) {
-        var blob = new Blob([data], {
-          type: "text/plain;charset=utf-8"
-        });
-        saveAs(blob, name + '.xml');
-      }
+      saveAs(blob, name + '.xml');
     }
-  </script>
+  }
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+  //se agrega un EventListener, para saber que se ha acceido a el
+    control.addEventListener("change", function(event) {
+         var buttonload=document.getElementById('loadbutton').disabled=false;
+    }, false);
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
+</script>
 </body>
 </html>
 
