@@ -3,6 +3,33 @@ var roadpaint = [];
 var degreesToRadian = function (deg) {
    return deg * Math.PI / 180;
 };
+//funcion para que ejecute los ajustes decimales
+(function() {
+  function decimalAdjust(type, value, exp) {
+    // Si el exp no está definido o es cero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+      return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // Si el valor no es un número o el exp no es un entero...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+      return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  }
+  //si es redondeo a 2 digitos
+  if (!Math.round10) {
+      Math.round10 = function(value, exp) {
+        return decimalAdjust('round', value, exp);
+      };
+    }
+})();
 function paintingObj(x,y,z,color){
       this.poX= x;
       this.poY = y;
@@ -152,25 +179,14 @@ function sound(sonido){
 //funcion para que se espere X segundos
 function wait(secs){
   acabo=0;
-  intermitentes=setInterval(function(){
-    if (luz==1) {
-        luz=0;
-    }else{
-      luz=1;
-    }
-    if (luzTrasera==1) {
-      luzTrasera=0;
-    }else{
-      luzTrasera=1;
-    }
-    rotar(positionObj.objZ, '"stay"');
-  },100);
 
   interv= setInterval(function(){
     acabo=1;
-    altos.push(Math.round(positionObj.objX/stepsizeX)+","+Math.round(positionObj.objY/stepsizeY));
+    //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+
+
+    altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),0,0));
     /*roadpaint.push(positionObj.objX+","+positionObj.objY);*/
-    clearInterval(intermitentes);
     clearInterval(interv);
   },secs*1000);
 }
@@ -296,25 +312,6 @@ function backwardPaint(nosteps,color){
 }
 
 
-function decimalAdjust(type, value, exp) {
-    // Si el exp no está definido o es cero...
-    if (typeof exp === 'undefined' || +exp === 0) {
-      return Math[type](value);
-    }
-    value = +value;
-    exp = +exp;
-    // Si el valor no es un número o el exp no es un entero...
-    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
-      return NaN;
-    }
-    // Shift
-    value = value.toString().split('e');
-    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
-    // Shift back
-    value = value.toString().split('e');
-    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
-  }
-
 //Funciones para pintar paso a paso
 function paint(Xend,Yend,no_steps,color){
   var srt;
@@ -324,13 +321,6 @@ function paint(Xend,Yend,no_steps,color){
   ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
   var exe=wimg/2;
-
-
-  if (!Math.round10) {
-    Math.round10 = function(value, exp) {
-      return decimalAdjust('round', value, exp);
-    };
-  }
 
   if (roadpaint.length==1) {
     srt= roadpaint[0];

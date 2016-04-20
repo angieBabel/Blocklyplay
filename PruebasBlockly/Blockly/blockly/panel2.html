@@ -115,6 +115,18 @@
       objY: 0,
       objZ: 0,
     };
+  //objeto que nos ayudara a guardar los valores
+  function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+      /*this.example = function(){
+        var contexto=this;
+        alert(this);
+      }*/
+
+    }
   //primer funcion donde se inicializan todo el canvas
     function begin(){
       canvas = document.getElementById('canvas');
@@ -135,13 +147,14 @@
       //roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-      semaforos.push("24,21");
-      semaforos.push("24,4");
-      semaforos.push("12,4");
-      semaforos.push("12,14");
-      semaforos.push("3,14");
-      semaforos.push("3,21");
-      semaforos.push("1,21");
+
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
       panel();
     }
   //para detener el intervalo del paso
@@ -183,10 +196,10 @@
           ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         }
     }
+    //para saber si va a girar o no
+    var angle=0;
   //Drawing avatar
     function Avatar(){
-      var positionX, positionY;
-
       img.id = 'imagen';
       img.src = 'media/carro.png';
       avatarwith=40;avatarheight=20;
@@ -195,13 +208,22 @@
         ctx.translate(positionObj.objX,positionObj.objY);
         ctx.rotate(positionObj.objZ * (Math.PI/180));
         /*if (luz==1) {
-              luces(20,0);
+              luces(0,0);
             }
         if (luzTrasera==1) {
-          lucesTraceras(-20,0);
+          lucesTraceras(-40,0);
         }*/
         ctx.globalAlpha=1;
-        ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
+
+        if (angle!=positionObj.objZ) {
+          angle=positionObj.objZ;
+          ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
+        }else{
+          ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
+        }
+
+
+
         ctx.restore();
         /*ctx.drawImage(img,positionObj.objX, positionObj.objY,avatarwith,avatarheight);*/
         //rotar(positionObj.objZ);
@@ -218,11 +240,18 @@
   //Compara si las paradas que hizo el niño estuvieron bien
     function checkStops(){
       var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
       for (var i = 0; i < semaforos.length; i++) {
-        if (semaforos[i]==altos[i]) {
-          coincidencias+=1;
+        for (var j = 0; j < altos.length; j++) {
+
+          //si en algun punto coinciden incrementa las coincidencias en 1
+          if (semaforos[i].soX==altos[j].soX && semaforos[i].soY==altos[j].soY ) {
+            //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
+            coincidencias+=1;
+          }
         }
       }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
       if (coincidencias==semaforos.length) {
         alert('Felicidades haz realizado correctamente el puzzle')
       }else{
