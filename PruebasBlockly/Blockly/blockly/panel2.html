@@ -103,8 +103,8 @@
     var roadpaint = [];
     //vector de posiciones done estaban los semaforos y donde hizo un alto
     var semaforos=[],altos=[];
-    //variables para saber si las luces estan encendidas
-    var luz=0,luzTrasera=0;
+    //variables para saber si las luces estan encendidas, y de que lado debe prender
+    var luz=0,luzTrasera=0,lightside;
     //variable de contador para la funcion de pintar
     var count=0;
 
@@ -206,26 +206,27 @@
         ctx.save();
         ctx.translate(positionObj.objX,positionObj.objY);
         ctx.rotate(positionObj.objZ * (Math.PI/180));
-        /*if (luz==1) {
-              luces(0,0);
-            }
-        if (luzTrasera==1) {
-          lucesTraceras(-40,0);
-        }*/
         ctx.globalAlpha=1;
 
         if (angle!=positionObj.objZ) {
           angle=positionObj.objZ;
+          if (luz==1) {
+              luces(20,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-40,0,lightside);
+          }
           ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
         }else{
+          if (luz==1) {
+              luces(0,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-40,0,lightside);
+          }
           ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
         }
-
-
-
         ctx.restore();
-        /*ctx.drawImage(img,positionObj.objX, positionObj.objY,avatarwith,avatarheight);*/
-        //rotar(positionObj.objZ);
       }
     }
   //path forward
@@ -346,6 +347,13 @@
           return interpreter.createPrimitive(wait(secs));
         }
         interpreter.setProperty(scope, 'wait',
+            interpreter.createNativeFunction(wrapper));
+
+        //cambiar valor de las luces
+        var wrapper = function(lu,luzTraser,lightsid) {
+          return interpreter.createPrimitive(lights(lu,luzTraser,lightsid));
+        }
+        interpreter.setProperty(scope, 'lights',
             interpreter.createNativeFunction(wrapper));
         //funcion para prender las direccionales
         var wrapper = function(side) {

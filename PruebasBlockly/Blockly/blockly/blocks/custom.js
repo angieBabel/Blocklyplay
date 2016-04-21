@@ -99,7 +99,9 @@ Blockly.Blocks['lights'] = {
         .appendField("Front")
         .appendField(new Blockly.FieldCheckbox("FALSE"), "frontlight")
         .appendField("Back")
-        .appendField(new Blockly.FieldCheckbox("FALSE"), "backtlight");
+        .appendField(new Blockly.FieldCheckbox("FALSE"), "backlight")
+        .appendField("On")
+        .appendField(new Blockly.FieldCheckbox("FALSE"), "on");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(176);

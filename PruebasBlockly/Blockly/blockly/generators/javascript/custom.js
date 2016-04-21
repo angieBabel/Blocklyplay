@@ -73,11 +73,24 @@ Blockly.JavaScript['blinker'] = function(block) {
 };
 
 Blockly.JavaScript['lights'] = function(block) {
-  var checkbox_frontlight = block.getFieldValue('frontlight') == 'TRUE';
-  var checkbox_backtlight = block.getFieldValue('backtlight') == 'TRUE';
+  var checkbox_frontlight = block.getFieldValue('frontlight');
+  var checkbox_backlight = block.getFieldValue('backlight');
+  var checkbox_on = block.getFieldValue('on');
   // TODO: Assemble JavaScript into code variable.
-  var code = '...';
-  return code;
+  var luz,luzTrasera,lightside;
+  var code = '';
+  if (checkbox_frontlight=='TRUE' && checkbox_on=='TRUE') {
+    luz=1;
+  }else{
+    luz=0;
+  }
+  if (checkbox_backlight=='TRUE' && checkbox_on=='TRUE') {
+    luzTrasera=1
+  }else{
+    luzTrasera=0
+  }
+  lightside='both';
+  return code="lights(" + luz +"," + luzTrasera +",'"+lightside+"');\n";
 };
 
 Blockly.JavaScript['sonido'] = function(block) {

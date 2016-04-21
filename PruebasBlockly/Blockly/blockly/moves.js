@@ -453,7 +453,7 @@ function painroad(){
       ctx.stroke();
     }
   }
-  function lucesTraceras(Xx,Yy,side){
+  function lucesTraseras(Xx,Yy,side){
     var R = 5;
     // El ángulo de partida ap y el ángulo final af
     var ap = (Math.PI / 180) * 150;
@@ -505,7 +505,7 @@ function painroad(){
     var blinks=0;
     blink=setInterval(function(){
       //ctx.globalAlpha=1;
-      panel();
+      //panel();
       if (luz==1) {
         luces(positionObj.objX,positionObj.objY,side);
         console.log('prende luz')
@@ -516,19 +516,25 @@ function painroad(){
       }
       if (luzTrasera==1) {
         luzTrasera=0;
-        lucesTraceras(positionObj.objX-40,positionObj.objY,side);
+        lucesTraseras(positionObj.objX-40,positionObj.objY,side);
         console.log('prende luz trasera')
       }else{
         //ctx.clearRect(positionObj.objX-45,positionObj.objY+stepsizeY,40,stepsizeY);
         luzTrasera=1;
       }
      blinks+=1;
-     //Avatar();
+     Avatar();
     if (blinks==10) {
       clearInterval(blink);
       acabo=1;
     }
-    },500);
+    },200);
+  }
+  function lights(lu,luzTraser,lightsid){
+    luz=lu;
+    luzTrasera=luzTraser;
+    lightside=lightsid;
+
   }
 //funciones para mover hacia arriba y hacia abajo
 function upward(nosteps){
