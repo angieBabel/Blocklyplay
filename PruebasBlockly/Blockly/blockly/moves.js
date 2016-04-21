@@ -503,33 +503,42 @@ function painroad(){
   function blinker(side){
     acabo=0;
     var blinks=0;
+    var bluz=luz;
+    var bluzT=luzTrasera;
+    //alert(bluz+'luz'+bluzT+"luzTrasera")
+
     blink=setInterval(function(){
       //ctx.globalAlpha=1;
-      //panel();
+      panel();
+      Avatar();
+      lightside=side;
       if (luz==1) {
-        luces(positionObj.objX,positionObj.objY,side);
-        console.log('prende luz')
-        luz=0;
-      }else{
-        //ctx.clearRect(positionObj.objX,positionObj.objY+stepsizeY,40,stepsizeY);
-        luz=1;
-      }
+         luz=0;
+          /*luces(20,0,lightside);*/
+        }else{
+          luz=1;
+        }
       if (luzTrasera==1) {
+        /*lucesTraseras(-20,0,lightside);*/
         luzTrasera=0;
-        lucesTraseras(positionObj.objX-40,positionObj.objY,side);
-        console.log('prende luz trasera')
       }else{
-        //ctx.clearRect(positionObj.objX-45,positionObj.objY+stepsizeY,40,stepsizeY);
         luzTrasera=1;
       }
-     blinks+=1;
-     Avatar();
-    if (blinks==10) {
-      clearInterval(blink);
-      acabo=1;
-    }
+       blinks+=1;
+       //Avatar();
+      if (blinks==10) {
+        clearInterval(blink);
+        luz=bluz;
+        luzTrasera=bluzT;
+        lightside='both';
+        //alert(luz+'luz '+luzTrasera+" luzTrasera")
+        //Avatar();
+        panel();
+        acabo=1;
+      }
     },200);
   }
+  //funcon que cambia el estado de las luces dependiendo del bloque del niño
   function lights(lu,luzTraser,lightsid){
     if (lu!=2) {
       luz=lu;
