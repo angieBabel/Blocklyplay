@@ -135,16 +135,16 @@
 
     }
     function answer(){
-      solution.push(new solutionObj(34.15, 273.125,0,0));//1
-      solution.push(new solutionObj(96.66,154.94,0,0));//2
-      solution.push(new solutionObj(159.16,273.13,0,0));//3
-      solution.push(new solutionObj(221.67,154.94,0,0)); //4
-      solution.push(new solutionObj(284.17,273.13,0,0)); //5
-      solution.push(new solutionObj(346.68,154.94,0,0));//6
-      solution.push(new solutionObj(409.18,273.13,0,0));//7
-      solution.push(new solutionObj(471.69,154.94,0,0));//8
-      solution.push(new solutionObj(534.19,273.13,0,0));//9
-      solution.push(new solutionObj(596.7,154.94,0,0));//10
+      solution.push(new solutionObj(X, Y,0,0));//1
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*3.6604878),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//2
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*7.32122987),-2)),Math.round10(Y,-2),0,0));//3
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*10.9821376),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0)); //4
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*14.6424597),-2)),Math.round10(Y,-2),0,0)); //5
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*18.3029268),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//6
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*21.9636896),-2)),Math.round10(Y,-2),0,0));//7
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*25.6245974),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//8
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*29.2849195),-2)),Math.round10(Y,-2),0,0));//9
+      solution.push(new solutionObj((X+Math.round10((stepsizeX*32.9458272),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//10
     }
 
     function stopTimer(){
@@ -546,6 +546,7 @@
       /*window.setTimeout(finish, 15);*/
       clearInterval(intervalo);
       for (var i = 0; i < solution.length; i++) {
+        alert(roadpaint[i].poX+','+roadpaint[i].poY+'='+ solution[i].soX +','+solution[i].soY)
         if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){ verific=verific+1; }
       }
       //alert(verific);
