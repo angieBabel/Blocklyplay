@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML5 - Nave en movimiento</title>
+<!-- Responsive css -->
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<!-- interprete de JS -->
+<script src="acorn_interpreter.js"></script>
+<script src="acorn.js"></script>
+<script src="interpreter.js"></script>
+<!-- <script src="/storage.js"></script> -->
+<script src="blockly_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+<script src="javascript_compressed.js"></script>
+<script src="core/css.js"></script>
+<script src="core/blockly.js"></script>
+<script src="msg/js/en.js"></script>
+<script src="blocks/custom.js"></script>
+<script src="generators/javascript/custom.js"></script>
+<script type="text/javascript" src="moves.js"></script>
+<script type="text/javascript" src="filesaver.js"></script>
+<script type="text/javascript" src="Blob.js"></script>
+
+<style>
+  canvas {
+      background: #fff;
+      font-family: sans-serif;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    .button-success,
+    .button-error,
+    .button-warning,
+    .button-secondary {
+      color: white;
+      border-radius: 20px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      margin-left: 20px;
+    }
+
+    .button-success {
+      background: rgb(28, 184, 65); /* this is a green */
+    }
+    .button-error {
+      background: rgb(202, 60, 60); /* this is a maroon */
+    }
+
+    .button-warning {
+       background: rgb(223, 117, 20); /* this is an orange */
+    }
+
+    .button-secondary {
+      background: rgb(66, 184, 221); /* this is a light blue */
+    }
+
+    canvas {
+     height: 100%;
+     width: 99%;
+    }
+
+    #divCanvas{
+      height: 80%;
+    }
+    #level{
+      color: white;
+      border-radius: 100%;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      font-size: 12px;
+    }
+</style>
+
+<script type="text/javascript">
+  /*var image;*/
+  //inicialización de las variables
+    var img= new Image();//variable de imagen del avatar
+    //coordenadas donde comienza el avatar
+    var X,Y;
+    //variables auxiliares para mover el avatar
+    var Xaux=0,Yaux=0;
+    //variables de hasta donde llegara el avatar (para hacer el conteo de pasos)
+    var limtX,limtY;
+    //tamaño de paso de X y Y
+    var stepsizeX,stepsizeY;
+    //variables para controlar donde poner los puntos del grid
+    var initX=0,initY=0;
+    //intervalo de tiempo de cada paso
+    var interval;
+    //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
+    var acabo=1;
+    //Variable para guardar el color del camino
+    var colorPath='';
+    //Tamaño de ancho y alto del avatar
+    var avatarheight, avatarwith;
+    //tamaño del ancho de la linea que dibuja el avatar
+    var wimg=20;
+    //vector del camino que ha pintado
+    var roadpaint = [];
+    //vector de posiciones done estaban los semaforos y donde hizo un alto
+    var semaforos=[],altos=[];
+    //variables para saber si las luces estan encendidas, y de que lado debe prender
+    var luz=0,luzTrasera=0,lightside;
+    //variable de contador para la funcion de pintar
+    var count=0;
+
+    /*var road [];*/
+  //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
+    var positionObj = {
+      objX: 0,
+      objY: 0,
+      objZ: 0,
+    };
+  //objeto que nos ayudara a guardar los valores
+  function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+      /*this.example = function(){
+        var contexto=this;
+        alert(this);
+      }*/
+    }
+  //primer funcion donde se inicializan todo el canvas
+    function begin(){
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      ctx = canvas.getContext('2d');
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.width= ancho;
+      canvas.height = alto;
+
+      stepsizeX=canvas.width/30;
+      stepsizeY=canvas.height/30;
+
+      X = stepsizeX*15;
+      Y = stepsizeY*21;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      //roadpaint.push(X+","+Y);
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
+
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
+      panel();
+    }
+  //para detener el intervalo del paso
+
+    function stopTimer(){
+      clearInterval(interval);
+    }
+  //dibuja el panel
+    function panel(){
+      var imgback = new Image();
+            imgback.src = "media/mapa_semaforo.png";
+
+     imgback.onload = function() {
+        ctx.drawImage(imgback, 0, 0,ancho,alto);
+        while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "#E3E2E2";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
+        }
+        initX=0;
+        painroad(colorPath);
+        Avatar();
+      }
+       var semaforo = new Image();
+            semaforo.src = "media/semaforo.png";
+       semaforo.onload = function() {
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        }
+    }
+    //para saber si va a girar o no
+    var angle=0;
+  //Drawing avatar
+    function Avatar(){
+      img.id = 'imagen';
+      img.src = 'media/carro.png';
+      avatarwith=40;avatarheight=20;
+      img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
+        ctx.globalAlpha=1;
+
+        if (angle!=positionObj.objZ) {
+          angle=positionObj.objZ;
+          if (luz==1) {
+              luces(20,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-20,0,lightside);
+          }
+          ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
+        }else{
+          if (luz==1) {
+              luces(0,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-40,0,lightside);
+          }
+          ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
+        }
+        ctx.restore();
+      }
+    }
+  //path forward
+    function path(){
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "gray";
+      ctx.rect(X, Y-100, 100, 100);
+      ctx.stroke();
+    }
+  //Compara si las paradas que hizo el niño estuvieron bien
+    function checkStops(){
+      var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+      for (var i = 0; i < semaforos.length; i++) {
+        for (var j = 0; j < altos.length; j++) {
+
+          //si en algun punto coinciden incrementa las coincidencias en 1
+          if (semaforos[i].soX==altos[j].soX && semaforos[i].soY==altos[j].soY ) {
+            //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
+            coincidencias+=1;
+          }
+        }
+      }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+      if (coincidencias==semaforos.length) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Te ha faltado hacer una parada')
+      }
+    }
+</script>
+<script type="text/javascript">
+    var myInterpreter=null;
+    function initAlert(interpreter, scope) {
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(alert(text));
+      };
+      interpreter.setProperty(scope, 'alert',
+          interpreter.createNativeFunction(wrapper));
+      // Add an API function for the prompt() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(prompt(text));
+      };
+      interpreter.setProperty(scope, 'prompt',
+          interpreter.createNativeFunction(wrapper));
+
+      // Add an API function for highlighting blocks.
+      var wrapper = function(id) {
+        id = id ? id.toString() : '';
+        return interpreter.createPrimitive(highlightBlock(id));
+      };
+      interpreter.setProperty(scope, 'highlightBlock',
+          interpreter.createNativeFunction(wrapper));
+
+      //Moves Funcitons
+        //Move forward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(forward(nosteps));
+        }
+        interpreter.setProperty(scope, 'forward',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move backward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(backward(nosteps));
+        }
+        interpreter.setProperty(scope, 'backward',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move upward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(upward(nosteps));
+        }
+        interpreter.setProperty(scope, 'upward',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move downward
+        var wrapper = function(nosteps) {
+          return interpreter.createPrimitive(downward(nosteps));
+        }
+        interpreter.setProperty(scope, 'downward',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move forwardPainting
+        var wrapper = function(nosteps,color) {
+          return interpreter.createPrimitive(forwardPaint(nosteps,color));
+        }
+        interpreter.setProperty(scope, 'forwardPaint',
+            interpreter.createNativeFunction(wrapper));
+
+        //Move backwardPainting
+        var wrapper = function(nosteps,color) {
+          return interpreter.createPrimitive(backwardPaint(nosteps,color));
+        }
+        interpreter.setProperty(scope, 'backwardPaint',
+            interpreter.createNativeFunction(wrapper));
+
+
+        //turn left-right
+        var wrapper = function(angulo, side) {
+          return interpreter.createPrimitive(rotar(angulo, side));
+        }
+        interpreter.setProperty(scope, 'rotar',
+            interpreter.createNativeFunction(wrapper));
+
+        //play sound
+        var wrapper = function(sonido) {
+          return interpreter.createPrimitive(sound(sonido));
+        }
+        interpreter.setProperty(scope, 'sound',
+            interpreter.createNativeFunction(wrapper));
+
+        //wait X secs
+        var wrapper = function(secs) {
+          return interpreter.createPrimitive(wait(secs));
+        }
+        interpreter.setProperty(scope, 'wait',
+            interpreter.createNativeFunction(wrapper));
+
+        //cambiar valor de las luces
+        var wrapper = function(lu,luzTraser,lightsid) {
+          return interpreter.createPrimitive(lights(lu,luzTraser,lightsid));
+        }
+        interpreter.setProperty(scope, 'lights',
+            interpreter.createNativeFunction(wrapper));
+        //funcion para prender las direccionales
+        var wrapper = function(side) {
+          return interpreter.createPrimitive(blinker(side));
+        }
+        interpreter.setProperty(scope, 'blinker',
+            interpreter.createNativeFunction(wrapper));
+    }
+    var highlightPause = false;
+    function highlightBlock(id) {
+      workspace.highlightBlock(id);
+      highlightPause = true;
+    }
+</script>
+</head>
+<body onload="begin()">
+  <div class="pure-g">
+    <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
+      <p class="pure-menu-heading pure-menu-link">Blockly play</p>
+      <ul class="pure-menu-list">
+        <li class="pure-menu-item"><button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
+        <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
+      </ul>
+    </div>
+    <div class="pure-u-2-5" id="blocklyArea">
+      <div id="blocklyDiv" style="position: absolute" ></div>
+    </div>
+
+    <div class="pure-u-3-5" id="divCanvas">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div class="pure-u-1-1">
+      <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
+      <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
+      <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+      <button onclick="loadXML()" id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
+      <input type="file" id="your-files" multiple>
+    </div>
+  </div>
+<!-- <table>
+
+<button onclick="showCode()">Show JavaScript</button>
+<button onclick="saveXML()">Save as XML</button>
+<button onclick="runCode()">Run JavaScript</button>
+<td><canvas id="canvas" height="480" width="600" ></canvas></td>
+<td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+</td>
+</table> -->
+
+
+<xml id="toolbox" style="display: none">
+  <category name="Control" colour="355">
+    <block type="wait"></block>
+    <block type="stop"></block>
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_whileUntil"></block>
+    <block type="controls_for">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="controls_flow_statements"></block>
+  </category>
+
+  <category name="Move" colour="79">
+    <block type="mover"></block>
+    <block type="mover_pintando"></block>
+    <block type="girar"></block>
+  </category>
+
+  <category name="Lights" colour="176">
+    <block type="blinker"></block>
+    <block type="lights"></block>
+  </category>
+
+  <category name="Sounds" colour="290">
+    <block type="sonido"></block>
+  </category>
+
+  <category name="Math" colour="190">
+    <block type="math_number" gap="32"></block>
+    <block type="math_arithmetic">
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+
+  <category name="Text" colour="210">
+    <block type="text"></block>
+    <block type="text_isEmpty">
+      <value name="VALUE">
+        <shadow type="text">
+          <field name="TEXT"></field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_print">
+      <value name="TEXT">
+        <shadow type="text">
+          <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="text_prompt_ext">
+      <value name="TEXT">
+        <shadow type="text">
+           <field name="TEXT">abc</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+
+  <category name="Logic" colour="25">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+  </category>
+
+  <category name="Colour" colour="160">
+    <block type="colour_picker"></block>
+    <block type="colour_random"></block>
+    <block type="colour_rgb">
+      <value name="RED">
+        <shadow type="math_number">
+          <field name="NUM">100</field>
+        </shadow>
+      </value>
+      <value name="GREEN">
+        <shadow type="math_number">
+          <field name="NUM">50</field>
+        </shadow>
+      </value>
+      <value name="BLUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="colour_blend">
+      <value name="COLOUR1">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+      <value name="COLOUR2">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#3333ff</field>
+        </shadow>
+      </value>
+      <value name="RATIO">
+        <shadow type="math_number">
+          <field name="NUM">0.5</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+
+  <sep></sep>
+  <category name="Variables" colour="330" custom="VARIABLE"></category>
+  <category name="Functions" colour="46" custom="PROCEDURE"></category>
+</xml>
+<script type="text/javascript">
+  var blocklyArea = document.getElementById('blocklyArea');
+  var blocklyDiv = document.getElementById('blocklyDiv');
+  var blocklyCanvas = document.getElementById('divCanvas');
+  var workspace = Blockly.inject(blocklyDiv,
+      { media: 'media/',
+        zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
+        toolbox: document.getElementById('toolbox')});
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    //alert(blocklyArea.offsetWidth)
+    //blocklyArea.style.height='80%';
+    blocklyDiv.style.height='85%';
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+
+    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
+  var program = window.localStorage.getItem("panel2");
+  Blockly.mainWorkspace.clear();
+  var textToDom = Blockly.Xml.textToDom(program);
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+
+  function showCode() {
+    // Generate JavaScript code and display it.
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    alert(code);
+  }
+  function nextStep() {
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
+    }
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+      checkStops();
+    }
+  }
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
+  }
+
+  function runCode() {
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    //permite que funcione el resaltar bloque
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
+    //lee lo que hay en el workspaces y lo guarda como codigo
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    //se crea un interprete con el codigo obtenido
+    myInterpreter = new Interpreter(code, initAlert);
+    //se pone en pausa la funcion de resaltar el bloque
+    highlightPause = false;
+    //se habilita la funcion para rastrear el workspace
+    workspace.traceOn(true);
+    workspace.highlightBlock(null);
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+    intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    window.localStorage.setItem("panel2", domToPretty);
+  }
+
+  function saveXML(){
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var mappingData = window.localStorage.getItem('mappingBlock');
+    var conditionData = window.localStorage.getItem('conditionBlock');
+
+    /*var mappingElem = new Element('mapping', {
+      'html': mappingData
+    });
+    var conditionElem = new Element('condition', {
+      'html': conditionData
+    });
+
+    $(xml).grab(mappingElem);
+    $(xml).grab(conditionElem);
+    */
+    var data = Blockly.Xml.domToPrettyText(xml);
+    console.log(data);
+    //return;
+
+    // Store data in blob.
+    //var builder = new BlobBuilder();
+    //builder.append(data);
+    //console.log(builder);
+    //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+    var name = prompt("Name of this file", "blocks");
+    if (name) {
+      var blob = new Blob([data], {
+        type: "text/plain;charset=utf-8"
+      });
+      saveAs(blob, name + '.xml');
+    }
+  }
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+  //se agrega un EventListener, para saber que se ha acceido a el
+    control.addEventListener("change", function(event) {
+         var buttonload=document.getElementById('loadbutton').disabled=false;
+    }, false);
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
+</script>
+</body>
+</html>
+
+
+
+
