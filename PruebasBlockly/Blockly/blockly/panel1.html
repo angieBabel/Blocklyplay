@@ -187,7 +187,7 @@
         initY=stepsizeY*4;
       }
       initX=stepsizeX*7;
-        painroad(colorPath);
+        painroad();
         Avatar();
       }
 
@@ -600,7 +600,7 @@
       clearInterval(intervalo);
       //alert(solution.length);
       for (var i = 0; i < solution.length; i++) {
-        //alert(solution[i]+'='+roadpaint[i]);
+        //alert(roadpaint[i].poColor);
       if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
         verific=verific+1;
       }

@@ -192,7 +192,7 @@ function wait(secs){
 }
 //Funciones para moverse hacia adelante pintando
 function forwardPaint(nosteps,color){
-  colorPath=color;
+  //colorPath=color;
   acabo=0;
   distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
   distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
@@ -201,7 +201,7 @@ function forwardPaint(nosteps,color){
   limtY = positionObj.objY + distY;
   i=0;
   if(roadpaint.length===0){
-    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
     //roadpaint.push(positionObj.objX+","+positionObj.objY);
   }
 
@@ -241,7 +241,7 @@ function forwardPaint(nosteps,color){
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
 
-    rotar(positionObj.objZ,'"ahead"',color);
+    rotar(positionObj.objZ,'"ahead"');
     /*panel();*/
     paint(positionObj.objX,positionObj.objY,nosteps,color);
     i++;
@@ -253,14 +253,14 @@ function forwardPaint(nosteps,color){
 }
 function backwardPaint(nosteps,color){
   acabo=0;
-  colorPath=color;
+  //colorPath=color;
   distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
   distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
   limtX = positionObj.objX - distX;
   limtY = positionObj.objY - distY;
   i=0;
   if(roadpaint.length===0){
-    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
     //roadpaint.push(positionObj.objX+","+positionObj.objY);
   }
   interval= setInterval(function(){
@@ -300,7 +300,7 @@ function backwardPaint(nosteps,color){
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
     paint(positionObj.objX,positionObj.objY,nosteps,color);
-    rotar(positionObj.objZ, '"ahead"',color);
+    rotar(positionObj.objZ, '"ahead"');
     //panel();
     //path();
     i++;
@@ -326,17 +326,12 @@ function paint(Xend,Yend,no_steps,color){
     srt= roadpaint[0];
   }else{
 
-    painroad(color);
+    painroad();
     srt=roadpaint[roadpaint.length-1];
 
   }
 
   //res = srt.split(",");
-
-  //alert(count);
-  //poX,poY
-  ctx.moveTo(srt.poX,srt.poY);//(x,y)
-  ctx.lineTo(Xend, Yend);
 
   if(count===0){
     //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
@@ -350,21 +345,27 @@ function paint(Xend,Yend,no_steps,color){
     //count++;
 
   }
+  ctx.moveTo(srt.poX,srt.poY);//(x,y)
+  ctx.lineTo(Xend, Yend);
   count++;
   if(count==no_steps){
     count=0;
   }
   ctx.stroke();
+
 }
 //Función para pintar el camino que ha dejado
-function painroad(color){
+function painroad(){
   var yinit, xinit;
   ctx.beginPath();
-  ctx.strokeStyle = color;
+  //ctx.strokeStyle = color;
   ctx.lineWidth = wimg;
   var exe=wimg/2;
 
   for (var i = 0; i < roadpaint.length-1; i++) {
+    if(i!=0){
+      ctx.restore();
+    }
       //alert(roadpaint.length);
       //alert(i);
       MT=roadpaint[i];
@@ -374,7 +375,8 @@ function painroad(color){
 
       LT=roadpaint[i+1];
       //resLT=LT.split(",");
-
+      ctx.strokeStyle = LT.poColor;
+      //alert(LT.poColor);
       //alert(parseFloat(resMT[1]) + " a "+ parseFloat(resLT[1]));
 
       if (MT.poX > LT.poX) {
@@ -399,7 +401,10 @@ function painroad(color){
       //alert(i);
       ctx.lineTo(xinit,yinit);
       ctx.stroke();
+      ctx.save();
   }
+
+  //ctx.strokeStyle = color;
 }
 //Funciones de luces,
 function luces(Xx,Yy){
