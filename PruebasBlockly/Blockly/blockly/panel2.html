@@ -125,7 +125,6 @@
         var contexto=this;
         alert(this);
       }*/
-
     }
   //primer funcion donde se inicializan todo el canvas
     function begin(){
@@ -314,7 +313,6 @@
             interpreter.createNativeFunction(wrapper));
 
         //Move forwardPainting
-
         var wrapper = function(nosteps,color) {
           return interpreter.createPrimitive(forwardPaint(nosteps,color));
         }
@@ -348,6 +346,12 @@
           return interpreter.createPrimitive(wait(secs));
         }
         interpreter.setProperty(scope, 'wait',
+            interpreter.createNativeFunction(wrapper));
+        //funcion para prender las direccionales
+        var wrapper = function(side) {
+          return interpreter.createPrimitive(blinker(side));
+        }
+        interpreter.setProperty(scope, 'blinker',
             interpreter.createNativeFunction(wrapper));
     }
     var highlightPause = false;
@@ -621,7 +625,7 @@
     //se guarda lo que hay en el workspaces en el almcaneamiento local
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
-    window.localStorage.setItem("panel4", domToPretty);
+    window.localStorage.setItem("panel2", domToPretty);
   }
 
   function saveXML(){
