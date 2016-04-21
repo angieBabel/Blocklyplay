@@ -101,6 +101,13 @@
       objY: 0,
       objZ: 0,
     };
+    function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+
+    }
     function begin(){
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
@@ -115,8 +122,8 @@
 
       X = stepsizeX*2;
       Y = stepsizeY*19;
-      initX=0;
-      initY=0;
+      initX=stepsizeX;
+      initY=stepsizeY*9;
       //se inicializa la posicion del objeto, aqui es donde se pintara la linea
       positionObj.objX=X;//350;
       positionObj.objY=Y;//142;
@@ -128,13 +135,16 @@
 
     }
     function answer(){
-      solution.push(X + "," + Y);//1
-      solution.push((X+(stepsizeX*3)) +","+(Y+(stepsizeY*9)));//2
-      solution.push((X+(stepsizeX*7))+","+ Y);//3
-      solution.push((X-(stepsizeX*11))+","+ (Y+(stepsizeY*9))); //4
-      solution.push((X-(stepsizeX*2))+","+ Y); //5
-      solution.push(X+ "," + Y); //6
-
+      solution.push(new solutionObj(34.15, 273.125,0,0));//1
+      solution.push(new solutionObj(96.66,154.94,0,0));//2
+      solution.push(new solutionObj(159.16,273.13,0,0));//3
+      solution.push(new solutionObj(221.67,154.94,0,0)); //4
+      solution.push(new solutionObj(284.17,273.13,0,0)); //5
+      solution.push(new solutionObj(346.68,154.94,0,0));//6
+      solution.push(new solutionObj(409.18,273.13,0,0));//7
+      solution.push(new solutionObj(471.69,154.94,0,0));//8
+      solution.push(new solutionObj(534.19,273.13,0,0));//9
+      solution.push(new solutionObj(596.7,154.94,0,0));//10
     }
 
     function stopTimer(){
@@ -147,39 +157,22 @@
       imgback.onload = function() {
         ctx.drawImage(imgback, 0, 0,ancho,alto);
         ctx.beginPath();
-        /*ctx.lineWidth = 2;
-        ctx.strokeStyle = "red";
-        ctx.setLineDash([3, stepsizeY]);
-          ctx.moveTo(initX, initY);
-          ctx.lineTo(stepsizeX*3.2, stepsizeY*7);
-          ctx.moveTo(stepsizeX*3.2, stepsizeY*7.5);
-          ctx.lineTo(stepsizeX*6.2, stepsizeY*14);
-        ctx.stroke();*/
         //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-        while(initX<canvas.width){
-        initX=initX+stepsizeX;
-        while(initY<canvas.height){
-          initY=initY+stepsizeY;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,2,0,2*Math.PI);
-
-          /*ctx.moveTo(X,Y);
-          ctx.lineTo(stepsizeX*3,stepsizeY*8);
-          ctx.stroke();*/
-          ctx.fill();
-
+        while(initX<canvas.width - stepsizeX){
+          initX=initX+stepsizeX;
+          while(initY<canvas.height - (stepsizeY*21)){
+            initY=initY+stepsizeY;
+            ctx.beginPath();
+            ctx.fillStyle = "#E3E2E2";
+            ctx.arc(initX,initY,2,0,2*Math.PI);
+            ctx.fill();
+          }
+          initY=stepsizeY*9;
         }
-        initY=0;
-        initY=0;
-      }
-      initX=0;
+        initX=stepsizeX;
         painroad(colorPath);
-
         Avatar();
       }
-
-
     }
 
     function paintroad(){
@@ -189,7 +182,7 @@
         ctx.moveTo(road[i]);
         ctx.lineTo(road[i+1]);
         ctx.stroke();
-      };
+      }
     }
 
     //Drawing avatar
@@ -206,28 +199,11 @@
         //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
         ctx.translate(positionObj.objX,positionObj.objY);
         //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
         ctx.globalAlpha=1;
         //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
         ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
         ctx.restore();
-        /*for (var i = 0; i < solution.length; i++) {
-        var divi=solution[i].split(',');
-
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.arc(divi[0],divi[1],2,0,2*Math.PI);
-        ctx.fill();
-
-      }*/
-
       }
-
-      /*positionObj.objX=positionX;
-      positionObj.objY=positionY;
-      roadpaint.push(positionObj.objX+","+positionObj.objY);
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;*/
     }
 
     //path forward
@@ -367,15 +343,6 @@
       <input type="file" id="your-files" multiple>
     </div>
   </div>
-<!-- <table>
-
-<button onclick="showCode()">Show JavaScript</button>
-<button onclick="saveXML()">Save as XML</button>
-<button onclick="runCode()">Run JavaScript</button>
-<td><canvas id="canvas" height="480" width="600" ></canvas></td>
-<td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-</td>
-</table> -->
 
 
 <xml id="toolbox" style="display: none">
@@ -566,6 +533,7 @@
     alert(code);
   }
   function nextStep() {
+    var verific=0;
     if (highlightPause) {
       // A block has been highlighted.  Pause execution here.
       highlightPause = false;
@@ -573,36 +541,22 @@
       // Keep executing until a highlight statement is reached.
       /*stepCode();*/
     }
+
     if (!myInterpreter.step()) {
       /*window.setTimeout(finish, 15);*/
       clearInterval(intervalo);
       for (var i = 0; i < solution.length; i++) {
-        //alert(solution[i]+'='+roadpaint[i]);
-      if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-        verific=verific+1;
+        if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){ verific=verific+1; }
       }
-    }
-  }
-    //alert(verific);
-    if(verific==2) {
-      verific=0;
-      //alert(solution.length);
-      for (var i = solution.length-1; i >= 0; i--) {
-        //alert(i);
-        //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-        if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-          verific=verific+1;
-        }
-      }
-    }
-    //alert(verific);
-    if(verific===6){
+      //alert(verific);
+      if(verific===10){
         alert('Felicidades, haz completado correctamente el puzzle');
         roadpaint.splice(0,roadpaint.length);
       }else{
         alert('Esta vez no lo conseguiste, intenta de nuevo');
         location.reload();
       }
+    }
   }
   function finish(){
     if(acabo==1){
