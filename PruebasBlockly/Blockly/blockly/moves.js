@@ -531,8 +531,12 @@ function painroad(){
     },200);
   }
   function lights(lu,luzTraser,lightsid){
-    luz=lu;
-    luzTrasera=luzTraser;
+    if (lu!=2) {
+      luz=lu;
+    }
+    if (luzTrasera!=2) {
+      luzTrasera=luzTraser;
+    }
     lightside=lightsid;
 
   }

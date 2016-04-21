@@ -81,13 +81,18 @@ Blockly.JavaScript['lights'] = function(block) {
   var code = '';
   if (checkbox_frontlight=='TRUE' && checkbox_on=='TRUE') {
     luz=1;
-  }else{
+  }else if (checkbox_frontlight=='TRUE' && checkbox_on=='FALSE'){
     luz=0;
+  }else {
+    luz=2;
   }
+
   if (checkbox_backlight=='TRUE' && checkbox_on=='TRUE') {
     luzTrasera=1
-  }else{
+  }else if (checkbox_backlight=='TRUE' && checkbox_on=='FALSE'){
     luzTrasera=0
+  }else{
+    luzTrasera=2;
   }
   lightside='both';
   return code="lights(" + luz +"," + luzTrasera +",'"+lightside+"');\n";
