@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blockly Demo: Generating JavaScript</title>
+  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blocks_compressed.js"></script>
+  <script src="../../javascript_compressed.js"></script>
+  <script src="../../msg/js/en.js"></script>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+  </style>
+
+    <script type="text/javascript">
+    var image;
+    var X;
+    var Y;
+    var r;
+    var Xaux=0,Yaux=0,limtX,limtY;
+    var stepsize=20;
+    var initX=0,initY=0;
+    var interval;
+
+    var positionObj = {
+      objX: 0,
+      objY: 0,
+    };
+
+
+    function begin(){
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      ctx = canvas.getContext('2d');
+      X = canvas.width/2;
+      Y = canvas.height/2;
+      r = 10;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
+      panel();
+      Avatar();
+      path();
+      //forward(5);
+      //backward(5);
+      //upward(5);
+      //downward(5);
+    }
+
+    function stopTimer(){
+      clearInterval(interval);
+    }
+
+    function panel(){
+      while(initX<canvas.width-stepsize){
+        initX=initX+stepsize;
+        while(initY<canvas.height-stepsize){
+          initY=initY+stepsize;
+          ctx.beginPath();
+          ctx.fillStyle = "#E3E2E2";
+          ctx.arc(initX,initY,1.5,0,2*Math.PI);
+          ctx.fill();
+        }
+        initY=0;
+      }
+      initX=0;
+    }
+
+    //function sipin
+    function spin(grade){
+
+    }
+    //motion functions
+    function forward(nosteps){
+      limtX = positionObj.objX + (nosteps*stepsize);
+
+      i=0;
+      interval= setInterval(function(){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Xaux<limtX){
+            Xaux=Xaux+stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if(i==nosteps){
+          stopTimer();
+        }
+      },300);
+      positionObj.objX=Xaux;
+    }
+
+     function backward(nosteps){
+      limtX= positionObj.objX - (nosteps*stepsize);
+      i=0;
+      interval= setInterval(function(){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Xaux>limtX){
+            Xaux=Xaux -stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(Xaux,positionObj.objY,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objX=Xaux;
+    }
+
+    function upward(nosteps){
+      limtY=positionObj.objY-(nosteps*stepsize);
+      i=0;
+      interval= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux>limtY){
+            Yaux=Yaux-stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objY=Yaux;
+    }
+
+    function downward(nosteps){
+      limtY=positionObj.objY+(nosteps*stepsize);
+      i=0;
+      interval= setInterval(function (){
+        ctx.strokeStyle = "#006400";
+        ctx.fillStyle = "#6ab150";
+        ctx.beginPath();
+          if(Yaux<limtY){
+            Yaux=Yaux+stepsize;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.arc(positionObj.objX,Yaux,r,0,2*Math.PI);
+            ctx.fill();
+            ctx.stroke();
+          }
+        panel();
+        path();
+        i++;
+        if (i==nosteps) {
+          stopTimer();
+        }
+      },300);
+      positionObj.objY=Yaux;
+    }
+    //Drawing avatar
+    function Avatar(){
+      ctx.beginPath();
+      ctx.strokeStyle = "#006400";
+      ctx.fillStyle = "#6ab150";
+      ctx.lineWidth = 2;
+      ctx.arc(X,Y,r,0,2*Math.PI);
+      ctx.fill();
+      ctx.stroke();
+    }
+    //path forward
+    function path(){
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "gray";
+      ctx.rect(X, Y-100, 100, 100);
+      ctx.stroke();
+
+    }
+    </script>
+</head>
+<body onload="begin()">
+  <h1><a href="https://developers.google.com/blockly/">Blockly</a> &gt;
+      <a href="../index.html">Demos</a> &gt; Generating JavaScript
+  </h1>
+  <p>
+    <button onclick="showCode()">Show JavaScript</button>
+    <button onclick="runCode()">Run JavaScript</button>
+  </p>
+
+  <div class="pure-g">
+    <div class="pure-u-1-2">
+      <div id="blocklyDiv" style="height: 500px;" >
+        <xml id="toolbox" style="display: none">
+          <category name="Logic" colour="210">
+            <block type="controls_if"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean"></block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Loops" colour="120">
+            <block type="controls_repeat_ext">
+              <value name="TIMES">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+              <value name="FROM">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="TO">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+              <value name="BY">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="controls_forEach"></block>
+            <block type="controls_flow_statements"></block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Math" colour="230">
+            <block type="math_number" gap="32"></block>
+            <block type="math_arithmetic">
+              <value name="A">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="B">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_single">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">9</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_trig">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">45</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_constant"></block>
+            <block type="math_number_property">
+              <value name="NUMBER_TO_CHECK">
+                <shadow type="math_number">
+                  <field name="NUM">0</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_change">
+              <value name="DELTA">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_round">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">3.1</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_on_list"></block>
+            <block type="math_modulo">
+              <value name="DIVIDEND">
+                <shadow type="math_number">
+                  <field name="NUM">64</field>
+                </shadow>
+              </value>
+              <value name="DIVISOR">
+                <shadow type="math_number">
+                  <field name="NUM">10</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_constrain">
+              <value name="VALUE">
+                <shadow type="math_number">
+                  <field name="NUM">50</field>
+                </shadow>
+              </value>
+              <value name="LOW">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="HIGH">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_random_int">
+              <value name="FROM">
+                <shadow type="math_number">
+                  <field name="NUM">1</field>
+                </shadow>
+              </value>
+              <value name="TO">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="math_random_float"></block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Text" colour="160">
+            <block type="text"></block>
+            <block type="text_join"></block>
+            <block type="text_append">
+              <value name="TEXT">
+                <shadow type="text"></shadow>
+              </value>
+            </block>
+            <block type="text_length">
+              <value name="VALUE">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_isEmpty">
+              <value name="VALUE">
+                <shadow type="text">
+                  <field name="TEXT"></field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_indexOf">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+              <value name="FIND">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_charAt">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+            </block>
+            <block type="text_getSubstring">
+              <value name="STRING">
+                <block type="variables_get">
+                  <field name="VAR">text</field>
+                </block>
+              </value>
+            </block>
+            <block type="text_changeCase">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_trim">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_print">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="text_prompt_ext">
+              <value name="TEXT">
+                <shadow type="text">
+                  <field name="TEXT">abc</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Lists" colour="260">
+            <block type="lists_create_with">
+              <mutation items="0"></mutation>
+            </block>
+            <block type="lists_create_with"></block>
+            <block type="lists_repeat">
+              <value name="NUM">
+                <shadow type="math_number">
+                  <field name="NUM">5</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="lists_length"></block>
+            <block type="lists_isEmpty"></block>
+            <block type="lists_indexOf">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_getIndex">
+              <value name="VALUE">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_setIndex">
+              <value name="LIST">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_getSublist">
+              <value name="LIST">
+                <block type="variables_get">
+                  <field name="VAR">list</field>
+                </block>
+              </value>
+            </block>
+            <block type="lists_split">
+              <value name="DELIM">
+                <shadow type="text">
+                  <field name="TEXT">,</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Colour" colour="20">
+            <block type="colour_picker"></block>
+            <block type="colour_random"></block>
+            <block type="colour_rgb">
+              <value name="RED">
+                <shadow type="math_number">
+                  <field name="NUM">100</field>
+                </shadow>
+              </value>
+              <value name="GREEN">
+                <shadow type="math_number">
+                  <field name="NUM">50</field>
+                </shadow>
+              </value>
+              <value name="BLUE">
+                <shadow type="math_number">
+                  <field name="NUM">0</field>
+                </shadow>
+              </value>
+            </block>
+            <block type="colour_blend">
+              <value name="COLOUR1">
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#ff0000</field>
+                </shadow>
+              </value>
+              <value name="COLOUR2">
+                <shadow type="colour_picker">
+                  <field name="COLOUR">#3333ff</field>
+                </shadow>
+              </value>
+              <value name="RATIO">
+                <shadow type="math_number">
+                  <field name="NUM">0.5</field>
+                </shadow>
+              </value>
+            </block>
+          </category>
+
+          <sep></sep>
+
+          <category name="Variables" colour="330" custom="VARIABLE"></category>
+
+          <sep></sep>
+
+          <category name="Functions" colour="290" custom="PROCEDURE"></category>
+          <sep></sep>
+
+        </xml>
+      </div>
+    </div>
+
+    <div class="pure-u-1-2">
+      <canvas id="canvas" height=500 width=600 ></canvas>
+    </div>
+  </div>
+
+
+
+  <script>
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(workspace,
+        document.getElementById('startBlocks'));
+
+    function showCode() {
+      // Generate JavaScript code and display it.
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      alert(code);
+    }
+
+    function runCode() {
+      // Generate JavaScript code and run it.
+      window.LoopTrap = 1000;
+      Blockly.JavaScript.INFINITE_LOOP_TRAP =
+          'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
+  </script>
+
+</body>
+</html>
