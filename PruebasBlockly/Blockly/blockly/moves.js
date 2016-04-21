@@ -251,6 +251,7 @@ function forwardPaint(nosteps,color){
     }
   },300);
 }
+//Funciones para moverse hacia atrás pintando
 function backwardPaint(nosteps,color){
   acabo=0;
   colorPath=color;
@@ -310,8 +311,6 @@ function backwardPaint(nosteps,color){
     }
   },300);
 }
-
-
 //Funciones para pintar paso a paso
 function paint(Xend,Yend,no_steps,color){
   var srt;
@@ -401,84 +400,130 @@ function painroad(color){
   }
 }
 //Funciones de luces,
-function luces(Xx,Yy){
-  var R = 13;
-  // El ángulo de partida ap y el ángulo final af
-  var ap = (Math.PI / 180) * -30;
-  var af = (Math.PI / 180) * 30;
+  function luces(Xx,Yy,side){
+    var R = 13;
+    // El ángulo de partida ap y el ángulo final af
+    var ap = (Math.PI / 180) * -30;
+    var af = (Math.PI / 180) * 30;
 
-  //Luz izquierda
-  // Las coordenadas del punto de partida en la circunferencia
-  var Xap = Xx+R * Math.cos(ap);
-  var Yap = Yy-5+R * Math.sin(ap);
-  // estilos
-  ctx.globalAlpha=0.75;
-  ctx.fillStyle = "#abcdef";
-  ctx.strokeStyle = "#1E90FF";
-  ctx.lineWidth = 10;
+    //Luz izquierda
+    // Las coordenadas del punto de partida en la circunferencia
+    var Xap = Xx+R * Math.cos(ap);
+    var Yap = Yy-5+R * Math.sin(ap);
+    // estilos
+    //ctx.globalAlpha=0.75;
+    ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.strokeStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.lineWidth = 10;
 
-  // empezamos a dibujar
-  //Luz izquierda
-  ctx.beginPath();
-  ctx.moveTo(Xx,Yy-5);
-  ctx.lineTo(Xap,Yap);
-  ctx.arc(Xx,Yy-5,R,ap,af);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
+    // empezamos a dibujar
+    //Luz izquierda
+    //si el lado de la luz es izquierda o ambas lo prende
+    if (side=="left" || side=="both") {
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy-5);
+      ctx.lineTo(Xap,Yap);
+      ctx.arc(Xx,Yy-5,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
 
-  // Luz derecha
-  // Las coordenadas del punto de partida en la circunferencia
- /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
-  Yap = Yy+5+R * Math.sin(ap);
-  ctx.strokeStyle = "yellow";
-  ctx.beginPath();
-  ctx.moveTo(Xx,Yy+5);
-  ctx.lineTo(Xap,Yap);
-  ctx.arc(Xx,Yy+5,R,ap,af);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-}
-function lucesTraceras(Xx,Yy){
-  var R = 5;
-  // El ángulo de partida ap y el ángulo final af
-  var ap = (Math.PI / 180) * 150;
-  var af = (Math.PI / 180) * 210;
 
-  //Luz izquierda
-  // Las coordenadas del punto de partida en la circunferencia
-  var Xap = Xx+R * Math.cos(ap);
-  var Yap = Yy-5+R * Math.sin(ap);
-  // estilos
-  ctx.globalAlpha=0.75;
-  ctx.fillStyle = "#abcdef";
-  ctx.strokeStyle = "#1E90FF";
-  ctx.lineWidth = 10;
+    // Luz derecha
+    // Las coordenadas del punto de partida en la circunferencia
+   /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
+    Yap = Yy+5+R * Math.sin(ap);
+    ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.strokeStyle = "rgba(255, 255, 0, 0.5)";
+    //si el lado de la luz es derecha o ambas lo prende
+    if (side=="right" || side=="both") {
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy+5);
+      ctx.lineTo(Xap,Yap);
+      ctx.arc(Xx,Yy+5,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+  function lucesTraceras(Xx,Yy,side){
+    var R = 5;
+    // El ángulo de partida ap y el ángulo final af
+    var ap = (Math.PI / 180) * 150;
+    var af = (Math.PI / 180) * 210;
 
-  // empezamos a dibujar
-  //Luz izquierda
-  ctx.beginPath();
-  ctx.moveTo(Xx,Yy-5);
-  ctx.lineTo(Xap,Yap);
-  ctx.arc(Xx,Yy-5,R,ap,af);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
+    //Luz izquierda
+    // Las coordenadas del punto de partida en la circunferencia
+    var Xap = Xx+R * Math.cos(ap);
+    var Yap = Yy-5+R * Math.sin(ap);
+    // estilos
+    //ctx.globalAlpha=0.75;
+    //si debe pintarlo
+    ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.strokeStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.lineWidth = 10;
 
-  // Luz derecha
-  // Las coordenadas del punto de partida en la circunferencia
- /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
-  Yap = Yy+5+R * Math.sin(ap);
-  ctx.strokeStyle = "yellow";
-  ctx.beginPath();
-  ctx.moveTo(Xx,Yy+5);
-  ctx.lineTo(Xap,Yap);
-  ctx.arc(Xx,Yy+5,R,ap,af);
-  ctx.closePath();
-  ctx.fill();
-  ctx.stroke();
-}
+    // empezamos a dibujar
+    //Luz izquierda
+    //si el lado de la luz es izquierda o ambas lo prende
+    if (side=="left" || side=="both") {
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy-5);
+      ctx.lineTo(Xap,Yap);
+      ctx.arc(Xx,Yy-5,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    // Luz derecha
+    // Las coordenadas del punto de partida en la circunferencia
+   /*nueva coordenada de punto de partida de circunferencia para faro izquierdo*/
+    Yap = Yy+5+R * Math.sin(ap);
+    ctx.fillStyle = "rgba(255, 255, 0, 0.5)";
+    ctx.strokeStyle = "rgba(255, 255, 0, 0.5)";
+    //si el lado de la luz es derecha o ambas lo prende
+    if (side=="right" || side=="both") {
+      ctx.beginPath();
+      ctx.moveTo(Xx,Yy+5);
+      ctx.lineTo(Xap,Yap);
+      ctx.arc(Xx,Yy+5,R,ap,af);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+  }
+  function blinker(side){
+    acabo=0;
+    var blinks=0;
+    blink=setInterval(function(){
+      //ctx.globalAlpha=1;
+      panel();
+      if (luz==1) {
+        luces(positionObj.objX,positionObj.objY,side);
+        console.log('prende luz')
+        luz=0;
+      }else{
+        //ctx.clearRect(positionObj.objX,positionObj.objY+stepsizeY,40,stepsizeY);
+        luz=1;
+      }
+      if (luzTrasera==1) {
+        luzTrasera=0;
+        lucesTraceras(positionObj.objX-40,positionObj.objY,side);
+        console.log('prende luz trasera')
+      }else{
+        //ctx.clearRect(positionObj.objX-45,positionObj.objY+stepsizeY,40,stepsizeY);
+        luzTrasera=1;
+      }
+     blinks+=1;
+     //Avatar();
+    if (blinks==10) {
+      clearInterval(blink);
+      acabo=1;
+    }
+    },500);
+  }
 //funciones para mover hacia arriba y hacia abajo
 function upward(nosteps){
   acabo=0;
