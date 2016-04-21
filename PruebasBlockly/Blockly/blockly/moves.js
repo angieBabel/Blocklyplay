@@ -179,10 +179,19 @@ function sound(sonido){
 //funcion para que se espere X segundos
 function wait(secs){
   acabo=0;
-
+  blinker('both');
+  //se guarda el estado de las luces antes de hacer las intermitentes
+  var bluz=luz;
+  var bluzT=luzTrasera;
+  //se ponen en 1 para que ambas prendan
+  luzTrasera=1;
+  luz=1;
   interv= setInterval(function(){
     acabo=1;
     //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,color));
+    //se restaura el estado de las luces
+    luz=bluz;
+    luzTrasera=bluzT;
 
 
     altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),0,0));
@@ -502,14 +511,18 @@ function painroad(){
   }
   function blinker(side){
     acabo=0;
+    //se inicializa el valor de las intermitentes en 0
     var blinks=0;
+    //se guarda el estado de las luces anterior a las intermitentes
     var bluz=luz;
     var bluzT=luzTrasera;
     //alert(bluz+'luz'+bluzT+"luzTrasera")
 
     blink=setInterval(function(){
       //ctx.globalAlpha=1;
+      //cada ves que entra se pinta el panel
       panel();
+      //tambien se ejecuta el avatar, para que no se note el retraso cuando el panel lo pinte
       Avatar();
       lightside=side;
       if (luz==1) {
@@ -528,12 +541,13 @@ function painroad(){
        //Avatar();
       if (blinks==10) {
         clearInterval(blink);
+        //se restaura el valor de las intermitentes asi como de los lados
         luz=bluz;
         luzTrasera=bluzT;
         lightside='both';
         //alert(luz+'luz '+luzTrasera+" luzTrasera")
         //Avatar();
-        panel();
+        //panel();
         acabo=1;
       }
     },200);
