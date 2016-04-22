@@ -26,6 +26,7 @@
 <script src="jquery.min.js"></script>
 <!-- Funciones comunes para controlar el juego -->
 <script type="text/javascript" src="controlFunctions.js"></script>
+
 <script type="text/javascript">
   /*var image;*/
   //las variables generales se pasaron a moves.js
@@ -80,12 +81,25 @@
         initX=0;
         Avatar();
       }
-      var boton = new Image();
-          boton.src = "media/boton.jpg";
-     boton.onload = function() {
-        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*6),stepsizeX,stepsizeY);
-        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*5),stepsizeX,stepsizeY);
-        ctx.drawImage(boton, (stepsizeX*7),(stepsizeY*4),stepsizeX,stepsizeY);
+      var button1 = new Image();
+          button1.src = "media/button1.png";
+     button1.onload = function() {
+        ctx.drawImage(button1, (stepsizeX*7),(stepsizeY*6),stepsizeX,stepsizeY);
+      }
+      var button2 = new Image();
+          button2.src = "media/button2.png";
+     button2.onload = function() {
+        ctx.drawImage(button2, (stepsizeX*7),(stepsizeY*5),stepsizeX,stepsizeY);
+      }
+      var button3 = new Image();
+          button3.src = "media/button3.png";
+     button3.onload = function() {
+        ctx.drawImage(button3, (stepsizeX*7),(stepsizeY*4),stepsizeX,stepsizeY);
+      }
+      var button4 = new Image();
+          button4.src = "media/button4.png";
+     button4.onload = function() {
+        ctx.drawImage(button4, (stepsizeX*7),(stepsizeY*3),stepsizeX,stepsizeY);
       }
   }
   //Drawing avatar
@@ -140,7 +154,11 @@
       piso=3;
       alert(piso);
       acabo=1;
-    } else {
+    }else if (clickX>7 && clickX<8 && clickY>=3 && clickY<4){ //Validar boton piso 3
+      piso=4;
+      alert(piso);
+      acabo=1;
+    }else {
       alert('debes presionar un boton')
     }
   }
@@ -165,8 +183,15 @@
         else{
           alert('Esta vez no lo conseguiste, intenta de nuevo');
         }
-    } else /*if (clickX>7 && clickX<8 && clickY>=5 && clickY<6)*/{ //Validar boton piso 3
+    } else if (clickX>7 && clickX<8 && clickY>=5 && clickY<6){ //Validar boton piso 3
         if (positionObj.objY==stepsizeY*4) {
+          alert('Felicidades haz completado correctamente el puzzle');
+        }
+        else{
+          alert('Esta vez no lo conseguiste, intenta de nuevo');
+        }
+    } else /*if (clickX>7 && clickX<8 && clickY>=3 && clickY<4)*/{ //Validar boton piso 3
+      if (positionObj.objY==stepsizeY*3) {
           alert('Felicidades haz completado correctamente el puzzle');
         }
         else{
@@ -193,7 +218,7 @@
       <button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button>
     </div>
     <div class="pure-u-17-24">
-      <span>Ahora vamos a aprender un poco de variables, haz un programa que permita a nuestro personaje subir en el elevador al piso que desees, con el bloque If de la categoría Logic programa al elevador para que suba la cantidad de pisos que has seleccionado, para que puedas elegir un piso, debes poner tu código dentro del bloque On cick de la categoría de Control, el piso que elegiste se guarda en el bloque Piso que se encuentra en la categoría de Logic.
+      <span>Vamos a aprender un poco de variables, haz un programa que permita al personaje subir en elevador al piso que desees, con el bloque If de la categoría Logic programa al elevador para que suba la cantidad de pisos que has seleccionado, para que puedas elegir un piso, debes poner tu código dentro del bloque On cick de la categoría de Control, el piso que elegiste se guarda en el bloque Piso que se encuentra en la categoría de Logic.
     </div>
     <div class="pure-u-2-5" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
