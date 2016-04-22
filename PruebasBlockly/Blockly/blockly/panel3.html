@@ -137,8 +137,6 @@
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
     panel();
-    //Avatar(1);
-    //path();
   }
 
   function stopTimer(){
@@ -180,7 +178,6 @@
 
     img.id = 'imagen';
     img.src = 'media/persona.png';
-    //avatarwith=40;avatarheight=20;
     img.onload = function() {
       ctx.drawImage(img,positionObj.objX,positionObj.objY+stepsizeY*.2,stepsizeX*.8,stepsizeY*.6);
     }
@@ -261,6 +258,9 @@
     }
     location.reload();
   }
+  function ocultar(){
+       $('.blocklyToolboxDiv').toggle('slow');
+    }
 </script>
 <script type="text/javascript">
     var myInterpreter=null;
@@ -381,14 +381,12 @@
 <body onload="begin()">
   <div class="pure-g">
     <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
-      <p class="pure-menu-heading pure-menu-link">Blockly play</p>
-      <ul class="pure-menu-list">
-        <li class="pure-menu-item"><button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
-      </ul>
+      <button class="button-success pure-button" onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>
+        <button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button>
+        <button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button>
+        <button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button>
+        <button onclick="location.href = 'panel3.html'"  class="button-secondary pure-button" id="level">3</button>
+        <button onclick="location.href = 'panel4.html'"  class="button-secondary pure-button" id="level">4</button>
     </div>
     <div class="pure-u-2-5" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
@@ -404,15 +402,6 @@
       <input type="file" id="your-files" multiple>
     </div>
   </div>
-<!-- <table>
-
-<button onclick="showCode()">Show JavaScript</button>
-<button onclick="saveXML()">Save as XML</button>
-<button onclick="runCode()">Run JavaScript</button>
-<td><canvas id="canvas" height="480" width="600" ></canvas></td>
-<td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-</td>
-</table> -->
 
 <xml id="toolbox" style="display: none">
   <category name="Control" colour="355">
@@ -581,8 +570,7 @@
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
-    //alert(blocklyArea.offsetWidth)
-    //blocklyArea.style.height='80%';
+
     blocklyDiv.style.height='85%';
     // Position blocklyDiv over blocklyArea.
     blocklyDiv.style.left = x + 'px';
@@ -595,18 +583,7 @@
   window.addEventListener('resize', onresize, false);
   onresize();
 
-   /*function onFirstComment(event) {
-    if (event.type == Blockly.Events.CHANGE &&
-        event.element == 'comment' &&
-        !event.oldValue && event.newValue) {
-      alert('Congratulations on creating your first comment!')
 
-      workspace.removeChangeListener(onFirstComment);
-    }
-      console.log(event.type);
-      console.log(event.)
-  }
-  workspace.addChangeListener(onFirstComment);*/
   var program = window.localStorage.getItem("panel3");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
@@ -698,18 +675,6 @@
       control.addEventListener("change", function(event) {
 
          var buttonload=document.getElementById('loadbutton').disabled=false;
-      /*
-        // When the control has changed, there are new files
-        //para
-        var i = 0,
-            files = control.files,
-            len = files.length;
-
-        for (; i < len; i++) {
-            console.log("Filename: " + files[i].name);
-            console.log("Type: " + files[i].type);
-            console.log("Size: " + files[i].size + " bytes");
-        }*/
 
     }, false);
   //funcion que carga un archivo XML

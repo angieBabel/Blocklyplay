@@ -96,12 +96,6 @@
     var luz=0,luzTrasera=0;
     var pasitos=4;
     var solution=[];
-    /*var solutionObj= {
-      soX: 0;
-      soY: 0;
-      soZ: 0;
-      soColor: 0;
-    }*/
 
     var positionObj = {
       objX: 0,
@@ -113,10 +107,6 @@
       this.soY = y;
       this.soZ = z;
       this.soColor = color;
-      /*this.example = function(){
-        var contexto=this;
-        alert(this);
-      }*/
 
     }
     function begin(){
@@ -150,19 +140,11 @@
 
       //acceder a un valor solution[0].soY
       solution.push(new solutionObj(X,Y,0,0));//1
-      //console.log(solution[0]);
       solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-      //console.log(solution[1]);
       solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-      //console.log(solution[2]);
       solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-      //console.log(solution[3]);
       solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-      //console.log(solution[4]);
       solution.push(new solutionObj(X,Y,0,0)); //6
-      //console.log(solution[6]);
-      /*var example= solution[0];
-      alert(example.soX);*/
 
     }
 
@@ -185,14 +167,12 @@
           ctx.arc(initX,initY,2,0,2*Math.PI);
           ctx.fill();
         }
-        //initY=0;
         initY=stepsizeY*4;
       }
       initX=stepsizeX*7;
         painroad();
         Avatar();
       }
-
 
     }
 
@@ -225,23 +205,8 @@
         //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
         ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
         ctx.restore();
-        /*for (var i = 0; i < solution.length; i++) {
-        var divi=solution[i].split(',');
-
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.arc(divi[0],divi[1],2,0,2*Math.PI);
-        ctx.fill();
-
-      }*/
-
       }
 
-      /*positionObj.objX=positionX;
-      positionObj.objY=positionY;
-      roadpaint.push(positionObj.objX+","+positionObj.objY);
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;*/
     }
 
     //path forward
@@ -253,7 +218,6 @@
       ctx.stroke();
     }
     function ocultar(){
-      //$('.blocklyToolboxDiv').css({'width':'20px'});
        $('.blocklyToolboxDiv').toggle('slow');
     }
 
