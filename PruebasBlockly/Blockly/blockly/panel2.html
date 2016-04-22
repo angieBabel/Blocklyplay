@@ -92,8 +92,7 @@
         initX=0;
         painroad();
         Avatar();
-      }
-       var semaforo = new Image();
+        var semaforo = new Image();
             semaforo.src = "media/semaforo.png";
        semaforo.onload = function() {
           ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
@@ -104,6 +103,8 @@
           ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
           ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         }
+      }
+
     }
     //para saber si va a girar o no
     var angle=0;
