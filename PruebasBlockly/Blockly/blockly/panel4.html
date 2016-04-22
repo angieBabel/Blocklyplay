@@ -317,15 +317,17 @@
 </head>
 <body onload="begin()">
   <div class="pure-g">
-    <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
-      <p class="pure-menu-heading pure-menu-link">Blockly play</p>
-      <ul class="pure-menu-list">
-        <li class="pure-menu-item"><button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
-      </ul>
+    <div class="pure-u-5-24">
+      <span class="pure-menu-heading pure-menu-link">Blockly play</span>
+      <!-- <p class="pure-menu-heading pure-menu-link"></p> -->
+      <button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button>
+      <button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button>
+      <button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button>
+      <button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button>
+      <button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button>
+    </div>
+    <div class="pure-u-19-24">
+      <span>Aprendamos de ciclos, colorea los pilares del puente utilizando los bloques de pintar que ya conoces, recuerda que debes girar los grados exactos para que puedas hacerlo de manera correcta (observa con atención la imagen), no puedes utilizar más de 6 bloques, ayúdate con el bloque Repeat que se encuentra en la categoría de Control.
     </div>
     <div class="pure-u-2-5" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>
