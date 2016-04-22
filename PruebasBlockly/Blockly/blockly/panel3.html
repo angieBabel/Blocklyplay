@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTML5 - Nave en movimiento</title>
+<title>BlocklyPlay</title>
 <!-- Responsive css -->
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="styles.css">
 <!-- interprete de JS -->
 <script src="acorn_interpreter.js"></script>
 <script src="acorn.js"></script>
@@ -23,102 +24,19 @@
 <script type="text/javascript" src="filesaver.js"></script>
 <script type="text/javascript" src="Blob.js"></script>
 <script src="jquery.min.js"></script>
-
-<style>
-  canvas {
-      background: #fff;
-      font-family: sans-serif;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-
-    .button-success,
-    .button-error,
-    .button-warning,
-    .button-secondary {
-      color: white;
-      border-radius: 20px;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      margin-left: 20px;
-    }
-
-    .button-success {
-      background: rgb(28, 184, 65); /* this is a green */
-    }
-    .button-error {
-      background: rgb(202, 60, 60); /* this is a maroon */
-    }
-
-    .button-warning {
-       background: rgb(223, 117, 20); /* this is an orange */
-    }
-
-    .button-secondary {
-      background: rgb(66, 184, 221); /* this is a light blue */
-    }
-
-    canvas {
-     height: 100%;
-     width: 99%;
-    }
-
-    #divCanvas{
-      height: 80%;
-    }
-    #level{
-      color: white;
-      border-radius: 100%;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      font-size: 12px;
-    }
-</style>
-
+<!-- Funciones comunes para controlar el juego -->
+<script type="text/javascript" src="controlFunctions.js"></script>
 <script type="text/javascript">
   /*var image;*/
-  //inicialización de las variables
-    var img= new Image();//variable de imagen del avatar
-    //coordenadas donde comienza el avatar
-    var X,Y;
-    //variables auxiliares para mover el avatar
-    var Xaux=0,Yaux=0;
-    //variables de hasta donde llegara el avatar (para hacer el conteo de pasos)
-    var limtX,limtY;
-    //tamaño de paso de X y Y
-    var stepsizeX,stepsizeY;
-    //variables para controlar donde poner los puntos del grid
-    var initX=0,initY=0;
-    //intervalo de tiempo de cada paso
-    var interval;
-    //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
-    var acabo=1;
-    //Variable para guardar el color del camino
-    var colorPath='';
-    //Tamaño de ancho y alto del avatar
-    var avatarheight, avatarwith;
-    //tamaño del ancho de la linea que dibuja el avatar
-    var wimg=20;
-    //vector del camino que ha pintado
-    var roadpaint = [];
-    //vector de posiciones done estaban los semaforos y donde hizo un alto
-    var semaforos=[],altos=[];
-    //variables para saber si las luces estan encendidas
-    var luz=0,luzTrasera=0;
-    //variable de contador para la funcion de pintar
-    var count=0;
+  //las variables generales se pasaron a moves.js
+  //inicialización de las variables propias del ejercicio 3
     //Posisiones recolectadas por el click
     var clickX,clickY
     var canvas;
-
-  //Variables para saber que piso presiono
-  var piso=0;
-  var positionObj = {
-    objX: 0,
-    objY: 0,
-    objZ: 0,
-  };
+    //Variables para saber que piso presiono
+    var piso=0;
+    //la variable de positionObj se paso a moves.js
+    //el objeto de solutionObj se paso a moves.js
   function begin(){
     canvas = document.getElementById('canvas');
     canvas.style.border='1px solid black';
@@ -140,9 +58,8 @@
     panel();
   }
 
-  function stopTimer(){
-    clearInterval(interval);
-  }
+  //la funcion de stopTimer se paso al archivo de controlFunctions.js
+
   function panel(){
     var imgback = new Image();
             imgback.src = "media/edificio.png";
@@ -161,7 +78,6 @@
             initY=0;
         }
         initX=0;
-        painroad(colorPath);
         Avatar();
       }
       var boton = new Image();
@@ -259,125 +175,12 @@
     }
     location.reload();
   }
+  //funcion para ocultar el toolbox
   function ocultar(){
-       $('.blocklyToolboxDiv').toggle('slow');
-    }
+     $('.blocklyToolboxDiv').toggle('slow');
+  }
 </script>
-<script type="text/javascript">
-    var myInterpreter=null;
-    function initAlert(interpreter, scope) {
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
-      // Add an API function for the prompt() block.
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(prompt(text));
-      };
-      interpreter.setProperty(scope, 'prompt',
-          interpreter.createNativeFunction(wrapper));
-
-      // Add an API function for highlighting blocks.
-      var wrapper = function(id) {
-        id = id ? id.toString() : '';
-        return interpreter.createPrimitive(highlightBlock(id));
-      };
-      interpreter.setProperty(scope, 'highlightBlock',
-          interpreter.createNativeFunction(wrapper));
-
-      //Moves Funcitons
-        //Move forward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(forward(nosteps));
-        }
-        interpreter.setProperty(scope, 'forward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(backward(nosteps));
-        }
-        interpreter.setProperty(scope, 'backward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move upward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(upward(nosteps));
-        }
-        interpreter.setProperty(scope, 'upward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move downward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(downward(nosteps));
-        }
-        interpreter.setProperty(scope, 'downward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move forwardPainting
-
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(forwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'forwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backwardPainting
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(backwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'backwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-
-        //turn left-right
-        var wrapper = function(angulo, side) {
-          return interpreter.createPrimitive(rotar(angulo, side));
-        }
-        interpreter.setProperty(scope, 'rotar',
-            interpreter.createNativeFunction(wrapper));
-
-        //play sound
-        var wrapper = function(sonido) {
-          return interpreter.createPrimitive(sound(sonido));
-        }
-        interpreter.setProperty(scope, 'sound',
-            interpreter.createNativeFunction(wrapper));
-
-        //wait X secs
-        var wrapper = function(secs) {
-          return interpreter.createPrimitive(wait(secs));
-        }
-        interpreter.setProperty(scope, 'wait',
-            interpreter.createNativeFunction(wrapper));
-        //Para habilitar la lectura de evento
-        var wrapper = function() {
-          return interpreter.createPrimitive(listener());
-        }
-        interpreter.setProperty(scope, 'listener',
-            interpreter.createNativeFunction(wrapper));
-        //Prueba para leer evento
-        var wrapper = function(ev) {
-          return interpreter.createPrimitive(getPosition(ev));
-        }
-        interpreter.setProperty(scope, 'getPosition',
-            interpreter.createNativeFunction(wrapper));
-        //Para obtener el valor del piso
-        var wrapper = function() {
-          return interpreter.createPrimitive(getFloor());
-        }
-        interpreter.setProperty(scope, 'getFloor',
-            interpreter.createNativeFunction(wrapper));
-    }
-    var highlightPause = false;
-    function highlightBlock(id) {
-      workspace.highlightBlock(id);
-      highlightPause = true;
-    }
-</script>
+<!-- El script para el interprete esta en controlFunctions.js -->
 </head>
 <body onload="begin()">
   <div class="pure-g">
@@ -550,6 +353,7 @@
   <category name="Functions" colour="46" custom="PROCEDURE"></category>
 </xml>
 <script type="text/javascript">
+//Funciones que definen las áreas correspondientes
   var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
   var blocklyCanvas = document.getElementById('divCanvas');
@@ -563,7 +367,7 @@
             minScale: 0.3,
             scaleSpeed: 1.2},
         toolbox: document.getElementById('toolbox')});
-
+  //Funcion para hacer el autosize de la pantalla
   var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
@@ -593,11 +397,8 @@
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-  function showCode() {
-    // Generate JavaScript code and display it.
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    alert(code);
-  }
+  //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
+
 
   function nextStep() {
     if (highlightPause) {
@@ -620,66 +421,22 @@
   }
 
   function runCode() {
-    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-    //permite que funcione el resaltar bloque
-    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    Blockly.JavaScript.addReservedWords('highlightBlock');
-    //lee lo que hay en el workspaces y lo guarda como codigo
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    //se crea un interprete con el codigo obtenido
-    myInterpreter = new Interpreter(code, initAlert);
-    //se pone en pausa la funcion de resaltar el bloque
-    highlightPause = false;
-    //se habilita la funcion para rastrear el workspace
-    workspace.traceOn(true);
-    workspace.highlightBlock(null);
+    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+    parseCode();
     //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
     intervalo= setInterval(function(){finish();},15)
     //se guarda lo que hay en el workspaces en el almcaneamiento local
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
-    window.localStorage.setItem("panel3", domToPretty);
+    window.localStorage.setItem("panel1", domToPretty);
   }
-  //funcion que guarda el XML como texto
-  function saveXML(){
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var mappingData = window.localStorage.getItem('mappingBlock');
-    var conditionData = window.localStorage.getItem('conditionBlock');
+  //las funciones de guardar XML estan en el archivo controlFunctions.js
 
-    /*var mappingElem = new Element('mapping', {
-      'html': mappingData
-    });
-    var conditionElem = new Element('condition', {
-      'html': conditionData
-    });
-
-    $(xml).grab(mappingElem);
-    $(xml).grab(conditionElem);
-    */
-    var data = Blockly.Xml.domToPrettyText(xml);
-    console.log(data);
-    //return;
-
-    // Store data in blob.
-    //var builder = new BlobBuilder();
-    //builder.append(data);
-    //console.log(builder);
-    //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-    var name = prompt("Name of this file", "blocks");
-    if (name) {
-      var blob = new Blob([data], {
-        type: "text/plain;charset=utf-8"
-      });
-      saveAs(blob, name + '.xml');
-    }
-  }
   //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
     //se agrega un EventListener, para saber que se ha acceido a el
-      control.addEventListener("change", function(event) {
-
+    control.addEventListener("change", function(event) {
          var buttonload=document.getElementById('loadbutton').disabled=false;
-
     }, false);
   //funcion que carga un archivo XML
   function loadXML() {

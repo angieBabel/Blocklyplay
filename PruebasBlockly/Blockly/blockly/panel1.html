@@ -6,6 +6,7 @@
 <!-- Responsive css -->
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="styles.css">
 
 <!-- interprete de JS -->
 <script src="acorn_interpreter.js"></script>
@@ -23,306 +24,130 @@
 <script type="text/javascript" src="moves.js"></script>
 <script type="text/javascript" src="filesaver.js"></script>
 <script type="text/javascript" src="Blob.js"></script>
-
-<style>
-  canvas {
-      background: #fff;
-      font-family: sans-serif;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-
-    .button-success,
-    .button-error,
-    .button-warning,
-    .button-secondary {
-      color: white;
-
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      margin-left: 20px;
-    }
-
-    .button-success {
-      background: rgb(28, 184, 65); /* this is a green */
-    }
-    .button-error {
-      background: rgb(202, 60, 60); /* this is a maroon */
-    }
-
-    .button-warning {
-       background: rgb(223, 117, 20); /* this is an orange */
-    }
-
-    .button-secondary {
-      background: rgb(66, 184, 221); /* this is a light blue */
-    }
-
-    canvas {
-     height: 100%;
-     width: 99%;
-    }
-
-    #divCanvas{
-      height: 80%;
-    }
-    #level{
-      color: white;
-
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      font-size: 12px;
-    }
-</style>
+<!-- Funciones comunes para controlar el juego -->
+<script type="text/javascript" src="controlFunctions.js"></script>
 
 <script type="text/javascript">
-    var img= new Image();
-    var X;
-    var Y;
-    var r,n=0;
-    var Xaux=0,Yaux=0,limtX,limtY;
+  //las variables generales se pasaron a moves.js
+  //inicialización de las variables propias del ejercicio 1
+  var pasitos=4;
+  var solution=[];
+  //la variable de positionObj se paso a moves.js
+  //el objeto de solutionObj se paso a moves.js
+  function begin(){
+    wimg=8;
+    canvas = document.getElementById('canvas');
+    canvas.style.border='1px solid black';
+    ctx = canvas.getContext('2d');
+    ancho = document.getElementById('divCanvas').offsetWidth;
+    alto = document.getElementById('divCanvas').offsetHeight;
+    canvas.width= ancho;
+    canvas.height = alto;
 
-    //tamaño de paso de X y Y
-    var stepsizeX=20,stepsizeY=20;//var stepsize=20;
-    var initX=0,initY=0;
-    var interval,time=2000;
-    var c=0,acabo=1;
-    var colorPath='';
-    var himg=20;
-    var wimg=8;
+    stepsizeX
+    =canvas.width/20;
+    stepsizeY=canvas.height/20;
 
-    var count=0;
-    var luz=0,luzTrasera=0;
-    var pasitos=4;
-    var solution=[];
+    X = stepsizeX*10;
+    Y = stepsizeY*5;
+    initX=stepsizeX*7;
+    initY=stepsizeY*3;
+    //se inicializa la posicion del objeto, aqui es donde se pintara la linea
+    positionObj.objX=X;//350;
+    positionObj.objY=Y;//142;
+    //se inicializan los valores auxiliares para poder pintar
+    Xaux = positionObj.objX;
+    Yaux= positionObj.objY;
+    answer();
+    panel();
 
-    var positionObj = {
-      objX: 0,
-      objY: 0,
-      objZ: 0,
-    };
-    function solutionObj(x,y,z,color){
-      this.soX= x;
-      this.soY = y;
-      this.soZ = z;
-      this.soColor = color;
+  }
+  function answer(){
 
-    }
-    function begin(){
-      canvas = document.getElementById('canvas');
-      canvas.style.border='1px solid black';
-      ctx = canvas.getContext('2d');
-      ancho = document.getElementById('divCanvas').offsetWidth;
-      alto = document.getElementById('divCanvas').offsetHeight;
-      canvas.width= ancho;
-      canvas.height = alto;
+    //acceder a un valor solution[0].soY
+    solution.push(new solutionObj(X,Y,0,0));//1
+    solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
+    solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
+    solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
+    solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
+    solution.push(new solutionObj(X,Y,0,0)); //6
 
-      stepsizeX
-      =canvas.width/20;
-      stepsizeY=canvas.height/20;
+  }
 
-      X = stepsizeX*10;
-      Y = stepsizeY*5;
-      initX=stepsizeX*7;
-      initY=stepsizeY*3;
-      //se inicializa la posicion del objeto, aqui es donde se pintara la linea
-      positionObj.objX=X;//350;
-      positionObj.objY=Y;//142;
-      //se inicializan los valores auxiliares para poder pintar
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
-      answer();
-      panel();
+  //la funcion de stopTimer se paso al archivo de controlFunctions.js
 
-    }
-    function answer(){
-
-      //acceder a un valor solution[0].soY
-      solution.push(new solutionObj(X,Y,0,0));//1
-      solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-      solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-      solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-      solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-      solution.push(new solutionObj(X,Y,0,0)); //6
-
-    }
-
-    function stopTimer(){
-      clearInterval(interval);
-    }
-
-    function panel(){
-      var imgback = new Image();
-      imgback.src = "media/mapa_casa.png";
-      imgback.onload = function() {
-        ctx.drawImage(imgback, 0, 0,ancho,alto);
-        //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-        while(initX<canvas.width-(stepsizeX*6)){
-        initX=initX+stepsizeX;
-        while(initY<canvas.height-(stepsizeY*10)){
-          initY=initY+stepsizeY;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,2,0,2*Math.PI);
-          ctx.fill();
-        }
-        initY=stepsizeY*4;
-      }
-      initX=stepsizeX*7;
-        painroad();
-        Avatar();
-      }
-
-    }
-
-    function paintroad(){
-      for (var i = 0; i <road.length; i++) {
-        ctx.strokeStyle = "#f00";
+  function panel(){
+    var imgback = new Image();
+    imgback.src = "media/mapa_casa.png";
+    imgback.onload = function() {
+      ctx.drawImage(imgback, 0, 0,ancho,alto);
+      //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
+      while(initX<canvas.width-(stepsizeX*6)){
+      initX=initX+stepsizeX;
+      while(initY<canvas.height-(stepsizeY*10)){
+        initY=initY+stepsizeY;
         ctx.beginPath();
-        ctx.moveTo(road[i]);
-        ctx.lineTo(road[i+1]);
-        ctx.stroke();
-      };
-    }
-
-    //Drawing avatar
-    function Avatar(){
-      var avatarheight, avatarwith;
-      var positionX, positionY;
-
-      img.id = 'imagen';
-      img.src = 'media/pincel.png';
-      avatarwith=40;avatarheight=40;
-
-      img.onload = function() {
-        ctx.save();
-        //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-        ctx.translate(positionObj.objX,positionObj.objY);
-        //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
-        ctx.globalAlpha=1;
-        //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-        ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
-        ctx.restore();
+        ctx.fillStyle = "#E3E2E2";
+        ctx.arc(initX,initY,2,0,2*Math.PI);
+        ctx.fill();
       }
-
+      initY=stepsizeY*4;
+    }
+    initX=stepsizeX*7;
+      painroad();
+      Avatar();
     }
 
-    //path forward
-    function path(){
+  }
+
+  function paintroad(){
+    for (var i = 0; i <road.length; i++) {
+      ctx.strokeStyle = "#f00";
       ctx.beginPath();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "gray";
-      ctx.rect(X, Y-100, 100, 100);
+      ctx.moveTo(road[i]);
+      ctx.lineTo(road[i+1]);
       ctx.stroke();
-    }
-    function ocultar(){
-       $('.blocklyToolboxDiv').toggle('slow');
+    };
+  }
+
+  //Drawing avatar
+  function Avatar(){
+    var avatarheight, avatarwith;
+    var positionX, positionY;
+
+    img.id = 'imagen';
+    img.src = 'media/pincel.png';
+    avatarwith=40;avatarheight=40;
+
+    img.onload = function() {
+      ctx.save();
+      //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
+      ctx.translate(positionObj.objX,positionObj.objY);
+      //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
+
+      ctx.globalAlpha=1;
+      //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+      ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
+      ctx.restore();
     }
 
+  }
+
+  //path forward
+  function path(){
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "gray";
+    ctx.rect(X, Y-100, 100, 100);
+    ctx.stroke();
+  }
+  //funcion para ocultar el toolbox
+  function ocultar(){
+     $('.blocklyToolboxDiv').toggle('slow');
+  }
 </script>
-<script type="text/javascript">
-    var myInterpreter=null;
-    function initAlert(interpreter, scope) {
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
-      // Add an API function for the prompt() block.
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(prompt(text));
-      };
-      interpreter.setProperty(scope, 'prompt',
-          interpreter.createNativeFunction(wrapper));
-
-      // Add an API function for highlighting blocks.
-      var wrapper = function(id) {
-        id = id ? id.toString() : '';
-        return interpreter.createPrimitive(highlightBlock(id));
-      };
-      interpreter.setProperty(scope, 'highlightBlock',
-          interpreter.createNativeFunction(wrapper));
-
-      //Moves Funcitons
-        //Move forward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(forward(nosteps));
-        }
-        interpreter.setProperty(scope, 'forward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(backward(nosteps));
-        }
-        interpreter.setProperty(scope, 'backward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move upward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(upward(nosteps));
-        }
-        interpreter.setProperty(scope, 'upward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move downward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(downward(nosteps));
-        }
-        interpreter.setProperty(scope, 'downward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move forwardPainting
-
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(forwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'forwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backwardPainting
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(backwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'backwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-
-        //turn left-right
-        var wrapper = function(angulo, side) {
-          return interpreter.createPrimitive(rotar(angulo, side));
-        }
-        interpreter.setProperty(scope, 'rotar',
-            interpreter.createNativeFunction(wrapper));
-
-        //play sound
-        var wrapper = function(sonido) {
-          return interpreter.createPrimitive(sound(sonido));
-        }
-        interpreter.setProperty(scope, 'sound',
-            interpreter.createNativeFunction(wrapper));
-
-        //wait X secs
-        var wrapper = function(secs) {
-          return interpreter.createPrimitive(wait(secs));
-        }
-        interpreter.setProperty(scope, 'wait',
-            interpreter.createNativeFunction(wrapper));
-
-
-    }
-    var highlightPause = false;
-    function highlightBlock(id) {
-      workspace.highlightBlock(id);
-      highlightPause = true;
-    }
-</script>
+<!-- El script para el interprete esta en controlFunctions.js -->
 </head>
-
 <body onload="begin()">
   <div class="pure-g">
     <div class="pure-u-7-24 ">
@@ -496,6 +321,7 @@
 
   </xml>
 <script type="text/javascript">
+  //Funciones que definen las áreas correspondientes
   var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
   var blocklyCanvas = document.getElementById('divCanvas');
@@ -509,53 +335,37 @@
             minScale: 0.3,
             scaleSpeed: 1.2},
         toolbox: document.getElementById('toolbox')});
+  //Funcion para hacer el autosize de la pantalla
   var onresize = function(e) {
-  // Compute the absolute coordinates and dimensions of blocklyArea.
-  var element = blocklyArea;
-  var x = 0;
-  var y = 0;
-  do {
-    x += element.offsetLeft;
-    y += element.offsetTop;
-    element = element.offsetParent;
-  } while (element);
-  //alert(blocklyArea.offsetWidth)
-  //blocklyArea.style.height='80%';
-  blocklyDiv.style.height='85%';
-  // Position blocklyDiv over blocklyArea.
-  blocklyDiv.style.left = x + 'px';
-  blocklyDiv.style.top = y + 'px';
-  blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-  //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-  blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
-  };
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    //alert(blocklyArea.offsetWidth)
+    //blocklyArea.style.height='80%';
+    blocklyDiv.style.height='85%';
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+    };
 
   window.addEventListener('resize', onresize, false);
   onresize();
-
-  /*var workspace = Blockly.inject('blocklyDiv',
-  {media: 'media/',
-   toolbox: document.getElementById('toolbox')});*/
+  //variables para almacenar en el localstorage-
   var program = window.localStorage.getItem("panel1");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-  function showCode() {
-    // Generate JavaScript code and display it.
-    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    Blockly.JavaScript.addReservedWords('highlightBlock');
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-
-    myInterpreter = new Interpreter(code, initAlert);
-    highlightPause = false;
-    workspace.traceOn(true);
-    workspace.highlightBlock(null);
-    alert(code);
-
-  }
-
+  //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
 
   function nextStep() {
     var verific=0;
@@ -607,8 +417,6 @@
         //location.reload();
       }*/
     }
-
-
   }
 
   function finish(){
@@ -618,49 +426,21 @@
   }
 
   function runCode() {
-    showCode();
+    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+    parseCode();
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
     intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
-
     window.localStorage.setItem("panel1", domToPretty);
   }
 
-  function saveXML(){
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var mappingData = window.localStorage.getItem('mappingBlock');
-    var conditionData = window.localStorage.getItem('conditionBlock');
+  //las funciones de guardar XML estan en el archivo controlFunctions.js
 
-    /*var mappingElem = new Element('mapping', {
-      'html': mappingData
-    });
-    var conditionElem = new Element('condition', {
-      'html': conditionData
-    });
-
-    $(xml).grab(mappingElem);
-    $(xml).grab(conditionElem);
-   */
-    var data = Blockly.Xml.domToPrettyText(xml);
-    console.log(data);
-    //return;
-
-    // Store data in blob.
-    //var builder = new BlobBuilder();
-    //builder.append(data);
-    //console.log(builder);
-    //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-    var name = prompt("Name of this file", "blocks");
-    if (name) {
-      var blob = new Blob([data], {
-        type: "text/plain;charset=utf-8"
-      });
-      saveAs(blob, name + '.xml');
-    }
-  }
   //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-  //se agrega un EventListener, para saber que se ha acceido a el
+    //se agrega un EventListener, para saber que se ha acceido a el
     control.addEventListener("change", function(event) {
          var buttonload=document.getElementById('loadbutton').disabled=false;
     }, false);

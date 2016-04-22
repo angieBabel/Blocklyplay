@@ -1,0 +1,46 @@
+canvas {
+      background: #fff;
+      font-family: sans-serif;
+      height: 100%;
+     width: 99%;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    .button-success,
+    .button-error,
+    .button-warning,
+    .button-secondary {
+      color: white;
+
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      margin-left: 20px;
+    }
+
+    .button-success {
+      background: rgb(28, 184, 65); /* this is a green */
+    }
+    .button-error {
+      background: rgb(202, 60, 60); /* this is a maroon */
+    }
+
+    .button-warning {
+       background: rgb(223, 117, 20); /* this is an orange */
+    }
+
+    .button-secondary {
+      background: rgb(66, 184, 221); /* this is a light blue */
+    }
+
+    #divCanvas{
+      height: 80%;
+    }
+    #level{
+      color: white;
+
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      font-size: 12px;
+    }

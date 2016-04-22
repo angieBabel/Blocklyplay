@@ -1,4 +1,42 @@
-var roadpaint = [];
+//inicialización de las variables
+    var img= new Image();//variable de imagen del avatar
+    //coordenadas donde comienza el avatar
+    var X,Y;
+    //variables auxiliares para mover el avatar
+    var Xaux=0,Yaux=0;
+    //variables de hasta donde llegara el avatar (para hacer el conteo de pasos)
+    var limtX,limtY;
+    //tamaño de paso de X y Y
+    var stepsizeX,stepsizeY;
+    //variables para controlar donde poner los puntos del grid
+    var initX=0,initY=0;
+    //intervalo de tiempo de cada paso
+    var interval;
+    //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
+    var acabo=1;
+    //Tamaño de ancho y alto del avatar
+    var avatarheight, avatarwith;
+    //tamaño del ancho de la linea que dibuja el avatar
+    var wimg=0;
+    //variable de contador para la funcion de pintar
+    var count=0;
+    //vector del camino que ha pintado
+    var roadpaint = [];
+
+    //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
+    var positionObj = {
+      objX: 0,
+      objY: 0,
+      objZ: 0,
+    };
+
+  //objeto que nos ayudara a guardar los valores
+  function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+    }
 
 var degreesToRadian = function (deg) {
    return deg * Math.PI / 180;
