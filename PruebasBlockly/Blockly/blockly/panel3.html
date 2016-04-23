@@ -63,11 +63,11 @@
 
   function panel(){
     var imgback = new Image();
-            imgback.src = "media/edificio.png";
+            imgback.src = "media/city.png";
 
      imgback.onload = function() {
-        ctx.drawImage(imgback, stepsizeX*1.4,stepsizeY*2,stepsizeX*6,stepsizeY*6);
-        while(initX<canvas.width-stepsizeX){
+
+        /*while(initX<canvas.width-stepsizeX){
           initX=initX+stepsizeX;
             while(initY<canvas.height-stepsizeY){
               initY=initY+stepsizeY;
@@ -77,30 +77,40 @@
               ctx.fill();
             }
             initY=0;
-        }
+        }*/
         initX=0;
+        ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
+
+        var building = new Image();
+          building.src = "media/edificio.png";
+
+        building.onload= function(){
+          ctx.drawImage(building, stepsizeX*1.4,stepsizeY*2,stepsizeX*6,stepsizeY*6);
+        }
+
+        var piso1 = new Image();
+            piso1.src = "media/piso1.png";
+        piso1.onload = function() {
+          ctx.drawImage(piso1, (stepsizeX*7),(stepsizeY*6),stepsizeY,stepsizeY);
+        }
+        var piso2 = new Image();
+            piso2.src = "media/piso2.png";
+        piso2.onload = function() {
+          ctx.drawImage(piso2, (stepsizeX*7),(stepsizeY*5),stepsizeY,stepsizeY);
+        }
+        var piso3 = new Image();
+            piso3.src = "media/piso3.png";
+        piso3.onload = function() {
+          ctx.drawImage(piso3, (stepsizeX*7),(stepsizeY*4),stepsizeY,stepsizeY);
+        }
+        var piso4 = new Image();
+            piso4.src = "media/piso4.png";
+        piso4.onload = function() {
+          ctx.drawImage(piso4, (stepsizeX*7),(stepsizeY*3),stepsizeY,stepsizeY);
+        }
         Avatar();
       }
-      var button1 = new Image();
-          button1.src = "media/button1.png";
-     button1.onload = function() {
-        ctx.drawImage(button1, (stepsizeX*7),(stepsizeY*6),stepsizeX,stepsizeY);
-      }
-      var button2 = new Image();
-          button2.src = "media/button2.png";
-     button2.onload = function() {
-        ctx.drawImage(button2, (stepsizeX*7),(stepsizeY*5),stepsizeX,stepsizeY);
-      }
-      var button3 = new Image();
-          button3.src = "media/button3.png";
-     button3.onload = function() {
-        ctx.drawImage(button3, (stepsizeX*7),(stepsizeY*4),stepsizeX,stepsizeY);
-      }
-      var button4 = new Image();
-          button4.src = "media/button4.png";
-     button4.onload = function() {
-        ctx.drawImage(button4, (stepsizeX*7),(stepsizeY*3),stepsizeX,stepsizeY);
-      }
+
   }
   //Drawing avatar
 
