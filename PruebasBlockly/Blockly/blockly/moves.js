@@ -540,7 +540,6 @@ function upward(nosteps){
         Yaux=Yaux-stepsizeY;
         positionObj.objY=Yaux;
       }
-    ctx.clearRect(0,0,canvas.width,canvas.height);
     panel();
     i++;
     if (i==nosteps) {
@@ -551,26 +550,16 @@ function upward(nosteps){
 }
 function downward(nosteps){
   acabo=0;
-  limtY=positionObj.objY+(nosteps*stepsize);
+  limtY=positionObj.objY+(nosteps*stepsizeY);
   i=0;
   interval= setInterval(function (){
-    ctx.strokeStyle = "#006400";
-    ctx.fillStyle = "#6ab150";
+
     ctx.beginPath();
       if(Yaux<limtY){
-        Yaux=Yaux+stepsize;
-
-        if ((positionObj.objZ % 270)==0 || (positionObj.objZ % 90)==0 ) {
-          rotar(positionObj.objZ);
-        } else {
-          alert('Debes de rotar el vehiculo hacía abajo');
-          stopTimer();
-          location.reload()
-        }
+        Yaux=Yaux+stepsizeY;
         positionObj.objY=Yaux;
       }
     panel();
-    path();
     i++;
     if (i==nosteps) {
       stopTimer();
