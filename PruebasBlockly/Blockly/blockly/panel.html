@@ -482,21 +482,16 @@ function showCode() {
   Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
-
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
-
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
+  /*
+    var allXml = Blockly.Xml.workspaceToDom(workspace);
+    var allCode = [];
+    for (var i = 0, xml; xml = allXml[i]; i++) {
+      var headless = new Blockly.Workspace();
+      Blockly.Xml.domToWorkspace(headless, xml);
+      allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+      headless.dispose();
+    }
+  */
 
   //////
   myInterpreter = new Interpreter(code, initAlert);
