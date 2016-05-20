@@ -26,6 +26,12 @@
 <script src="jquery.min.js"></script>
 <!-- Funciones comunes para controlar el juego -->
 <script type="text/javascript" src="controlFunctions.js"></script>
+<!-- agregar bloques de hardware -->
+  <script src="blocks/hardware.js"></script>
+  <script src="generators/javascript/hardware.js"></script>
+  <!-- para agregar las librerias del socket -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
 <script type="text/javascript">
   //las variables generales se pasaron a moves.js
   //inicialización de las variables propias del ejercicio 1
@@ -110,11 +116,11 @@
 
   //Drawing avatar
   function Avatar(){
+    var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
     var avatarheight, avatarwith;
     var positionX, positionY;
 
     img.id = 'imagen';
-    img.src = 'media/pincel.png';
     avatarwith=40;avatarheight=40;
 
     img.onload = function() {
@@ -127,6 +133,7 @@
       ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
       ctx.restore();
     }
+    img.src = 'media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
   }
 
   //path forward
@@ -169,153 +176,162 @@
 
     <div class="pure-u-1-1">
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
-      <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
-      <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
-      <button onclick="loadXML()"  id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
-      <input type="file" id="your-files" multiple>
+        <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
+        <button onclick="generate()"  class="button-warning pure-button">Take PNG</button>
+        <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+        <button onclick="pasoHW()" class="button-success pure-button">Run Hardware</button>
+        <button onclick="loadXML()" id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
+        <input type="file" id="your-files" multiple>
     </div>
   </div>
 
 
 <xml id="toolbox" style="display: none">
-  <category name="Control" colour="355">
-    <block type="wait"></block>
-    <block type="stop"></block>
-    <block type="controls_repeat_ext">
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="controls_whileUntil"></block>
-    <block type="controls_for">
-      <value name="FROM">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="TO">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="BY">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="controls_flow_statements"></block>
-  </category>
+    <category name="Control" colour="355">
+      <block type="wait"></block>
+      <block type="stop"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
 
-  <category name="Move" colour="79">
-    <block type="mover"></block>
-    <block type="mover_pintando"></block>
-    <block type="girar"></block>
-  </category>
+    <category name="Move" colour="79">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
 
-  <category name="Lights" colour="176">
-    <block type="blinker"></block>
-    <block type="lights"></block>
-  </category>
+    <category name="Lights" colour="176">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
 
-  <category name="Sounds" colour="290">
-    <block type="sonido"></block>
-  </category>
+    <category name="Sounds" colour="290">
+      <block type="sonido"></block>
+    </category>
 
-  <category name="Math" colour="190">
-    <block type="math_number" gap="32"></block>
-    <block type="math_arithmetic">
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Math" colour="190">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Text" colour="210">
-    <block type="text"></block>
-    <block type="text_isEmpty">
-      <value name="VALUE">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_print">
-      <value name="TEXT">
-        <shadow type="text">
-          <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_prompt_ext">
-      <value name="TEXT">
-        <shadow type="text">
-           <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Text" colour="210">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Logic" colour="25">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean"></block>
-  </category>
+    <category name="Logic" colour="25">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
 
-  <category name="Colour" colour="160">
-    <block type="colour_picker"></block>
-    <block type="colour_random"></block>
-    <block type="colour_rgb">
-      <value name="RED">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-      <value name="GREEN">
-        <shadow type="math_number">
-          <field name="NUM">50</field>
-        </shadow>
-      </value>
-      <value name="BLUE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="colour_blend">
-      <value name="COLOUR1">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#ff0000</field>
-        </shadow>
-      </value>
-      <value name="COLOUR2">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#3333ff</field>
-        </shadow>
-      </value>
-      <value name="RATIO">
-        <shadow type="math_number">
-          <field name="NUM">0.5</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Colour" colour="160">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <sep></sep>
+    <category name="Hardware" colour="354">
+      <block type="led"></block>
+      <block type="motor"></block>
+      <block type="buzzer"></block>
+    </category>
 
-  <sep></sep>
-  <category name="Variables" colour="330" custom="VARIABLE"></category>
-  <category name="Functions" colour="46" custom="PROCEDURE"></category>
-</xml>
+    <sep></sep>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="46" custom="PROCEDURE"></category>
+
+  </xml>
 <script type="text/javascript">
   var blocklyArea = document.getElementById('blocklyArea');
   var blocklyDiv = document.getElementById('blocklyDiv');
@@ -427,6 +443,12 @@
     //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
     reader.readAsText(control.files[0]);
   }
+function pasoHW(){
+  var socket = io.connect('http://edison.local:3000');
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  socket.emit('changefunction',code);
+  //alert(code);
+}
 </script>
 </body>
 </html>
