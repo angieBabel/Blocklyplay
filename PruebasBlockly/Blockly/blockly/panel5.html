@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BlocklyPlay</title>
+<!-- Responsive css -->
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="styles.css">
+<!-- interprete de JS -->
+<script src="acorn_interpreter.js"></script>
+<script src="acorn.js"></script>
+<script src="interpreter.js"></script>
+<!-- <script src="/storage.js"></script> -->
+<script src="blockly_compressed.js"></script>
+<script src="blocks_compressed.js"></script>
+<script src="javascript_compressed.js"></script>
+<script src="core/css.js"></script>
+<script src="core/blockly.js"></script>
+<script src="msg/js/en.js"></script>
+<script src="blocks/custom.js"></script>
+<script src="generators/javascript/custom.js"></script>
+<script type="text/javascript" src="moves.js"></script>
+<script type="text/javascript" src="filesaver.js"></script>
+<script type="text/javascript" src="Blob.js"></script>
+<script src="jquery.min.js"></script>
+<!-- Funciones comunes para controlar el juego -->
+<script type="text/javascript" src="controlFunctions.js"></script>
+<!-- agregar bloques de hardware -->
+  <script src="blocks/hardware.js"></script>
+  <script src="generators/javascript/hardware.js"></script>
+  <!-- para agregar las librerias del socket -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+
+<script type="text/javascript">
+  /*var image;*/
+  //las variables generales se pasaron a moves.js
+  //inicialización de las variables propias del ejercicio 5
+
+    //la variable de positionObj se paso a moves.js
+    //el objeto de solutionObj se paso a moves.js
+  function begin(){
+    canvas = document.getElementById('canvas');
+    canvas.style.border='1px solid black';
+    ctx = canvas.getContext('2d');
+    ancho = document.getElementById('divCanvas').offsetWidth;
+    alto = document.getElementById('divCanvas').offsetHeight;
+    canvas.width= ancho;
+    canvas.height = alto;
+    stepsizeX=canvas.width/30 ;
+    stepsizeY=canvas.height/22;
+
+    X = stepsizeX*12;
+    Y = stepsizeY*12;
+    positionObj.objX=X;
+    positionObj.objY=Y;
+    Xaux = positionObj.objX;
+    Yaux= positionObj.objY;
+    panel();
+  }
+
+  //la funcion de stopTimer se paso al archivo de controlFunctions.js
+
+  function panel(){
+    var imgback = new Image();
+            imgback.src = "media/airplane.jpg";
+
+     imgback.onload = function() {
+      ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
+
+        while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "yellow";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
+        }
+        initX=0;
+        Avatar();
+      }
+
+  }
+  //Drawing avatar
+
+  function Avatar(){
+    var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+
+    var positionX, positionY;
+
+    img.id = 'imagen';
+    img.onload = function() {
+      ctx.save();
+      ctx.translate(positionObj.objX,positionObj.objY);
+      ctx.rotate(positionObj.objZ * (Math.PI/180));
+      ctx.globalAlpha=1;
+      ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
+      ctx.restore();
+    }
+    img.src = 'media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
+  }  
+  //funcion para ocultar el toolbox
+  function ocultar(){
+     $('.blocklyToolboxDiv').toggle('slow');
+  }
+</script>
+<!-- El script para el interprete esta en controlFunctions.js -->
+</head>
+<body onload="begin()">
+  <div class="pure-g">
+    <div class="pure-u-8-24">
+      <button class="button-success pure-button" onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>
+      <button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button>
+      <button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button>
+      <button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button>
+      <button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button>
+      <button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button>
+      <button onclick="location.href = 'panel5.html'"   class="button-secondary pure-button" id="level">5</button>
+    </div>
+    <div class="pure-u-16-24">
+      <span>Con los bloques de hardware haz girar el motor 5 veces hacia la derecha, luego que gire 3 veces hacia la izquierda</span>
+    </div>
+    <div class="pure-u-2-5" id="blocklyArea">
+      <div id="blocklyDiv" style="position: absolute" ></div>
+    </div>
+    <div class="pure-u-3-5" id="divCanvas">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="pure-u-1-1">
+      <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
+        <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
+        <button onclick="generate()"  class="button-warning pure-button">Take PNG</button>
+        <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
+        <button onclick="pasoHW()" class="button-success pure-button">Run Hardware</button>
+        <button onclick="loadXML()" id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
+        <input type="file" id="your-files" multiple>
+    </div>
+  </div>
+
+<xml id="toolbox" style="display: none">
+    <category name="Control" colour="355">
+      <block type="wait"></block>
+      <block type="stop"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
+
+    <category name="Move" colour="79">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
+
+    <category name="Lights" colour="176">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
+
+    <category name="Sounds" colour="290">
+      <block type="sonido"></block>
+    </category>
+
+    <category name="Math" colour="190">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Text" colour="210">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Logic" colour="25">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Colour" colour="160">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <sep></sep>
+    <category name="Hardware" colour="354">
+      <block type="led"></block>
+      <block type="motor"></block>
+      <block type="buzzer"></block>
+    </category>
+
+    <sep></sep>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="46" custom="PROCEDURE"></category>
+
+  </xml>
+<script type="text/javascript">
+//Funciones que definen las áreas correspondientes
+  var blocklyArea = document.getElementById('blocklyArea');
+  var blocklyDiv = document.getElementById('blocklyDiv');
+  var blocklyCanvas = document.getElementById('divCanvas');
+  var workspace = Blockly.inject(blocklyDiv,
+      { media: 'media/',
+        zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
+        toolbox: document.getElementById('toolbox')});
+  //Funcion para hacer el autosize de la pantalla
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+
+    blocklyDiv.style.height='85%';
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+
+    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
+
+
+  var program = window.localStorage.getItem("panel5");
+  Blockly.mainWorkspace.clear();
+  var textToDom = Blockly.Xml.textToDom(program);
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+
+  //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
+
+
+  function nextStep() {
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
+    }
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+    }
+  }
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
+  }
+
+  function runCode() {
+    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+    parseCode();
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+    intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    window.localStorage.setItem("panel5", domToPretty);
+  }
+  //las funciones de guardar XML estan en el archivo controlFunctions.js
+
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+    //se agrega un EventListener, para saber que se ha acceido a el
+    control.addEventListener("change", function(event) {
+         var buttonload=document.getElementById('loadbutton').disabled=false;
+    }, false);
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
+function pasoHW(){
+  var socket = io.connect('http://edison.local:3000');
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  socket.emit('changefunction',code);
+  //alert(code);
+} 
+</script>
+</body>
+</html>

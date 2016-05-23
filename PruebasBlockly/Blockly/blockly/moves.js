@@ -194,7 +194,6 @@ function rotar(angulo,side){
   if (positionObj.objZ>=360) {
       positionObj.objZ-=360;
     }
-
   panel();
 }
 //Función para ejecutar sonidos de acuerdo a la elección del usuario
@@ -566,4 +565,30 @@ function downward(nosteps){
       acabo=1;
     }
   },300);
+}
+//funcion para rotar el motor (hacer girar una imagen)
+function motor(nosteps,side,speed){
+  acabo=0;  
+  var vel = 70/speed;
+  i=0;
+  interval= setInterval(function(){
+    //rotar(0.087890625, lado);
+    if (side=='forward') {
+      positionObj.objZ+=0.087890625;
+    }else{
+      positionObj.objZ-=0.087890625;
+    }
+    if (positionObj.objZ<0) {
+        positionObj.objZ+=360;
+      }
+    if (positionObj.objZ>=360) {
+        positionObj.objZ-=360;
+      }
+    Avatar();
+    i++;
+    if(i==nosteps){
+      stopTimer();
+      acabo=1;
+    }
+  },vel);
 }

@@ -120,6 +120,13 @@ function initAlert(interpreter, scope) {
     }
     interpreter.setProperty(scope, 'getFloor',
         interpreter.createNativeFunction(wrapper));
+    // funciones de hardware
+    var wrapper = function(nosteps,side,speed) {
+      return interpreter.createPrimitive(motor(nosteps,side,speed));
+    }
+    interpreter.setProperty(scope, 'motor',
+        interpreter.createNativeFunction(wrapper));
+
 }
 //Funcion para que pueda sobresaltar los bloques
 var highlightPause = false;

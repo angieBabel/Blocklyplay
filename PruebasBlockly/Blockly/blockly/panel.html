@@ -173,105 +173,6 @@
        $('.blocklyToolboxDiv').toggle('slow');
     }
 </script>
-<script type="text/javascript">
-    var myInterpreter=null;
-    function initAlert(interpreter, scope) {
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
-      // Add an API function for the prompt() block.
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(prompt(text));
-      };
-      interpreter.setProperty(scope, 'prompt',
-          interpreter.createNativeFunction(wrapper));
-
-      // Add an API function for highlighting blocks.
-      var wrapper = function(id) {
-        id = id ? id.toString() : '';
-        return interpreter.createPrimitive(highlightBlock(id));
-      };
-      interpreter.setProperty(scope, 'highlightBlock',
-          interpreter.createNativeFunction(wrapper));
-
-      //Moves Funcitons
-        //Move forward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(forward(nosteps));
-        }
-        interpreter.setProperty(scope, 'forward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(backward(nosteps));
-        }
-        interpreter.setProperty(scope, 'backward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move upward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(upward(nosteps));
-        }
-        interpreter.setProperty(scope, 'upward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move downward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(downward(nosteps));
-        }
-        interpreter.setProperty(scope, 'downward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move forwardPainting
-
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(forwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'forwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backwardPainting
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(backwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'backwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-
-        //turn left-right
-        var wrapper = function(angulo, side) {
-          return interpreter.createPrimitive(rotar(angulo, side));
-        }
-        interpreter.setProperty(scope, 'rotar',
-            interpreter.createNativeFunction(wrapper));
-
-        //play sound
-        var wrapper = function(sonido) {
-          return interpreter.createPrimitive(sound(sonido));
-        }
-        interpreter.setProperty(scope, 'sound',
-            interpreter.createNativeFunction(wrapper));
-
-        //wait X secs
-        var wrapper = function(secs) {
-          return interpreter.createPrimitive(wait(secs));
-        }
-        interpreter.setProperty(scope, 'wait',
-            interpreter.createNativeFunction(wrapper));
-
-
-    }
-    var highlightPause = false;
-    function highlightBlock(id) {
-      workspace.highlightBlock(id);
-      highlightPause = true;
-    }
-</script>
 </head>
 <body onload="begin()">
   <div class="pure-g">
@@ -282,6 +183,8 @@
         <button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button>
         <button onclick="location.href = 'panel3.html'"  class="button-secondary pure-button" id="level">3</button>
         <button onclick="location.href = 'panel4.html'"  class="button-secondary pure-button" id="level">4</button>
+        
+      <button onclick="location.href = 'panel5.html'"   class="button-secondary pure-button" id="level">4</button>
 
     </div>
     <div class="pure-u-2-5" id="blocklyArea">
