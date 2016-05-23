@@ -569,7 +569,7 @@ function downward(nosteps){
 //funcion para rotar el motor (hacer girar una imagen)
 function motor(nosteps,side,speed){
   acabo=0;  
-  var vel = 70/speed;
+  var vel = 3/speed;
   i=0;
   interval= setInterval(function(){
     //rotar(0.087890625, lado);
