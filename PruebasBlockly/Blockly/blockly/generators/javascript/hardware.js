@@ -11,7 +11,7 @@ Blockly.JavaScript['led'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var pin= parseInt(text_pin);
   var code = '...';
-   return code= "led("+pin+","+dropdown_turn+");\n";
+   return code= "led("+pin+",'"+dropdown_turn+"');\n";
 };
 
 Blockly.JavaScript['motor'] = function(block) {
@@ -22,7 +22,7 @@ Blockly.JavaScript['motor'] = function(block) {
   var code = '...';
   var pasos = parseInt(text_steps);
   var speed= parseInt(dropdown_speed);
-  return code= "motor("+pasos+","+dropdown_direction+","+speed+");\n";
+  return code= "motor("+pasos+",'"+dropdown_direction+"',"+speed+");\n";
 };
 
 Blockly.JavaScript['buzzer'] = function(block) {
@@ -34,7 +34,7 @@ Blockly.JavaScript['buzzer'] = function(block) {
   var pin= parseInt(text_pin);
   var secs= parseInt(text_secs);
 
-  return code= "buzzer("+pin+","+dropdown_tone+","+secs+");\n";
+  return code= "buzzer("+pin+",'"+dropdown_tone+"',"+secs+");\n";
 };
 
 Blockly.JavaScript['pantalla'] = function(block) {
@@ -44,7 +44,7 @@ Blockly.JavaScript['pantalla'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   var pin= parseInt(dropdown_pin);
-  return code= "pantalla("+pin+","+colour_color+","+text_text+");\n";
+  return code= "pantalla("+pin+",'"+colour_color+"','"+text_text+"');\n";
 };
 
 Blockly.JavaScript['boton'] = function(block) {
@@ -53,7 +53,7 @@ Blockly.JavaScript['boton'] = function(block) {
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
   var pin= parseInt(dropdown_pin);
-  return code= "boton("+pin+","+dropdown_estado+");\n";
+  return code= "boton("+pin+",'"+dropdown_estado+"');\n";
 };
 
 
