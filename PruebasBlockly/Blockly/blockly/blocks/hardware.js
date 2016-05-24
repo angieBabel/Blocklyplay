@@ -72,3 +72,44 @@ Blockly.Blocks['buzzer'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.Blocks['pantalla'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("PrintScreen:");
+    this.appendDummyInput()
+        .appendField("PIN")
+        .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "pin");
+    this.appendDummyInput()
+        .appendField("Color")
+        .appendField(new Blockly.FieldColour("#ff0000"), "color");
+    this.appendDummyInput()
+        .appendField("Message")
+        .appendField(new Blockly.FieldTextInput("type message here"), "text");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['boton'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Button:");
+    this.appendDummyInput()
+        .appendField("PIN")
+        .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]]), "pin");
+    this.appendDummyInput()
+        .appendField("Pressed")
+        .appendField(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), "estado");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
