@@ -331,7 +331,7 @@ function paint(Xend,Yend,no_steps,color){
   var res;
   var yinit, xinit;
   ctx.beginPath();
-  ctx.strokeStyle = color;
+  ctx.strokeStyle = color.valueOf();//Safari ocupa acceder al valor de la variable
   ctx.lineWidth = wimg;
   var exe=wimg/2;
 
@@ -371,7 +371,7 @@ function painroad(){
       ctx.moveTo(MT.poX,MT.poY);
 
       LT=roadpaint[i+1];
-      ctx.strokeStyle = LT.poColor;
+      ctx.strokeStyle = LT.poColor.valueOf();//Safari ocupa acceder al valor de la variable
 
       if (MT.poX > LT.poX) {
         xinit= LT.poX - exe;
