@@ -66,20 +66,23 @@
     stepsizeX=canvas.width/30 ;
     stepsizeY=canvas.height/22;
 
-    X = stepsizeX*12;
-    Y = stepsizeY*12;
+    X = stepsizeX*5;
+    Y = stepsizeY*5;
     positionObj.objX=X;
     positionObj.objY=Y;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
 
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'forward',2));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'backward',5));
+   
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),2048,'forward',5));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'backward',7));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),2048,'forward',5));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'backward',7));
+
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
+    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
     panel();
   }
 
@@ -143,13 +146,9 @@
       }
       //si coincidio en todas las paradas, sin importar el orden lo da por bueno
       if (coincidencias==solucion.length) {
-        alert('Felicidades haz realizado correctamente el puzzle');
-        solucion.splice(0,solucion.length);
-        respuesta.splice(0,respuesta.length);
-        var pagina='panel5l2.html';
-        location.href=pagina;
+        alert('Felicidades haz realizado correctamente el puzzle')
       }else{
-       alert('Esta vez no lo conseguiste intenta de nuevo');
+        alert('Esta vez no lo conseguiste intenta de nuevo');
         location.reload();
       }
     }
@@ -168,7 +167,7 @@
       <button onclick="location.href = 'panel5.html'"   class="button-secondary pure-button" id="level">5</button>
     </div>
     <div class="pure-u-16-24">
-       <span>Con los bloques de hardwre haz un programa que gire el motor 3 veces hacia la derecha en velocidad 5ta, despues que gire 2 veces hacia la izquierda en 7ma velocidad, por ultimo media vuelta hacia la derecha en 2da velocidad y media hacia la izquierda en 5ta velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</span>
+      <span>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</span>
     </div>
     <div class="pure-u-2-5" id="blocklyArea">
       <div id="blocklyDiv" style="position: absolute" ></div>

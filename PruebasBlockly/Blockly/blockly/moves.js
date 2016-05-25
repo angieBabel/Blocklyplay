@@ -568,7 +568,8 @@ function downward(nosteps){
 }
 //funcion para rotar el motor (hacer girar una imagen)
 function motor(nosteps,side,speed){
-  respuesta.push(new motorObj(positionObj.objX,positionObj.objY,nosteps,side,speed));
+
+  respuesta.push(new motorObj(Math.round10((positionObj.objX),2),Math.round10((positionObj.objY),2),nosteps,side,speed));
   acabo=0;  
   var vel = 7/speed;
   i=0;
