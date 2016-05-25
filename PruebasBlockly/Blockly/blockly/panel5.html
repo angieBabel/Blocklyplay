@@ -439,7 +439,7 @@ function pasoHW(){
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   code = code.replace(/[']/gi, "");
   socket.emit('changefunction',code);
-  alert(code);
+  //alert(code);
 } 
 </script>
 </body>
