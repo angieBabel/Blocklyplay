@@ -30,13 +30,28 @@
   <script src="blocks/hardware.js"></script>
   <script src="generators/javascript/hardware.js"></script>
   <!-- para agregar las librerias del socket -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
 
 <script type="text/javascript">
   /*var image;*/
   //las variables generales se pasaron a moves.js
   //inicialización de las variables propias del ejercicio 5
+  function solutionObj(x,y,z,color){
+      this.soX= x;
+      this.soY = y;
+      this.soZ = z;
+      this.soColor = color;
+    }
+    function motorObj(px,py,ns,dir,speed){
+      pX= px;
+      pY= py;
+      ns= ns;
+      dirr= dir;
+      speed= speed;
+    };
+    var solucion=[],respuesta=[]; 
+
 
     //la variable de positionObj se paso a moves.js
     //el objeto de solutionObj se paso a moves.js
@@ -57,6 +72,14 @@
     positionObj.objY=Y;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
+
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,4096,'forward',5));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,4096,'forward',5));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,4096,'forward',5));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,4096,'backward',7));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,4096,'backward',7));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,2048,'forward',2));
+    solucion.push(new motorObj(stepsizeX*12,stepsizeY*12,2048,'backward',5));
     panel();
   }
 
@@ -107,6 +130,24 @@
   function ocultar(){
      $('.blocklyToolboxDiv').toggle('slow');
   }
+  //Compara si las paradas que hizo el niño estuvieron bien
+    function check(){
+      var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+
+      for (var i = 0; i < solucion.length; i++) {
+        if (solucion[i].pX==respuesta[i].pX && solucion[i].pY==respuesta[i].pY && solucion[i].ns==respuesta[i].ns && solucion[i].dirr==respuesta[i].dirr && solucion[i].speed==respuesta[i].speed) {
+          coincidencias+=1;
+        };
+
+      }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+      if (coincidencias==solucion.length) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Te ha faltado hacer una parada')
+      }
+    }
 </script>
 <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
@@ -348,6 +389,7 @@
     if (!myInterpreter.step()) {
       /*window.setTimeout(finish, 15);*/
       clearInterval(intervalo);
+      check();
     }
   }
   function finish(){
