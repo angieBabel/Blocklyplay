@@ -180,7 +180,7 @@
     <div class="pure-u-3-5" id="divCanvas">
       <canvas id="canvas"></canvas>
     </div>
-    <div class="pure-u-1-1">
+     <div class="pure-u-1-1">
       <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
         <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
         <button onclick="generate()"  class="button-warning pure-button">Take PNG</button>
@@ -451,8 +451,16 @@
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
     window.localStorage.setItem("panel1", domToPretty);
   }
-
+  
   function screenshotPage() {
+    //para sacar el thumnail
+          var previa = window.localStorage.getItem("preview");
+          var thumb = document.getElementById('thumbnail');
+          console.log(thumb);
+          var prev = previa;
+          thumb.innerHTML=previa;
+          thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+          console.log(pre);
           //se crea el nuevo body
           var screenshot = document.createElement('body');
           //se clona el header al nuevo
@@ -491,10 +499,10 @@
           while (thumb.firstChild) {
               thumb.removeChild(thumb.firstChild);
           }
-          thumb.appendChild(screenshot);
+          thumb.appendChild(newSVG);
           console.log(thumb);
 
-          window.localStorage.setItem("preview", screenshot.outerHTML);   
+          window.localStorage.setItem("preview", newSVG.outerHTML);   
   }
 
   function generate() {
@@ -528,13 +536,13 @@
     reader.readAsText(control.files[0]);
   }
   //declaramos la variable del socket
-function pasoHW(){
-  var socket = io.connect('http://edison.local:3000');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  code = code.replace(/[']/gi, "");
-  socket.emit('changefunction',code);
-  //alert(code);
-} 
+  function pasoHW(){
+    var socket = io.connect('http://edison.local:3000');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    code = code.replace(/[']/gi, "");
+    socket.emit('changefunction',code);
+    //alert(code);
+  } 
 </script>
 </body>
 </html>
