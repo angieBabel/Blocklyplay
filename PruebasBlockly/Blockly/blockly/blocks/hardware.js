@@ -76,7 +76,7 @@ Blockly.Blocks['buzzer'] = {
 Blockly.Blocks['pantalla'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("PrintScreen:");
+        .appendField("Display:");
     this.appendDummyInput()
         .appendField("Color")
         .appendField(new Blockly.FieldColour("#ff0000"), "color");
