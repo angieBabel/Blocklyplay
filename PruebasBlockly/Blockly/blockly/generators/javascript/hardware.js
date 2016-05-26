@@ -38,13 +38,11 @@ Blockly.JavaScript['buzzer'] = function(block) {
 };
 
 Blockly.JavaScript['pantalla'] = function(block) {
-  var dropdown_pin = block.getFieldValue('pin');
   var colour_color = block.getFieldValue('color');
   var text_text = block.getFieldValue('text');
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
-  var pin= parseInt(dropdown_pin);
-  return code= "pantalla("+pin+",'"+colour_color+"','"+text_text+"');\n";
+  return code= "pantalla('"+colour_color+"','"+text_text+"');\n";
 };
 
 Blockly.JavaScript['boton'] = function(block) {

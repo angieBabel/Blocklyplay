@@ -78,9 +78,6 @@ Blockly.Blocks['pantalla'] = {
     this.appendDummyInput()
         .appendField("PrintScreen:");
     this.appendDummyInput()
-        .appendField("PIN")
-        .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"]]), "pin");
-    this.appendDummyInput()
         .appendField("Color")
         .appendField(new Blockly.FieldColour("#ff0000"), "color");
     this.appendDummyInput()
