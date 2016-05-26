@@ -359,7 +359,7 @@ function paint(Xend,Yend,no_steps,color){
 //Función para pintar el camino que ha dejado
 function painroad(){
   var yinit, xinit;
-  ctx.beginPath();
+  
   ctx.lineWidth = wimg;
   var exe=wimg/2;
 
@@ -367,6 +367,7 @@ function painroad(){
     if(i!=0){
       ctx.restore();
     }
+    ctx.beginPath();
       MT=roadpaint[i];
       ctx.moveTo(MT.poX,MT.poY);
 
@@ -393,6 +394,7 @@ function painroad(){
       ctx.lineTo(xinit,yinit);
       ctx.stroke();
       ctx.save();
+      ctx.closePath();
   }
 }
 //Funciones de luces,
