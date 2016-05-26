@@ -162,34 +162,19 @@ function saveXML(){
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var mappingData = window.localStorage.getItem('mappingBlock');
   var conditionData = window.localStorage.getItem('conditionBlock');
-
-  /*var mappingElem = new Element('mapping', {
-    'html': mappingData
-  });
-  var conditionElem = new Element('condition', {
-    'html': conditionData
-  });
-
-  $(xml).grab(mappingElem);
-  $(xml).grab(conditionElem);
- */
   var data = Blockly.Xml.domToPrettyText(xml);
   console.log(data);
-  //return;
-
-  // Store data in blob.
-  //var builder = new BlobBuilder();
-  //builder.append(data);
-  //console.log(builder);
-  //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
   var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
                navigator.userAgent && !navigator.userAgent.match('CriOS');
 
    var name = prompt("Name of this file", "blocks");
    //downloadFile(data,name)
  if (isSafari) {
-  window.open('data:"text/plain;charset=utf-8",' + encodeURI(data),name + '.xml');
-
+  var downloadPage = window.open('data:"text/plain;charset=utf-8",' + encodeURI(data),name + '.xml');
+  dP=setInterval(function(){
+    downloadPage.close();
+    clearInterval(dP);
+  },100);
  }else{
   if (name) {
     var blob = new Blob([data], {
@@ -198,42 +183,4 @@ function saveXML(){
     saveAs(blob, name + '.xml');
   }
  }
-
-  //alert(name);
-  
 }
-var downloadFile = function downloadFile(content, filename) {
-  var supportsDownloadAttribute = 'download' in document.createElement('a');
-
-  if(supportsDownloadAttribute) {
-    var link = angular.element('<a/>');
-    link.attr({
-      href: 'data:text/plain;charset=utf-8,' + encodeURI($window.btoa(content)),
-      target: '_blank',
-      download: filename
-    })[0].click();
-    $timeout(function() {
-      link.remove();
-    }, 50);
-  } else if(typeof safari !== 'undefined') {
-    alert('entro a safari')
-    window.open('data:attachment/csv;charset=utf-8,' + encodeURI(content));
-  } else {
-    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, filename);
-  }
-}
-/*function download(filename, text) {
-    var pom = document.createElement('a');
-    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    pom.setAttribute('download', filename);
-
-    if (document.createEvent) {
-        var event = document.createEvent('MouseEvents');
-        event.initEvent('click', true, true);
-        pom.dispatchEvent(event);
-    }
-    else {
-        pom.click();
-    }
-}*/
