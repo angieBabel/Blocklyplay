@@ -119,10 +119,12 @@ function forward(nosteps){
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
+    paint(positionObj.objX,positionObj.objY,nosteps,0);
     i++;
     if(i==nosteps){
       stopTimer();
       acabo=1;
+      //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
     }
   },300);
 }
@@ -170,6 +172,7 @@ function backward(nosteps){
     rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
+    paint(positionObj.objX,positionObj.objY,nosteps,0);
     i++;
     if(i==nosteps){
       stopTimer();
@@ -367,12 +370,17 @@ function painroad(){
     if(i!=0){
       ctx.restore();
     }
+    //alert('step')
+    
+
     ctx.beginPath();
       MT=roadpaint[i];
       ctx.moveTo(MT.poX,MT.poY);
 
       LT=roadpaint[i+1];
       ctx.strokeStyle = LT.poColor.valueOf();//Safari ocupa acceder al valor de la variable
+      console.log(LT.poColor.valueOf());
+
 
       if (MT.poX > LT.poX) {
         xinit= LT.poX - exe;
@@ -392,7 +400,11 @@ function painroad(){
         yinit= LT.poY + exe;
       }
       ctx.lineTo(xinit,yinit);
-      ctx.stroke();
+      if (LT.poColor.valueOf()!=0) {
+        ctx.stroke();
+
+      }
+      
       ctx.save();
       ctx.closePath();
   }
