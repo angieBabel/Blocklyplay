@@ -42,7 +42,7 @@ Blockly.JavaScript['pantalla'] = function(block) {
   var text_text = block.getFieldValue('text');
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
-  return code= "pantalla('"+colour_color+"','"+text_text+"');\n";
+  return code= "pantalla('"+text_text+"','"+colour_color+"');\n";
 };
 
 Blockly.JavaScript['boton'] = function(block) {

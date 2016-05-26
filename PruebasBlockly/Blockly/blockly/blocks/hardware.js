@@ -78,11 +78,11 @@ Blockly.Blocks['pantalla'] = {
     this.appendDummyInput()
         .appendField("Display:");
     this.appendDummyInput()
-        .appendField("Color")
-        .appendField(new Blockly.FieldColour("#ff0000"), "color");
-    this.appendDummyInput()
         .appendField("Message")
         .appendField(new Blockly.FieldTextInput("type message here"), "text");
+    this.appendDummyInput()
+        .appendField("Color")
+        .appendField(new Blockly.FieldColour("#ff0000"), "color");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
