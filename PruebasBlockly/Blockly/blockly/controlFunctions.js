@@ -182,11 +182,58 @@ function saveXML(){
   //builder.append(data);
   //console.log(builder);
   //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
-  var name = prompt("Name of this file", "blocks");
+  var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+               navigator.userAgent && !navigator.userAgent.match('CriOS');
+
+   var name = prompt("Name of this file", "blocks");
+   //downloadFile(data,name)
+ if (isSafari) {
+  window.open('data:"text/plain;charset=utf-8",' + encodeURI(data),name + '.xml');
+
+ }else{
   if (name) {
     var blob = new Blob([data], {
       type: "text/plain;charset=utf-8"
     });
     saveAs(blob, name + '.xml');
   }
+ }
+
+  //alert(name);
+  
 }
+var downloadFile = function downloadFile(content, filename) {
+  var supportsDownloadAttribute = 'download' in document.createElement('a');
+
+  if(supportsDownloadAttribute) {
+    var link = angular.element('<a/>');
+    link.attr({
+      href: 'data:text/plain;charset=utf-8,' + encodeURI($window.btoa(content)),
+      target: '_blank',
+      download: filename
+    })[0].click();
+    $timeout(function() {
+      link.remove();
+    }, 50);
+  } else if(typeof safari !== 'undefined') {
+    alert('entro a safari')
+    window.open('data:attachment/csv;charset=utf-8,' + encodeURI(content));
+  } else {
+    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, filename);
+  }
+}
+/*function download(filename, text) {
+    var pom = document.createElement('a');
+    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    pom.setAttribute('download', filename);
+
+    if (document.createEvent) {
+        var event = document.createEvent('MouseEvents');
+        event.initEvent('click', true, true);
+        pom.dispatchEvent(event);
+    }
+    else {
+        pom.click();
+    }
+}*/
