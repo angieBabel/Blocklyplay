@@ -127,6 +127,13 @@ function initAlert(interpreter, scope) {
     interpreter.setProperty(scope, 'motor',
         interpreter.createNativeFunction(wrapper));
 
+
+    var wrapper = function(nopin,sate) {
+      return interpreter.createPrimitive(led(nopin,sate));
+    }
+    interpreter.setProperty(scope, 'led',
+        interpreter.createNativeFunction(wrapper));
+
 }
 //Funcion para que pueda sobresaltar los bloques
 var highlightPause = false;

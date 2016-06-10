@@ -374,6 +374,14 @@
   window.addEventListener('resize', onresize, false);
   onresize();
 
+  function onchange() {
+      document.getElementById('capacity').innerHTML =
+          workspace.remainingCapacity();
+    }
+
+    workspace.addChangeListener(onchange);
+    onchange();
+
 
   var program = window.localStorage.getItem("panel5");
   Blockly.mainWorkspace.clear();

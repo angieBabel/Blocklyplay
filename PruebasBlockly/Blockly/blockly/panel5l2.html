@@ -374,7 +374,7 @@
   onresize();
 
 
-  var program = window.localStorage.getItem("panel5");
+  var program = window.localStorage.getItem("panel5l2");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
@@ -410,7 +410,7 @@
     //se guarda lo que hay en el workspaces en el almcaneamiento local
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
-    window.localStorage.setItem("panel5", domToPretty);
+    window.localStorage.setItem("panel5l2", domToPretty);
   }
   //las funciones de guardar XML estan en el archivo controlFunctions.js
 
