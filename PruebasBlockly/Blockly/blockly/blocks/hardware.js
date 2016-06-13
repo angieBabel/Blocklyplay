@@ -25,6 +25,25 @@ Blockly.Blocks['led'] = {
   }
 };
 
+Blockly.Blocks['ledDisplayed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("LED:");
+    this.appendValueInput("PIN")
+            .appendField("     PIN:")
+            .setCheck(null);
+    this.appendValueInput("Turn")
+            .appendField("     Turn:")
+    .setCheck("turn");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['motor'] = {
   init: function() {
     this.appendDummyInput()
@@ -40,6 +59,24 @@ Blockly.Blocks['motor'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed");
     this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+Blockly.Blocks['motorDisplayed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("MOTOR:");
+    this.appendValueInput("steps")
+        .appendField("         Laps:")
+    this.appendValueInput("direction")
+        .appendField("    Direction:")
+    this.appendValueInput("speed")
+        .appendField("       Speed:")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
@@ -73,6 +110,28 @@ Blockly.Blocks['buzzer'] = {
   }
 };
 
+Blockly.Blocks['buzzerDisplayed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Buzzer:");
+    this.appendValueInput("PIN")
+            .appendField("            PIN:")
+            .setCheck(null);
+    this.appendValueInput("Tone")
+            .appendField("          Tone:")
+            .setCheck(null);
+    this.appendValueInput("Secs")
+            .appendField("    Seconds:")
+            .setCheck(null);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
 Blockly.Blocks['pantalla'] = {
   init: function() {
     this.appendDummyInput()
@@ -92,6 +151,23 @@ Blockly.Blocks['pantalla'] = {
   }
 };
 
+Blockly.Blocks['pantallaDisplayed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Display:");
+    this.appendValueInput("message")
+            .appendField("          Message:")
+            .setCheck(null);
+    this.appendValueInput("color")
+            .appendField("    Screen Color:")
+            .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
 Blockly.Blocks['boton'] = {
   init: function() {
     this.appendDummyInput()
@@ -106,6 +182,96 @@ Blockly.Blocks['boton'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+Blockly.Blocks['botonDisplayed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Button:");
+    this.appendValueInput("PIN")
+            .appendField("            PIN:")
+            .setCheck(null);
+    this.appendValueInput("Status")
+            .appendField("     Pressed:")
+            .setCheck(null);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(290);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//Bloques de salida
+//prender o apagar
+Blockly.Blocks['status'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), "on/off");
+    this.setInputsInline(true);
+    this.setOutput(true, "String");
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//pin analogico
+Blockly.Blocks['pina'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("1"), "PIN")
+        .appendField("analogico");
+    this.setOutput(true, "pina");
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//pin digital
+Blockly.Blocks['pind'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("1"), "PIN")
+        .appendField("digital");
+    this.setOutput(true, "pind");
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+//direccion
+Blockly.Blocks['direction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backward", "backward"]]), "direction");
+    this.setOutput(true, "direction");
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//velocidad
+Blockly.Blocks['speed'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed");
+    this.setOutput(true, null);
+    this.setColour(260);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+//Tono
+Blockly.Blocks['tone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Do", "Do"], ["Re", "Re"], ["Mi", "Mi"], ["Fa", "Fa"], ["Sol", "Sol"], ["La", "La"], ["Si", "Si"]]), "tone");
+    this.setOutput(true, null);
+    this.setColour(260);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
