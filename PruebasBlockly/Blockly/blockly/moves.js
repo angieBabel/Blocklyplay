@@ -1,5 +1,3 @@
-'use strict';
-
 //inicialización de las variables
     var img= new Image();//variable de imagen del avatar
     //coordenadas donde comienza el avatar
