@@ -53,7 +53,7 @@ Blockly.Blocks['motor'] = {
     this.appendDummyInput()
         .appendField("Steps");
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backward", "backward"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["Right", "forward"], ["Left", "backward"]]), "direction");
     this.appendDummyInput()
         .appendField("Speed");
     this.appendDummyInput()
