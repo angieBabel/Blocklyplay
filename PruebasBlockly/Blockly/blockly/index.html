@@ -371,30 +371,35 @@
     var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
         { media: 'media/',
+          zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
           toolbox: document.getElementById('toolbox')});
+  
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    blocklyDiv.style.top = y + 'px';
+    blocklyDiv.style.width = (myWidth*.4) + 'px';
+    blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    blocklyCanvas.style.height= (myHeight*.8)+'px';
+  };
+  window.addEventListener('resize', onresize, false);
+  onresize();
 
-    var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      //alert(x+','+y);
-
-      blocklyDiv.style.height=(myHeight*.8)+'px';
-      blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-
-
-      blocklyCanvas.style.height= (myHeight*.8)+'px';
-    };
-    window.addEventListener('resize', onresize, false);
-    onresize();
 
 
   var program = window.localStorage.getItem("panel");
