@@ -1,174 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Turbine Project</title>
-<!-- Responsive css
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Turbine Project</title>
+  <!-- Responsive css
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+  <!-- <link rel="stylesheet" href="styles.css"> -->
 
- <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!-- Angular Material requires Angular.js Libraries-->
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <!-- Angular Material requires Angular.js Libraries-->
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-  <!-- Angular Material Library -->
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-<!-- interprete de JS -->
-<script src="../acorn_interpreter.js"></script>
-<script src="../acorn.js"></script>
-<script src="../interpreter.js"></script>
-<!-- <script src="..//storage.js"></script> -->
-<script src="../blockly_compressed.js"></script>
-<script src="../blocks_compressed.js"></script>
-<script src="../javascript_compressed.js"></script>
-<script src="../core/css.js"></script>
-<script src="../core/blockly.js"></script>
-<script src="../msg/js/en.js"></script>
-<script src="../blocks/custom.js"></script>
-<script src="../generators/javascript/custom.js"></script>
+    <!-- Angular Material Library -->
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+  <!-- interprete de JS -->
+  <script src="../acorn_interpreter.js"></script>
+  <script src="../acorn.js"></script>
+  <script src="../interpreter.js"></script>
+  <!-- <script src="..//storage.js"></script> -->
+  <script src="../blockly_compressed.js"></script>
+  <script src="../blocks_compressed.js"></script>
+  <script src="../javascript_compressed.js"></script>
+  <script src="../core/css.js"></script>
+  <script src="../core/blockly.js"></script>
+  <script src="../msg/js/en.js"></script>
+  <script src="../blocks/custom.js"></script>
+  <script src="../generators/javascript/custom.js"></script>
 
-<script type="text/javascript" src="../moves.js"></script>
-<script type="text/javascript" src="../filesaver.js"></script>
-<script type="text/javascript" src="../Blob.js"></script>
-<!-- Funciones comunes para controlar el juego -->
-<script type="text/javascript" src="../controlFunctions.js"></script>
-<!-- agregar bloques de hardware -->
-<script src="../blocks/hardware.js"></script>
-<script src="../generators/javascript/hardware.js"></script>
-  <!-- para agregar las librerias del socket -->
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+  <script type="text/javascript" src="../moves.js"></script>
+  <script type="text/javascript" src="../filesaver.js"></script>
+  <script type="text/javascript" src="../Blob.js"></script>
+  <!-- Funciones comunes para controlar el juego -->
+  <script type="text/javascript" src="../controlFunctions.js"></script>
+  <!-- agregar bloques de hardware -->
+  <script src="../blocks/hardware.js"></script>
+  <script src="../generators/javascript/hardware.js"></script>
+    <!-- para agregar las librerias del socket -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
 
-<script type="text/javascript">
-  /*var image;*/
-  //las variables generales se pasaron a moves.js
-  //inicialización de las variables propias del ejercicio 5
-  function solutionObj(x,y,z,color){
-      this.soX= x;
-      this.soY = y;
-      this.soZ = z;
-      this.soColor = color;
+  <script type="text/javascript">
+    /*var image;*/
+    //las variables generales se pasaron a moves.js
+    //inicialización de las variables propias del ejercicio 5
+    function solutionObj(x,y,z,color){
+        this.soX= x;
+        this.soY = y;
+        this.soZ = z;
+        this.soColor = color;
+      }
+      function motorObj(px,py,ns,dir,speed){
+        pX= px;
+        pY= py;
+        ns= ns;
+        dirr= dir;
+        speed= speed;
+      };
+      var solucion=[],respuesta=[]; 
+
+
+      //la variable de positionObj se paso a moves.js
+      //el objeto de solutionObj se paso a moves.js
+    function begin(){
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      canvas.style.margin='0px 0px 0px 10px';
+      ctx = canvas.getContext('2d');
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.width= ancho;
+      canvas.height = alto;
+      stepsizeX=canvas.width/30 ;
+      stepsizeY=canvas.height/22;
+
+      X = stepsizeX*12;
+      Y = stepsizeY*12;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
+
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'forward',2));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'backward',5));
+      panel();
     }
-    function motorObj(px,py,ns,dir,speed){
-      pX= px;
-      pY= py;
-      ns= ns;
-      dirr= dir;
-      speed= speed;
-    };
-    var solucion=[],respuesta=[]; 
 
+    //la funcion de stopTimer se paso al archivo de controlFunctions.js
 
-    //la variable de positionObj se paso a moves.js
-    //el objeto de solutionObj se paso a moves.js
-  function begin(){
-    canvas = document.getElementById('canvas');
-    canvas.style.border='1px solid black';
-    canvas.style.margin='0px 0px 0px 10px';
-    ctx = canvas.getContext('2d');
-    ancho = document.getElementById('divCanvas').offsetWidth;
-    alto = document.getElementById('divCanvas').offsetHeight;
-    canvas.width= ancho;
-    canvas.height = alto;
-    stepsizeX=canvas.width/30 ;
-    stepsizeY=canvas.height/22;
+    function panel(){
+      var imgback = new Image();
+              imgback.src = "../media/airplane.jpg";
 
-    X = stepsizeX*12;
-    Y = stepsizeY*12;
-    positionObj.objX=X;
-    positionObj.objY=Y;
-    Xaux = positionObj.objX;
-    Yaux= positionObj.objY;
+       imgback.onload = function() {
+        ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
 
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'forward',2));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'backward',5));
-    panel();
-  }
-
-  //la funcion de stopTimer se paso al archivo de controlFunctions.js
-
-  function panel(){
-    var imgback = new Image();
-            imgback.src = "../media/airplane.jpg";
-
-     imgback.onload = function() {
-      ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
-
-        while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "yellow";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
-            }
-            initY=0;
+          while(initX<canvas.width-stepsizeX){
+            initX=initX+stepsizeX;
+              while(initY<canvas.height-stepsizeY){
+                initY=initY+stepsizeY;
+                ctx.beginPath();
+                ctx.fillStyle = "yellow";
+                ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                ctx.fill();
+              }
+              initY=0;
+          }
+          initX=0;
+          Avatar();
         }
-        initX=0;
-        Avatar();
-      }
 
-  }
-  //Drawing avatar
-
-  function Avatar(){
-    var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-
-    var positionX, positionY;
-
-    img.id = 'imagen';
-    img.onload = function() {
-      ctx.save();
-      ctx.translate(positionObj.objX,positionObj.objY);
-      ctx.rotate(positionObj.objZ * (Math.PI/180));
-      ctx.globalAlpha=1;
-      ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
-      ctx.restore();
     }
-    img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
-  }  
-  //funcion para ocultar el toolbox
-  function ocultar(){
-     $('.blocklyToolboxDiv').toggle('slow');
-  }
-  //Compara si las paradas que hizo el niño estuvieron bien
-    function check(){
-      var coincidencias=0;
-      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+    //Drawing avatar
 
-      for (var i = 0; i < solucion.length; i++) {
-        if (solucion[i].pX==respuesta[i].pX && solucion[i].pY==respuesta[i].pY && solucion[i].ns==respuesta[i].ns && solucion[i].dirr==respuesta[i].dirr && solucion[i].speed==respuesta[i].speed) {
-          coincidencias+=1;
-        };
+    function Avatar(){
+      var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
 
+      var positionX, positionY;
+
+      img.id = 'imagen';
+      img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
+        ctx.globalAlpha=1;
+        ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
+        ctx.restore();
       }
-      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-      if (coincidencias==solucion.length) {
-        alert('Felicidades haz realizado correctamente el puzzle');
-        solucion.splice(0,solucion.length);
-        respuesta.splice(0,respuesta.length);
-        var pagina='panel5l2.html';
-        location.href=pagina;
-      }else{
-       alert('Esta vez no lo conseguiste intenta de nuevo');
-        location.reload();
-      }
+      img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
+    }  
+    //funcion para ocultar el toolbox
+    function ocultar(){
+       $('.blocklyToolboxDiv').toggle('slow');
     }
-</script>
-<!-- El script para el interprete esta en controlFunctions.js -->
+    //Compara si las paradas que hizo el niño estuvieron bien
+      function check(){
+        var coincidencias=0;
+        //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+
+        for (var i = 0; i < solucion.length; i++) {
+          if (solucion[i].pX==respuesta[i].pX && solucion[i].pY==respuesta[i].pY && solucion[i].ns==respuesta[i].ns && solucion[i].dirr==respuesta[i].dirr && solucion[i].speed==respuesta[i].speed) {
+            coincidencias+=1;
+          };
+
+        }
+        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+        if (coincidencias==solucion.length) {
+          alert('Felicidades haz realizado correctamente el puzzle');
+          solucion.splice(0,solucion.length);
+          respuesta.splice(0,respuesta.length);
+          var pagina='panel5l2.html';
+          location.href=pagina;
+        }else{
+         alert('Esta vez no lo conseguiste intenta de nuevo');
+          location.reload();
+        }
+      }
+  </script>
+  <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
 <body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
@@ -185,25 +185,25 @@
     </div>
     <div flex='40'>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = '../index.html'">
-        <md-icon ></md-icon>
+        <md-icon><i class="material-icons">home</i></md-icon>
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = '../projecthouse/housel1.html'" >
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->1
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = '../projectstreetlight/streetlightl1.html'" >
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->2
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = '../projectelevator/elevatorl1.html'">
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->3
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = '../projectbridge/bridgel1.html'">
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->4
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = 'turbinel1.html'">
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->5
       </md-button>
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1736'}"onclick="location.href = 'turbinel2.html'">
-        <md-icon ></md-icon>
+        <!-- <md-icon ></md-icon> -->6
       </md-button>
     </div>
     <div flex='20' class="dialog-demo-content" ng-controller="AppCtrl">
