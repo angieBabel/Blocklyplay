@@ -2,11 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>BlocklyPlay</title>
-<!-- Responsive css -->
+<title>Bridge Project</title>
+<!-- Responsive css
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
 <link rel="stylesheet" href="styles.css">
+
+ <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Angular Material requires Angular.js Libraries-->
+  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 <!-- interprete de JS -->
 <script src="acorn_interpreter.js"></script>
 <script src="acorn.js"></script>
@@ -43,6 +56,7 @@
     wimg=8;
     canvas = document.getElementById('canvas');
     canvas.style.border='1px solid black';
+    canvas.style.margin='0px 0px 0px 10px';
     ctx = canvas.getContext('2d');
     ancho = document.getElementById('divCanvas').offsetWidth;
     alto = document.getElementById('divCanvas').offsetHeight;
@@ -152,38 +166,66 @@
 </script>
 <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
-<body onload="begin()">
-  <div class="pure-g">
+<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
+  <div layout="row" layout-wrap id="menu">
+    <div flex="10">
+      <md-button class="md-icon-button md-primary" aria-label="Settings" onclick="ocultar()" >
+        <md-icon >
+          <i class="material-icons">dehaze</i>
+        </md-icon>
+      </md-button>
+      <!--<button onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>-->
+    </div>
+    <div flex="30">
+      <p>Instructions</p>
+    </div>
+    <div flex='40'>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = 'index.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = 'panel1.html'" >
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = 'panel2.html'" >
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = 'panel3.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = 'panel4.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = 'panel5.html'">
+        <md-icon ></md-icon>
+      </md-button>
+    </div>
+    <div flex='20'>
+        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}">
+          Instructions <i class="material-icons">help_outline</i>
+        </md-button>
+    </div>
 
-    <div class="pure-u-7-24">
-      <button class="button-success pure-button" onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>
-      <button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button>
-      <button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button>
-      <button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button>
-      <button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button>
-      <button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button>
-      
-      <button onclick="location.href = 'panel5.html'"   class="button-secondary pure-button" id="level">5</button>
-    </div>
-    <div class="pure-u-17-24">
-      <span>Aprendamos de ciclos, colorea los pilares del puente utilizando los bloques de pintar que ya conoces, recuerda que debes girar los grados exactos para que puedas hacerlo de manera correcta (observa con atención la imagen), no puedes utilizar más de 6 bloques, ayúdate con el bloque Repeat que se encuentra en la categoría de Control.</span>
-    </div>
-    <div class="pure-u-2-5" id="blocklyArea">
-      <div id="blocklyDiv" style="position: absolute" ></div>
+  </div>
+  <div layout="row" id="blocklyArea">
+    <div flex='40'>
+        <div id="blocklyDiv" style="position: absolute" ></div>
     </div>
 
-    <div class="pure-u-3-5" id="divCanvas">
-      <canvas id="canvas"></canvas>
-    </div>
+    <div flex='60' id="divCanvas">
 
-    <div class="pure-u-1-1">
-      <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
-        <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
-        <button onclick="generate()"  class="button-warning pure-button">Take PNG</button>
-        <button onclick="runCode()" class="button-success pure-button">Run JavaScript</button>
-        <button onclick="pasoHW()" class="button-success pure-button">Run Hardware</button>
-        <button onclick="loadXML()" id="loadbutton" disabled="true"  class="button-warning pure-button">Load XML</button>
-        <input type="file" id="your-files" multiple>
+        <canvas id="canvas"></canvas>
+
+    </div>
+  </div>
+  <div layout="row">
+    <div flex>
+      <md-button  onclick="runCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#64DD17','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Run code<i class="material-icons">&#xE039;</i></md-button>
+    </div>
+    <div flex>
+      <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save project </md-button>
+    </div>
+    <div flex>
+      <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show JavaScript</md-button>
     </div>
   </div>
 
@@ -337,19 +379,43 @@
 
 </xml>
 <script type="text/javascript">
-  var blocklyArea = document.getElementById('blocklyArea');
-  var blocklyDiv = document.getElementById('blocklyDiv');
-  var blocklyCanvas = document.getElementById('divCanvas');
-  var workspace = Blockly.inject(blocklyDiv,
-      { media: 'media/',
-        zoom:
+  var myWidth = 0, myHeight = 0;
+    function alertSize() {
+
+      if( typeof( window.innerWidth ) == 'number' ) {
+        //No-IE
+        myWidth = window.innerWidth;
+        myHeight = window.innerHeight;
+      } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+        //IE 6+
+        myWidth = document.documentElement.clientWidth;
+        myHeight = document.documentElement.clientHeight;
+      } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+        //IE 4 compatible
+        myWidth = document.body.clientWidth;
+        myHeight = document.body.clientHeight;
+      }
+      /*window.alert( 'Width = ' + myWidth );
+      window.alert( 'Height = ' + myHeight ); */
+
+    }
+    alertSize();
+
+'use strict';
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var blocklyCanvas = document.getElementById('divCanvas');
+    var workspace = Blockly.inject(blocklyDiv,
+        { media: 'media/',
+          zoom:
            {controls: true,
             wheel: true,
             startScale: 1.0,
             maxScale: 3,
             minScale: 0.3,
             scaleSpeed: 1.2},
-        toolbox: document.getElementById('toolbox')});
+          toolbox: document.getElementById('toolbox')});
+
   var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
     var element = blocklyArea;
@@ -360,13 +426,16 @@
       y += element.offsetTop;
       element = element.offsetParent;
     } while (element);
-    blocklyDiv.style.height='85%';
+    //alert(blocklyArea.offsetWidth)
     // Position blocklyDiv over blocklyArea.
     blocklyDiv.style.left = x + 'px';
-    blocklyDiv.style.top = y + 'px';
-    blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
-  };
+    //blocklyDiv.style.top = y + 'px';
+
+    blocklyDiv.style.width = (myWidth*.4) + 'px';
+    blocklyDiv.style.height = (myHeight*.85)+ 'px';
+    blocklyCanvas.style.height= (myHeight*.85)+ 'px';
+    };
+
   window.addEventListener('resize', onresize, false);
   onresize();
 
@@ -510,6 +579,13 @@ function pasoHW(){
   //alert(code);
 } 
 </script>
+<script type="text/javascript">
+'use strict';
+    /**
+     * You must include the dependency on 'ngMaterial'
+     */
+    angular.module('Blocklyplay', ['ngMaterial']);
+  </script>
 </body>
 </html>
 
