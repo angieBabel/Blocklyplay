@@ -2,7 +2,9 @@ canvas {
       background: #fff;
       font-family: sans-serif;
       height: 100%;
-     width: 99%;
+     width: 98%;
+     left: 5px;
+     marg
     }
 
     h1 {
@@ -43,4 +45,9 @@ canvas {
 
       text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
       font-size: 12px;
+    }
+    .btnfunction {
+      border-radius: 30px;
+      color:'white';
+      border-color:
     }
