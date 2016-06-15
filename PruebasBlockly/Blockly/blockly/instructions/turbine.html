@@ -1,0 +1,41 @@
+<md-dialog aria-label="Draw the">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Draw the turbine</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Level 1">
+          <md-content class="md-padding">
+            <!-- <h1 class="md-display-2">Tab One</h1> -->
+            <p>Con los bloques de hardwre haz un programa que gire el motor 3 veces hacia la derecha en velocidad 5ta, despues que gire 2 veces hacia la izquierda en 7ma velocidad, por ultimo media vuelta hacia la derecha en 2da velocidad y media hacia la izquierda en 5ta velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 2">
+          <md-content class="md-padding">
+            <!-- <h1 class="md-display-2">Tab Two</h1> -->
+            <p>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 3">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Three</h1>
+            <p>Instrucciones nivel 3</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" >
+        OK!
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

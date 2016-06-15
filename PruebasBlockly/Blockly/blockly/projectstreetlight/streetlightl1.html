@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bridge Project</title>
+<title>Streetlight Project</title>
 <!-- Responsive css
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
@@ -20,151 +20,174 @@
 
   <!-- Angular Material Library -->
   <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+
+
 <!-- interprete de JS -->
-<script src="acorn_interpreter.js"></script>
-<script src="acorn.js"></script>
-<script src="interpreter.js"></script>
-<!-- <script src="/storage.js"></script> -->
-<script src="blockly_compressed.js"></script>
-<script src="blocks_compressed.js"></script>
-<script src="javascript_compressed.js"></script>
-<script src="core/css.js"></script>
-<script src="core/blockly.js"></script>
-<script src="msg/js/en.js"></script>
-<script src="blocks/custom.js"></script>
-<script src="generators/javascript/custom.js"></script>
-<script type="text/javascript" src="moves.js"></script>
-<script type="text/javascript" src="filesaver.js"></script>
-<script type="text/javascript" src="Blob.js"></script>
-<script src="jquery.min.js"></script>
+<script src="../acorn_interpreter.js"></script>
+<script src="../acorn.js"></script>
+<script src="../interpreter.js"></script>
+<!-- <script src="..//storage.js"></script> -->
+<script src="../blockly_compressed.js"></script>
+<script src="../blocks_compressed.js"></script>
+<script src="../javascript_compressed.js"></script>
+<script src="../core/css.js"></script>
+<script src="../core/blockly.js"></script>
+<script src="../msg/js/en.js"></script>
+<script src="../blocks/custom.js"></script>
+<script src="../generators/javascript/custom.js"></script>
+
+<script type="text/javascript" src="../moves.js"></script>
+<script type="text/javascript" src="../filesaver.js"></script>
+<script type="text/javascript" src="../Blob.js"></script>
 <!-- Funciones comunes para controlar el juego -->
-<script type="text/javascript" src="controlFunctions.js"></script>
+<script type="text/javascript" src="../controlFunctions.js"></script>
 <!-- agregar bloques de hardware -->
-  <script src="blocks/hardware.js"></script>
-  <script src="generators/javascript/hardware.js"></script>
+<script src="../blocks/hardware.js"></script>
+<script src="../generators/javascript/hardware.js"></script>
   <!-- para agregar las librerias del socket -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+
 <script type="text/javascript">
+  /*var image;*/
   //las variables generales se pasaron a moves.js
-  //inicialización de las variables propias del ejercicio 1
-  var pasitos=4;
-  var solution=[];
-  //la variable de positionObj se paso a moves.js
-  //el objeto de solutionObj se paso a moves.js
-  function begin(){
-    wimg=8;
-    canvas = document.getElementById('canvas');
-    canvas.style.border='1px solid black';
-    canvas.style.margin='0px 0px 0px 10px';
-    ctx = canvas.getContext('2d');
-    ancho = document.getElementById('divCanvas').offsetWidth;
-    alto = document.getElementById('divCanvas').offsetHeight;
-    canvas.width= ancho;
-    canvas.height = alto;
+  //inicialización de las variables propias del ejercicio 2
+    //vector de posiciones donde estaban los semaforos y donde hizo un alto
+    var semaforos=[],altos=[];
+    //variables para saber si las luces estan encendidas, y de que lado debe prender
+    var luz=0,luzTrasera=0,lightside;
+  //primer funcion donde se inicializan todo el canvas
+    function begin(){
+      wimg=20
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      canvas.style.margin='0px 0px 0px 10px';
+      ctx = canvas.getContext('2d');
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.width= ancho;
+      canvas.height = alto;
 
-    stepsizeX=canvas.width/40;
-    stepsizeY=canvas.height/40;
+      stepsizeX=canvas.width/30;
+      stepsizeY=canvas.height/30;
 
-    X = stepsizeX*2;
-    Y = stepsizeY*19;
-    initX=stepsizeX;
-    initY=stepsizeY*9;
-    //se inicializa la posicion del objeto, aqui es donde se pintara la linea
-    positionObj.objX=X;//350;
-    positionObj.objY=Y;//142;
-    //se inicializan los valores auxiliares para poder pintar
-    Xaux = positionObj.objX;
-    Yaux= positionObj.objY;
-    answer();
-    panel();
-  }
-  function answer(){
-    solution.push(new solutionObj(X, Y,0,0));//1
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*3.6604878),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//2
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*7.32122987),-2)),Math.round10(Y,-2),0,0));//3
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*10.9821376),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0)); //4
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*14.6424597),-2)),Math.round10(Y,-2),0,0)); //5
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*18.3029268),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//6
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*21.9636896),-2)),Math.round10(Y,-2),0,0));//7
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*25.6245974),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//8
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*29.2849195),-2)),Math.round10(Y,-2),0,0));//9
-    solution.push(new solutionObj((X+Math.round10((stepsizeX*32.9458272),-2)),Math.round10((Y-(stepsizeY*8.22156522)),-2),0,0));//10
-  }
+      X = stepsizeX*15;
+      Y = stepsizeY*21;
+      positionObj.objX=X;
+      positionObj.objY=Y;
+      //roadpaint.push(X+","+Y);
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
 
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
+      semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
+      panel();
+    }
   //la funcion de stopTimer se paso al archivo de controlFunctions.js
-
-  function panel(){
-    var imgback = new Image();
-    imgback.src = "media/puente.png";
-    imgback.onload = function() {
-      ctx.drawImage(imgback, 0, 0,ancho,alto);
-      ctx.beginPath();
-      //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-      while(initX<canvas.width - stepsizeX){
-        initX=initX+stepsizeX;
-        while(initY<canvas.height - (stepsizeY*21)){
-          initY=initY+stepsizeY;
-          ctx.beginPath();
-          ctx.fillStyle = "#E3E2E2";
-          ctx.arc(initX,initY,2,0,2*Math.PI);
-          ctx.fill();
-        }
-        initY=stepsizeY*9;
-      }
-      initX=stepsizeX;
-      painroad();
-      Avatar();
-    }
-  }
-
-  function paintroad(){
-    for (var i = 0; i <road.length; i++) {
-      ctx.strokeStyle = "#f00";
-      ctx.beginPath();
-      ctx.moveTo(road[i]);
-      ctx.lineTo(road[i+1]);
-      ctx.stroke();
-    }
-  }
-
-  //Drawing avatar
-  function Avatar(){
-    var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-    var avatarheight, avatarwith;
-    var positionX, positionY;
-
-    img.id = 'imagen';
-    avatarwith=40;avatarheight=40;
-
-    img.onload = function() {
-      ctx.save();
-      //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-      ctx.translate(positionObj.objX,positionObj.objY);
-      //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-      ctx.globalAlpha=1;
-      //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-      ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
-      ctx.restore();
-    }
-    img.src = 'media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
-  }
-
-  //path forward
-  function path(){
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "gray";
-    ctx.rect(X, Y-100, 100, 100);
-    ctx.stroke();
-  }
-
   //funcion para ocultar el toolbox
   function ocultar(){
      $('.blocklyToolboxDiv').toggle('slow');
   }
+  //dibuja el panel
+    function panel(){
+      var imgback = new Image();
+            imgback.src = "../media/mapa_semaforo.png";
+
+     imgback.onload = function() {
+        ctx.drawImage(imgback, 0, 0,ancho,alto);
+        while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "#E3E2E2";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
+        }
+        initX=0;
+        painroad();
+        var semaforo = new Image();
+            semaforo.src = "../media/semaforo.png";
+       semaforo.onload = function() {
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        }
+        Avatar();
+      }
+
+    }
+    //para saber si va a girar o no
+    var angle=0;
+  //Drawing avatar
+    function Avatar(){
+      var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+
+      img.id = 'imagen';
+
+      avatarwith=40;avatarheight=20;
+      img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
+        ctx.globalAlpha=1;
+
+        if (angle!=positionObj.objZ) {
+          angle=positionObj.objZ;
+          if (luz==1) {
+              luces(20,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-20,0,lightside);
+          }
+          ctx.drawImage(img,-20,-10,avatarwith,avatarheight);
+        }else{
+          if (luz==1) {
+              luces(0,0,lightside);
+            }
+          if (luzTrasera==1) {
+            lucesTraseras(-40,0,lightside);
+          }
+          ctx.drawImage(img,-40,-10,avatarwith,avatarheight);
+        }
+        ctx.restore();
+      }
+      img.src = '../media/carro.png';//el img.src se pone despues del onload para asegurar su carga
+    }
+  //Compara si las paradas que hizo el niño estuvieron bien
+    function checkStops(){
+      var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+      for (var i = 0; i < semaforos.length; i++) {
+        for (var j = 0; j < altos.length; j++) {
+
+          //si en algun punto coinciden incrementa las coincidencias en 1
+          if (semaforos[i].soX==altos[j].soX && semaforos[i].soY==altos[j].soY ) {
+            //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
+            coincidencias+=1;
+          }
+        }
+      }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+      if (coincidencias==semaforos.length) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Te ha faltado hacer una parada')
+      }
+    }
 </script>
-<!-- El script para el interprete esta en controlFunctions.js -->
 </head>
 <body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
@@ -180,27 +203,27 @@
       <p>Instructions</p>
     </div>
     <div flex='40'>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = 'index.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = '../index.html'">
         <md-icon ></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = 'panel1.html'" >
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = '../projecthouse/housel1.html'" >
         <md-icon ></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = 'panel2.html'" >
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = 'streetlightl1.html'" >
         <md-icon ></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = 'panel3.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = '../projectelevator/elevatorl1.html'">
         <md-icon ></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = 'panel4.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = '../projectbridge/bridgel1.html'">
         <md-icon ></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = 'panel5.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = '../projectturbine/turbinel1.html'">
         <md-icon ></md-icon>
       </md-button>
     </div>
-    <div flex='20'>
-        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}">
+    <div flex='20' class="dialog-demo-content" ng-controller="AppCtrl">
+        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}" ng-click="showTabDialog($event)" flex="100"  flex-gt-md="auto">
           Instructions <i class="material-icons">help_outline</i>
         </md-button>
     </div>
@@ -228,6 +251,7 @@
       <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show JavaScript</md-button>
     </div>
   </div>
+
 
 
 <xml id="toolbox" style="display: none">
@@ -481,7 +505,7 @@
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
     var workspace = Blockly.inject(blocklyDiv,
-        { media: 'media/',
+        { media: '../media/',
           zoom:
            {controls: true,
             wheel: true,
@@ -513,17 +537,14 @@
 
   window.addEventListener('resize', onresize, false);
   onresize();
-
   //variables para almacenar en el localstorage-
-  var program = window.localStorage.getItem("panel4");
+  var program = window.localStorage.getItem("panel2");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
   //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
-
   function nextStep() {
-    var verific=0;
     if (highlightPause) {
       // A block has been highlighted.  Pause execution here.
       highlightPause = false;
@@ -531,21 +552,10 @@
       // Keep executing until a highlight statement is reached.
       /*stepCode();*/
     }
-
     if (!myInterpreter.step()) {
       /*window.setTimeout(finish, 15);*/
       clearInterval(intervalo);
-      for (var i = 0; i < solution.length; i++) {
-
-        if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){ verific=verific+1; }
-      }
-      if(verific===10){
-        alert('Felicidades, haz completado correctamente el puzzle');
-        roadpaint.splice(0,roadpaint.length);
-      }else{
-        alert('Esta vez no lo conseguiste, intenta de nuevo');
-        location.reload();
-      }
+      checkStops();
     }
   }
   function finish(){
@@ -562,7 +572,7 @@
     //se guarda lo que hay en el workspaces en el almcaneamiento local
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
-    window.localStorage.setItem("panel4", domToPretty);
+    window.localStorage.setItem("panel2", domToPretty);
   }
   function screenshotPage() {
     //para sacar el thumnail
@@ -619,12 +629,13 @@
   function generate() {
       screenshotPage();
   }
+  
 
   //las funciones de guardar XML estan en el archivo controlFunctions.js
-
+  //Variable para controlar la subida de archivos
   //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-    //se agrega un EventListener, para saber que se ha acceido a el
+  //se agrega un EventListener, para saber que se ha acceido a el
     control.addEventListener("change", function(event) {
          var buttonload=document.getElementById('loadbutton').disabled=false;
     }, false);
@@ -655,12 +666,42 @@ function pasoHW(){
 } 
 </script>
 <script type="text/javascript">
-'use strict';
+  'use strict';
     /**
      * You must include the dependency on 'ngMaterial'
      */
     angular.module('Blocklyplay', ['ngMaterial']);
-  </script>
+    
+    angular.module('Blocklyplay', ['ngMaterial'])
+  .controller('AppCtrl', function($scope, $mdDialog, $mdMedia) {
+    $scope.status = '  ';
+    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+    $scope.showTabDialog = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '../instructions/streetlight.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      }).then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    };
+  });
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+</script>
 </body>
 </html>
 

@@ -1,0 +1,41 @@
+<md-dialog aria-label="Learn conditionals and events">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Conditionals and events</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Level 1">
+          <md-content class="md-padding">
+            <!-- <h1 class="md-display-2">Tab One</h1> -->
+            <p>Vamos a aprender un poco de variables, haz un programa que permita al personaje subir en elevador al piso que desees, con el bloque If de la categoría Logic programa al elevador para que suba la cantidad de pisos que has seleccionado, para que puedas elegir un piso, debes poner tu código dentro del bloque On cick de la categoría de Control, el piso que elegiste se guarda en el bloque Piso que se encuentra en la categoría de Logic.</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 2">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Two</h1>
+            <p>Instrucciones nivel 2</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 3">
+          <md-content class="md-padding">
+            <h1 class="md-display-2">Tab Three</h1>
+            <p>Instrucciones nivel 3</p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" >
+        OK!
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

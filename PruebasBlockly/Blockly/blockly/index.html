@@ -158,27 +158,30 @@
       <p>Instructions</p>
     </div>
     <div flex='40'>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = 'index.html'">
-        <md-icon ></md-icon>
-      </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = 'panel1.html'" >
-        <md-icon ></md-icon>
-      </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = 'panel2.html'" >
-        <md-icon ></md-icon>
-      </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = 'panel3.html'">
-        <md-icon ></md-icon>
-      </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = 'panel4.html'">
-        <md-icon ></md-icon>
-      </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = 'panel5.html'">
-        <md-icon ></md-icon>
-      </md-button>
-    </div>
-    <div flex='20'>
-        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}">
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = 'index.html'">
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = 'projecthouse/housel1.html'" >
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = 'projectstreetlight/streetlightl1.html'" >
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = 'projectelevator/elevatorl1.html'">
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = 'projectbridge/bridgel1.html'">
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = 'turbinel1.html'">
+    <md-icon ></md-icon>
+  </md-button>
+  <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1736'}"onclick="location.href = 'turbinel2.html'">
+    <md-icon ></md-icon>
+  </md-button>
+</div>
+<div flex='20' class="dialog-demo-content" ng-controller="AppCtrl">
+        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}" ng-click="showTabDialog($event)" flex="100"  flex-gt-md="auto">
           Instructions <i class="material-icons">help_outline</i>
         </md-button>
     </div>
@@ -498,12 +501,42 @@ function saveXML(){
 }
 </script>
 <script type="text/javascript">
-'use strict';
+  'use strict';
     /**
      * You must include the dependency on 'ngMaterial'
      */
     angular.module('Blocklyplay', ['ngMaterial']);
-  </script>
+    
+    angular.module('Blocklyplay', ['ngMaterial'])
+  .controller('AppCtrl', function($scope, $mdDialog, $mdMedia) {
+    $scope.status = '  ';
+    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+    $scope.showTabDialog = function(ev) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '../instructions/cube.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true
+      }).then(function(answer) {
+            $scope.status = 'You said the information was "' + answer + '".';
+          }, function() {
+            $scope.status = 'You cancelled the dialog.';
+          });
+    };
+  });
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+</script>
 </body>
 </html>
 
