@@ -235,7 +235,7 @@
       <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Download project </md-button>
     </div>
     <div flex>
-      <md-button onclick="loadXML()" id='loadbutton' class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white','display':'none'}">Load project
+      <md-button onclick="loadXML()" id='loadbutton' class="md-raised md-cornered btnfunction" ng-style="{'display':'none'}">Load project
       </md-button>
       <input type='file' id='your-files'></input>
 
@@ -575,7 +575,9 @@
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
     //se agrega un EventListener, para saber que se ha acceido a el
     control.addEventListener("change", function(event) {
-         var buttonload=document.getElementById('loadbutton').style='display:true';
+         var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#0091EA;border-radius:10px; color:white;border-color: 10px solid white;"
+         //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
+
          var loadinput=document.getElementById('your-files').style='display:none';
     }, false);
   //funcion que carga un archivo XML
