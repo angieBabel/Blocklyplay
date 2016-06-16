@@ -226,24 +226,23 @@
   </div>
   <div layout="row">
     <div flex>
-      <md-button  onclick="runCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#64DD17','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Run code<i class="material-icons">&#xE039;</i></md-button>
+      <md-button  onclick="runCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#64DD17','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Run code<i class="material-icons">play_circle_outline</i></md-button>
     </div>
     <div flex>
-      <md-button  onclick="" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save project </md-button>
+      <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show Code<i class="material-icons">code</i></md-button>
     </div>
     <div flex>
-      <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Download project </md-button>
+      <md-button  onclick="" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save project <i class="material-icons">save</i></md-button>
     </div>
     <div flex>
-      <md-button onclick="loadXML()" id='loadbutton' class="md-raised md-cornered btnfunction" ng-style="{'display':'none'}">Load project
+      <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Download project <i class="material-icons">file_download</i></md-button>
+    </div>
+    <div flex>
+      <md-button onclick="showFileInput()" id='loadbutton' class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Load project<i class="material-icons">file_upload</i>
       </md-button>
-      <input type='file' id='your-files'></input>
-
+      <br>
+     <input type='file' style="display:none" id='your-files'></input>
     </div>
-    <div flex>
-      <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show JavaScript</md-button>
-    </div>
-
   </div>
 
 <xml id="toolbox" style="display: none">
@@ -577,9 +576,14 @@
     control.addEventListener("change", function(event) {
          var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#0091EA;border-radius:10px; color:white;border-color: 10px solid white;"
          //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
-
+         loadXML();
          var loadinput=document.getElementById('your-files').style='display:none';
     }, false);
+  //funcion que habilita el file input
+  function showFileInput(){
+    var loadinput=document.getElementById('your-files').style='display:true';
+    var buttonload=document.getElementById('loadbutton').style='display:none';
+  }
   //funcion que carga un archivo XML
   function loadXML() {
     //se define la funcion Reader, de tipo FileReader
