@@ -218,10 +218,10 @@
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#3F51B5'}"onclick="location.href = '../projectbridge/bridgel1.html'">
         4
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = '../projectturbineturbinel1.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = '../projectturbine/turbinel1.html'">
         5
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = '../projectturbineturbinel2.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = '../projectturbine/turbinel2.html'">
         <!-- <md-icon ></md-icon> -->6
       </md-button>
     </div>
@@ -652,12 +652,23 @@
 
   //las funciones de guardar XML estan en el archivo controlFunctions.js
   //Variable para controlar la subida de archivos
-  //Variable para controlar la subida de archivos
   var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-  //se agrega un EventListener, para saber que se ha acceido a el
+    //se agrega un EventListener, para saber que se ha acceido a el
     control.addEventListener("change", function(event) {
-         var buttonload=document.getElementById('loadbutton').disabled=false;
+         var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
+         //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
+         loadXML();
+         var loadinput=document.getElementById('your-files').style='display:none';
     }, false);
+  //funcion que habilita el file input
+  function showFileInput(){
+    var loadinput=document.getElementById('your-files').style='display:true';
+    var buttonload=document.getElementById('loadbutton').style='display:none';
+  }
+
+
+
+    
   //funcion que carga un archivo XML
   function loadXML() {
     //se define la funcion Reader, de tipo FileReader

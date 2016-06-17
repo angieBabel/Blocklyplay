@@ -76,16 +76,17 @@
       canvas.width= ancho;
       canvas.height = alto;
       //alert(ancho +','+ alto);
+        stepsizeX=canvas.width/20;
+        stepsizeY=canvas.height/20;
 
       X = canvas.width/2;
       Y = canvas.height/2;
       r = 10;
       positionObj.objX=X;
       positionObj.objY=Y;
-       roadpaint.push(X+","+Y);
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
-      panel(0);
+      panel();
     }
 
     function stopTimer(){
@@ -114,7 +115,30 @@
       };
     }
     //Drawing avatar
+    function Avatar(){
+        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+        var avatarheight, avatarwith;
+        var positionX, positionY;
 
+        img.id = 'imagen';
+        //el img.src se cambio para asegurar que siempre haga el onload
+        avatarwith=100;avatarheight=130;
+
+        img.onload = function() {
+          ctx.save();
+          //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
+          ctx.translate(positionObj.objX,positionObj.objY);
+          //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
+
+          ctx.globalAlpha=1;
+          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+          ctx.drawImage(img,-(avatarwith/2), 0,avatarwith,avatarheight);
+          ctx.restore();
+        }
+        img.src = 'media/avatar.png';//el img.src se pone despues del onload para asegurar su carga
+
+      }
+/*
     function Avatar(){
       var avatarheight, avatarwith;
       var positionX, positionY;
@@ -127,7 +151,7 @@
       img.onload = function() {
         ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
       }
-    }
+    }*/
 
     //path forward
     function path(){
@@ -173,10 +197,10 @@
         <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#3F51B5'}"onclick="location.href = 'projectbridge/bridgel1.html'">
           4
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'turbinel1.html'">
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'projectturbine/turbinel1.html'">
           5
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = 'turbinel2.html'">
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = 'projectturbine/turbinel2.html'">
           <!-- <md-icon ></md-icon> -->6
         </md-button>
     </div>
@@ -367,41 +391,41 @@
 </xml>
 <script type="text/javascript">
   var myWidth = 0, myHeight = 0;
-    function alertSize() {
+      function alertSize() {
 
-      if( typeof( window.innerWidth ) == 'number' ) {
-        //No-IE
-        myWidth = window.innerWidth;
-        myHeight = window.innerHeight;
-      } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-        //IE 6+
-        myWidth = document.documentElement.clientWidth;
-        myHeight = document.documentElement.clientHeight;
-      } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-        //IE 4 compatible
-        myWidth = document.body.clientWidth;
-        myHeight = document.body.clientHeight;
+        if( typeof( window.innerWidth ) == 'number' ) {
+          //No-IE
+          myWidth = window.innerWidth;
+          myHeight = window.innerHeight;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+          //IE 6+
+          myWidth = document.documentElement.clientWidth;
+          myHeight = document.documentElement.clientHeight;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+          //IE 4 compatible
+          myWidth = document.body.clientWidth;
+          myHeight = document.body.clientHeight;
+        }
+        /*window.alert( 'Width = ' + myWidth );
+        window.alert( 'Height = ' + myHeight ); */
+
       }
-      /*window.alert( 'Width = ' + myWidth );
-      window.alert( 'Height = ' + myHeight ); */
+      alertSize();
 
-    }
-    alertSize();
-
-'use strict';
-    var blocklyArea = document.getElementById('blocklyArea');
-    var blocklyDiv = document.getElementById('blocklyDiv');
-    var blocklyCanvas = document.getElementById('divCanvas');
-    var workspace = Blockly.inject(blocklyDiv,
-        { media: 'media/',
-          zoom:
-           {controls: true,
-            wheel: true,
-            startScale: 1.0,
-            maxScale: 3,
-            minScale: 0.3,
-            scaleSpeed: 1.2},
-          toolbox: document.getElementById('toolbox')});
+  'use strict';
+      var blocklyArea = document.getElementById('blocklyArea');
+      var blocklyDiv = document.getElementById('blocklyDiv');
+      var blocklyCanvas = document.getElementById('divCanvas');
+      var workspace = Blockly.inject(blocklyDiv,
+          { media: '../media/',
+            zoom:
+             {controls: true,
+              wheel: true,
+              startScale: 1.0,
+              maxScale: 3,
+              minScale: 0.3,
+              scaleSpeed: 1.2},
+            toolbox: document.getElementById('toolbox')});
 
   var onresize = function(e) {
     // Compute the absolute coordinates and dimensions of blocklyArea.
@@ -427,93 +451,85 @@
   onresize();
 
 
-
-  var program = window.localStorage.getItem("panel");
+  var program = window.localStorage.getItem("index");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
 
-function showCode() {
-  // Generate JavaScript code and display it.
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-  Blockly.JavaScript.addReservedWords('highlightBlock');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  //////
-  /*
-    var allXml = Blockly.Xml.workspaceToDom(workspace);
-    var allCode = [];
-    for (var i = 0, xml; xml = allXml[i]; i++) {
-      var headless = new Blockly.Workspace();
-      Blockly.Xml.domToWorkspace(headless, xml);
-      allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-      headless.dispose();
-    }
-  */
+  //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
 
-  //////
-  myInterpreter = new Interpreter(code, initAlert);
-  highlightPause = false;
-  workspace.traceOn(true);
-  workspace.highlightBlock(null);
-  alert(code);
 
-}
-function nextStep() {
-  if (highlightPause) {
-    // A block has been highlighted.  Pause execution here.
-    highlightPause = false;
-  } else {
-    // Keep executing until a highlight statement is reached.
-    /*stepCode();*/
-  }
-  if (!myInterpreter.step()) {
-    /*window.setTimeout(finish, 15);*/
-    clearInterval(intervalo);
-    if (positionObj.objY==Y && positionObj.objX==X) {
-      alert('Felicidades, haz completado correctamente el puzzle');
+  function nextStep() {
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
     }
-    else{
-      alert('Esta vez no lo conseguiste, intenta de nuevo');
-      //location.reload();
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+      //check();
     }
   }
-}
-function finish(){
-  if(acabo==1){
-        nextStep();
-      }
-}
-
-function runCode() {
-  showCode();
-  intervalo= setInterval(function(){finish();},15)
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var domToPretty = Blockly.Xml.domToPrettyText(xml);
-
-  window.localStorage.setItem("panel", domToPretty);
-}
-
-function saveXML(){
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var mappingData = window.localStorage.getItem('mappingBlock');
-  var conditionData = window.localStorage.getItem('conditionBlock');
-
-
-  var data = Blockly.Xml.domToPrettyText(xml);
-  console.log(data);
-  //return;
-
-
-  var name = prompt("Name of this file", "blocks");
-  if (name) {
-    var blob = new Blob([data], {
-      type: "text/plain;charset=utf-8"
-    });
-    saveAs(blob, name + '.xml');
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
   }
 
-}
+  function runCode() {
+    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+    parseCode();
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+    intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    window.localStorage.setItem("index", domToPretty);
+  }
+  //las funciones de guardar XML estan en el archivo controlFunctions.js
+
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+    //se agrega un EventListener, para saber que se ha acceido a el
+    control.addEventListener("change", function(event) {
+         var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
+         //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
+         loadXML();
+         var loadinput=document.getElementById('your-files').style='display:none';
+    }, false);
+  //funcion que habilita el file input
+  function showFileInput(){
+    var loadinput=document.getElementById('your-files').style='display:true';
+    var buttonload=document.getElementById('loadbutton').style='display:none';
+  }
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
+  function pasoHW(){
+    var socket = io.connect('http://edison.local:3000');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    code = code.replace(/[']/gi, "");
+    socket.emit('changefunction',code);
+    //alert(code);
+  } 
 </script>
 <script type="text/javascript">
   'use strict';
