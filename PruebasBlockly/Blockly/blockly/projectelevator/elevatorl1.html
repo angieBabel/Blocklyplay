@@ -259,27 +259,30 @@
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = '../index.html'">
         <md-icon><i class="material-icons">home</i></md-icon>
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00B0FF'}"onclick="location.href = '../projecthouse/housel1.html'" >
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#80DEEA'}"onclick="location.href = '../projecthouse/housel1.html'" >
         1
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#2979FF'}"onclick="location.href = '../projectstreetlight/streetlightl1.html'" >
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#4FC3F7'}"onclick="location.href = '../projectstreetlight/streetlightl1.html'" >
         2
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#651FFF'}"onclick="location.href = 'elevatorl1.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#42A5F5'}"onclick="location.href = 'elevatorl1.html'">
         3
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#D500F9'}"onclick="location.href = '../projectbridge/bridgel1.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#3F51B5'}"onclick="location.href = '../projectbridge/bridgel1.html'">
         4
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#FF1744'}"onclick="location.href = '../projectturbine/turbinel1.html'">
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'turbinel1.html'">
         5
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = 'turbinel2.html'">
+        <!-- <md-icon ></md-icon> -->6
       </md-button>
     </div>
     <div flex='20' class="dialog-demo-content" ng-controller="AppCtrl">
-        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FFC400',}" ng-click="showTabDialog($event)" flex="100"  flex-gt-md="auto">
+        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#F0D345','color':'white'}" ng-click="showTabDialog($event)" flex="100"  flex-gt-md="auto">
           Instructions <i class="material-icons">help_outline</i>
         </md-button>
-    </div>
+    </div> 
 
   </div>
   <div layout="row" id="blocklyArea">
@@ -294,17 +297,32 @@
     </div>
   </div>
   <div layout="row">
-    <div flex>
-      <md-button  onclick="runCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#64DD17','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Run code<i class="material-icons">&#xE039;</i></md-button>
+    <div layout="row" flex="50">
+      <div flex="30">
+        <md-button  onclick="runCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E676','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Run code<i class="material-icons">play_circle_outline</i></md-button>
+      </div>
+      <div flex="30">
+        <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#1DE9B6','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show Code<i class="material-icons">code</i></md-button>
+      </div>
+      <div flex="30">
+        <md-button  onclick="" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E5FF','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save<i class="material-icons">save</i></md-button>
+      </div>
     </div>
-    <div flex>
-      <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF5252','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save project </md-button>
-    </div>
-    <div flex>
-      <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#0091EA','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show JavaScript</md-button>
+    <div layout="row" flex="50" layout-align="center center">
+      <md-button class="md-icon-button md-accent" aria-label="Favorite">
+        <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+      </md-button>
+      <div flex="40">
+        <md-button  onclick="saveXML()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FF9100','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Download project <i class="material-icons">file_download</i></md-button>
+      </div>
+      <div flex="50">
+        <md-button onclick="showFileInput()" id='loadbutton' class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#FFC400','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Load project<i class="material-icons">file_upload</i>
+        </md-button>
+        <br>
+       <input type='file' style="display:none" id='your-files'></input>
+      </div>
     </div>
   </div>
-
 <xml id="toolbox" style="display: none">
     <category name="Control" colour="355">
       <block type="wait"></block>
