@@ -244,13 +244,10 @@
 </head>
 <body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
-    <div flex="10">
-      <md-button class="md-icon-button md-primary" aria-label="Settings" onclick="ocultar()" >
-        <md-icon >
-          <i class="material-icons">dehaze</i>
-        </md-icon>
+    <div flex="10" layout-align="center center" layout="row">
+      <md-button class="md-fab md-mini" aria-label="Settings" onclick="ocultar()">
+        <md-icon><i class="material-icons">dehaze</i></md-icon>
       </md-button>
-      <!--<button onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>-->
     </div>
     <div flex="30">
       <h3>Conditionals and events</h3>
