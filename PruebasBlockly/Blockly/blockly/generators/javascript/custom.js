@@ -10,7 +10,7 @@ Blockly.JavaScript['mover'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');
   var code = '';
   // TODO: Assemble JavaScript into code variable.
- var nosteps = parseInt(text_nosteps);//si la opcion fue forward, llama la funcion forward
+ var nosteps = parseFloat(text_nosteps);//si la opcion fue forward, llama la funcion forward
   if (dropdown_direction=="front") {
     return code=  "forward ("+nosteps+");";
   }
@@ -31,7 +31,7 @@ Blockly.JavaScript['mover_pintando'] = function(block) {
   var colour_color = block.getFieldValue('color');
   // TODO: Assemble JavaScript into code variable.
   var code = '';
-  var pasos = parseInt(text_pasos);
+  var pasos = parseFloat(text_pasos);
   if (dropdown_directio=="front") {//si la opcion fue hacia adelante, manda llamar la funcion de forwardPaint
     return code= "forwardPaint ("+pasos+",'"+colour_color+"');";
   }
@@ -45,7 +45,7 @@ Blockly.JavaScript['girar'] = function(block) {
   var angle_grades = block.getFieldValue('grades');
   var dropdown_side = block.getFieldValue('side');
   var code = '';
-  var angulo=parseInt(angle_grades);
+  var angulo=parseFloat(angle_grades);
   //alert(angulo);
   return  code= "rotar(" + angulo +",'"+dropdown_side+"');\n";
 };
@@ -55,7 +55,7 @@ Blockly.JavaScript['wait'] = function(block) {
   var text_secs = block.getFieldValue('secs');
   // TODO: Assemble JavaScript into code variable.
   var code = '';
-  var sec=parseInt(text_secs);
+  var sec=parseFloat(text_secs);
   return  code= "wait("+sec+");\n";
 };
 

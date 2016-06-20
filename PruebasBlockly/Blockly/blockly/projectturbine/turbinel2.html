@@ -69,80 +69,98 @@
     //la variable de positionObj se paso a moves.js
     //el objeto de solutionObj se paso a moves.js
   function begin(){
-    canvas = document.getElementById('canvas');
-    canvas.style.border='1px solid black';
-    canvas.style.margin='0px 0px 0px 10px';
-    ctx = canvas.getContext('2d');
-    ancho = document.getElementById('divCanvas').offsetWidth;
-    alto = document.getElementById('divCanvas').offsetHeight;
-    canvas.width= ancho;
-    canvas.height = alto;
-    stepsizeX=canvas.width/30 ;
-    stepsizeY=canvas.height/22;
+      canvas = document.getElementById('canvas');
+      canvas.style.border='1px solid black';
+      canvas.style.margin='0px 0px 0px 10px';
+      ctx = canvas.getContext('2d');
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.width= ancho;
+      canvas.height = alto;
+      stepsizeX=canvas.width/30 ;
+      stepsizeY=canvas.height/22;
+      wimg=stepsizeX/2;
 
-    X = stepsizeX*5;
-    Y = stepsizeY*5;
-    positionObj.objX=X;
-    positionObj.objY=Y;
-    Xaux = positionObj.objX;
-    Yaux= positionObj.objY;
+      X = stepsizeX*15;
+      Y = stepsizeY*11;
+      positionObj.objX=X+stepsizeX*2;
+      positionObj.objY=Y-stepsizeY;
+      Xaux = positionObj.objX;
+      Yaux= positionObj.objY;
 
-   
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),2048,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'backward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),2048,'forward',5));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'backward',7));
-
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
-    solucion.push(new motorObj(Math.round10((stepsizeX*12),-2),Math.round10((stepsizeY*12),-2),4096,'forward',7));
-    panel();
-  }
-
-  //la funcion de stopTimer se paso al archivo de controlFunctions.js
-
-  function panel(){
-    var imgback = new Image();
-            imgback.src = "../media/airplane.jpg";
-
-     imgback.onload = function() {
-      ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
-
-        while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "yellow";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
-            }
-            initY=0;
-        }
-        initX=0;
-        Avatar();
-      }
-
-  }
-  //Drawing avatar
-
-  function Avatar(){
-    var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-
-    var positionX, positionY;
-
-    img.id = 'imagen';
-    img.onload = function() {
-      ctx.save();
-      ctx.translate(positionObj.objX,positionObj.objY);
-      ctx.rotate(positionObj.objZ * (Math.PI/180));
-      ctx.globalAlpha=1;
-      ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
-      ctx.restore();
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'forward',2));
+      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'backward',5));
+      panel();
     }
-    img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
-  }  
+
+    //la funcion de stopTimer se paso al archivo de controlFunctions.js
+
+    function panel(){
+      var imgback = new Image();
+              imgback.src = "../media/helice4.png";
+
+            ctx.beginPath();
+            ctx.clearRect(0,0,ancho,alto);
+            ctx.strokeStyle = '#000';
+            //linea vertical
+            ctx.lineWidth = stepsizeX*1.5;
+            ctx.moveTo(X,Y-stepsizeY*6);
+            ctx.lineTo(X, Y+stepsizeY*6);
+            //linea horizontal
+            ctx.lineWidth = stepsizeY*1.5;
+            ctx.moveTo(X-stepsizeX*6,Y);
+            ctx.lineTo(X+stepsizeX*6, Y);
+            //linea diagonal izq
+            ctx.lineWidth = stepsizeX*1.5;
+            ctx.moveTo(X-stepsizeX*4,Y-stepsizeY*4);
+            ctx.lineTo(X+stepsizeX*4,Y+stepsizeY*4);
+            //linea diagonal der
+            ctx.lineWidth = stepsizeX*1.5;
+            ctx.moveTo(X+stepsizeX*4,Y-stepsizeY*4);
+            ctx.lineTo(X-stepsizeX*4,Y+stepsizeY*4);
+            ctx.stroke();
+            ctx.closePath();
+
+       imgback.onload = function() {
+          
+          while(initX<canvas.width-stepsizeX){
+            initX=initX+stepsizeX;
+              while(initY<canvas.height-stepsizeY){
+                initY=initY+stepsizeY;
+                ctx.beginPath();
+                ctx.fillStyle = "gray";
+                ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                ctx.fill();
+              }
+              initY=0;
+          }
+          initX=0;
+          painroad();
+          Avatar();
+        }
+    }
+    //Drawing avatar
+    function Avatar(){
+      var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+      var positionX, positionY;
+      avatarwith=40;avatarheight=40;
+
+      img.id = 'imagen';
+      img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        //ctx.rotate(positionObj.objZ * (Math.PI/180));
+        ctx.globalAlpha=1;
+        ctx.drawImage(img,-0,-stepsizeY,stepsizeX,stepsizeY); 
+        ctx.restore();
+      }
+      img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+    }  
   //funcion para ocultar el toolbox
   function ocultar(){
      $('.blocklyToolboxDiv').toggle('slow');
