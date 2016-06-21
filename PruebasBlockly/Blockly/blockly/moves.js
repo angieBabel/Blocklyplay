@@ -379,8 +379,7 @@ function painroad(){
 
       LT=roadpaint[i+1];
       ctx.strokeStyle = LT.poColor.valueOf();//Safari ocupa acceder al valor de la variable
-      console.log(LT.poColor.valueOf());
-
+      
 
       if (MT.poX > LT.poX) {
         xinit= LT.poX - exe;

@@ -63,7 +63,7 @@
         dirr= dir;
         speed= speed;
       };
-      var solucion=[],respuesta=[]; 
+      var solucion=[],roadpaint=[]; 
 
 
       //la variable de positionObj se paso a moves.js
@@ -88,13 +88,19 @@
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
 
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'forward',5));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),4096,'backward',7));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'forward',2));
-      solucion.push(new motorObj(Math.round10((stepsizeX*12),2),Math.round10((stepsizeY*12),2),2048,'backward',5));
+      solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//1
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY-stepsizeY*5),0,0));//2
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY-stepsizeY*5),0,0));//3
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),positionObj.objY,0,0)); //4
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*7)),positionObj.objY,0,0));//5
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*7)),(positionObj.objY+stepsizeY*2),0,0));//6
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY+stepsizeY*2),0,0));//7
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY+stepsizeY*7),0,0));//8
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY+stepsizeY*7),0,0));//9
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY+stepsizeY*2),0,0));//10
+      solucion.push(new solutionObj((positionObj.objX-(stepsizeX*5)),(positionObj.objY+stepsizeY*2),0,0));//11
+      solucion.push(new solutionObj((positionObj.objX-(stepsizeX*5)),positionObj.objY,0,0));//12
+      solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//13
       panel();
     }
 
@@ -159,28 +165,30 @@
        $('.blocklyToolboxDiv').toggle('slow');
     }
     //Compara si las paradas que hizo el niño estuvieron bien
-      function check(){
-        var coincidencias=0;
-        //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
 
-        for (var i = 0; i < solucion.length; i++) {
-          if (solucion[i].pX==respuesta[i].pX && solucion[i].pY==respuesta[i].pY && solucion[i].ns==respuesta[i].ns && solucion[i].dirr==respuesta[i].dirr && solucion[i].speed==respuesta[i].speed) {
+
+
+    function check(){
+      var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+      for (var i = 0; i < solucion.length; i++) {
+        for (var j = 0; j < roadpaint.length; j++) {
+          
+          //si en algun punto coinciden incrementa las coincidencias en 1
+          if (Math.round10((solucion[i].soX),-2)==roadpaint[j].poX && Math.round10((solucion[i].soY),-2)==roadpaint[j].poY ) {
+            //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
             coincidencias+=1;
-          };
-
-        }
-        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-        if (coincidencias==solucion.length) {
-          alert('Felicidades haz realizado correctamente el puzzle');
-          solucion.splice(0,solucion.length);
-          respuesta.splice(0,respuesta.length);
-          var pagina='panel5l2.html';
-          location.href=pagina;
-        }else{
-         alert('Esta vez no lo conseguiste intenta de nuevo');
-          location.reload();
+          }
         }
       }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+      if (coincidencias==solucion.length) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo')
+      }
+    }
+      
   </script>
   <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
