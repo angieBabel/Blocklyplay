@@ -69,6 +69,10 @@
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
     function begin(){
+      roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+      solucion.splice(0,solucion.length);//inicializa los vectores
+
+
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
       canvas.style.margin='0px 0px 0px 10px';
@@ -85,6 +89,7 @@
       Y = stepsizeY*11;
       positionObj.objX=X-stepsizeX;
       positionObj.objY=Y-stepsizeY;
+      positionObj.objZ=0;
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
 
@@ -222,7 +227,7 @@
       <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'turbinel1.html'">
         5
       </md-button>
-      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = 'turbinel2.html'">
+      <md-button class="md-raised md-cornered btnfunction" aria-label="Panel" ng-style="{'background-color':'#B9191D','border-radius':'50px','border-color': '10px solid white', 'color':'white'}"onclick="location.href = 'turbinel2.html'">
         <!-- <md-icon ></md-icon> -->6
       </md-button>
     </div>
@@ -253,7 +258,7 @@
         <md-button onclick="showCode()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#1DE9B6','border-radius':'10px', 'color':'white','border-color': '10px solid white'}">Show Code<i class="material-icons">code</i></md-button>
       </div>
       <div flex="30">
-        <md-button  onclick="" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E5FF','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save<i class="material-icons">save</i></md-button>
+        <md-button  onclick="stop()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E5FF','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save<i class="material-icons">save</i></md-button>
       </div>
     </div>
     <div layout="row" flex="50" layout-align="center center">
@@ -593,6 +598,13 @@ var myWidth = 0, myHeight = 0;
     var domToPretty = Blockly.Xml.domToPrettyText(xml);
     window.localStorage.setItem("panel5", domToPretty);
   }
+
+  function stop(){
+    clearInterval(intervalo);
+    begin();
+  }
+
+
   function screenshotPage() {
     //para sacar el thumnail
           var previa = window.localStorage.getItem("preview");
