@@ -91,7 +91,7 @@
       positionObj.objY=Y-stepsizeY;
       positionObj.objZ=0;
       Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
+      Yaux = positionObj.objY;
 
       solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//1
       solucion.push(new solutionObj(positionObj.objX,(positionObj.objY-stepsizeY*5),0,0));//2
@@ -170,9 +170,6 @@
        $('.blocklyToolboxDiv').toggle('slow');
     }
     //Compara si las paradas que hizo el niño estuvieron bien
-
-
-
     function check(){
       var coincidencias=0;
       //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
@@ -198,7 +195,7 @@
   </script>
   <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
-<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
+<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'##4DD0E1'}">
   <div layout="row" layout-wrap id="menu">
     <div flex="10" layout-align="center center" layout="row">
       <md-button class="md-fab md-mini" aria-label="Settings" onclick="ocultar()">
@@ -259,6 +256,9 @@
       </div>
       <div flex="30">
         <md-button  onclick="stop()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E5FF','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Save<i class="material-icons">save</i></md-button>
+      </div>
+      <div flex="30">
+        <md-button  onclick="stop()" class="md-raised md-cornered btnfunction" ng-style="{'background-color':'#00E5FF','border-radius':'10px','border-color': '10px solid white', 'color':'white'}">Stop<i class="material-icons">stop</i>
       </div>
     </div>
     <div layout="row" flex="50" layout-align="center center">
@@ -501,7 +501,7 @@
 
 </xml>
 <script type="text/javascript">
-var myWidth = 0, myHeight = 0;
+  var myWidth = 0, myHeight = 0;
     function alertSize() {
 
       if( typeof( window.innerWidth ) == 'number' ) {
@@ -523,7 +523,7 @@ var myWidth = 0, myHeight = 0;
     }
     alertSize();
 
-'use strict';
+  'use strict';
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
@@ -600,6 +600,8 @@ var myWidth = 0, myHeight = 0;
   }
 
   function stop(){
+    acabo==0;
+    clearInterval(interval);
     clearInterval(intervalo);
     begin();
   }

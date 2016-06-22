@@ -1,0 +1,98 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <!-- lo que blockly necesita -->
+  <!-- interprete de JS -->
+  <script src="../acorn_interpreter.js"></script>
+  <script src="../acorn.js"></script>
+  <script src="../interpreter.js"></script>
+  <!-- <script src="..//storage.js"></script> -->
+  <script src="../blockly_compressed.js"></script>
+  <script src="../blocks_compressed.js"></script>
+  <script src="../javascript_compressed.js"></script>
+  <script src="../core/css.js"></script>
+  <script src="../core/blockly.js"></script>
+  <script src="../msg/js/en.js"></script>
+  <script src="../blocks/custom.js"></script>
+  <script src="../generators/javascript/custom.js"></script>
+
+  <script type="text/javascript" src="../moves.js"></script>
+  <script type="text/javascript" src="../filesaver.js"></script>
+  <script type="text/javascript" src="../Blob.js"></script>
+  <!-- Funciones comunes para controlar el juego -->
+  <script type="text/javascript" src="../controlFunctions.js"></script>
+  <!-- agregar bloques de hardware -->
+  <script src="../blocks/hardware.js"></script>
+  <script src="../generators/javascript/hardware.js"></script>
+    <!-- para agregar las librerias del socket -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+</head>
+<body ng-app="Blocklyplay" ng-cloak>
+  <!-- Container #1 (see wireframe) -->
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Toolbar with Disabled/Enabled Icon Buttons</span>
+        </h2>
+        <md-button class="md-icon-button" aria-label="Settings">
+          <i class="material-icons">menu</i>
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <i class="material-icons">favorite</i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <i class="material-icons">more_vert</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <!-- contenedor de los elementos -->
+    <div flex layout="row">
+      <!-- Contenedor del toolbox -->
+      <md-content flex id="content">
+      content
+      </md-content>
+      <!-- side nav de instrucciones -->
+      <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+        sidenav
+      </md-sidenav>
+
+    </div>
+
+  
+  <!-- Your application bootstrap  -->
+  <script type="text/javascript">    
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('Blocklyplay', ['ngMaterial']);
+  </script>
+  
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
