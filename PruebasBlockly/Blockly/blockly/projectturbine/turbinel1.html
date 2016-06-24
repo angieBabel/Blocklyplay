@@ -190,8 +190,7 @@
         alert('Esta vez no lo conseguiste, intenta de nuevo')
         location.reload();
       }
-    }
-      
+    }   
   </script>
   <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
@@ -504,6 +503,7 @@
   var myWidth = 0, myHeight = 0;
     function alertSize() {
 
+
       if( typeof( window.innerWidth ) == 'number' ) {
         //No-IE
         myWidth = window.innerWidth;
@@ -521,12 +521,12 @@
       window.alert( 'Height = ' + myHeight ); */
 
     }
-    alertSize();
 
   'use strict';
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
+    
     var workspace = Blockly.inject(blocklyDiv,
         { media: '../media/',
           zoom:

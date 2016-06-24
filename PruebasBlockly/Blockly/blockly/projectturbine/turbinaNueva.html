@@ -3,6 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="../styles.css">
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
@@ -41,16 +42,146 @@
 
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
+<script type="text/javascript">
+    /*var image;*/
+    //las variables generales se pasaron a moves.js
+    //inicialización de las variables propias del ejercicio 5
+    function solutionObj(x,y,z,color){
+        this.soX= x;
+        this.soY = y;
+        this.soZ = z;
+        this.soColor = color;
+      }
+      var solucion=[],roadpaint=[]; 
+      //la variable de positionObj se paso a moves.js
+      //el objeto de solutionObj se paso a moves.js
+    function begin1(){
+      roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+      solucion.splice(0,solucion.length);//inicializa los vectores
+      canvas = document.getElementById('canvas0');
+      canvas.style.border='1px solid black';
+      canvas.style.margin='0px 0px 0px 10px';
+      ctx = canvas.getContext('2d');
+      ancho = document.getElementById('divCanvas').offsetWidth;
+      alto = document.getElementById('divCanvas').offsetHeight;
+      canvas.width= ancho;
+      canvas.height = alto;
+      stepsizeX=canvas.width/30 ;
+      stepsizeY=canvas.height/22;
+      wimg=stepsizeX/2;
+      X = stepsizeX*15;
+      Y = stepsizeY*11;
+      positionObj.objX=X-stepsizeX;
+      positionObj.objY=Y-stepsizeY;
+      positionObj.objZ=0;
+      Xaux = positionObj.objX;
+      Yaux = positionObj.objY;
+
+      solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//1
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY-stepsizeY*5),0,0));//2
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY-stepsizeY*5),0,0));//3
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),positionObj.objY,0,0)); //4
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*7)),positionObj.objY,0,0));//5
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*7)),(positionObj.objY+stepsizeY*2),0,0));//6
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY+stepsizeY*2),0,0));//7
+      solucion.push(new solutionObj((positionObj.objX+(stepsizeX*2)),(positionObj.objY+stepsizeY*7),0,0));//8
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY+stepsizeY*7),0,0));//9
+      solucion.push(new solutionObj(positionObj.objX,(positionObj.objY+stepsizeY*2),0,0));//10
+      solucion.push(new solutionObj((positionObj.objX-(stepsizeX*5)),(positionObj.objY+stepsizeY*2),0,0));//11
+      solucion.push(new solutionObj((positionObj.objX-(stepsizeX*5)),positionObj.objY,0,0));//12
+      solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//13
+      panel1();
+    }
+
+    //la funcion de stopTimer se paso al archivo de controlFunctions.js
+
+    function panel1(){
+      var imgback = new Image();
+              imgback.src = "../media/helice4.png";
+
+            ctx.beginPath();
+            ctx.clearRect(0,0,ancho,alto);
+            ctx.strokeStyle = '#000';//Safari ocupa acceder al valor de la variable
+            //linea vertical
+            ctx.lineWidth = stepsizeX*1.5;
+            ctx.moveTo(X,Y-stepsizeY*6);
+            ctx.lineTo(X, Y+stepsizeY*6);
+            ctx.stroke();
+            //linea horizontal
+            ctx.lineWidth = stepsizeY*1.5;
+            ctx.moveTo(X-stepsizeX*6,Y);
+            ctx.lineTo(X+stepsizeX*6, Y);
+            ctx.stroke();
+            ctx.closePath();
+
+       imgback.onload = function() {
+          
+          while(initX<canvas.width-stepsizeX){
+            initX=initX+stepsizeX;
+              while(initY<canvas.height-stepsizeY){
+                initY=initY+stepsizeY;
+                ctx.beginPath();
+                ctx.fillStyle = "gray";
+                ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                ctx.fill();
+              }
+              initY=0;
+          }
+          initX=0;
+          painroad();
+          Avatar1();
+        }
+    }
+    //Drawing avatar
+    function Avatar1(){
+      var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+      var positionX, positionY;
+      avatarwith=40;avatarheight=40;
+
+      img.id = 'imagen';
+      img.onload = function() {
+        ctx.save();
+        ctx.translate(positionObj.objX,positionObj.objY);
+        //ctx.rotate(positionObj.objZ * (Math.PI/180));
+        ctx.globalAlpha=1;
+        ctx.drawImage(img,-0,-stepsizeY,stepsizeX,stepsizeY); 
+        ctx.restore();
+      }
+      img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+    }  
+    //Compara si las paradas que hizo el niño estuvieron bien
+    function check1(){
+      var coincidencias=0;
+      //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+      for (var i = 0; i < solucion.length; i++) {
+        for (var j = 0; j < roadpaint.length; j++) {
+          
+          //si en algun punto coinciden incrementa las coincidencias en 1
+          if (Math.round10((solucion[i].soX),-2)==roadpaint[j].poX && Math.round10((solucion[i].soY),-2)==roadpaint[j].poY ) {
+            //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
+            coincidencias+=1;
+          }
+        }
+      }
+      //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+      if (coincidencias==solucion.length) {
+        alert('Felicidades haz realizado correctamente el puzzle')
+      }else{
+        alert('Esta vez no lo conseguiste, intenta de nuevo')
+        location.reload();
+      }
+    }   
+</script>
 </head>
-<body ng-app="Blocklyplay" ng-cloak ng-controller="AppCtrl">
+
+<body ng-app="Blocklyplay"  ng-controller="AppCtrl">
     <!-- header de la pagina -->
     <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
       <div class="md-toolbar-tools" layout="row" >
           <div flex layout="row"   layout-align="start center">
             <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">keyboard_backspace</i>
-              </md-button>
+              <md-icon md-svg-icon="../media/icons/arrow-left-bold.svg"></md-icon> 
             </div>
             <div>
               <span>kite</span>
@@ -80,48 +211,31 @@
     <!-- contenedor de los elementos -->
     <div flex layout="row">
       <!-- Contenedor del toolbox -->
-      <div flex="40">
-          content
+      <div flex="40" id="blocklyArea" ng-style="{'position': 'relative', 'height': '85%'}">
+          <div id="blocklyDiv" style="position: absolute"></div>
       </div>
       <!-- container donde ira el canvas -->
-      <div layout-align="center start" layout="row" flex="60">
-        <md-card layout="column" flex="95" ng-style="{'position': 'relative','top': '-70px','z-index': '4'}">
-            <md-dialog-content style="max-width:800px;max-height:810px; ">
-              <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="one">
+      <div layout-align="center start" layout="row" flex="60" >
+        <md-card layout="column" id="divCanvas" flex="95" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
+            <md-content id="divCanvas">
+              <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual">
+                <md-tab label="nivel1" md-on-select="myClickEvent1();"> 
+                  <div id="divCanvas">
+                      <canvas id="canvas0"></canvas>
+                  </div>                 
+                </md-tab>
+                <md-tab label="nivel2">
                   <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab One</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                    <canvas id="canvas1"></canvas>
                   </md-content>
                 </md-tab>
-                <md-tab label="two">
+                <md-tab label="nivel3">
                   <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Two</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-                    <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-                  </md-content>
-                </md-tab>
-                <md-tab label="three">
-                  <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <canvas id="canvas2"></canvas>
                   </md-content>
                 </md-tab>
               </md-tabs>
-            </md-dialog-content>
-            <md-dialog-actions layout="row">
-              <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-                More on Wikipedia
-              </md-button>
-              <span flex></span>
-              <md-button ng-click="answer('not useful')" >
-                Not Useful
-              </md-button>
-              <md-button ng-click="answer('useful')" style="margin-right:20px;" >
-                Useful
-              </md-button>
-            </md-dialog-actions>  
+            </md-content>
         </md-card>  
       </div>
       <!-- side nav de instrucciones -->
@@ -137,11 +251,276 @@
             </md-button>
           </div>
         </md-toolbar>
-        <md-content ng-controller="RightCtrl" layout-padding>
+        <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+         <!-- imagen previa -->
+         <div>
+          <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
+         </div>
+         <!-- informacion general del nivel -->
+         <div layout="column">
+          <div>
+            <strong>Dibuja el área de una casa</strong>
+          </div>
+          <div layout="row" layout-align="start center">
+            <div ng-style="{'color':'yellow'}" flex="55"><strong>Nivel uno</strong></div>
+            <div flex="45" layout="row"   layout-align="center center">
+              <div>
+                <span>Fácil</span>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star</i>
+                </md-button>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star_border</i>
+                </md-button>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star_border</i>
+                </md-button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <md-icon md-svg-icon="../media/icons/cube3.svg"></md-icon> 15 pts
+          </div>
+
+         </div>
+         <!-- instrucciones -->
+         <div>
+          <p>Para que una turbina funcione es importante que tenga una helice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la helice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+          <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+                Comenzar reto 
+          </md-button>
+
+         </div>
         </md-content>
       </md-sidenav>
-
     </div>
+<xml id="toolbox" style="display: none">
+    <category name="Control" colour="355">
+      <block type="wait"></block>
+      <block type="stop"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
+    </category>
+
+    <category name="Move" colour="79">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
+
+    <category name="Lights" colour="176">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
+
+    <category name="Sounds" colour="290">
+      <block type="sonido"></block>
+    </category>
+
+    <category name="Math" colour="190">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Text" colour="210">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Logic" colour="25">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Colour" colour="160">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <sep></sep>
+    <category name="Hardware" colour="354">
+      <block type="ledDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Turn">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="motorDisplayed">
+        <value name="steps">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="direction">
+          <shadow type="direction">
+            <field name="direction">Forward</field>
+          </shadow>
+        </value>
+        <value name="speed">
+          <shadow type="speed">
+            <field name="speed">1</field>
+          </shadow>
+        </value>
+      </block>
+
+      <block type="buzzerDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Tone">
+          <shadow type="tone">
+            <field name="tone">Do</field>
+          </shadow>
+        </value>
+        <value name="Secs">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pantallaDisplayed">
+        <value name="message">
+          <shadow type="text">
+            <field name="TEXT">Type message here</field>
+          </shadow>
+        </value>
+        <value name="color">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+
+      </block>
+      <block type="botonDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Status">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+
+
+      </block>
+
+      <block type="status"></block>
+      <block type="speed"></block>
+      <block type="pina"></block>
+      <block type="pind"></block>
+      <block type="tone"></block>
+    </category>
+
+    <sep></sep>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="46" custom="PROCEDURE"></category>
   <!-- Your application bootstrap  -->
   <script type="text/javascript">    
     /**
@@ -153,8 +532,10 @@
         $scope.isOpenRight = function(){
           return $mdSidenav('right').isOpen();
         };
-        function AppCtrl($scope) {
-          $scope.currentNavItem = 'page1';
+        $scope.myClickEvent1 = function() {
+          
+          begin1();
+          
         }
         function buildToggler(navID) {
           return function() {
@@ -176,13 +557,68 @@
             });
         };
       });
+  </script> 
+  <script type="text/javascript">
+  var myWidth = 0, myHeight = 0;
+    function alertSize() {
 
+      if( typeof( window.innerWidth ) == 'number' ) {
+        //No-IE
+        myWidth = window.innerWidth;
+        myHeight = window.innerHeight;
+      } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+        //IE 6+
+        myWidth = document.documentElement.clientWidth;
+        myHeight = document.documentElement.clientHeight;
+      } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+        //IE 4 compatible
+        myWidth = document.body.clientWidth;
+        myHeight = document.body.clientHeight;
+      }
+      /*window.alert( 'Width = ' + myWidth );
+      window.alert( 'Height = ' + myHeight ); */
 
-      angular.module('navBarDemoBasicUsage', ['ngMaterial'])
-      .controller('AppCtrl', AppCtrl);
-  
+    }
+    alertSize();
+
+  'use strict';
+    var blocklyArea = document.getElementById('blocklyArea');
+    var blocklyDiv = document.getElementById('blocklyDiv');
+    var blocklyCanvas = document.getElementById('divCanvas');
+    var workspace = Blockly.inject(blocklyDiv,
+        { media: '../media/',
+          zoom:
+           {controls: true,
+            wheel: true,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3,
+            scaleSpeed: 1.2},
+          toolbox: document.getElementById('toolbox')});
+
+  var onresize = function(e) {
+    // Compute the absolute coordinates and dimensions of blocklyArea.
+    var element = blocklyArea;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+    //alert(blocklyArea.offsetWidth)
+    // Position blocklyDiv over blocklyArea.
+    blocklyDiv.style.left = x + 'px';
+    //blocklyDiv.style.top = y + 'px';
+
+    blocklyDiv.style.width = (myWidth*.4) + 'px';
+    blocklyDiv.style.height = (myHeight*.80)+ 'px';
+    blocklyCanvas.style.height= (myHeight*.80)+ 'px';
+    };
+
+  window.addEventListener('resize', onresize, false);
+  onresize();
   </script>
-  
   
 </body>
 </html>
