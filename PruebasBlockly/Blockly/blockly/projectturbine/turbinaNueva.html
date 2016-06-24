@@ -60,7 +60,7 @@
         roadpaint.splice(0,roadpaint.length);//inicializa los vectores
         solucion.splice(0,solucion.length);//inicializa los vectores
         canvas = document.getElementById('canvas1');
-        canvas.style.border='1px solid black';
+        
         canvas.style.margin='0px 0px 0px 10px';
         ctx = canvas.getContext('2d');
         ancho = document.getElementById('divCanvas').offsetWidth;
@@ -182,7 +182,7 @@
           solucion.splice(0,solucion.length);//inicializa los vectores
 
           canvas = document.getElementById('canvas2');
-          canvas.style.border='1px solid black';
+          
           canvas.style.margin='0px 0px 0px 10px';
           ctx = canvas.getContext('2d');
           ancho = document.getElementById('divCanvas').offsetWidth;
@@ -331,7 +331,7 @@
 
         <md-card layout="column" id="divCanvas" flex="95" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
             <md-content id="divCanvas">
-              <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual">
+              <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-style="{'position': 'relative','left' : '-2%'}">
                 <md-tab label="nivel1" md-on-select="canvas1();"> 
                   <canvas id="canvas1"></canvas>               
                 </md-tab>
@@ -343,7 +343,7 @@
                 </md-tab>
               </md-tabs>
             </md-content>
-            <div ng-style="{'position': 'relative','top': '-92%','left': '75%','z-index': '5'}">
+            <div ng-style="{'position': 'relative','top': '-99%','left': '75%','z-index': '5','height': '0%'}">
               <md-button class="md-icon-button" aria-label="Favorite">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
@@ -357,7 +357,7 @@
                 <md-menu-content>
                   <!-- mostrar codigo -->
                   <md-menu-item>
-                    <md-button onclick="showCode()"  ><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
+                    <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
                   </md-menu-item>
                   <!-- Download project -->
                   <md-menu-item>
