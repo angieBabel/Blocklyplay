@@ -290,8 +290,7 @@
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
     <!-- header de la pagina -->
-    <div layout="row">
-      <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
         <div class="md-toolbar-tools" layout="row" >
           <div flex layout="row"   layout-align="start center">
             <div>
@@ -320,8 +319,7 @@
           <span>Secuencias y loops</span>
         </h4>  
         </div>
-    </md-toolbar>
-    </div>
+     </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
       <!-- Contenedor del toolbox y blockly -->
@@ -330,7 +328,7 @@
       </div>
       <!-- container donde ira el canvas -->
       <div flex="60">
-        <md-card  id="divCanvas" flex="95" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
+        <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-style="{'position': 'relative','left' : '-2%'}">
               <md-tab label="nivel1" md-on-select="canvas1();"> 
@@ -345,7 +343,7 @@
             </md-tabs>
           </md-content>
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
-            <div ng-style="{'position': 'absolute','left':'70%'}">
+            <div ng-style="{'position': 'absolute','left':'75%'}">
               <md-button class="md-icon-button" aria-label="Favorite">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
@@ -767,7 +765,6 @@
 
     window.addEventListener('resize', onresize, false);
     onresize();
-
   </script>
   
 </body>
