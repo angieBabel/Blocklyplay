@@ -302,7 +302,7 @@
           </div>
           <div flex="60" layout="row"   layout-align="start center">
             <div flex="20">
-              <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex="100"  flex-gt-md="auto" ng-click="toggleRight()" >
+              <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex="100"  flex-gt-md="auto" ng-click="toggle()" >
                 Instrucciones 
               </md-button>
             </div>
@@ -378,8 +378,8 @@
         </md-card>
       </div>
     </div>
-    <!-- side nav de instrucciones -->
-    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" ng-style="{'background-color':'#0097A7'}" >
+    <!-- side nav de instrucciones de nivel 1-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
       <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
         <div class="md-toolbar-tools">
           <h2>
@@ -402,8 +402,8 @@
           <strong>Dibuja el área de una casa</strong>
         </div>
         <div layout="row" layout-align="start center">
-          <div ng-style="{'color':'yellow'}" flex="55"><strong>Nivel uno</strong></div>
-          <div flex="45" layout="row"   layout-align="center center">
+          <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
+          <div flex="60" layout="row"   layout-align="center center">
             <div>
               <span>Fácil</span>
             </div>
@@ -432,6 +432,67 @@
        <!-- instrucciones -->
        <div>
         <p>Para que una turbina funcione es importante que tenga una helice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la helice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+              Comenzar reto 
+        </md-button>
+
+       </div>
+      </md-content>
+    </md-sidenav>
+    <!-- side nav de instrucciones de nivel 2-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones2" ng-style="{'background-color':'#0097A7'}" >
+      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Instrucciones</span>
+          </h2>
+          <span flex></span>            
+          <md-button class="md-icon-button" ng-click="close()">
+            <md-icon><i class="material-icons">close</i></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+       <!-- imagen previa -->
+       <div>
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
+       </div>
+       <!-- informacion general del nivel -->
+       <div layout="column">
+        <div>
+          <strong>Dibuja el área de una casa</strong>
+        </div>
+        <div layout="row" layout-align="start center">
+          <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel dos</strong></div>
+          <div flex="60" layout="row"   layout-align="center center">
+            <div>
+              <span>Intermedio</span>
+            </div>
+            <div>
+              <md-button class="md-icon-button" aria-label="Settings">
+                <i class="material-icons">star</i>
+              </md-button>
+            </div>
+            <div>
+              <md-button class="md-icon-button" aria-label="Settings">
+                <i class="material-icons">star</i>
+              </md-button>
+            </div>
+            <div>
+              <md-button class="md-icon-button" aria-label="Settings">
+                <i class="material-icons">star_border</i>
+              </md-button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 30 pts
+        </div>
+
+       </div>
+       <!-- instrucciones -->
+       <div>
+        <p>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos.</p>
         <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
               Comenzar reto 
         </md-button>
@@ -669,7 +730,7 @@
      */
     angular.module('Blocklyplay', ['ngMaterial'])
       .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-        $scope.toggleRight = buildToggler('right');
+        $scope.toggle = buildToggler();
         $scope.isOpenRight = function(){
           return $mdSidenav('right').isOpen();
         };
@@ -694,26 +755,45 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        function buildToggler(navID) {
+        function buildToggler() {
           return function() {
-            // Component lookup should always be available since we are not using `ng-if`
-            $mdSidenav(navID)
-              .toggle()
-              .then(function () {
-                $log.debug("toggle " + navID + " is done");
-              });
+              switch(currentpanel) {
+                case 1:
+                    navID = 'Instrucciones1';
+                    alert(navID)
+                    break;
+                case 2:
+                    navID = 'Instrucciones2';
+                    alert(navID)
+                    break;
+                case 3:
+                    navID = 'Instrucciones3';
+                    alert(navID)
+                case 4:
+                    navID = 'Instrucciones4';
+                    alert(navID)
+                default:
+                    navID = 'Instrucciones1';
+                    alert(navID)
+              }
+              // Component lookup should always be available since we are not using `ng-if`
+              $mdSidenav(navID)
+                .toggle()
+                .then(function () {
+                  $log.debug("toggle " + navID + " is done");
+                });
+            }
           }
-        }
-      })
-      .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-        $scope.close = function () {
-          // Component lookup should always be available since we are not using `ng-if`
-          $mdSidenav('right').close()
-            .then(function () {
-              $log.debug("close RIGHT is done");
-            });
-        };
-      });
+        })
+        .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+          $scope.close = function () {
+            // Component lookup should always be available since we are not using `ng-if`
+            $mdSidenav('right').close()
+              .then(function () {
+                $log.debug("close RIGHT is done");
+              });
+          };
+        });
   </script> 
   <script type="text/javascript">
     var myWidth = 0, myHeight = 0;
@@ -784,77 +864,90 @@
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
 
 
-  function nextStep() {
-    if (highlightPause) {
-      // A block has been highlighted.  Pause execution here.
-      highlightPause = false;
-    } else {
-      // Keep executing until a highlight statement is reached.
-      /*stepCode();*/
-    }
-    if (!myInterpreter.step()) {
-      /*window.setTimeout(finish, 15);*/
-      clearInterval(intervalo);
-      check();
-    }
-  }
-  function finish(){
-    if(acabo==1){
-          nextStep();
+    function nextStep() {
+      if (highlightPause) {
+        // A block has been highlighted.  Pause execution here.
+        highlightPause = false;
+      } else {
+        // Keep executing until a highlight statement is reached.
+        /*stepCode();*/
+      }
+      if (!myInterpreter.step()) {
+        /*window.setTimeout(finish, 15);*/
+        clearInterval(intervalo);
+        switch(currentpanel) {
+          case 1:
+              check1();
+              break;
+          case 2:
+              check2();
+              break;
+          case 3:
+              check3();
+          case 4:
+              check4();
+          default:
+              check1();
         }
-  }
+      }
+    }
+    function finish(){
+      if(acabo==1){
+            nextStep();
+          }
+    }
 
-  function runCode() {
-    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
-    parseCode();
-    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
-    intervalo= setInterval(function(){finish();},15)
-    //se guarda lo que hay en el workspaces en el almcaneamiento local
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var domToPretty = Blockly.Xml.domToPrettyText(xml);
-    window.localStorage.setItem("panel5l2", domToPretty);
-  }
-  //las funciones de guardar XML estan en el archivo controlFunctions.js
+    function runCode() {
+      //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+      parseCode();
+      //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+      intervalo= setInterval(function(){finish();},15)
+      //se guarda lo que hay en el workspaces en el almcaneamiento local
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var domToPretty = Blockly.Xml.domToPrettyText(xml);
+      window.localStorage.setItem("panel5l2", domToPretty);
+    }
+    //las funciones de guardar XML estan en el archivo controlFunctions.js
 
-  //Variable para controlar la subida de archivos
-  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-    //se agrega un EventListener, para saber que se ha acceido a el
-    control.addEventListener("change", function(event) {
-         var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
-         //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
-         loadXML();
-         var loadinput=document.getElementById('your-files').style='display:none';
-    }, false);
-  //funcion que habilita el file input
-  function showFileInput(){
-    var loadinput=document.getElementById('your-files').style='display:true';
-    var buttonload=document.getElementById('loadbutton').style='display:none';
-  }
-  //funcion que carga un archivo XML
-  function loadXML() {
-    //se define la funcion Reader, de tipo FileReader
-    var reader = new FileReader();
-    reader.onload = function(event) {
-        var contents = event.target.result;//se almacena el resultado en una variable llamada content
-        console.log("File contents: " + contents);
-        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
-        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
-    };
-    //en caso de haber error, lo lanza
-    reader.onerror = function(event) {
-        console.error("File could not be read! Code " + event.target.error.code);
-    };
-    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
-    reader.readAsText(control.files[0]);
-  }
-  function pasoHW(){
-    var socket = io.connect('http://edison.local:3000');
-    var code = Blockly.JavaScript.workspaceToCode(workspace);
-    code = code.replace(/[']/gi, "");
-    socket.emit('changefunction',code);
-    //alert(code);
-  } 
+    //Variable para controlar la subida de archivos
+    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+      //se agrega un EventListener, para saber que se ha acceido a el
+      control.addEventListener("change", function(event) {
+           var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
+           //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
+           loadXML();
+           var loadinput=document.getElementById('your-files').style='display:none';
+      }, false);
+    //funcion que habilita el file input
+    function showFileInput(){
+      var loadinput=document.getElementById('your-files').style='display:true';
+      var buttonload=document.getElementById('loadbutton').style='display:none';
+    }
+    //funcion que carga un archivo XML
+    function loadXML() {
+      //se define la funcion Reader, de tipo FileReader
+      var reader = new FileReader();
+      reader.onload = function(event) {
+          var contents = event.target.result;//se almacena el resultado en una variable llamada content
+          console.log("File contents: " + contents);
+          Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+          var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+          Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+      };
+      //en caso de haber error, lo lanza
+      reader.onerror = function(event) {
+          console.error("File could not be read! Code " + event.target.error.code);
+      };
+      //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+      reader.readAsText(control.files[0]);
+    }
+    function pasoHW(){
+      var socket = io.connect('http://edison.local:3000');
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      code = code.replace(/[']/gi, "");
+      socket.emit('changefunction',code);
+      //alert(code);
+    } 
   </script>
   
 </body>
