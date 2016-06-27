@@ -347,10 +347,10 @@
           </md-content>
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
             <div ng-style="{'position': 'absolute','left':'75%'}">
-              <md-button class="md-icon-button" aria-label="Favorite">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
-              <md-button class="md-icon-button" aria-label="More">
+              <md-button class="md-icon-button" aria-label="More" onclick="stop()">
                 <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
               </md-button>
               <md-menu>
@@ -675,12 +675,19 @@
         };
         $scope.canvas1 = function() {
           begin1();
+          currentpanel=1;
         }
         $scope.canvas2 = function() {
           begin2();
+          currentpanel=2;
         }
         $scope.canvas3 = function() {
           begin3();
+          currentpanel=3;
+        }
+        $scope.canvas4 = function() {
+          begin4();
+          currentpanel=4;
         }
         var originatorEv;
         $scope.openMenu = function($mdOpenMenu, ev) {
@@ -768,6 +775,86 @@
 
     window.addEventListener('resize', onresize, false);
     onresize();
+
+    var program = window.localStorage.getItem("panel5l2");
+    Blockly.mainWorkspace.clear();
+    var textToDom = Blockly.Xml.textToDom(program);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+
+    //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
+
+
+  function nextStep() {
+    if (highlightPause) {
+      // A block has been highlighted.  Pause execution here.
+      highlightPause = false;
+    } else {
+      // Keep executing until a highlight statement is reached.
+      /*stepCode();*/
+    }
+    if (!myInterpreter.step()) {
+      /*window.setTimeout(finish, 15);*/
+      clearInterval(intervalo);
+      check();
+    }
+  }
+  function finish(){
+    if(acabo==1){
+          nextStep();
+        }
+  }
+
+  function runCode() {
+    //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+    parseCode();
+    //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+    intervalo= setInterval(function(){finish();},15)
+    //se guarda lo que hay en el workspaces en el almcaneamiento local
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var domToPretty = Blockly.Xml.domToPrettyText(xml);
+    window.localStorage.setItem("panel5l2", domToPretty);
+  }
+  //las funciones de guardar XML estan en el archivo controlFunctions.js
+
+  //Variable para controlar la subida de archivos
+  var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+    //se agrega un EventListener, para saber que se ha acceido a el
+    control.addEventListener("change", function(event) {
+         var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
+         //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
+         loadXML();
+         var loadinput=document.getElementById('your-files').style='display:none';
+    }, false);
+  //funcion que habilita el file input
+  function showFileInput(){
+    var loadinput=document.getElementById('your-files').style='display:true';
+    var buttonload=document.getElementById('loadbutton').style='display:none';
+  }
+  //funcion que carga un archivo XML
+  function loadXML() {
+    //se define la funcion Reader, de tipo FileReader
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var contents = event.target.result;//se almacena el resultado en una variable llamada content
+        console.log("File contents: " + contents);
+        Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+        var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+    };
+    //en caso de haber error, lo lanza
+    reader.onerror = function(event) {
+        console.error("File could not be read! Code " + event.target.error.code);
+    };
+    //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+    reader.readAsText(control.files[0]);
+  }
+  function pasoHW(){
+    var socket = io.connect('http://edison.local:3000');
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    code = code.replace(/[']/gi, "");
+    socket.emit('changefunction',code);
+    //alert(code);
+  } 
   </script>
   
 </body>

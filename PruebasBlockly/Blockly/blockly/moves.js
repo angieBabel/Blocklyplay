@@ -1,4 +1,6 @@
 //inicialización de las variables
+    
+    var currentpanel=0;//para saber en que panel esta
     var img= new Image();//variable de imagen del avatar
     //coordenadas donde comienza el avatar
     var X,Y;
@@ -197,7 +199,20 @@ function rotar(angulo,side){
   if (positionObj.objZ>=360) {
       positionObj.objZ-=360;
     }
-  panel();
+  switch(currentpanel) {
+    case 1:
+        panel1();
+        break;
+    case 2:
+        panel2();
+        break;
+    case 3:
+        panel3();
+    case 4:
+        panel4();
+    default:
+        panel1();
+  }
 }
 //Función para ejecutar sonidos de acuerdo a la elección del usuario
 function sound(sonido){
@@ -504,7 +519,20 @@ function painroad(){
 
     blink=setInterval(function(){
       //cada ves que entra se pinta el panel
-      panel();
+      switch(currentpanel) {
+        case 1:
+            panel1();
+            break;
+        case 2:
+            panel2();
+            break;
+        case 3:
+            panel3();
+        case 4:
+            panel4();
+        default:
+            panel1();
+      }
       //tambien se ejecuta el avatar, para que no se note el retraso cuando el panel lo pinte
       Avatar();
       lightside=side;

@@ -191,3 +191,12 @@ function saveXML(){
   }
  }
 }
+
+//funcion para detener
+function stop(){
+    acabo==0;
+    clearInterval(interval);
+    clearInterval(intervalo);
+    begin();
+  }
+
