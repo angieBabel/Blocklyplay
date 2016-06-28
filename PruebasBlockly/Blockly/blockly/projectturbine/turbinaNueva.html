@@ -315,12 +315,12 @@
           </div>
         </div>
         <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Settings" >
-          <md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon> 
-        </md-button>
-        <h4>
-          <span>Secuencias y loops</span>
-        </h4>  
+          <md-button class="md-icon-button" aria-label="Settings" >
+            <md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon> 
+          </md-button>
+          <h4>
+            <span>Secuencias y loops</span>
+          </h4>  
         </div>
      </md-toolbar>
     <!-- contenedor de los elementos -->
@@ -331,9 +331,11 @@
       </div>
       <!-- container donde ira el canvas -->
       <div flex="60">
+        <!-- tarjeta donde esta el canvas y los botones de accion -->
         <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
+          <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
-            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-style="{'position': 'relative','left' : '-2%'}">
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-click="toggle()" ng-style="{'position': 'relative','left' : '-2%'}">
               <md-tab label="nivel1" md-on-select="canvas1();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
@@ -345,6 +347,7 @@
               </md-tab>
             </md-tabs>
           </md-content>
+          <!-- div con los botones de accion -->
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
             <div ng-style="{'position': 'absolute','left':'75%'}">
               <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
@@ -760,21 +763,16 @@
               switch(currentpanel) {
                 case 1:
                     navID = 'Instrucciones1';
-                    alert(navID)
                     break;
                 case 2:
                     navID = 'Instrucciones2';
-                    alert(navID)
                     break;
                 case 3:
                     navID = 'Instrucciones3';
-                    alert(navID)
                 case 4:
                     navID = 'Instrucciones4';
-                    alert(navID)
                 default:
                     navID = 'Instrucciones1';
-                    alert(navID)
               }
               // Component lookup should always be available since we are not using `ng-if`
               $mdSidenav(navID)
