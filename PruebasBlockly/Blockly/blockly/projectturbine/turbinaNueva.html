@@ -738,18 +738,22 @@
         $scope.canvas1 = function() {
           begin1();
           currentpanel=1;
+          loadCode();
         }
         $scope.canvas2 = function() {
           begin2();
           currentpanel=2;
+          loadCode();
         }
         $scope.canvas3 = function() {
           begin3();
           currentpanel=3;
+          loadCode();
         }
         $scope.canvas4 = function() {
           begin4();
           currentpanel=4;
+          loadCode();
         }
         var originatorEv;
         $scope.openMenu = function($mdOpenMenu, ev) {
@@ -851,14 +855,30 @@
 
     window.addEventListener('resize', onresize, false);
     onresize();
+    //para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
+    function loadCode(){
+      var program;
+      switch(currentpanel) {
+            case 1:
+                program = window.localStorage.getItem("turbina1");
+                break;
+            case 2:
+                program = window.localStorage.getItem("turbina2");
+                break;
+            case 3:
+                program = window.localStorage.getItem("turbina3");
+            case 4:
+                program = window.localStorage.getItem("turbina4");
+            default:
+                program = window.localStorage.getItem("turbina1");
+          }
 
-    var program = window.localStorage.getItem("panel5l2");
-    Blockly.mainWorkspace.clear();
-    var textToDom = Blockly.Xml.textToDom(program);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+      Blockly.mainWorkspace.clear();
+      var textToDom = Blockly.Xml.textToDom(program);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+    }
 
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
-
 
     function nextStep() {
       if (highlightPause) {
@@ -901,7 +921,21 @@
       //se guarda lo que hay en el workspaces en el almcaneamiento local
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
       var domToPretty = Blockly.Xml.domToPrettyText(xml);
-      window.localStorage.setItem("panel5l2", domToPretty);
+      switch(currentpanel) {
+          case 1:
+              window.localStorage.setItem("turbina1", domToPretty);
+              break;
+          case 2:
+              window.localStorage.setItem("turbina2", domToPretty);
+              break;
+          case 3:
+              window.localStorage.setItem("turbina3", domToPretty);
+          case 4:
+              window.localStorage.setItem("turbina4", domToPretty);
+          default:
+              window.localStorage.setItem("turbina1", domToPretty);
+        }
+      //window.localStorage.setItem("panel5l2", domToPretty);
     }
     //las funciones de guardar XML estan en el archivo controlFunctions.js
 
