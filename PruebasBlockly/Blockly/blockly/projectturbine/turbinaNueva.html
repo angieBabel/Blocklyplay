@@ -733,6 +733,10 @@
      */
     angular.module('Blocklyplay', ['ngMaterial'])
       .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        angular.element(document).ready(function () {
+          $mdSidenav('Instrucciones1')
+                .toggle();
+        });
         $scope.toggle = buildToggler();
         $scope.isOpenRight = function(){
           return $mdSidenav('right').isOpen();
