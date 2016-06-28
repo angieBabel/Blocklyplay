@@ -303,7 +303,7 @@
               <span>Dibuja el contorno de una hélice</span>
             </div>
             <div flex="20">
-              <md-button onclick=""><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
+              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
             </div> 
           </div>
         </div>
@@ -394,36 +394,35 @@
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
-        <div>
-          <strong>Dibuja el área de una casa</strong>
-        </div>
-        <div layout="row" layout-align="start center">
-          <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
-          <div flex="60" layout="row"   layout-align="center center">
-            <div>
-              <span>Fácil</span>
-            </div>
-            <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star</i>
-              </md-button>
-            </div>
-            <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star_border</i>
-              </md-button>
-            </div>
-            <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star_border</i>
-              </md-button>
+          <div>
+            <strong>Dibuja el área de una casa</strong>
+          </div>
+          <div layout="row" layout-align="start center">
+            <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
+            <div flex="60" layout="row"   layout-align="center center">
+              <div>
+                <span>Fácil</span>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star</i>
+                </md-button>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star_border</i>
+                </md-button>
+              </div>
+              <div>
+                <md-button class="md-icon-button" aria-label="Settings">
+                  <i class="material-icons">star_border</i>
+                </md-button>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 15 pts
-        </div>
-
+          <div>
+            <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 15 pts
+          </div>
        </div>
        <!-- instrucciones -->
        <div>
@@ -725,7 +724,7 @@
      * You must include the dependency on 'ngMaterial' 
      */
     angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+      .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $mdDialog) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
           $mdSidenav('Instrucciones1')
@@ -737,31 +736,41 @@
           begin1();
           currentpanel=1;
           loadCode();
-
         }
         $scope.canvas2 = function() {
           begin2();
           currentpanel=2;
           loadCode();
-
         }
         $scope.canvas3 = function() {
           begin3();
           currentpanel=3;
           loadCode();
-
         }
         $scope.canvas4 = function() {
           begin4();
           currentpanel=4;
           loadCode();
-
         }
         var originatorEv;
         $scope.openMenu = function($mdOpenMenu, ev) {
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
+        $scope.showTabDialog = function(ev) {
+            $mdDialog.show({
+              controller: DialogController,
+              templateUrl: '../instructions/turbine.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true
+            }).then(function(answer) {
+                  $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                  $scope.status = 'You cancelled the dialog.';
+                });
+          };
+
         function buildToggler() {
           return function() {
               switch(currentpanel) {
@@ -796,6 +805,17 @@
               });
           };
         });
+      function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+          $mdDialog.hide(answer);
+        };
+      }
   </script> 
   <script type="text/javascript">
     var myWidth = 0, myHeight = 0;

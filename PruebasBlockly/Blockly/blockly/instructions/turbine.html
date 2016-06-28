@@ -1,35 +1,43 @@
 <md-dialog aria-label="Use your knowledge">
   <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Loops and sequences</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon><i class="material-icons">close</i></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
     <md-dialog-content style="max-width:800px;max-height:810px; ">
-      <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Level 1">
-          <md-content class="md-padding">
-            <!-- <h1 class="md-display-2">Tab One</h1> -->
-            <p>Para que una turbina funcione es importante que tenga una helice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la helice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="Level 2">
-          <md-content class="md-padding">
-            <!-- <h1 class="md-display-2">Tab Two</h1> -->
-            <p>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="Level 3">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Tab Three</h1>
-            <p>Instrucciones nivel 3</p>
-          </md-content>
-        </md-tab>
-      </md-tabs>
+      <!-- barra de herramienta para poner el close -->
+      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Publicar producto</span>
+          </h2>
+          <span flex></span>            
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon><i class="material-icons">close</i></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <!-- imagen de vista previa -->
+      <div id="thumbnail">
+       
+      </div>
+      <!-- inputs del formulario -->
+       <div layout="column">
+          <!-- titulo del programa -->
+          <div></div>
+          <!-- si es individual o grupal -->
+          <div>
+            <div flex-xs flex="50">
+              <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                Checkbox 1: {{ data.cb1 }}
+              </md-checkbox>
+            </div>
+            <div flex-xs flex="50">
+              <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                Checkbox 1: {{ data.cb1 }}
+              </md-checkbox>
+            </div>
+          </div>
+          <!-- comentario -->
+          <div></div>
+       </div>
+
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <span flex></span>
