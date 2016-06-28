@@ -61,7 +61,6 @@
         solucion.splice(0,solucion.length);//inicializa los vectores
         canvas = document.getElementById('canvas1');
         
-        canvas.style.margin='0px 0px 0px 10px';
         ctx = canvas.getContext('2d');
         ancho = document.getElementById('divCanvas').offsetWidth;
         alto = document.getElementById('divCanvas').offsetHeight;
@@ -72,9 +71,9 @@
         wimg=stepsizeX/2;
         X = stepsizeX*15;
         Y = stepsizeY*11;
-        positionObj.objX=X-stepsizeX;
-        positionObj.objY=Y-stepsizeY;
-        positionObj.objZ=0;
+        positionObj.objX=stepsizeX*14;
+        positionObj.objY=stepsizeY*10;
+        //positionObj.objZ=0;
         Xaux = positionObj.objX;
         Yaux = positionObj.objY;
 
@@ -145,7 +144,7 @@
           ctx.translate(positionObj.objX,positionObj.objY);
           //ctx.rotate(positionObj.objZ * (Math.PI/180));
           ctx.globalAlpha=1;
-          ctx.drawImage(img,-0,-stepsizeY,stepsizeX,stepsizeY); 
+          ctx.drawImage(img,0,-stepsizeY,stepsizeX,stepsizeY); 
           ctx.restore();
         }
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
@@ -182,8 +181,7 @@
           solucion.splice(0,solucion.length);//inicializa los vectores
 
           canvas = document.getElementById('canvas2');
-          
-          canvas.style.margin='0px 0px 0px 10px';
+
           ctx = canvas.getContext('2d');
           ancho = document.getElementById('divCanvas').offsetWidth;
           alto = document.getElementById('divCanvas').offsetHeight;
@@ -260,7 +258,7 @@
           ctx.translate(positionObj.objX,positionObj.objY);
           //ctx.rotate(positionObj.objZ * (Math.PI/180));
           ctx.globalAlpha=1;
-          ctx.drawImage(img,-0,-stepsizeY,stepsizeX,stepsizeY); 
+          ctx.drawImage(img,0,-stepsizeY,stepsizeX,stepsizeY); 
           ctx.restore();
         }
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
@@ -302,7 +300,7 @@
               </md-button>
             </div>
             <div flex="60">
-              <span>Dibuja el contorno de una helice</span>
+              <span>Dibuja el contorno de una hélice</span>
             </div>
             <div flex="20">
               <md-button onclick=""><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
@@ -330,14 +328,14 @@
         <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
-            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-style="{'position': 'relative','left' : '-2%'}">
-              <md-tab label="nivel1" md-on-select="canvas1();"> 
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
+              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-on-select="canvas2();">
+              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-on-select="canvas3();">
+              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -429,7 +427,7 @@
        </div>
        <!-- instrucciones -->
        <div>
-        <p>Para que una turbina funcione es importante que tenga una helice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la helice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+        <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
         <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
               Comenzar reto 
         </md-button>
@@ -490,7 +488,7 @@
        </div>
        <!-- instrucciones -->
        <div>
-        <p>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos.</p>
+        <p>Ahora vamos a armar la turbina, coloca la hélice en el lugar que corresponde (toma como referencia el centro de la hélice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos.</p>
         <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
               Comenzar reto 
         </md-button>
@@ -739,21 +737,25 @@
           begin1();
           currentpanel=1;
           loadCode();
+
         }
         $scope.canvas2 = function() {
           begin2();
           currentpanel=2;
           loadCode();
+
         }
         $scope.canvas3 = function() {
           begin3();
           currentpanel=3;
           loadCode();
+
         }
         $scope.canvas4 = function() {
           begin4();
           currentpanel=4;
           loadCode();
+
         }
         var originatorEv;
         $scope.openMenu = function($mdOpenMenu, ev) {

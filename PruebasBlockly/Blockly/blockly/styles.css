@@ -1,5 +1,13 @@
 canvas {
-      background: #fff;
-      height: 91.5%;
-     width: 100%;
-    }
+  background: #fff;
+  height: 91.5%;
+ width: 100%;
+}
+#divCanvas .md-tab {
+  color: #CFD8DC; 
+  /*color: #26C6DA; */
+}
+
+#divCanvas .md-active{
+  color: #26C6DA; 
+}
