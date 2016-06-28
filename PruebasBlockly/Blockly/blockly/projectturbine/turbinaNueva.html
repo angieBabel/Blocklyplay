@@ -293,12 +293,7 @@
     <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
-            <div>
-              <md-icon md-svg-icon="../media/icons/arrow-left.svg"></md-icon> 
-            </div>
-            <div>
-              <span>kite</span>
-            </div>
+            <md-button><md-icon md-svg-icon="../media/icons/arrow-left.svg"></md-icon></md-icon> Kite</md-button>   
           </div>
           <div flex="60" layout="row"   layout-align="start center">
             <div flex="20">
@@ -310,7 +305,7 @@
               <span>Dibuja el contorno de una helice</span>
             </div>
             <div flex="20">
-              <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
+              <md-button onclick=""><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
             </div> 
           </div>
         </div>
@@ -335,7 +330,7 @@
         <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
-            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-click="toggle()" ng-style="{'position': 'relative','left' : '-2%'}">
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" ng-style="{'position': 'relative','left' : '-2%'}">
               <md-tab label="nivel1" md-on-select="canvas1();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
@@ -733,14 +728,13 @@
      */
     angular.module('Blocklyplay', ['ngMaterial'])
       .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
           $mdSidenav('Instrucciones1')
                 .toggle();
+                navID = 'Instrucciones1';
         });
         $scope.toggle = buildToggler();
-        $scope.isOpenRight = function(){
-          return $mdSidenav('right').isOpen();
-        };
         $scope.canvas1 = function() {
           begin1();
           currentpanel=1;
@@ -790,7 +784,7 @@
         .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
           $scope.close = function () {
             // Component lookup should always be available since we are not using `ng-if`
-            $mdSidenav('right').close()
+            $mdSidenav(navID).close()
               .then(function () {
                 $log.debug("close RIGHT is done");
               });
