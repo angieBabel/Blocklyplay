@@ -1,49 +1,73 @@
-<md-dialog aria-label="Use your knowledge">
-  <form>
-    <md-dialog-content style="max-width:800px;max-height:810px; ">
+<md-dialog aria-label="Publicar producto" id="publishwindow" >
+    <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
-      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+      <md-toolbar ng-style="{'background-color':'#fff', 'color':'#B0BEC5'}" ng-controller="RightCtrl">
         <div class="md-toolbar-tools">
-          <h2>
+          <h4>
             <span>Publicar producto</span>
-          </h2>
+          </h4>
           <span flex></span>            
-          <md-button class="md-icon-button" ng-click="cancel()">
-            <md-icon><i class="material-icons">close</i></md-icon>
+          <md-button class="md-icon-button" aria-label="cerrar" ng-click="cancel()">
+            <md-icon md-svg-icon="../media/icons/close-circle-outline.svg"></md-icon> 
           </md-button>
         </div>
       </md-toolbar>
-      <!-- imagen de vista previa -->
-      <div id="thumbnail">
-       
-      </div>
       <!-- inputs del formulario -->
-       <div layout="column">
-          <!-- titulo del programa -->
-          <div></div>
-          <!-- si es individual o grupal -->
-          <div>
-            <div flex-xs flex="50">
-              <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                Checkbox 1: {{ data.cb1 }}
-              </md-checkbox>
-            </div>
-            <div flex-xs flex="50">
-              <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                Checkbox 1: {{ data.cb1 }}
-              </md-checkbox>
-            </div>
-          </div>
-          <!-- comentario -->
-          <div></div>
-       </div>
-
+      <form name="publicar"  id="publicar">
+        <!-- imagen de vista previa -->
+        <div id="thumbnail">
+        </div>
+        <!-- titulo del programa -->
+        <div>
+          <md-input-container>
+            <label>Titulo</label>
+            <input ng-model="product.tittle">
+          </md-input-container>
+        </div>
+        <!-- si es individual o grupal -->
+        <div layout="column">
+          <md-radio-group ng-model="data.group1">
+            <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
+            <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+          </md-radio-group>
+        </div>
+        <!-- comentario -->
+        <div>
+          <md-input-container class="md-block">
+            <label>Agrega un comentario (opcional)</label>
+            <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          </md-input-container>
+        </div>
+        <div>
+          <md-button ng-click="cancel()" >
+            Cancelar
+          </md-button>
+          <md-button ng-click="" >
+            Publicar
+          </md-button>
+        </div>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button ng-click="cancel()" >
-        OK!
-      </md-button>
-    </md-dialog-actions>
-  </form>
 </md-dialog>
+<script type="text/javascript">
+  function loadThumbnail(){
+    var previa = window.localStorage.getItem("preview");
+    console.log(previa);
+    var thumb = document.getElementById('thumbnail');
+    console.log(thumb);
+    var prev = previa;
+    thumb.innerHTML=previa;
+    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+    //console.log(pre);
+  }
+
+</script>
+
+
+
+
+
+
+
+
+
+

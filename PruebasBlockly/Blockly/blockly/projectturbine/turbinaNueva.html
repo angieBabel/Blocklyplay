@@ -383,7 +383,7 @@
           </h2>
           <span flex></span>            
           <md-button class="md-icon-button" ng-click="close()">
-            <md-icon><i class="material-icons">close</i></md-icon>
+            <md-icon md-svg-icon="../media/icons/close.svg"></md-icon> 
           </md-button>
         </div>
       </md-toolbar>
@@ -757,7 +757,7 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        $scope.showTabDialog = function(ev) {
+        $scope.showTabDialog = function(ev) { 
             $mdDialog.show({
               controller: DialogController,
               templateUrl: '../instructions/turbine.html',
@@ -769,6 +769,7 @@
                 }, function() {
                   $scope.status = 'You cancelled the dialog.';
                 });
+            generate();
           };
 
         function buildToggler() {
@@ -806,14 +807,14 @@
           };
         });
       function DialogController($scope, $mdDialog) {
+        $scope.show = function(){
+
+        };
         $scope.hide = function() {
           $mdDialog.hide();
         };
         $scope.cancel = function() {
           $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
         };
       }
   </script> 
@@ -959,6 +960,35 @@
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }
+
+    function screenshotPage() {
+    //para sacar el thumnail
+      var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
+      var trash = newSVG.querySelector('g.blocklyTrash');
+      trash.remove();
+      var scrolV = newSVG.querySelector('g.blocklyScrollbarVertical');
+      scrolV.remove();
+      var scrolH = newSVG.querySelector('g.blocklyScrollbarHorizontal');
+      scrolH.remove();
+      var zoom = newSVG.querySelector('g.blocklyZoom');
+      zoom.remove();
+      //console.log(newSVG);
+      window.localStorage.setItem("preview", newSVG.outerHTML); 
+
+  }
+  function generate() {
+      screenshotPage();
+  }
+  function loadThumbnail(){
+    var previa = window.localStorage.getItem("preview");
+    console.log(previa);
+    var thumb = document.getElementById('thumbnail');
+    console.log(thumb);
+    var prev = previa;
+    thumb.innerHTML=previa;
+    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+    //console.log(pre);
+  }
     //las funciones de guardar XML estan en el archivo controlFunctions.js
 
     //Variable para controlar la subida de archivos

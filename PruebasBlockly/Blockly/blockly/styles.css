@@ -11,3 +11,7 @@ canvas {
 #divCanvas .md-active{
   color: #26C6DA; 
 }
+
+ .md-dialog-content .md-active {
+	color: #26C6DA; 
+}
