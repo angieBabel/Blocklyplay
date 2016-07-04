@@ -966,6 +966,7 @@
       var zoom = newSVG.querySelector('g.blocklyZoom');
       zoom.remove();
       //console.log(newSVG);
+      newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
       window.localStorage.setItem("preview", newSVG.outerHTML); 
     }
     function generate() {
