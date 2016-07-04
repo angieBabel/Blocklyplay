@@ -15,3 +15,6 @@ canvas {
  .md-dialog-content .md-active {
 	color: #26C6DA; 
 }
+p {
+text-align : justify;
+}

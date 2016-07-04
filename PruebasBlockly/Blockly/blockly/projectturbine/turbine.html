@@ -10,6 +10,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 
 
   <!-- lo que blockly necesita -->
@@ -283,7 +284,6 @@
         }
       }
   </script>
-
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
@@ -291,11 +291,15 @@
     <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
-            <md-button><md-icon md-svg-icon="../media/icons/arrow-left.svg"></md-icon></md-icon> Kite</md-button>   
+            <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
+              <md-icon md-svg-icon="../media/icons/arrow-left.svg">
+            </md-button>
+            <h6 class="md-title ">Kite</h6>
+            
           </div>
           <div flex="60" layout="row"   layout-align="start center">
             <div flex="20">
-              <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex="100"  flex-gt-md="auto" ng-click="toggle()" >
+              <md-button class="md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex-gt-md="auto" ng-click="toggle()" >
                 Instrucciones 
               </md-button>
             </div>
@@ -308,12 +312,17 @@
           </div>
         </div>
         <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Settings" >
-            <md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon> 
-          </md-button>
-          <h4>
-            <span>Secuencias y loops</span>
-          </h4>  
+          <div flex="5"></div>
+          <div flex="40" layout="row"   layout-align="start center">
+            <md-button class="md-icon-button" aria-label="Settings" >
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="#FFFFFF" d="M11,6.5V9.33L8.33,12L11,14.67V17.5L5.5,12M13,6.43L18.57,12L13,17.57V14.74L15.74,12L13,9.26M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5Z" />
+              </svg>
+            </md-button>
+            <h4>
+              <span>Secuencias y loops</span>
+            </h4> 
+          </div> 
         </div>
      </md-toolbar>
     <!-- contenedor de los elementos -->
@@ -325,7 +334,7 @@
       <!-- container donde ira el canvas -->
       <div flex="60">
         <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-70px','z-index': '4', 'height': '85%'}">
+        <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
@@ -404,19 +413,9 @@
                 <span>Fácil</span>
               </div>
               <div>
-                <md-button class="md-icon-button" aria-label="Settings">
-                  <i class="material-icons">star</i>
-                </md-button>
-              </div>
-              <div>
-                <md-button class="md-icon-button" aria-label="Settings">
-                  <i class="material-icons">star_border</i>
-                </md-button>
-              </div>
-              <div>
-                <md-button class="md-icon-button" aria-label="Settings">
-                  <i class="material-icons">star_border</i>
-                </md-button>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star_border</i>
+                <i class="material-icons">star_border</i>
               </div>
             </div>
           </div>
@@ -425,12 +424,15 @@
           </div>
        </div>
        <!-- instrucciones -->
-       <div>
-        <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
-        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
-              Comenzar reto 
-        </md-button>
-
+       <div layout="column"   layout-align="center center">
+          <div>
+            <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+          </div>
+          <div>
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+                Comenzar reto 
+          </md-button>
+          </div>
        </div>
       </md-content>
     </md-sidenav>
@@ -464,19 +466,9 @@
               <span>Intermedio</span>
             </div>
             <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star</i>
-              </md-button>
-            </div>
-            <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star</i>
-              </md-button>
-            </div>
-            <div>
-              <md-button class="md-icon-button" aria-label="Settings">
-                <i class="material-icons">star_border</i>
-              </md-button>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star_border</i>
             </div>
           </div>
         </div>
@@ -486,12 +478,15 @@
 
        </div>
        <!-- instrucciones -->
-       <div>
-        <p>Ahora vamos a armar la turbina, coloca la hélice en el lugar que corresponde (toma como referencia el centro de la hélice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos.</p>
-        <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
-              Comenzar reto 
-        </md-button>
-
+       <div layout="column"   layout-align="center center">
+          <div>
+            <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+          </div>
+          <div>
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+                Comenzar reto 
+          </md-button>
+          </div>
        </div>
       </md-content>
     </md-sidenav>
@@ -974,21 +969,20 @@
       zoom.remove();
       //console.log(newSVG);
       window.localStorage.setItem("preview", newSVG.outerHTML); 
-
-  }
-  function generate() {
-      screenshotPage();
-  }
-  function loadThumbnail(){
-    var previa = window.localStorage.getItem("preview");
-    console.log(previa);
-    var thumb = document.getElementById('thumbnail');
-    console.log(thumb);
-    var prev = previa;
-    thumb.innerHTML=previa;
-    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
-    //console.log(pre);
-  }
+    }
+    function generate() {
+        screenshotPage();
+    }
+    function loadThumbnail(){
+      var previa = window.localStorage.getItem("preview");
+      console.log(previa);
+      var thumb = document.getElementById('thumbnail');
+      console.log(thumb);
+      var prev = previa;
+      thumb.innerHTML=previa;
+      //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+      //console.log(pre);
+    }
     //las funciones de guardar XML estan en el archivo controlFunctions.js
 
     //Variable para controlar la subida de archivos
