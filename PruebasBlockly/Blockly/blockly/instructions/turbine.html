@@ -1,5 +1,5 @@
 <div flex="50">
-  <md-dialog aria-label="Publicar producto" id="publishwindow" >
+  <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="thumbnail()">
     <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
       <md-toolbar ng-style="{'background-color':'#fff', 'color':'#B0BEC5'}" ng-controller="RightCtrl">
@@ -15,17 +15,17 @@
       </md-toolbar>
       <md-content layout-padding>
         <div layout="column">
-          <!-- imagen de vista previa -->
+          <div>
+            <!-- imagen de vista previa -->
           <div id="thumbnail" >
             <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" onclick="loadThumbnail();">
               Poner thumbnail
             </md-button>
           </div>
-          <div>
             <!-- inputs del formulario -->
             <form name="publicar"  id="publicar">
               <!-- titulo del programa -->
-              <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
+              <div>
                 <md-input-container class="md-block" >
                   <label>Titulo</label>
                   <input ng-model="product.tittle">
@@ -39,7 +39,7 @@
                 </md-radio-group>
               </div>
               <!-- comentario -->
-              <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
+              <div>
                 <md-input-container class="md-block" >
                   <label>Agrega un comentario (opcional)</label>
                   <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
@@ -64,15 +64,9 @@
 <script type="text/javascript">
   function loadThumbnail(){
     var previa = window.localStorage.getItem("preview");
-    console.log(previa);
     var thumb = document.getElementById('thumbnail');
-    console.log(thumb);
-    var prev = previa;
     thumb.innerHTML=previa;
-    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0; height: auto;"
-    //console.log(pre);
   }
-
 </script>
 
 
