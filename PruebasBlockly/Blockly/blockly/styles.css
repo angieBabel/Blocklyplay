@@ -18,3 +18,7 @@ canvas {
 p {
 text-align : justify;
 }
+
+#thumbnail {
+	height: 10%;
+}

@@ -13,40 +13,51 @@
           </md-button>
         </div>
       </md-toolbar>
-      <!-- inputs del formulario -->
-      <form name="publicar"  id="publicar">
-        <!-- imagen de vista previa -->
-        <div id="thumbnail">
+      <md-content layout-padding>
+        <div>
+          <!-- imagen de vista previa -->
+            <div id="thumbnail" >
+              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" onclick="loadThumbnail();">
+                Poner thumbnail
+              </md-button>
+            </div>
+            <div>
+              <!-- inputs del formulario -->
+              <form name="publicar"  id="publicar">
+                <!-- titulo del programa -->
+                <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
+                  <md-input-container class="md-block" >
+                    <label>Titulo</label>
+                    <input ng-model="product.tittle">
+                  </md-input-container>
+                </div>
+                <!-- si es individual o grupal -->
+                <div layout="column" layout-align=" center">
+                  <md-radio-group ng-model="data.group1">
+                    <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
+                    <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+                  </md-radio-group>
+                </div>
+                <!-- comentario -->
+                <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
+                  <md-input-container class="md-block" >
+                    <label>Agrega un comentario (opcional)</label>
+                    <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                  </md-input-container>
+                </div>
+                <div layout="row" layout-align="end center">
+                  <md-button  class="md-raised" ng-click="cancel()" >
+                    Cancelar
+                  </md-button>
+                  <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
+                    Publicar
+                  </md-button>
+                </div>
+              </form>
+            </div>
+          
         </div>
-        <!-- titulo del programa -->
-        <div ng-style="{'position': 'relative','left':'20px'}">
-          <md-input-container class="md-block">
-            <label>Titulo</label>
-            <input ng-model="product.tittle">
-          </md-input-container>
-        </div>
-        <!-- si es individual o grupal -->
-        <div layout="column" layout-align="center center">
-          <md-radio-group ng-model="data.group1">
-            <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
-            <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
-          </md-radio-group>
-        </div>
-        <!-- comentario -->
-        <div ng-style="{'position': 'relative','left':'20px'}">
-          <md-input-container class="md-block">
-            <label>Agrega un comentario (opcional)</label>
-            <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-          </md-input-container>
-        </div>
-        <div layout="row" layout-align="end center">
-          <md-button ng-click="cancel()" >
-            Cancelar
-          </md-button>
-          <md-button ng-click="" >
-            Publicar
-          </md-button>
-        </div>
+      </md-content>
     </md-dialog-content>
   </md-dialog>
 </div>
@@ -58,7 +69,7 @@
     console.log(thumb);
     var prev = previa;
     thumb.innerHTML=previa;
-    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+    thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
     //console.log(pre);
   }
 
