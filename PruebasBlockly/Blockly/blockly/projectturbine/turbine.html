@@ -741,11 +741,7 @@
               parent: angular.element(document.body),
               targetEvent: ev,
               clickOutsideToClose:true
-            }).then(function(answer) {
-                  $scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                  $scope.status = 'You cancelled the dialog.';
-                });
+            });
             generate();
           };
         function buildToggler() {
@@ -783,7 +779,9 @@
           };
         });
       function DialogController($scope, $mdDialog) {
-        $scope.show = function(){
+        $scope.vistaprevia = function(){
+          loadThumbnail();
+          showTabDialog();
         };
         $scope.hide = function() {
           $mdDialog.hide();
@@ -945,13 +943,9 @@
     }
     function loadThumbnail(){
       var previa = window.localStorage.getItem("preview");
-      console.log(previa);
       var thumb = document.getElementById('thumbnail');
-      console.log(thumb);
-      var prev = previa;
       thumb.innerHTML=previa;
       thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
-      //console.log(pre);
     }
     //las funciones de guardar XML estan en el archivo controlFunctions.js
     //Variable para controlar la subida de archivos

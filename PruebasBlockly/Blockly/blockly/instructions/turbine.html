@@ -1,5 +1,5 @@
-<div flex="50">
-  <md-dialog aria-label="Publicar producto" id="publishwindow" >
+<div flex="50" >
+  <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()">
     <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
       <md-toolbar ng-style="{'background-color':'#fff', 'color':'#B0BEC5'}" ng-controller="RightCtrl">
@@ -62,14 +62,9 @@
   </md-dialog>
 </div>
 <script type="text/javascript">
-  function loadThumbnail(){
+  /*function loadThumbnail(){
     var previa = window.localStorage.getItem("preview");
-    console.log(previa);
     var thumb = document.getElementById('thumbnail');
-    console.log(thumb);
-    var prev = previa;
     thumb.innerHTML=previa;
-    //thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0; height: auto;"
-    //console.log(pre);
-  }
+  }*/
 </script>
