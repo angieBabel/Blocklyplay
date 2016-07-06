@@ -1,41 +1,60 @@
-<md-dialog aria-label="Use your knowledge">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Loops and sequences</h2>
-        <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon><i class="material-icons">close</i></md-icon>
-        </md-button>
+<div flex="50">
+  <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()">
+    <md-dialog-content >
+      <!-- barra de herramienta para poner el close -->
+      <md-toolbar ng-style="{'background-color':'#fff', 'color':'#9E9E9E'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h4>
+            <span>Publicar producto</span>
+          </h4>
+          <span flex></span>            
+          <md-button class="md-icon-button" aria-label="cerrar" ng-click="cancel()">
+            <md-icon md-svg-icon="../media/icons/close-circle-outline.svg"></md-icon> 
+          </md-button>
+        </div>
+      </md-toolbar>
+      <!-- container con todos los elementos -->
+      <div layout="column">
+        <!-- imagen de vista previa -->
+        <div id="thumbnail">
+        </div>
+        <!-- entradas del formulario -->
+        <div ng-style="{'padding-left':'10%','padding-right':'10%'}">
+          <!-- inputs del formulario -->
+          <form name="publicar"  id="publicar">
+            <!-- titulo del programa -->
+            <div>
+              <md-input-container class="md-block" >
+                <label>Titulo</label>
+                <input ng-model="product.tittle">
+              </md-input-container>
+            </div>
+            <!-- si es individual o grupal -->
+            <div layout="column" layout-align=" center">
+              <md-radio-group ng-model="data.group1">
+                <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
+                <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+              </md-radio-group>
+            </div>
+            <!-- comentario -->
+            <div>
+              <md-input-container class="md-block" >
+                <label>Agrega un comentario (opcional)</label>
+                <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+            </div>
+            <!-- botones para cancelar y publicar -->
+            <div layout="row" layout-align="end center">
+              <md-button  class="md-raised" ng-click="cancel()" >
+                Cancelar
+              </md-button>
+              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
+                Publicar
+              </md-button>
+            </div>
+          </form>
+        </div>
       </div>
-    </md-toolbar>
-    <md-dialog-content style="max-width:800px;max-height:810px; ">
-      <md-tabs md-dynamic-height md-border-bottom>
-        <md-tab label="Level 1">
-          <md-content class="md-padding">
-            <!-- <h1 class="md-display-2">Tab One</h1> -->
-            <p>Para que una turbina funcione es importante que tenga una helice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la helice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="Level 2">
-          <md-content class="md-padding">
-            <!-- <h1 class="md-display-2">Tab Two</h1> -->
-            <p>Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos</p>
-          </md-content>
-        </md-tab>
-        <md-tab label="Level 3">
-          <md-content class="md-padding">
-            <h1 class="md-display-2">Tab Three</h1>
-            <p>Instrucciones nivel 3</p>
-          </md-content>
-        </md-tab>
-      </md-tabs>
     </md-dialog-content>
-    <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button ng-click="cancel()" >
-        OK!
-      </md-button>
-    </md-dialog-actions>
-  </form>
-</md-dialog>
+  </md-dialog>
+</div>
