@@ -73,11 +73,7 @@ Blockly.HSV_SATURATION = 0.9;
  * The intensity of block colours, regardless of the hue.
  * Must be in the range of 0 (inclusive) to 1 (exclusive).
  */
-<<<<<<< HEAD
 Blockly.HSV_VALUE = 0.94;
-=======
-Blockly.HSV_VALUE = 0.9;
->>>>>>> origin/aplicacion
 
 /**
  * Sprited icons and images.
