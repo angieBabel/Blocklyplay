@@ -197,6 +197,20 @@ function stop(){
     acabo==0;
     clearInterval(interval);
     clearInterval(intervalo);
-    begin();
+    switch(currentpanel) {
+            case 1:
+                begin1();
+                break;
+            case 2:
+                begin2();
+                break;
+            case 3:
+                begin3();
+            case 4:
+                begin4();
+            default:
+                begin1();
+          }
+
   }
 
