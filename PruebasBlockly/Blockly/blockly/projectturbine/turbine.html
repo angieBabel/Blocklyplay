@@ -307,7 +307,7 @@
             </h4> 
           </div> 
         </div>
-     </md-toolbar>
+    </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
       <!-- Contenedor del toolbox y blockly -->
@@ -952,15 +952,11 @@
     var control = document.getElementById("your-files");//se hace referencia al input de tipo file
       //se agrega un EventListener, para saber que se ha acceido a el
       control.addEventListener("change", function(event) {
-           var buttonload=document.getElementById('loadbutton').style.cssText="display:true;background:#FFC400;border-radius:10px; color:white;border-color: 10px solid white;"
-           //buttonload.style.cssText="background-color:'#0091EA';border-radius:10px; color:white;"
            loadXML();
-           var loadinput=document.getElementById('your-files').style='display:none';
       }, false);
     //funcion que habilita el file input
     function showFileInput(){
-      var loadinput=document.getElementById('your-files').style='display:true';
-      var buttonload=document.getElementById('loadbutton').style='display:none';
+      var openfile =document.getElementById('your-files').click()
     }
     //funcion que carga un archivo XML
     function loadXML() {
