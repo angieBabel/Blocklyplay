@@ -1,8 +1,8 @@
-<div flex="50" >
+<div flex="50">
   <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()">
     <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
-      <md-toolbar ng-style="{'background-color':'#fff', 'color':'#B0BEC5'}" ng-controller="RightCtrl">
+      <md-toolbar ng-style="{'background-color':'#fff', 'color':'#9E9E9E'}" ng-controller="RightCtrl">
         <div class="md-toolbar-tools">
           <h4>
             <span>Publicar producto</span>
@@ -13,55 +13,48 @@
           </md-button>
         </div>
       </md-toolbar>
-      <md-content layout-padding>
-        <div layout="column">
-          <!-- imagen de vista previa -->
-          <div id="thumbnail">
-          </div>
-          <div>
-            <!-- inputs del formulario -->
-            <form name="publicar"  id="publicar">
-              <!-- titulo del programa -->
-              <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
-                <md-input-container class="md-block" >
-                  <label>Titulo</label>
-                  <input ng-model="product.tittle">
-                </md-input-container>
-              </div>
-              <!-- si es individual o grupal -->
-              <div layout="column" layout-align=" center">
-                <md-radio-group ng-model="data.group1">
-                  <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
-                  <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
-                </md-radio-group>
-              </div>
-              <!-- comentario -->
-              <div ng-style="{'position': 'relative'}" ><!-- ,'left':'20px' -->
-                <md-input-container class="md-block" >
-                  <label>Agrega un comentario (opcional)</label>
-                  <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-                </md-input-container>
-              </div>
-              <div layout="row" layout-align="end center">
-                <md-button  class="md-raised" ng-click="cancel()" >
-                  Cancelar
-                </md-button>
-                <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
-                  Publicar
-                </md-button>
-              </div>
-            </form>
-          </div>
-          
+      <!-- container con todos los elementos -->
+      <div layout="column">
+        <!-- imagen de vista previa -->
+        <div id="thumbnail">
         </div>
-      </md-content>
+        <!-- entradas del formulario -->
+        <div ng-style="{'padding-left':'10%','padding-right':'10%'}">
+          <!-- inputs del formulario -->
+          <form name="publicar"  id="publicar">
+            <!-- titulo del programa -->
+            <div>
+              <md-input-container class="md-block" >
+                <label>Titulo</label>
+                <input ng-model="product.tittle">
+              </md-input-container>
+            </div>
+            <!-- si es individual o grupal -->
+            <div layout="column" layout-align=" center">
+              <md-radio-group ng-model="data.group1">
+                <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
+                <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+              </md-radio-group>
+            </div>
+            <!-- comentario -->
+            <div>
+              <md-input-container class="md-block" >
+                <label>Agrega un comentario (opcional)</label>
+                <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+              </md-input-container>
+            </div>
+            <!-- botones para cancelar y publicar -->
+            <div layout="row" layout-align="end center">
+              <md-button  class="md-raised" ng-click="cancel()" >
+                Cancelar
+              </md-button>
+              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
+                Publicar
+              </md-button>
+            </div>
+          </form>
+        </div>
+      </div>
     </md-dialog-content>
   </md-dialog>
 </div>
-<script type="text/javascript">
-  /*function loadThumbnail(){
-    var previa = window.localStorage.getItem("preview");
-    var thumb = document.getElementById('thumbnail');
-    thumb.innerHTML=previa;
-  }*/
-</script>
