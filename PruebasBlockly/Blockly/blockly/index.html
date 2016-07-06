@@ -384,6 +384,88 @@
   <sep></sep>
   <category name="Variables" colour="355" custom="VARIABLE"></category>
   <category name="Functions" colour="287" custom="PROCEDURE"></category>
+  <category name="Hardware" colour="354">
+      <block type="ledDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Turn">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="motorDisplayed">
+        <value name="steps">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="direction">
+          <shadow type="direction">
+            <field name="direction">Forward</field>
+          </shadow>
+        </value>
+        <value name="speed">
+          <shadow type="speed">
+            <field name="speed">1</field>
+          </shadow>
+        </value>
+      </block>
+
+      <block type="buzzerDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Tone">
+          <shadow type="tone">
+            <field name="tone">Do</field>
+          </shadow>
+        </value>
+        <value name="Secs">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pantallaDisplayed">
+        <value name="message">
+          <shadow type="text">
+            <field name="TEXT">Type message here</field>
+          </shadow>
+        </value>
+        <value name="color">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+
+      </block>
+      <block type="botonDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Status">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+
+
+      </block>
+
+      <block type="status"></block>
+      <block type="speed"></block>
+      <block type="pina"></block>
+      <block type="pind"></block>
+      <block type="tone"></block>
+    </category>
 
 </xml>
 <script type="text/javascript">

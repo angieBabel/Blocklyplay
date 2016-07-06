@@ -53,6 +53,9 @@ Blockly.Blocks['girar'] = {
   }
 };
 
+Blockly.HSV_SATURATION = 1;
+Blockly.HSV_VALUE = 0.82;
+
 Blockly.Blocks['wait'] = {
   init: function() {
     this.appendDummyInput()
@@ -61,11 +64,14 @@ Blockly.Blocks['wait'] = {
         .appendField("seconds");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(355);
+    this.setColour(157);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+Blockly.HSV_SATURATION = .95;
+Blockly.HSV_VALUE = 0.71;
 
 Blockly.Blocks['stop'] = {
   init: function() {
@@ -73,7 +79,7 @@ Blockly.Blocks['stop'] = {
         .appendField("Stop");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(355);
+    this.setColour(175);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
