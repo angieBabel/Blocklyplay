@@ -150,12 +150,12 @@
             <span>Instrucciones</span>
           </h2>
           <span flex></span>            
-          <md-button class="md-icon-button" ng-click="close()">
+          <md-button class="md-icon-button" ng-show="showclose" ng-click="close()">
             <md-icon md-svg-icon="../media/icons/close.svg"></md-icon> 
           </md-button>
         </div>
       </md-toolbar>
-      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+      <md-content layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
         <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
@@ -183,12 +183,12 @@
           </div>
        </div>
        <!-- instrucciones -->
-       <div layout="column"   layout-align="center center">
+       <div layout="column"  ng-controller="RightCtrl" layout-align="center center">
           <div>
             <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" onclick="begin1()">
+            <md-button id="comenzar" class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  ng-show="buttonshow" flex-gt-md="auto" ng-click="loadCV()">
                 Comenzar reto 
           </md-button>
           </div>
@@ -242,7 +242,7 @@
             <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" onclick="begin2()" >
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="loadCV()" >
                 Comenzar reto 
           </md-button>
           </div>
@@ -477,7 +477,7 @@
      * You must include the dependency on 'ngMaterial' 
      */
     angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $mdDialog) {
+      .controller('AppCtrl', function ($scope, $mdSidenav,$mdDialog) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
           $mdSidenav('Instrucciones1')
@@ -485,23 +485,19 @@
                 navID = 'Instrucciones1';
         });
         $scope.toggle = buildToggler();
-        $scope.canvas1 = function() {
-          //begin1();
+        $scope.canvas1 = function() {         
           currentpanel=1;
           loadCode();
         }
-        $scope.canvas2 = function() {
-          //begin2();
+        $scope.canvas2 = function() {         
           currentpanel=2;
           loadCode();
         }
-        $scope.canvas3 = function() {
-          begin3();
+        $scope.canvas3 = function() {         
           currentpanel=3;
           loadCode();
         }
-        $scope.canvas4 = function() {
-          begin4();
+        $scope.canvas4 = function() {          
           currentpanel=4;
           loadCode();
         }
@@ -542,10 +538,39 @@
             }
           }
         })
-        .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+        .controller('RightCtrl', function ($scope,$mdSidenav) {
           $scope.close = function () {
             // Component lookup should always be available since we are not using `ng-if`
             $mdSidenav(navID).close();
+          };
+          $scope.buttonshow = true;
+          $scope.showclose = false;
+
+          $scope.showcancel = function () {
+            if ($scope.buttonshow == true) {
+              $scope.showclose = false;
+            }else{
+              $scope.showclose = true;
+            };
+          }
+          $scope.loadCV = function () {
+            // Component lookup should always be available since we are not using `ng-if`
+            $mdSidenav(navID).close();
+            $scope.buttonshow = false;
+            switch(currentpanel) {
+              case 1:
+                  begin1();
+                  break;
+              case 2:
+                  begin2();
+                  break;
+              case 3:
+                  begin3();
+              case 4:
+                  begin4();
+              default:
+                  begin1();
+            }
           };
         });
       function DialogController($scope, $mdDialog) {
