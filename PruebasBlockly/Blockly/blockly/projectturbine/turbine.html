@@ -188,7 +188,7 @@
             <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" onclick="begin1()">
                 Comenzar reto 
           </md-button>
           </div>
@@ -242,7 +242,7 @@
             <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" onclick="begin2()" >
                 Comenzar reto 
           </md-button>
           </div>
@@ -486,12 +486,12 @@
         });
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {
-          begin1();
+          //begin1();
           currentpanel=1;
           loadCode();
         }
         $scope.canvas2 = function() {
-          begin2();
+          //begin2();
           currentpanel=2;
           loadCode();
         }

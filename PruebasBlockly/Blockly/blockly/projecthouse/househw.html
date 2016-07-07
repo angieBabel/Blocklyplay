@@ -629,17 +629,17 @@
       var program;
       switch(currentpanel) {
             case 1:
-                program = window.localStorage.getItem("turbina1");
+                program = window.localStorage.getItem("house1");
                 break;
             case 2:
-                program = window.localStorage.getItem("turbina2");
+                program = window.localStorage.getItem("house2");
                 break;
             case 3:
-                program = window.localStorage.getItem("turbina3");
+                program = window.localStorage.getItem("house3");
             case 4:
-                program = window.localStorage.getItem("turbina4");
+                program = window.localStorage.getItem("house4");
             default:
-                program = window.localStorage.getItem("turbina1");
+                program = window.localStorage.getItem("house1");
           }
       Blockly.mainWorkspace.clear();
       var textToDom = Blockly.Xml.textToDom(program);
@@ -688,17 +688,17 @@
       var domToPretty = Blockly.Xml.domToPrettyText(xml);
       switch(currentpanel) {
           case 1:
-              window.localStorage.setItem("turbina1", domToPretty);
+              window.localStorage.setItem("house1", domToPretty);
               break;
           case 2:
-              window.localStorage.setItem("turbina2", domToPretty);
+              window.localStorage.setItem("house2", domToPretty);
               break;
           case 3:
-              window.localStorage.setItem("turbina3", domToPretty);
+              window.localStorage.setItem("house3", domToPretty);
           case 4:
-              window.localStorage.setItem("turbina4", domToPretty);
+              window.localStorage.setItem("house4", domToPretty);
           default:
-              window.localStorage.setItem("turbina1", domToPretty);
+              window.localStorage.setItem("house1", domToPretty);
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }

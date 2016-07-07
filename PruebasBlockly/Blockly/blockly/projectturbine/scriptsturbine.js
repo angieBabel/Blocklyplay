@@ -15,7 +15,6 @@
     roadpaint.splice(0,roadpaint.length);//inicializa los vectores
     solucion.splice(0,solucion.length);//inicializa los vectores
     canvas = document.getElementById('canvas1');
-    
     ctx = canvas.getContext('2d');
     ancho = document.getElementById('divCanvas').offsetWidth;
     alto = document.getElementById('divCanvas').offsetHeight;
