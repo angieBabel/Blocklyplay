@@ -197,6 +197,7 @@ function stop(){
     acabo==0;
     clearInterval(interval);
     clearInterval(intervalo);
+    myInterpreter=null;
     switch(currentpanel) {
             case 1:
                 begin1();
@@ -211,6 +212,5 @@ function stop(){
             default:
                 begin1();
           }
-
   }
 
