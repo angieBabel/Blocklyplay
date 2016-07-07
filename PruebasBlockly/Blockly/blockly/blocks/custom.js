@@ -53,8 +53,7 @@ Blockly.Blocks['girar'] = {
   }
 };
 
-Blockly.HSV_SATURATION = 1;
-Blockly.HSV_VALUE = 0.82;
+
 
 Blockly.Blocks['wait'] = {
   init: function() {
@@ -70,8 +69,7 @@ Blockly.Blocks['wait'] = {
   }
 };
 
-Blockly.HSV_SATURATION = .95;
-Blockly.HSV_VALUE = 0.71;
+
 
 Blockly.Blocks['stop'] = {
   init: function() {
