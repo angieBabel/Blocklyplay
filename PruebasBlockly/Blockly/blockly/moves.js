@@ -82,12 +82,11 @@ function forward(nosteps){
   acabo=0;
   distX=Math.cos(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeX);
   distY=Math.sin(degreesToRadian(positionObj.objZ))*(nosteps*stepsizeY);
+
   limtX = positionObj.objX + distX;
   limtY = positionObj.objY + distY;
   i=0;
   interval= setInterval(function(){
-    ctx.strokeStyle = "#006400";
-    ctx.fillStyle = "#6ab150";
     ctx.beginPath();
     //cuadrante inf derecho
     if (positionObj.objZ>=0 && positionObj.objZ<90) {
@@ -117,16 +116,13 @@ function forward(nosteps){
         Yaux=Yaux+(distY/nosteps);
       }
     }
-
-    rotar(positionObj.objZ, '"ahead"');
     positionObj.objX=Xaux;
     positionObj.objY=Yaux;
-    paint(positionObj.objX,positionObj.objY,nosteps,0);
+    rotar(positionObj.objZ,'"ahead"');
     i++;
     if(i==nosteps){
       stopTimer();
       acabo=1;
-      //roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
     }
   },300);
 }
@@ -416,9 +412,7 @@ function painroad(){
       ctx.lineTo(xinit,yinit);
       if (LT.poColor.valueOf()!=0) {
         ctx.stroke();
-
       }
-      
       ctx.save();
       ctx.closePath();
   }
@@ -534,7 +528,20 @@ function painroad(){
             panel1();
       }
       //tambien se ejecuta el avatar, para que no se note el retraso cuando el panel lo pinte
-      Avatar();
+      switch(currentpanel) {
+        case 1:
+            Avatar1();
+            break;
+        case 2:
+            Avatar2();
+            break;
+        case 3:
+            Avatar3();
+        case 4:
+            Avatar4();
+        default:
+            Avatar1();
+      }
       lightside=side;
       if (luz==1) {
          luz=0;

@@ -26,6 +26,7 @@
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
+        positionObj.objZ=0;
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;

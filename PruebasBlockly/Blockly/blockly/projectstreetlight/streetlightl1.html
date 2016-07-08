@@ -58,7 +58,7 @@
     //variables para saber si las luces estan encendidas, y de que lado debe prender
     var luz=0,luzTrasera=0,lightside;
   //primer funcion donde se inicializan todo el canvas
-    function begin(){
+    function begin1(){
       wimg=20
       canvas = document.getElementById('canvas');
       canvas.style.border='1px solid black';
@@ -87,7 +87,7 @@
       semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
       semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
       semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
-      panel();
+      panel1();
     }
   //la funcion de stopTimer se paso al archivo de controlFunctions.js
   //funcion para ocultar el toolbox
@@ -95,7 +95,7 @@
      $('.blocklyToolboxDiv').toggle('slow');
   }
   //dibuja el panel
-    function panel(){
+    function panel1(){
       var imgback = new Image();
             imgback.src = "../media/mapa_semaforo.png";
 
@@ -125,14 +125,14 @@
           ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
           ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         }
-        Avatar();
+        Avatar1();
       }
 
     }
     //para saber si va a girar o no
     var angle=0;
   //Drawing avatar
-    function Avatar(){
+    function Avatar1(){
       var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
 
       img.id = 'imagen';
@@ -189,7 +189,7 @@
     }
 </script>
 </head>
-<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
+<body onload="begin1()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
     <div flex="10" layout-align="center center" layout="row">
       <md-button class="md-fab md-mini" aria-label="Settings" onclick="ocultar()">
