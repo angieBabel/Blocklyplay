@@ -164,6 +164,34 @@ function parseCode(){
     workspace.traceOn(true);
     workspace.highlightBlock(null);
 }
+//funcoin para ir recorriendo el interprete, y verificar la respuesta al terminar
+function nextStep() {
+      if (highlightPause) {
+        // A block has been highlighted.  Pause execution here.
+        highlightPause = false;
+      } else {
+        // Keep executing until a highlight statement is reached.
+        /*stepCode();*/
+      }
+      if (!myInterpreter.step()) {
+        /*window.setTimeout(finish, 15);*/
+        clearInterval(intervalo);
+        switch(currentpanel) {
+          case 1:
+              check1();
+              break;
+          case 2:
+              check2();
+              break;
+          case 3:
+              check3();
+          case 4:
+              check4();
+          default:
+              check1();
+        }
+      }
+}
 //Funcion para guardar el XML
 function saveXML(){
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -191,7 +219,6 @@ function saveXML(){
   }
  }
 }
-
 //funcion para detener
 function stop(){
     acabo==0;
@@ -212,5 +239,55 @@ function stop(){
             default:
                 begin1();
           }
-  }
-
+}
+//para sacar el thumbnail
+function generate() {
+  var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
+  var trash = newSVG.querySelector('g.blocklyTrash');
+  trash.remove();
+  var scrolV = newSVG.querySelector('g.blocklyScrollbarVertical');
+  scrolV.remove();
+  var scrolH = newSVG.querySelector('g.blocklyScrollbarHorizontal');
+  scrolH.remove();
+  var zoom = newSVG.querySelector('g.blocklyZoom');
+  zoom.remove();
+  //console.log(newSVG);
+  newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
+  window.localStorage.setItem("preview", newSVG.outerHTML); 
+}
+//para cargar el thumbnail en el preview
+function loadThumbnail(){
+  var previa = window.localStorage.getItem("preview");
+  var thumb = document.getElementById('thumbnail');
+  thumb.innerHTML=previa;
+  thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+}
+//funcion que habilita el file input
+function showFileInput(){
+  var openfile =document.getElementById('your-files').click()
+}
+//funcion que carga un archivo XML
+function loadXML() {
+  //se define la funcion Reader, de tipo FileReader
+  var reader = new FileReader();
+  reader.onload = function(event) {
+      var contents = event.target.result;//se almacena el resultado en una variable llamada content
+      console.log("File contents: " + contents);
+      Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
+      var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
+  };
+  //en caso de haber error, lo lanza
+  reader.onerror = function(event) {
+      console.error("File could not be read! Code " + event.target.error.code);
+  };
+  //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
+  reader.readAsText(control.files[0]);
+}
+//para enviar el codigo al hardware
+function pasoHW(){
+  var socket = io.connect('http://edison.local:3000');
+  var code = Blockly.JavaScript.workspaceToCode(workspace);
+  code = code.replace(/[']/gi, "");
+  socket.emit('changefunction',code);
+} 

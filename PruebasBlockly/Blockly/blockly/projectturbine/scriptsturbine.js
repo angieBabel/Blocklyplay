@@ -27,7 +27,7 @@
     Y = stepsizeY*11;
     positionObj.objX=stepsizeX*14;
     positionObj.objY=stepsizeY*10;
-    //positionObj.objZ=0;
+    positionObj.objZ=0;
     Xaux = positionObj.objX;
     Yaux = positionObj.objY;
     solucion.push(new solutionObj(positionObj.objX,positionObj.objY,0,0));//1
@@ -139,6 +139,7 @@
       Y = stepsizeY*11;
       positionObj.objX=X;
       positionObj.objY=Y;
+      positionObj.objZ=0;
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
       panel2();
