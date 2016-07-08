@@ -58,14 +58,14 @@
     var piso=0;
     //la variable de positionObj se paso a moves.js
     //el objeto de solutionObj se paso a moves.js
-  function begin(){
+  function begin1(){
     canvas = document.getElementById('canvas');
     canvas.style.border='1px solid black';
     canvas.style.margin='0px 0px 0px 10px';
     ctx = canvas.getContext('2d');
     ancho = document.getElementById('divCanvas').offsetWidth;
     alto = document.getElementById('divCanvas').offsetHeight;
-    canvas.addEventListener("mousedown", getPosition, false);
+    //canvas.addEventListener("mousedown", getPosition, false);
     canvas.width= ancho;
     canvas.height = alto;
     stepsizeX=canvas.width/9  ;
@@ -77,12 +77,12 @@
     positionObj.objY=Y;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
-    panel();
+    panel1();
   }
 
   //la funcion de stopTimer se paso al archivo de controlFunctions.js
 
-  function panel(){
+  function panel1(){
     var imgback = new Image();
             imgback.src = "../media/edificio1.png";
 
@@ -130,13 +130,13 @@
         piso4.onload = function() {
           ctx.drawImage(piso4, (stepsizeX*7),(stepsizeY*1),stepsizeY,stepsizeY);
         }
-        Avatar();
+        Avatar1();
       }
 
   }
   //Drawing avatar
 
-  function Avatar(){
+  function Avatar1(){
     var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
 
     var positionX, positionY;
@@ -175,6 +175,7 @@
     clickX=clickX/stepsizeX;
     clickY=clickY/stepsizeY;
     /*piso=0;*/
+    alert(clickX +' '+clickY)
     //Validar los click para saber donde presiono
     if (clickX>7 && clickX<8 && clickY>=4 && clickY<5){//Validar boton piso 1
       piso=1;
@@ -184,7 +185,6 @@
       acabo=1;
     } else if (clickX>7 && clickX<8 && clickY>=2 && clickY<3){ //Validar boton piso 3
       piso=3;
-      alert(piso);
       acabo=1;
     }else if (clickX>7 && clickX<8 && clickY>=1 && clickY<2){ //Validar boton piso 3
       piso=4;
@@ -242,7 +242,7 @@
 </script>
 <!-- El script para el interprete esta en controlFunctions.js -->
 </head>
-<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
+<body onload="begin1()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
     <div flex="10" layout-align="center center" layout="row">
       <md-button class="md-fab md-mini" aria-label="Settings" onclick="ocultar()">

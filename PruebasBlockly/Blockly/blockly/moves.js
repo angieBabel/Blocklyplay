@@ -587,7 +587,20 @@ function upward(nosteps){
         Yaux=Yaux-stepsizeY;
         positionObj.objY=Yaux;
       }
-    panel();
+    switch(currentpanel) {
+        case 1:
+            panel1();
+            break;
+        case 2:
+            panel2();
+            break;
+        case 3:
+            panel3();
+        case 4:
+            panel4();
+        default:
+            panel1();
+      }
     i++;
     if (i==nosteps) {
       stopTimer();
@@ -606,7 +619,20 @@ function downward(nosteps){
         Yaux=Yaux+stepsizeY;
         positionObj.objY=Yaux;
       }
-    panel();
+    switch(currentpanel) {
+        case 1:
+            panel1();
+            break;
+        case 2:
+            panel2();
+            break;
+        case 3:
+            panel3();
+        case 4:
+            panel4();
+        default:
+            panel1();
+      }
     i++;
     if (i==nosteps) {
       stopTimer();
