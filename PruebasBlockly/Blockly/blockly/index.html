@@ -108,16 +108,6 @@
       }
 
     }
-
-    function paintroad(){
-      for (var i = 0; i <road.length; i++) {
-        ctx.strokeStyle = "#f00";
-        ctx.beginPath();
-        ctx.moveTo(road[i]);
-        ctx.lineTo(road[i+1]);
-        ctx.stroke();
-      };
-    }
     //Drawing avatar
     function Avatar(){
         var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
@@ -142,34 +132,6 @@
         img.src = 'media/avatar.png';//el img.src se pone despues del onload para asegurar su carga
 
       }
-/*
-    function Avatar(){
-      var avatarheight, avatarwith;
-      var positionX, positionY;
-
-      img.id = 'imagen';
-      img.src = 'media/avatar.png';
-      avatarwith=100;avatarheight=130;
-      positionX=X-(avatarwith/2); positionY=canvas.height-250;
-
-      img.onload = function() {
-        ctx.drawImage(img,positionX, positionY,avatarwith,avatarheight);
-      }
-    }*/
-
-    //path forward
-    function path(){
-      ctx.beginPath();
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = "gray";
-      ctx.rect(X, Y-100, 100, 100);
-      ctx.stroke();
-    }
-
-    function ocultar(){
-      //$('.blocklyToolboxDiv').css({'width':'20px'});
-       $('.blocklyToolboxDiv').toggle('slow');
-    }
 </script>
 </head>
 <body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
@@ -186,19 +148,19 @@
         <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#00E676'}" onclick="location.href = 'index.html'">
           <md-icon><i class="material-icons">home</i></md-icon>
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#80DEEA'}"onclick="location.href = 'projecthouse/housel1.html'" >
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#80DEEA'}"onclick="location.href = 'projecthouse/house.html'" >
           1
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#4FC3F7'}"onclick="location.href = 'projectstreetlight/streetlightl1.html'" >
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#4FC3F7'}"onclick="location.href = 'projectstreetlight/streetlight.html'" >
           2
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#42A5F5'}"onclick="location.href = 'projectelevator/elevatorl1.html'">
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#42A5F5'}"onclick="location.href = 'projectelevator/elevator.html'">
           3
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#3F51B5'}"onclick="location.href = 'projectbridge/bridgel1.html'">
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#3F51B5'}"onclick="location.href = 'projectbridge/bridge.html'">
           4
         </md-button>
-        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'projectturbine/turbinel1.html'">
+        <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#5E35B1'}"onclick="location.href = 'projectturbine/turbine.html'">
           5
         </md-button>
         <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'#B9191D'}"onclick="location.href = 'projectturbine/turbinel2.html'">

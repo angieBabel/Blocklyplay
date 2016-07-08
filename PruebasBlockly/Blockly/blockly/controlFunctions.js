@@ -141,7 +141,6 @@ function highlightBlock(id) {
   workspace.highlightBlock(id);
   highlightPause = true;
 }
-
 //Funcion para mostrar el código
 function showCode() {
   // Generate JavaScript code and display it.
