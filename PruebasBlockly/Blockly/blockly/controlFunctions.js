@@ -164,7 +164,7 @@ function parseCode(){
     workspace.traceOn(true);
     workspace.highlightBlock(null);
 }
-//funcoin para ir recorriendo el interprete, y verificar la respuesta al terminar
+//funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
       if (highlightPause) {
         // A block has been highlighted.  Pause execution here.
