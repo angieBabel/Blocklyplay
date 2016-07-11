@@ -19,7 +19,7 @@ Blockly.Blocks['led'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -38,7 +38,7 @@ Blockly.Blocks['ledDisplayed'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -61,7 +61,7 @@ Blockly.Blocks['motor'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -79,7 +79,7 @@ Blockly.Blocks['motorDisplayed'] = {
         .appendField("       Speed:")
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -104,7 +104,7 @@ Blockly.Blocks['buzzer'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -126,7 +126,7 @@ Blockly.Blocks['buzzerDisplayed'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -145,7 +145,7 @@ Blockly.Blocks['pantalla'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -163,7 +163,7 @@ Blockly.Blocks['pantallaDisplayed'] = {
             .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -181,7 +181,7 @@ Blockly.Blocks['boton'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -199,7 +199,7 @@ Blockly.Blocks['botonDisplayed'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(290);
+    this.setColour(354);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -212,7 +212,7 @@ Blockly.Blocks['status'] = {
         .appendField(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), "on/off");
     this.setInputsInline(true);
     this.setOutput(true, "String");
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -224,7 +224,7 @@ Blockly.Blocks['pina'] = {
         .appendField(new Blockly.FieldTextInput("1"), "PIN")
         .appendField("analogico");
     this.setOutput(true, "pina");
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -236,7 +236,7 @@ Blockly.Blocks['pind'] = {
         .appendField(new Blockly.FieldTextInput("1"), "PIN")
         .appendField("digital");
     this.setOutput(true, "pind");
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -248,7 +248,7 @@ Blockly.Blocks['direction'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["Forward", "forward"], ["Backward", "backward"]]), "direction");
     this.setOutput(true, "direction");
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -259,7 +259,7 @@ Blockly.Blocks['speed'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed");
     this.setOutput(true, null);
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -271,7 +271,7 @@ Blockly.Blocks['tone'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["Do", "Do"], ["Re", "Re"], ["Mi", "Mi"], ["Fa", "Fa"], ["Sol", "Sol"], ["La", "La"], ["Si", "Si"]]), "tone");
     this.setOutput(true, null);
-    this.setColour(260);
+    this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }

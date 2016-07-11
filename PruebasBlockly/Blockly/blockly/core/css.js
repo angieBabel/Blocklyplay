@@ -262,16 +262,21 @@ Blockly.Css.CONTENT = [
   '.blocklyFieldDropdown:not(.blocklyHidden) {',
     'display: block;',
   '}',
-
   '.blocklyIconGroup {',
     'cursor: default;',
   '}',
-
+  '.blocklyIconShape {'
+    'fill: #00f;'
+    'stroke: #fff;'
+    'stroke-width: 1px;'
+  '}',
+  '.blocklyIconSymbol {'
+      'fill: #fff;'
+  '}',
   '.blocklyIconGroup:not(:hover),',
   '.blocklyIconGroupReadonly {',
     'opacity: .6;',
   '}',
-
   '.blocklyMinimalBody {',
     'margin: 0;',
     'padding: 0;',

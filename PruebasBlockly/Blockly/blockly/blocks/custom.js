@@ -15,7 +15,7 @@ Blockly.Blocks['mover'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(79);
+    this.setColour(175);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -32,7 +32,7 @@ Blockly.Blocks['mover_pintando'] = {
         .appendField(new Blockly.FieldColour("#ff0000"), "color");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(79);
+    this.setColour(175);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -47,7 +47,7 @@ Blockly.Blocks['girar'] = {
         .appendField(new Blockly.FieldDropdown([["Left", "left"], ["Right", "right"]]), "side");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(79);
+    this.setColour(175);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -77,7 +77,7 @@ Blockly.Blocks['stop'] = {
         .appendField("Stop");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(175);
+    this.setColour(157);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -90,7 +90,7 @@ Blockly.Blocks['blinker'] = {
         .appendField("Blinker");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(176);
+    this.setColour(192);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -108,7 +108,7 @@ Blockly.Blocks['lights'] = {
         .appendField(new Blockly.FieldCheckbox("FALSE"), "on");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(176);
+    this.setColour(192);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
@@ -121,7 +121,7 @@ Blockly.Blocks['sonido'] = {
         .appendField(new Blockly.FieldDropdown([["Cat", "gato.mp3"], ["Dog", "perro.mp3"], ["Lion", "leon.mp3"], ["Chicken", "pollo.mp3"]]), "sonido");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(290);
+    this.setColour(247);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
   }
