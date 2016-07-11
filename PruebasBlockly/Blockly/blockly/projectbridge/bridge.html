@@ -63,7 +63,7 @@
               </md-button>
             </div>
             <div flex="60">
-              <span>Dibuja el contorno de una hélice</span>
+              <span>Construye un puente</span>
             </div>
             <div flex="20">
               <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
@@ -79,7 +79,7 @@
               </svg>
             </md-button>
             <h4>
-              <span>Puente y loops</span>
+              <span>Secuencias y loops</span>
             </h4> 
           </div> 
         </div>
@@ -163,7 +163,7 @@
        <!-- informacion general del nivel -->
        <div layout="column">
           <div>
-            <strong>Dibuja el área de una casa</strong>
+            <strong>Dibuja los pilares del puente</strong>
           </div>
           <div layout="row" layout-align="start center">
             <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
@@ -185,7 +185,7 @@
        <!-- instrucciones -->
        <div layout="column"   layout-align="center center">
           <div>
-            <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+            <p>Aprendamos de ciclos, colorea los pilares del puente utilizando los bloques de pintar que ya conoces, recuerda que debes girar los grados exactos para que puedas hacerlo de manera correcta (observa con atención la imagen), no puedes utilizar más de 6 bloques, ayúdate con el bloque Repeat que se encuentra en la categoría de Control.</p>
           </div>
           <div>
             <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
@@ -532,17 +532,17 @@
       var program;
       switch(currentpanel) {
             case 1:
-                program = window.localStorage.getItem("turbina1");
+                program = window.localStorage.getItem("bridge1");
                 break;
             case 2:
-                program = window.localStorage.getItem("turbina2");
+                program = window.localStorage.getItem("bridge2");
                 break;
             case 3:
-                program = window.localStorage.getItem("turbina3");
+                program = window.localStorage.getItem("bridge3");
             case 4:
-                program = window.localStorage.getItem("turbina4");
+                program = window.localStorage.getItem("bridge4");
             default:
-                program = window.localStorage.getItem("turbina1");
+                program = window.localStorage.getItem("bridge1");
           }
       Blockly.mainWorkspace.clear();
       var textToDom = Blockly.Xml.textToDom(program);
@@ -565,17 +565,17 @@
       var domToPretty = Blockly.Xml.domToPrettyText(xml);
       switch(currentpanel) {
           case 1:
-              window.localStorage.setItem("turbina1", domToPretty);
+              window.localStorage.setItem("bridge1", domToPretty);
               break;
           case 2:
-              window.localStorage.setItem("turbina2", domToPretty);
+              window.localStorage.setItem("bridge2", domToPretty);
               break;
           case 3:
-              window.localStorage.setItem("turbina3", domToPretty);
+              window.localStorage.setItem("bridge3", domToPretty);
           case 4:
-              window.localStorage.setItem("turbina4", domToPretty);
+              window.localStorage.setItem("bridge4", domToPretty);
           default:
-              window.localStorage.setItem("turbina1", domToPretty);
+              window.localStorage.setItem("bridge1", domToPretty);
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }
