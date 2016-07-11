@@ -149,7 +149,7 @@ function showCode() {
 }
 //Funcion para crear el interprete
 function parseCode(){
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    //Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     //permite que funcione el resaltar bloque
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     Blockly.JavaScript.addReservedWords('highlightBlock');

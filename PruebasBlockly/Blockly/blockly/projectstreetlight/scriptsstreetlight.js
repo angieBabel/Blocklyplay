@@ -3,8 +3,7 @@
   //inicialización de las variables propias del ejercicio 2
     //vector de posiciones donde estaban los semaforos y donde hizo un alto
     var semaforos=[],altos=[];
-    //variables para saber si las luces estan encendidas, y de que lado debe prender
-    var luz=0,luzTrasera=0,lightside;
+    
   //primer funcion donde se inicializan todo el canvas
     function begin1(){
       wimg=20

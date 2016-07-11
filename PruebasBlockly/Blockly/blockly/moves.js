@@ -24,6 +24,8 @@
     var count=0;
     //vector del camino que ha pintado
     var roadpaint = [];
+    //variables para saber si las luces estan encendidas, y de que lado debe prender, propias para el ejercicio 2
+    var luz=0,luzTrasera=0,lightside;
 
     //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {
@@ -660,7 +662,21 @@ function motor(nosteps,side,speed){
     if (positionObj.objZ>=360) {
         positionObj.objZ-=360;
       }
-    Avatar();
+    //rotar(positionObj.objZ,side)
+    switch(currentpanel) {
+    case 1:
+        Avatar1();
+        break;
+    case 2:
+        Avatar2();
+        break;
+    case 3:
+        Avatar3();
+    case 4:
+        Avatar4();
+    default:
+        Avatar1();
+  }
     i++;
     if(i==nosteps){
       stopTimer();

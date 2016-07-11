@@ -7,6 +7,8 @@
   //el objeto de solutionObj se paso a moves.js
   function begin1(){
     wimg=8;
+    roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+    solution.splice(0,solution.length);//inicializa los vectores
     canvas = document.getElementById('canvas1');
     ctx = canvas.getContext('2d');
     ancho = document.getElementById('divCanvas').offsetWidth;
@@ -24,6 +26,7 @@
     //se inicializa la posicion del objeto, aqui es donde se pintara la linea
     positionObj.objX=X;//350;
     positionObj.objY=Y;//142;
+    positionObj.objZ=0;
     //se inicializan los valores auxiliares para poder pintar
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
