@@ -99,8 +99,8 @@
   }  
   //Compara si las paradas que hizo el niño estuvieron bien
   function check1(){
-    var openfile =document.getElementById('prueba').click()
-    /*var coincidencias=0;
+
+    var coincidencias=0;
     //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
     for (var i = 0; i < solucion.length; i++) {
       for (var j = 0; j < roadpaint.length; j++) {
@@ -114,11 +114,13 @@
     }
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==solucion.length) {
-      alert('Felicidades haz realizado correctamente el puzzle')
+      var openfile =document.getElementById('Correct').click()
+      //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
-      alert('Esta vez no lo conseguiste, intenta de nuevo')
+      var openfile =document.getElementById('Wrong').click()
+      //alert('Esta vez no lo conseguiste, intenta de nuevo')
       location.reload();
-    }*/
+    }
   }   
 
 /*scripts para el segundo nivel*/

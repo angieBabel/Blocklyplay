@@ -291,3 +291,9 @@ function pasoHW(){
   code = code.replace(/[']/gi, "");
   socket.emit('changefunction',code);
 } 
+//para cambiar de nivel si lo puso bien
+function nextLevel(){
+  alert('entro al nextleel')
+
+  //var nl = document.getElementById('nivel2').click()
+}
