@@ -46,9 +46,9 @@
   <script src="scriptsturbine.js"></script> 
 </head>
 
-<body ng-app="Blocklyplay"  ng-controller="AppCtrl">
+<body ng-app="Blocklyplay"  ng-controller="AppCtrl" >
     <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}" ng-controller="AppCtrl" id="prueba">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
@@ -249,7 +249,7 @@
        </div>
       </md-content>
     </md-sidenav>
- <xml id="toolbox" style="display: none">
+<xml id="toolbox" style="display: none">
   <category name="Control" colour="157">
     <block type="wait"></block>
     <block type="stop"></block>
@@ -448,7 +448,6 @@
       <block type="pind"></block>
       <block type="tone"></block>
   </category>
-
 </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>
