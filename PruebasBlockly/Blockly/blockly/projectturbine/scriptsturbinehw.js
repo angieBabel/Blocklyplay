@@ -93,10 +93,6 @@
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
         if (coincidencias==solucion.length) {
           alert('Felicidades haz realizado correctamente el puzzle');
-          solucion.splice(0,solucion.length);
-          respuesta.splice(0,respuesta.length);
-          var pagina='panel5l2.html';
-          location.href=pagina;
         }else{
          alert('Esta vez no lo conseguiste intenta de nuevo');
           location.reload();
