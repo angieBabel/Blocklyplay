@@ -1,0 +1,19 @@
+Instrucciones
+
+Instrucciones panel 1
+
+      ¡Aprendamos de secuencias! Utiliza los bloques Move Painting para dibujar el área de la casa, apóyate de los puntos para saber cuántos pasos deberás avanzar mientras pintas, elige el color que más te guste, utiliza el bloque Turn para dar vueltas hacia donde quieras avanzar, para girar hacia cualquier lado utiliza 90 grados, estos bloques se encuentran en la categoría Moves.
+
+Instrucciones panel 2
+        ¡Seguimos con las secuencias! Para este ejercicio, desplaza el carrito por la carretera y haz una parada de 3 segundos en cada semáforo. Los bloques de movimiento ya los conoces, para hacer una parada utiliza el bloque Wait que se encuentra en la categoría de Control.
+Instrucciones panel 3
+          Vamos a aprender un poco de variables, haz un programa que permita al personaje subir en elevador al piso que desees, con el bloque If de la categoría Logic programa al elevador para que suba la cantidad de pisos que has seleccionado, para que puedas elegir un piso, debes poner tu código dentro del bloque On cick de la categoría de Control, el piso que elegiste se guarda en el bloque Piso que se encuentra en la categoría de Logic.
+Instrucciones panel 4
+          Aprendamos de ciclos, colorea los pilares del puente utilizando los bloques de pintar que ya conoces, recuerda que debes girar los grados exactos para que puedas hacerlo de manera correcta (observa con atención la imagen), no puedes utilizar más de 6 bloques, ayúdate con el bloque Repeat que se encuentra en la categoría de Control.
+Instrucciones panel 5
+          Con los bloques de hardwre haz un programa que gire el motor 3 veces hacia la derecha en velocidad 5ta, despues que gire 2 veces hacia la izquierda en 7ma velocidad, por ultimo media vuelta hacia la derecha en 2da velocidad y media hacia la izquierda en 5ta velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos
+Instrucciones panel 6
+          Ahora vamos a armar la turbina, coloca la helice en el lugar que corresponde (toma como referencia el centro de la helice), posteriormente gira media vuelta hacia la derecha en 5ta velocidad, luego una vuelta hacia la izquierda en 7ma velocidad haz este paso 2 veces, por ultimo gira hacia la derecha 4 vueltas en 7ma velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos
+
+
+

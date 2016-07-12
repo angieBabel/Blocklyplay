@@ -1,0 +1,39 @@
+<md-dialog aria-label="Draw the">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Introduction Level</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content style="max-width:800px;max-height:810px; ">
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Level 1">
+          <md-content class="md-padding">
+            <p>Sigue las instrucciones de los videos para que aprendas como utilizar esta herramienta :) </p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 2">
+          <md-content class="md-padding">           
+            <p>Cada video te ira enseñando como utilizar los bloques para que logres pasar los niveles</p>
+          </md-content>
+        </md-tab>
+        <md-tab label="Level 3">
+          <md-content class="md-padding">
+            <p>"Vive la aventura de conquistar y defender tu reino. Descarga Tower troopers y conviertete en el mejor!" <br>
+Juego de inteligencia y diversion para toda la familia! </p>
+          </md-content>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('not useful')" >
+        OK!
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

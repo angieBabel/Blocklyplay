@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 <title>HTML5 - Nave en movimiento</title>
-<!-- Responsive css -->
+<!-- Responsive css 
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+<link rel="stylesheet" href="styles.css">
+
+ <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script> 
+
 <!-- interprete de JS -->
 <script src="acorn_interpreter.js"></script>
 <script src="acorn.js"></script>
@@ -22,60 +37,10 @@
 <script type="text/javascript" src="moves.js"></script>
 <script type="text/javascript" src="filesaver.js"></script>
 <script type="text/javascript" src="Blob.js"></script>
-
-<style>
-  canvas {
-      background: #fff;
-      font-family: sans-serif;
-    }
-
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-
-    .button-success,
-    .button-error,
-    .button-warning,
-    .button-secondary {
-      color: white;
-      border-radius: 20px;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      margin-left: 20px;
-    }
-
-    .button-success {
-      background: rgb(28, 184, 65); /* this is a green */
-    }
-    .button-error {
-      background: rgb(202, 60, 60); /* this is a maroon */
-    }
-
-    .button-warning {
-       background: rgb(223, 117, 20); /* this is an orange */
-    }
-
-    .button-secondary {
-      background: rgb(66, 184, 221); /* this is a light blue */
-    }
-
-    canvas {
-     height: 100%;
-     width: 99%;
-    }
-
-    #divCanvas{
-      height: 80%;
-    }
-    #level{
-      color: white;
-      border-radius: 100%;
-      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-      font-size: 12px;
-    }
-</style>
+<script src="jquery.min.js"></script>
 
 <script type="text/javascript">
+    'use strict';
     /*var image;*/
     var img= new Image();
     var X;
@@ -92,8 +57,6 @@
     var roadpaint = [];
     var count=0;
     var luz=0,luzTrasera=0;
-
-    /*var road [];*/
 
     var positionObj = {
       objX: 0,
@@ -119,8 +82,6 @@
       Xaux = positionObj.objX;
       Yaux= positionObj.objY;
       panel(0);
-      //Avatar(1);
-      //path();
     }
 
     function stopTimer(){
@@ -170,149 +131,68 @@
       ctx.rect(X, Y-100, 100, 100);
       ctx.stroke();
     }
-</script>
-<script type="text/javascript">
-    var myInterpreter=null;
-    function initAlert(interpreter, scope) {
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(alert(text));
-      };
-      interpreter.setProperty(scope, 'alert',
-          interpreter.createNativeFunction(wrapper));
-      // Add an API function for the prompt() block.
-      var wrapper = function(text) {
-        text = text ? text.toString() : '';
-        return interpreter.createPrimitive(prompt(text));
-      };
-      interpreter.setProperty(scope, 'prompt',
-          interpreter.createNativeFunction(wrapper));
 
-      // Add an API function for highlighting blocks.
-      var wrapper = function(id) {
-        id = id ? id.toString() : '';
-        return interpreter.createPrimitive(highlightBlock(id));
-      };
-      interpreter.setProperty(scope, 'highlightBlock',
-          interpreter.createNativeFunction(wrapper));
-
-      //Moves Funcitons
-        //Move forward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(forward(nosteps));
-        }
-        interpreter.setProperty(scope, 'forward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(backward(nosteps));
-        }
-        interpreter.setProperty(scope, 'backward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move upward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(upward(nosteps));
-        }
-        interpreter.setProperty(scope, 'upward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move downward
-        var wrapper = function(nosteps) {
-          return interpreter.createPrimitive(downward(nosteps));
-        }
-        interpreter.setProperty(scope, 'downward',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move forwardPainting
-
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(forwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'forwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-        //Move backwardPainting
-        var wrapper = function(nosteps,color) {
-          return interpreter.createPrimitive(backwardPaint(nosteps,color));
-        }
-        interpreter.setProperty(scope, 'backwardPaint',
-            interpreter.createNativeFunction(wrapper));
-
-
-        //turn left-right
-        var wrapper = function(angulo, side) {
-          return interpreter.createPrimitive(rotar(angulo, side));
-        }
-        interpreter.setProperty(scope, 'rotar',
-            interpreter.createNativeFunction(wrapper));
-
-        //play sound
-        var wrapper = function(sonido) {
-          return interpreter.createPrimitive(sound(sonido));
-        }
-        interpreter.setProperty(scope, 'sound',
-            interpreter.createNativeFunction(wrapper));
-
-        //wait X secs
-        var wrapper = function(secs) {
-          return interpreter.createPrimitive(wait(secs));
-        }
-        interpreter.setProperty(scope, 'wait',
-            interpreter.createNativeFunction(wrapper));
-
-
-    }
-    var highlightPause = false;
-    function highlightBlock(id) {
-      workspace.highlightBlock(id);
-      highlightPause = true;
+    function ocultar(){
+      //$('.blocklyToolboxDiv').css({'width':'20px'});
+       $('.blocklyToolboxDiv').toggle('slow');
     }
 </script>
 </head>
-<body onload="begin()">
-  <div class="pure-g">
-    <div class="pure-u-1-1 pure-menu pure-menu-horizontal">
-      <p class="pure-menu-heading pure-menu-link" >Blockly play</p>
-      <ul class="pure-menu-list">
-        <li class="pure-menu-item"><button onclick="location.href = 'panel.html'"  class="button-secondary pure-button" id="level">0</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel1.html'"  class="button-secondary pure-button" id="level">1</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel2.html'"  class="button-secondary pure-button" id="level">2</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel3.html'"   class="button-secondary pure-button" id="level">3</button></li>
-        <li class="pure-menu-item"><button onclick="location.href = 'panel4.html'"   class="button-secondary pure-button" id="level">4</button></li>
-      </ul>
-
-
-
-
+<body onload="begin()" ng-app="Blocklyplay" ng-cloak>
+  <div layout="row" layout-wrap>
+    <div flex="10">
+      <md-button class="md-icon-button md-primary" aria-label="Settings" onclick="ocultar()" >
+        <md-icon >
+          <i class="material-icons">dehaze</i>
+        </md-icon>
+      </md-button>
+      <!--<button onclick="ocultar()"><i class="fa fa-bars " aria-hidden="true"></i></button>-->
     </div>
-    <div class="pure-u-2-5" id="blocklyArea">
-      <div id="blocklyDiv" style="position: absolute" ></div>
+    <div flex="40">
+      <p>Instrucciones</p>
+    </div>
+    <div flex>
+      <md-button class="md-fab md-mini" aria-label="Panel" ng-style="{'background-color':'blue'}" onclick="location.href = 'panel.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" onclick="location.href = 'panel1.html'" >
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" onclick="location.href = 'panel2.html'" >
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" onclick="location.href = 'panel3.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" onclick="location.href = 'panel4.html'">
+        <md-icon ></md-icon>
+      </md-button>
+      <md-button class="md-fab md-mini" aria-label="Panel" onclick="location.href = 'panel5.html'">
+        <md-icon ></md-icon>
+      </md-button>
     </div>
 
-    <div class="pure-u-3-5" id="divCanvas">
-      <canvas id="canvas"></canvas>
+  </div>
+  <div layout="row">
+    <div flex id="blocklyArea">
+        <div id="blocklyDiv" style="position: absolute" ></div>
     </div>
 
-    <div class="pure-u-1-1">
-      <button onclick="showCode()"  class="button-secondary pure-button">Show JavaScript</button>
-      <button onclick="saveXML()"  class="button-warning pure-button">Save as XML</button>
-      <button onclick="runCode()" class="button-success pure-button">
-        Run JavaScript
-      </button>
+    <div flex id="divCanvas">
+        <canvas id="canvas"></canvas>
     </div>
   </div>
-<!-- <table>
-
-<button onclick="showCode()">Show JavaScript</button>
-<button onclick="saveXML()">Save as XML</button>
-<button onclick="runCode()">Run JavaScript</button>
-<td><canvas id="canvas" height="480" width="600" ></canvas></td>
-<td><div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-</td>
-</table> -->
-
+  <div layout="row">
+    <div flex>
+      <button onclick="showCode()" >Show JavaScript</button>
+    </div>
+    <div flex>
+      <button onclick="saveXML()" >Save as XML</button>
+    </div>
+    <div flex>
+      <button onclick="runCode()">Run JavaScript</button>  
+    </div>    
+  </div>
 
 <xml id="toolbox" style="display: none">
   <category name="Control" colour="355">
@@ -455,6 +335,7 @@
 
 </xml>
 <script type="text/javascript">
+    'use strict';
     var blocklyArea = document.getElementById('blocklyArea');
     var blocklyDiv = document.getElementById('blocklyDiv');
     var blocklyCanvas = document.getElementById('divCanvas');
@@ -471,14 +352,11 @@
         y += element.offsetTop;
         element = element.offsetParent;
       } while (element);
-      //alert(blocklyArea.offsetWidth)
-      //blocklyArea.style.height='80%';
+
       blocklyDiv.style.height='85%';
-      // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
       blocklyDiv.style.top = y + 'px';
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-      //blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 
       blocklyCanvas.style.height= blocklyDiv.offsetHeight+ 'px';
     };
@@ -486,9 +364,6 @@
     onresize();
 
 
-/*var workspace = Blockly.inject('blocklyDiv',
-    {media: 'media/',
-     toolbox: document.getElementById('toolbox')});*/
   var program = window.localStorage.getItem("panel");
   Blockly.mainWorkspace.clear();
   var textToDom = Blockly.Xml.textToDom(program);
@@ -501,21 +376,16 @@ function showCode() {
   Blockly.JavaScript.addReservedWords('highlightBlock');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   //////
-  /*var allXml = Blockly.Xml.workspaceToDom(workspace);
-
-  var allCode = [];
-  console.log(allXml);
-  xml = allXml;
-  for (var i = 0, xml; xml = allXml[i]; i++) {
-
-    var headless = new Blockly.Workspace();
-
-    Blockly.Xml.domToWorkspace(headless, xml);
-    allCode.push(Blockly.JavaScript.workspaceToCode(headless));
-    headless.dispose();
-    console.log(allCode.length);
-
-  }*/
+  /*
+    var allXml = Blockly.Xml.workspaceToDom(workspace);
+    var allCode = [];
+    for (var i = 0, xml; xml = allXml[i]; i++) {
+      var headless = new Blockly.Workspace();
+      Blockly.Xml.domToWorkspace(headless, xml);
+      allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+      headless.dispose();
+    }
+  */
 
   //////
   myInterpreter = new Interpreter(code, initAlert);
@@ -565,25 +435,12 @@ function saveXML(){
   var mappingData = window.localStorage.getItem('mappingBlock');
   var conditionData = window.localStorage.getItem('conditionBlock');
 
-  /*var mappingElem = new Element('mapping', {
-    'html': mappingData
-  });
-  var conditionElem = new Element('condition', {
-    'html': conditionData
-  });
 
-  $(xml).grab(mappingElem);
-  $(xml).grab(conditionElem);
-*/
   var data = Blockly.Xml.domToPrettyText(xml);
   console.log(data);
   //return;
 
-  // Store data in blob.
-  //var builder = new BlobBuilder();
-  //builder.append(data);
-  //console.log(builder);
-  //saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
+
   var name = prompt("Name of this file", "blocks");
   if (name) {
     var blob = new Blob([data], {
@@ -594,6 +451,12 @@ function saveXML(){
 
 }
 </script>
+<script type="text/javascript">    
+    /**
+     * You must include the dependency on 'ngMaterial' 
+     */
+    angular.module('Blocklyplay', ['ngMaterial']);
+  </script>
 </body>
 </html>
 

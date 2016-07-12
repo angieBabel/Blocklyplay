@@ -5,3 +5,9 @@ npm-debug.log
 .project
 *.pyc
 *.komodoproject
+
+PruebasBlockly/Blockly/blockly/js/acorn_interpreter.js
+
+PruebasBlockly/Blockly/blockly/js/acorn.js
+
+PruebasBlockly/Blockly/blockly/js/Blob.js
