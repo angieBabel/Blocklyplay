@@ -48,7 +48,7 @@
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl" >
     <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}" ng-controller="AppCtrl" id="prueba">
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}" >
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
@@ -142,6 +142,10 @@
         </md-card>
       </div>
     </div>
+    <!-- para poner los alerts -->
+     <div>
+      <md-button ng-click="showConfirm($event)" ng-style="{'display':'none'}" id="prueba">Publicar reto</md-button> 
+     </div>
     <!-- side nav de instrucciones de nivel 1-->
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
       <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">

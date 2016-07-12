@@ -99,6 +99,7 @@
   }  
   //Compara si las paradas que hizo el niño estuvieron bien
   function check1(){
+    var openfile =document.getElementById('prueba').click()
     /*var coincidencias=0;
     //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
     for (var i = 0; i < solucion.length; i++) {
