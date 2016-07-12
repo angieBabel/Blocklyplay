@@ -125,8 +125,10 @@
       }
       //si coincidio en todas las paradas, sin importar el orden lo da por bueno
       if (coincidencias==semaforos.length) {
-        alert('Felicidades haz realizado correctamente el puzzle')
+        var correct =document.getElementById('Correct').click()
+        //alert('Felicidades haz realizado correctamente el puzzle')
       }else{
-        alert('Te ha faltado hacer una parada')
+        var wrong =document.getElementById('Wrong').click()
+        //alert('Te ha faltado hacer una parada')
       }
     }

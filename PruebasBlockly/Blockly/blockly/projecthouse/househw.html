@@ -97,13 +97,13 @@
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" md-active="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" md-active="nivel2" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" md-active="nivel3" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -145,6 +145,11 @@
         </md-card>
       </div>
     </div>
+    <!-- para poner los alerts -->
+     <div ng-style="{'display':'none'}">
+      <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
+      <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button> 
+     </div>
     <!-- side nav de instrucciones de nivel 1-->
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
       <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">

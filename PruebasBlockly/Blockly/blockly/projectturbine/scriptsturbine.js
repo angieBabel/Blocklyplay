@@ -114,10 +114,10 @@
     }
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==solucion.length) {
-      var openfile =document.getElementById('Correct').click()
+      var correct =document.getElementById('Correct').click()
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
-      var openfile =document.getElementById('Wrong').click()
+      var wrong =document.getElementById('Wrong').click()
       //alert('Esta vez no lo conseguiste, intenta de nuevo')
       location.reload();
     }

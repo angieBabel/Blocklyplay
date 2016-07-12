@@ -150,39 +150,43 @@
     //Validar los click para saber donde presiono
     if (clickX>13 && clickX<14 && clickY>=5 && clickY<6){//Validar boton piso 1
       if (Math.round10(positionObj.objY,-2)==Math.round10(stepsizeY*3,-2)) {
-        alert('Felicidades haz completado correctamente el puzzle');
+        var correct =document.getElementById('Correct').click()
+        //alert('Felicidades haz completado correctamente el puzzle');
       }
       else{
-        alert('Esta vez no lo conseguiste, intenta de nuevo');
+        var wrong =document.getElementById('Wrong').click()
+        //alert('Esta vez no lo conseguiste, intenta de nuevo');
       }
     } else if (clickX>13 && clickX<14 && clickY>=4 && clickY<5){//Validar boton piso 2
-      alert(Math.round10(positionObj.objY,-2)+' '+stepsizeY*2)
+      //alert(Math.round10(positionObj.objY,-2)+' '+stepsizeY*2)
         if (Math.round10(positionObj.objY,-2)==stepsizeY*2) {
-          alert('Felicidades haz completado correctamente el puzzle');
+          var correct =document.getElementById('Correct').click()
+          //alert('Felicidades haz completado correctamente el puzzle');
         }
         else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          var wrong =document.getElementById('Wrong').click()
+          //alert('Esta vez no lo conseguiste, intenta de nuevo');
         }
     } else if (clickX>13 && clickX<14 && clickY>=3 && clickY<4){ //Validar boton piso 3
-      alert(Math.round10(positionObj.objY,-2)+' '+stepsizeY)
+      //alert(Math.round10(positionObj.objY,-2)+' '+stepsizeY)
 
         if (Math.round10(positionObj.objY,-2)==stepsizeY) {
-          alert('Felicidades haz completado correctamente el puzzle');
+          var correct =document.getElementById('Correct').click()
+          //alert('Felicidades haz completado correctamente el puzzle');
         }
         else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          var wrong =document.getElementById('Wrong').click()
+          //alert('Esta vez no lo conseguiste, intenta de nuevo');
         }
     } else /*if (clickX>7 && clickX<8 && clickY>=1 && clickY<2)*/{ //Validar boton piso 4
-      alert(Math.round10(positionObj.objY,-2))
+      //alert(Math.round10(positionObj.objY,-2))
         if (Math.round10(positionObj.objY,-2)==0){
-          alert('Felicidades haz completado correctamente el puzzle');
+          var correct =document.getElementById('Correct').click()
+          //alert('Felicidades haz completado correctamente el puzzle');
         }
         else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          var wrong =document.getElementById('Wrong').click()
+          //alert('Esta vez no lo conseguiste, intenta de nuevo');
         }
     }
-  }
-  //funcion para ocultar el toolbox
-  function ocultar(){
-     $('.blocklyToolboxDiv').toggle('slow');
   }

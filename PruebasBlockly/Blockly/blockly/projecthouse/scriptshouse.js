@@ -108,10 +108,12 @@
           }
         }
         if(verific===6){
-          alert('Felicidades, haz completado correctamente el puzzle');
+          var correct =document.getElementById('Correct').click()
+          //alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
         }else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          var wrong =document.getElementById('Wrong').click()
+          //alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
       }
