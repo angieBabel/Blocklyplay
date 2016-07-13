@@ -20,7 +20,6 @@
     alto = document.getElementById('divCanvas').offsetHeight;
     canvas.width= ancho;
     canvas.height = alto;
-    alert('ancho= '+canvas.width+' alto='+canvas.height);
     stepsizeX=canvas.width/30 ;
     stepsizeY=canvas.height/22;
     wimg=stepsizeX/2;

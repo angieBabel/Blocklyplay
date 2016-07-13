@@ -15,6 +15,7 @@
     ancho = document.getElementById('divCanvas').offsetWidth;
     alto = document.getElementById('divCanvas').offsetHeight;
     //canvas.addEventListener("mousedown", getPosition, false);
+    
     canvas.width= ancho;
     canvas.height = alto;
     stepsizeX=canvas.width/9;

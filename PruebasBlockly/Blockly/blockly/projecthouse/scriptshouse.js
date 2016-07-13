@@ -12,6 +12,7 @@
         ctx = canvas.getContext('2d');
         ancho = document.getElementById('divCanvas').offsetWidth;
         alto = document.getElementById('divCanvas').offsetHeight;
+
         canvas.width= ancho;
         canvas.height = alto;
         wimg=8;

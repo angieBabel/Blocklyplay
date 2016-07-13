@@ -13,7 +13,7 @@
       alto = document.getElementById('divCanvas').offsetHeight;
       canvas.width= ancho;
       canvas.height = alto;
-
+     
       stepsizeX=canvas.width/30;
       stepsizeY=canvas.height/30;
 
