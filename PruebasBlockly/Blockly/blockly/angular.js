@@ -6,6 +6,9 @@
                 .toggle();
                 navID = 'Instrucciones1';
         });
+        $scope.nivel2= true;
+        $scope.nivel3= true;
+        $scope.nivel4= true;
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -40,17 +43,17 @@
           $mdDialog.show(confirm).then(function() {
             switch(currentpanel) {
               case 1:                  
-                  $scope.nivel2= true;
+                  $scope.nivel2= false;
                   break;
               case 2:                  
-                  $scope.nivel3= true;
+                  $scope.nivel3= false;
                   break;
               case 3:                  
-                  $scope.nivel4= true;
+                  $scope.nivel4= false;
               case 4:                  
                   /*aqui regresaria al menu principal o algo asi*/
               default:                  
-                  $scope.nivel2= true;
+                  $scope.nivel2= false;
             }
 
 
