@@ -286,8 +286,10 @@ function loadXML() {
 //para enviar el codigo al hardware
 function pasoHW(){
   var socket = null;
-  socket = io.connect('http://edison.local:3000');
+  //socket = io.connect('http://edison.local:3000');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   code = code.replace(/[']/gi, "");
-  socket.emit('changefunction',code);
+  code = code.replace(/\n{2,}/,"\n");
+  alert(code);
+  //socket.emit('changefunction',code);
 } 
