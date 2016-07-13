@@ -20,6 +20,7 @@
     alto = document.getElementById('divCanvas').offsetHeight;
     canvas.width= ancho;
     canvas.height = alto;
+    alert('ancho= '+canvas.width+' alto='+canvas.height);
     stepsizeX=canvas.width/30 ;
     stepsizeY=canvas.height/22;
     wimg=stepsizeX/2;
@@ -99,7 +100,8 @@
   }  
   //Compara si las paradas que hizo el niño estuvieron bien
   function check1(){
-    /*var coincidencias=0;
+
+    var coincidencias=0;
     //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
     for (var i = 0; i < solucion.length; i++) {
       for (var j = 0; j < roadpaint.length; j++) {
@@ -113,11 +115,13 @@
     }
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==solucion.length) {
-      alert('Felicidades haz realizado correctamente el puzzle')
+      var correct =document.getElementById('Correct').click()
+      //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
-      alert('Esta vez no lo conseguiste, intenta de nuevo')
+      var wrong =document.getElementById('Wrong').click()
+      //alert('Esta vez no lo conseguiste, intenta de nuevo')
       location.reload();
-    }*/
+    }
   }   
 
 /*scripts para el segundo nivel*/

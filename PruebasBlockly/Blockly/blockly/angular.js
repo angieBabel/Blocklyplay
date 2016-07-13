@@ -6,6 +6,9 @@
                 .toggle();
                 navID = 'Instrucciones1';
         });
+        $scope.nivel2= true;
+        $scope.nivel3= true;
+        $scope.nivel4= true;
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -28,14 +31,46 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        $scope.showConfirm = function(ev) {
+        $scope.showCorrect = function(ev) {
           // Appending dialog to document.body to cover sidenav in docs app
           var confirm = $mdDialog.confirm()
-                .title('Would you like to delete your debt?')
-                .textContent('All of the banks have agreed to forgive you your debts.')
-                .ariaLabel('Lucky day')
+                .title('Felicidades')
+                .textContent('Haz realizado correctamente el puzzle')
+                .ariaLabel('Felicidades')
                 .targetEvent(ev)
-                .ok('Please do it!')
+                .ok('Ir al siguiente nivel')
+                .cancel('Volver al nivel actual');
+          $mdDialog.show(confirm).then(function() {
+            switch(currentpanel) {
+              case 1:                  
+                  $scope.nivel2= false;
+                  break;
+              case 2:                  
+                  $scope.nivel3= false;
+                  break;
+              case 3:                  
+                  $scope.nivel4= false;
+              case 4:                  
+                  /*aqui regresaria al menu principal o algo asi*/
+              default:                  
+                  $scope.nivel2= false;
+            }
+
+
+            //$scope.status = 'You decided to get rid of your debt.';
+            //alert('entro al confirm');
+          }, function() {
+            $scope.status = 'You decided to keep your debt.';
+          });
+        };
+        $scope.showWrong = function(ev) {
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.confirm()
+                .title('Lo sentimos')
+                .textContent('Esta vez no lo conseguiste, intenta de nuevo.')
+                .ariaLabel('Intenta de nuevo')
+                .targetEvent(ev)
+                .ok('Intentar de nuevo')
                 .cancel('Sounds like a scam');
           $mdDialog.show(confirm).then(function() {
             $scope.status = 'You decided to get rid of your debt.';
@@ -52,7 +87,12 @@
               clickOutsideToClose:true
             });
             generate();
-          };
+        };
+        /*$scope.loadNewLevel = function(ev){
+
+          {{status}}
+
+        };*/
 
         function buildToggler() {
           return function() {

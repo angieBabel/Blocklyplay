@@ -48,7 +48,7 @@
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl" >
     <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}" ng-controller="AppCtrl" id="prueba">
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}" >
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
@@ -97,13 +97,13 @@
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -142,6 +142,15 @@
         </md-card>
       </div>
     </div>
+    <!-- para poner los alerts -->
+     <div ng-style="{'display':'none'}">
+      <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
+      <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button> 
+     </div>
+     <!-- para cargar un nuevo nivel o dejarte aqui -->
+     <!-- <div ng-if="status" id="status" ng-style="{'display':'none'}">
+       {{status}}
+      </div> -->
     <!-- side nav de instrucciones de nivel 1-->
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
       <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">

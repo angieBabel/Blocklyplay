@@ -289,5 +289,6 @@ function pasoHW(){
   socket = io.connect('http://edison.local:3000');
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   code = code.replace(/[']/gi, "");
+  code = code.replace(/\n{2,}/,"\n");
   socket.emit('changefunction',code);
 } 
