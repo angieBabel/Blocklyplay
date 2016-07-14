@@ -21,12 +21,12 @@
     canvas.width= ancho;
     canvas.height = alto;
     stepsizeX=canvas.width/30 ;
-    stepsizeY=canvas.height/22;
+    stepsizeY=canvas.height/20;
     wimg=stepsizeX/2;
     X = stepsizeX*15;
-    Y = stepsizeY*11;
+    Y = stepsizeY*10;
     positionObj.objX=stepsizeX*14;
-    positionObj.objY=stepsizeY*10;
+    positionObj.objY=stepsizeY*9;
     positionObj.objZ=0;
     Xaux = positionObj.objX;
     Yaux = positionObj.objY;
