@@ -68,6 +68,13 @@
           ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
           ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         }
+        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
+          ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
         Avatar1();
       }
 
