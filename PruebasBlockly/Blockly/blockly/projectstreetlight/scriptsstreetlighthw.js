@@ -3,8 +3,7 @@
       //inicialización de las variables propias del ejercicio 1
       var pasitos=4;
       var solution=[];
-      var pinled=0;
-      var ledstatus=null;
+      
       //se crean las variables de las imagenes para que sean globales
       var led1 = new Image();
       var led2 = new Image();
@@ -21,15 +20,32 @@
         alto = document.getElementById('divCanvas').offsetHeight;
         canvas.width= ancho;
         canvas.height = alto;
+        wimg=8;
 
-        stepsizeX=canvas.width/9;
-        stepsizeY=canvas.height/6;
+        stepsizeX=canvas.width/3;
+        stepsizeY=canvas.height/2;
+
+        X = stepsizeX;
+        Y = stepsizeY/2;
+        //se inicializa la posicion del objeto, aqui es donde se pintara la linea
+        positionObj.objX=X;//350;
+        positionObj.objY=Y;//142;
+        positionObj.objZ=0;
+        //se inicializan los valores auxiliares para poder pintar
+        Xaux = positionObj.objX;
+        Yaux= positionObj.objY;
         respuesta.push(new ledObj(1,'On'));
         panel1();
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
-          while(initX<canvas.width-stepsizeX){
+          var imgback = new Image();
+                  imgback.src = "../media/semaforohw2.png";
+                
+           imgback.onload = function() {
+            ctx.drawImage(imgback, 0, 0,ancho,alto);
+              
+             while(initX<canvas.width-stepsizeX){
                 initX=initX+stepsizeX;
                   while(initY<canvas.height-stepsizeY){
                     initY=initY+stepsizeY;
@@ -42,6 +58,7 @@
               }
               initX=0;
               Avatar1();
+            }
         }
 
       //Drawing avatar
@@ -49,20 +66,43 @@
         avatarwith=stepsizeX;avatarheight=stepsizeY;
            if (pinled==0) {
                     led1.src = "../media/ledOff.png";
-                    led2.src = "../media/ledOff.png";
-                    led3.src = "../media/ledOff.png";
+                    led2.src = "../media/ledOffYellow.png";
+                    led3.src = "../media/ledOffGreen.png";
               }else if (pinled==1) {
                 if (ledstatus=='On') {
                     led1.src = "../media/ledOn.png";
                 }else{
                     led1.src = "../media/ledOff.png";
                 };
+              }else if(pinled==2){
+                if (ledstatus=='On') {
+                    led2.src = "../media/ledOnYellow.png";
+                }else{
+                    led2.src = "../media/ledOffYellow.png";
+                };
+              }else if (pinled==3){
+                if (ledstatus=='On') {
+                    led3.src = "../media/ledOnGreen.png";
+                }else{
+                    led3.src = "../media/ledOffGreen.png";
+                }
               };
         led1.onload = function() {
-            ctx.drawImage(led1,stepsizeX*4, stepsizeY*2.5 ,avatarwith,avatarheight);
+            ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+            acabo=1;
           }
-          ctx.drawImage(led1,stepsizeX*4, stepsizeY*2.5 ,avatarwith,avatarheight);
-          acabo=1;
+        led2.onload = function() {
+            ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
+            acabo=1;
+          }
+        led3.onload = function() {
+            ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
+            acabo=1;
+          }
+          ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+          ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
+          ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
+          //acabo=1;
       }
 
       function check1(){
@@ -74,10 +114,10 @@
           };
         }
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-        /*if (coincidencias==solucion.length) {
+        if (coincidencias==solucion.length) {
           var correct =document.getElementById('Correct').click()
         }else{
          var wrong =document.getElementById('Wrong').click()
           location.reload();
-        }*/
+        }
       }

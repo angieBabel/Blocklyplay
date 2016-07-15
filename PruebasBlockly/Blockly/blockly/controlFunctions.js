@@ -2,6 +2,9 @@
 function stopTimer(){
     clearInterval(interval);
 }
+function stopwaitTimer(){
+  
+}
 //Funciones para que las reconozca el interprete
 var myInterpreter=null;
 function initAlert(interpreter, scope) {
@@ -97,8 +100,8 @@ function initAlert(interpreter, scope) {
     interpreter.setProperty(scope, 'lights',
         interpreter.createNativeFunction(wrapper));
     //funcion para prender las direccionales
-    var wrapper = function(side) {
-      return interpreter.createPrimitive(blinker(side));
+    var wrapper = function(side,secs) {
+      return interpreter.createPrimitive(blinker(side,secs));
     }
     interpreter.setProperty(scope, 'blinker',
         interpreter.createNativeFunction(wrapper));

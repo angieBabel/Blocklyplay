@@ -209,9 +209,9 @@
     }
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==solucion.length) {
-      alert('Felicidades haz realizado correctamente el puzzle')
+      var correct =document.getElementById('Correct').click()
     }else{
-      alert('Esta vez no lo conseguiste intenta de nuevo');
+      var wrong =document.getElementById('Wrong').click()
       location.reload();
     }
   }

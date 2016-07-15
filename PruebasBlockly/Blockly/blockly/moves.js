@@ -31,6 +31,10 @@
     //variables para saber si las luces estan encendidas, y de que lado debe prender, propias para el ejercicio 2
     var luz=0,luzTrasera=0,lightside;
 
+    //variables para el de led
+    var pinled=0;
+      var ledstatus=null;
+
     //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {
       objX: 0,
@@ -238,21 +242,25 @@
   //funcion para que se espere X segundos
   function wait(secs){
     acabo=0;
-    blinker('both');
+    blinker('both',secs);
+    var waitCount=0;
     //se guarda el estado de las luces antes de hacer las intermitentes
     var bluz=luz;
     var bluzT=luzTrasera;
     //se ponen en 1 para que ambas prendan
     luzTrasera=1;
     luz=1;
-    interv= setInterval(function(){
-      acabo=1;
-      //se restaura el estado de las luces
-      luz=bluz;
-      luzTrasera=bluzT;
-      altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),0,0));
-      clearInterval(interv);
-    },secs*1000);
+    interval= setInterval(function(){
+      waitCount+=1;
+      if (waitCount==(secs*10)) {
+        acabo=1;
+        //se restaura el estado de las luces
+        luz=bluz;
+        luzTrasera=bluzT;
+        altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),0,0));
+        stopTimer();
+      };
+    },100);
   }
   //Funciones para moverse hacia adelante pintando
   function forwardPaint(nosteps,color){
@@ -523,67 +531,71 @@
         ctx.stroke();
       }
     }
-    function blinker(side){
-      acabo=0;
+    function blinker(side,secs){
+      //acabo=0;
       //se inicializa el valor de las intermitentes en 0
       var blinks=0;
       //se guarda el estado de las luces anterior a las intermitentes
       var bluz=luz;
       var bluzT=luzTrasera;
+      if (pinled==0) {
+          blink=setInterval(function(){
 
-      blink=setInterval(function(){
-        //cada ves que entra se pinta el panel
-        switch(currentpanel) {
-          case 1:
-              panel1();
-              break;
-          case 2:
-              panel2();
-              break;
-          case 3:
-              panel3();
-          case 4:
-              panel4();
-          default:
-              panel1();
-        }
-        //tambien se ejecuta el avatar, para que no se note el retraso cuando el panel lo pinte
-        switch(currentpanel) {
-          case 1:
-              Avatar1();
-              break;
-          case 2:
-              Avatar2();
-              break;
-          case 3:
-              Avatar3();
-          case 4:
-              Avatar4();
-          default:
-              Avatar1();
-        }
-        lightside=side;
-        if (luz==1) {
-           luz=0;
-          }else{
-            luz=1;
+          //cada ves que entra se pinta el panel
+          switch(currentpanel) {
+            case 1:
+                panel1();
+                break;
+            case 2:
+                panel2();
+                break;
+            case 3:
+                panel3();
+            case 4:
+                panel4();
+            default:
+                panel1();
           }
-        if (luzTrasera==1) {
-          luzTrasera=0;
-        }else{
-          luzTrasera=1;
-        }
-         blinks+=1;
-         //Avatar();
-        if (blinks==10) {
-          clearInterval(blink);
-          //se restaura el valor de las intermitentes asi como de los lados
-          luz=bluz;
-          luzTrasera=bluzT;
-          lightside='both';
-          acabo=1;
-        }
-      },200);
+          //tambien se ejecuta el avatar, para que no se note el retraso cuando el panel lo pinte
+          switch(currentpanel) {
+            case 1:
+                Avatar1();
+                break;
+            case 2:
+                Avatar2();
+                break;
+            case 3:
+                Avatar3();
+            case 4:
+                Avatar4();
+            default:
+                Avatar1();
+          }
+          lightside=side;
+          if (luz==1) {
+             luz=0;
+            }else{
+              luz=1;
+            }
+          if (luzTrasera==1) {
+            luzTrasera=0;
+          }else{
+            luzTrasera=1;
+          }
+           blinks+=1;
+           //Avatar();
+          if (blinks==secs*5) {
+              clearInterval(blink);
+              //se restaura el valor de las intermitentes asi como de los lados
+              luz=bluz;
+              luzTrasera=bluzT;
+              lightside='both';
+              /*acabo=1;*/
+            }
+          },200);
+      };
+
+      
     }
     //funcon que cambia el estado de las luces dependiendo del bloque del niño
     function lights(lu,luzTraser,lightsid){
