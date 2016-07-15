@@ -5,10 +5,11 @@
       var solution=[];
       var pinled=0;
       var ledstatus=null;
-      
+      //se crean las variables de las imagenes para que sean globales
       var led1 = new Image();
       var led2 = new Image();
       var led3 = new Image();
+      
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
       function begin1(){
@@ -40,6 +41,7 @@
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
 
+
           var imgback = new Image();
                   imgback.src = "../media/citycube.jpg";
                 
@@ -65,31 +67,29 @@
       //Drawing avatar
       function Avatar1(){
         avatarwith=stepsizeX;avatarheight=stepsizeY;
-        
-        if (pinled==0) {
-
-              led1.src = "../media/ledOff.png";
-              led2.src = "../media/ledOff.png";
-              led3.src = "../media/ledOff.png";
-        }else if (pinled==1) {
-          if (ledstatus=='On') {
-              led1.src = "../media/ledOn.png";
-          }else{
-              led1.src = "../media/ledOff.png";
-          };
-        }else if(pinled==2){
-          if (ledstatus=='On') {
-              led2.src = "../media/ledOn.png";
-          }else{
-              led2.src = "../media/ledOff.png";
-          };
-        }else{
-          if (ledstatus=='On') {
-              led3.src = "../media/ledOn.png";
-          }else{
-              led3.src = "../media/ledOff.png";
-          }
-        };
+           if (pinled==0) {
+                    led1.src = "../media/ledOff.png";
+                    led2.src = "../media/ledOff.png";
+                    led3.src = "../media/ledOff.png";
+              }else if (pinled==1) {
+                if (ledstatus=='On') {
+                    led1.src = "../media/ledOn.png";
+                }else{
+                    led1.src = "../media/ledOff.png";
+                };
+              }else if(pinled==2){
+                if (ledstatus=='On') {
+                    led2.src = "../media/ledOn.png";
+                }else{
+                    led2.src = "../media/ledOff.png";
+                };
+              }else if (pinled==3){
+                if (ledstatus=='On') {
+                    led3.src = "../media/ledOn.png";
+                }else{
+                    led3.src = "../media/ledOff.png";
+                }
+              };
         led1.onload = function() {
             ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
           }
@@ -99,10 +99,9 @@
         led3.onload = function() {
             ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
           }
-          alert(led1.src);
-          /*ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+          ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
           ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
-          ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);*/
+          ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
           acabo=1;
       }
 
