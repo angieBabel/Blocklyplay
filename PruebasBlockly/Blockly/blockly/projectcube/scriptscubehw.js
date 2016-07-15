@@ -3,6 +3,12 @@
       //inicialización de las variables propias del ejercicio 1
       var pasitos=4;
       var solution=[];
+      var pinled=0;
+      var ledstatus=null;
+      
+      var led1 = new Image();
+      var led2 = new Image();
+      var led3 = new Image();
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
       function begin1(){
@@ -16,11 +22,11 @@
         canvas.height = alto;
         wimg=8;
 
-        stepsizeX=canvas.width/12;
-        stepsizeY=canvas.height/8;
+        stepsizeX=canvas.width/3;
+        stepsizeY=canvas.height/2;
 
-        X = stepsizeX*3;
-        Y = stepsizeY*6;
+        X = stepsizeX;
+        Y = stepsizeY/2;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -28,17 +34,12 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
+        respuesta.push(new ledObj(1,'On'));
         panel1();
-
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
+
           var imgback = new Image();
                   imgback.src = "../media/citycube.jpg";
                 
@@ -57,70 +58,67 @@
                   initY=0;
               }
               initX=0;
-              var casa = new Image();
-                  casa.src = "../media/cube2";
-              casa.onload = function() {
-                ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
-              }
-              ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
-              var carro = new Image();
-                  carro.src = "../media/carcube2.png";
-              carro.onload = function() {
-                ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
-              }
-              ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
               Avatar1();
             }
         }
 
       //Drawing avatar
       function Avatar1(){
-        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-        var avatarheight, avatarwith;
-        var positionX, positionY;
+        avatarwith=stepsizeX;avatarheight=stepsizeY;
+        
+        if (pinled==0) {
 
-        img.id = 'imagen';
-        //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=stepsizeX;avatarheight=stepsizeY*2;
-
-        img.onload = function() {
-          ctx.save();
-          //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-          ctx.translate(positionObj.objX,positionObj.objY);
-          //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
-          ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-          ctx.drawImage(img,0, 0,avatarwith,avatarheight);
-          ctx.restore();
-        }
-        img.src = '../media/persona2.png';//el img.src se pone despues del onload para asegurar su carga
+              led1.src = "../media/ledOff.png";
+              led2.src = "../media/ledOff.png";
+              led3.src = "../media/ledOff.png";
+        }else if (pinled==1) {
+          if (ledstatus=='On') {
+              led1.src = "../media/ledOn.png";
+          }else{
+              led1.src = "../media/ledOff.png";
+          };
+        }else if(pinled==2){
+          if (ledstatus=='On') {
+              led2.src = "../media/ledOn.png";
+          }else{
+              led2.src = "../media/ledOff.png";
+          };
+        }else{
+          if (ledstatus=='On') {
+              led3.src = "../media/ledOn.png";
+          }else{
+              led3.src = "../media/ledOff.png";
+          }
+        };
+        led1.onload = function() {
+            ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+          }
+        led2.onload = function() {
+            ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
+          }
+        led3.onload = function() {
+            ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
+          }
+          alert(led1.src);
+          /*ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+          ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
+          ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);*/
+          acabo=1;
       }
 
       function check1(){
-        var verific=0;
-        for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
-            if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-              verific=verific+1;
-            }
-          }
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-            }
-          }
+        var coincidencias=0;
+        //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
+        for (var i = 0; i < solucion.length; i++) {
+          if (solucion[i].Pin==respuesta[i].Pin && solucion[i].Turn==respuesta[i].Turn) {
+            coincidencias+=1;
+          };
         }
-        if(verific===6){
-          alert('Felicidades, haz completado correctamente el puzzle');
-          roadpaint.splice(0,roadpaint.length);
+        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+        if (coincidencias==solucion.length) {
+          alert('Felicidades haz realizado correctamente el puzzle');
         }else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+         alert('Esta vez no lo conseguiste intenta de nuevo');
           location.reload();
         }
       }

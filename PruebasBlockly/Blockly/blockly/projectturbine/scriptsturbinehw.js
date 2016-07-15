@@ -1,21 +1,6 @@
 /*scripts para el primer nievel*/
     /*var image;*/
     //las variables generales se pasaron a moves.js
-    //inicialización de las variables propias del ejercicio 5
-    function solutionObj(x,y,z,color){
-        this.soX= x;
-        this.soY = y;
-        this.soZ = z;
-        this.soColor = color;
-      }
-      function motorObj(px,py,ns,dir,speed){
-        pX= px;
-        pY= py;
-        ns= ns;
-        dirr= dir;
-        speed= speed;
-      };
-      var solucion=[],respuesta=[]; 
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
     function begin1(){

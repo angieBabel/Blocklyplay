@@ -1,14 +1,6 @@
 /*scrips para el primer nivel*/
   /*var image;*/
   //las variables generales se pasaron a moves.js
-  //inicialización de las variables propias del ejercicio 5
-  function solutionObj(x,y,z,color){
-      this.soX= x;
-      this.soY = y;
-      this.soZ = z;
-      this.soColor = color;
-    }
-    var solucion=[],roadpaint=[]; 
     //la variable de positionObj se paso a moves.js
     //el objeto de solutionObj se paso a moves.js
   function begin1(){
