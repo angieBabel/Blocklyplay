@@ -34,6 +34,9 @@
     //variables para el de led
     var pinled=0;
       var ledstatus=null;
+    //variables para el texto de la pantalla
+    var screentext;
+    var screencolor;
 
     //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {
@@ -693,6 +696,12 @@
       default:
           Avatar1();
     }
+  }
+
+  //funcion para escribir texto
+  function  pantalla(text,color){
+    screentext=text;
+    screencolor=color;
   }
 
   //funcion para rotar el motor (hacer girar una imagen)

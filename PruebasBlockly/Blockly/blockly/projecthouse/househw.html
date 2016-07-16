@@ -43,7 +43,7 @@
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 <!-- para cargar las funciones de begin y esas cosas -->
-  <script src="scriptshouse.js"></script>  
+  <script src="scriptshousehw.js"></script>  
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
@@ -63,7 +63,7 @@
               </md-button>
             </div>
             <div flex="60">
-              <span>Dibuja el contorno de una hélice</span>
+              <span>Dibuja el área de una casa</span>
             </div>
             <div flex="20">
               <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
@@ -79,7 +79,7 @@
               </svg>
             </md-button>
             <h4>
-              <span>house</span>
+              <span>Secuencias simples</span>
             </h4> 
           </div> 
         </div>
@@ -93,7 +93,7 @@
       <!-- container donde ira el canvas -->
       <div flex="60">
         <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
+        <md-card  ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
@@ -110,15 +110,12 @@
           </md-content>
           <!-- div con los botones de accion -->
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
-            <div ng-style="{'position': 'absolute','left':'70%'}">
+            <div ng-style="{'position': 'absolute','left':'75%'}">
               <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
-              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
+              <md-button class="md-icon-button" aria-label="More" onclick="stop()">
                 <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Hardware" onclick="pasoHW()">
-                <md-icon md-svg-icon="../media/icons/chip.svg"></md-icon> 
               </md-button>
               <md-menu>
                 <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
@@ -193,10 +190,10 @@
        <!-- instrucciones -->
        <div layout="column"   layout-align="center center">
           <div>
-            <p>Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+            <p>¡Aprendamos de secuencias! Utiliza los bloques Move Painting para dibujar el área de la casa, apóyate de los puntos para saber cuántos pasos deberás avanzar mientras pintas, elige el color que más te guste, utiliza el bloque Turn para dar vueltas hacia donde quieras avanzar, para girar hacia cualquier lado utiliza 90 grados, estos bloques se encuentran en la categoría Moves.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
                 Comenzar reto 
           </md-button>
           </div>
@@ -258,7 +255,7 @@
       </md-content>
     </md-sidenav>
   <xml id="toolbox" style="display: none">
-    <category name="Control" colour="355">
+    <category name="Control" colour="157">
       <block type="wait"></block>
       <block type="stop"></block>
       <block type="controls_repeat_ext">
@@ -268,43 +265,24 @@
           </shadow>
         </value>
       </block>
-      <block type="controls_whileUntil"></block>
-      <block type="controls_for">
-        <value name="FROM">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="TO">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-        <value name="BY">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="controls_flow_statements"></block>
     </category>
 
-    <category name="Move" colour="79">
+    <category name="Move" colour="175">
       <block type="mover"></block>
       <block type="mover_pintando"></block>
       <block type="girar"></block>
     </category>
 
-    <category name="Lights" colour="176">
+    <category name="Lights" colour="192">
       <block type="blinker"></block>
       <block type="lights"></block>
     </category>
 
-    <category name="Sounds" colour="290">
+    <category name="Sounds" colour="247">
       <block type="sonido"></block>
     </category>
 
-    <category name="Math" colour="190">
+    <category name="Math" colour="24">
       <block type="math_number" gap="32"></block>
       <block type="math_arithmetic">
         <value name="A">
@@ -320,7 +298,7 @@
       </block>
     </category>
 
-    <category name="Text" colour="210">
+    <category name="Text" colour="53">
       <block type="text"></block>
       <block type="text_isEmpty">
         <value name="VALUE">
@@ -345,7 +323,7 @@
       </block>
     </category>
 
-    <category name="Logic" colour="25">
+    <category name="Logic" colour="197">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -353,7 +331,7 @@
       <block type="logic_boolean"></block>
     </category>
 
-    <category name="Colour" colour="160">
+    <category name="Colour" colour="37">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -391,190 +369,93 @@
         </value>
       </block>
     </category>
+
     <sep></sep>
+    <category name="Variables" colour="355" custom="VARIABLE"></category>
+    <category name="Functions" colour="287" custom="PROCEDURE"></category>
     <category name="Hardware" colour="354">
-      <block type="ledDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Turn">
-          <shadow type="status">
-            <field name="on/off">On</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="motorDisplayed">
-        <value name="steps">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="direction">
-          <shadow type="direction">
-            <field name="direction">Forward</field>
-          </shadow>
-        </value>
-        <value name="speed">
-          <shadow type="speed">
-            <field name="speed">1</field>
-          </shadow>
-        </value>
-      </block>
+        <block type="ledDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">1</field>
+            </shadow>
+          </value>
+          <value name="Turn">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="motorDisplayed">
+          <value name="steps">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="direction">
+            <shadow type="direction">
+              <field name="direction">Forward</field>
+            </shadow>
+          </value>
+          <value name="speed">
+            <shadow type="speed">
+              <field name="speed">1</field>
+            </shadow>
+          </value>
+        </block>
 
-      <block type="buzzerDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Tone">
-          <shadow type="tone">
-            <field name="tone">Do</field>
-          </shadow>
-        </value>
-        <value name="Secs">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="pantallaDisplayed">
-        <value name="message">
-          <shadow type="text">
-            <field name="TEXT">Type message here</field>
-          </shadow>
-        </value>
-        <value name="color">
-          <shadow type="colour_picker">
-            <field name="COLOUR">#ff0000</field>
-          </shadow>
-        </value>
-
-      </block>
-      <block type="botonDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Status">
-          <shadow type="status">
-            <field name="on/off">On</field>
-          </shadow>
-        </value>
-
-
-      </block>
-
-      <block type="status"></block>
-      <block type="speed"></block>
-      <block type="pina"></block>
-      <block type="pind"></block>
-      <block type="tone"></block>
+        <block type="buzzerDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">1</field>
+            </shadow>
+          </value>
+          <value name="Tone">
+            <shadow type="tone">
+              <field name="tone">Do</field>
+            </shadow>
+          </value>
+          <value name="Secs">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="pantallaDisplayed">
+          <value name="message">
+            <shadow type="text">
+              <field name="TEXT">Type message here</field>
+            </shadow>
+          </value>
+          <value name="color">
+            <shadow type="colour_picker">
+              <field name="COLOUR">#ff0000</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="botonDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">1</field>
+            </shadow>
+          </value>
+          <value name="Status">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
     </category>
-
-    <sep></sep>
-    <category name="Variables" colour="330" custom="VARIABLE"></category>
-    <category name="Functions" colour="46" custom="PROCEDURE"></category>
+    <category name="Inputs" colour="210">
+      <block type="status"></block>
+        <block type="speed"></block>
+        <block type="pina"></block>
+        <block type="pind"></block>
+        <block type="tone"></block>
+    </category>
   </xml>
-  <!-- Your application bootstrap  -->
-  <script type="text/javascript">    
-    /**
-     * You must include the dependency on 'ngMaterial' 
-     */
-    angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $mdDialog) {
-        /*funcion on ready para que despliegue el sideNav de instrucciones*/
-        angular.element(document).ready(function () {
-          $mdSidenav('Instrucciones1')
-                .toggle();
-                navID = 'Instrucciones1';
-        });
-        $scope.toggle = buildToggler();
-        $scope.canvas1 = function() {
-          begin1();
-          currentpanel=1;
-          loadCode();
-        }
-        $scope.canvas2 = function() {
-          begin2();
-          currentpanel=2;
-          loadCode();
-        }
-        $scope.canvas3 = function() {
-          begin3();
-          currentpanel=3;
-          loadCode();
-        }
-        $scope.canvas4 = function() {
-          begin4();
-          currentpanel=4;
-          loadCode();
-        }
-        var originatorEv;
-        $scope.openMenu = function($mdOpenMenu, ev) {
-          originatorEv = ev;
-          $mdOpenMenu(ev);
-        };
-        $scope.showTabDialog = function(ev) { 
-            $mdDialog.show({
-              controller: DialogController,
-              templateUrl: '../publishproduct.html',
-              parent: angular.element(document.body),
-              targetEvent: ev,
-              clickOutsideToClose:true
-            });
-            generate();
-          };
-        function buildToggler() {
-          return function() {
-              switch(currentpanel) {
-                case 1:
-                    navID = 'Instrucciones1';
-                    break;
-                case 2:
-                    navID = 'Instrucciones2';
-                    break;
-                case 3:
-                    navID = 'Instrucciones3';
-                case 4:
-                    navID = 'Instrucciones4';
-                default:
-                    navID = 'Instrucciones1';
-              }
-              // Component lookup should always be available since we are not using `ng-if`
-              $mdSidenav(navID)
-                .toggle()
-                .then(function () {
-                  $log.debug("toggle " + navID + " is done");
-                });
-            }
-          }
-        })
-        .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-          $scope.close = function () {
-            // Component lookup should always be available since we are not using `ng-if`
-            $mdSidenav(navID).close()
-              .then(function () {
-                $log.debug("close RIGHT is done");
-              });
-          };
-        });
-      function DialogController($scope, $mdDialog) {
-        $scope.vistaprevia = function(){
-          loadThumbnail();
-          showTabDialog();
-        };
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-      }
-  </script> 
+  <!-- el script con las funciones de angular se separo al documento angular.js -->
+  <script src="../angular.js"></script>
   <script type="text/javascript">
     var myWidth = 0, myHeight = 0;
       function alertSize() {
@@ -651,33 +532,7 @@
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
     }
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
-    function nextStep() {
-      if (highlightPause) {
-        // A block has been highlighted.  Pause execution here.
-        highlightPause = false;
-      } else {
-        // Keep executing until a highlight statement is reached.
-        /*stepCode();*/
-      }
-      if (!myInterpreter.step()) {
-        /*window.setTimeout(finish, 15);*/
-        clearInterval(intervalo);
-        switch(currentpanel) {
-          case 1:
-              check1();
-              break;
-          case 2:
-              check2();
-              break;
-          case 3:
-              check3();
-          case 4:
-              check4();
-          default:
-              check1();
-        }
-      }
-    }
+    //funcion de nextep migradas al control functions.js
     function finish(){
       if(acabo==1){
             nextStep();
@@ -707,30 +562,7 @@
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }
-    function screenshotPage() {
-    //para sacar el thumnail
-      var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
-      var trash = newSVG.querySelector('g.blocklyTrash');
-      trash.remove();
-      var scrolV = newSVG.querySelector('g.blocklyScrollbarVertical');
-      scrolV.remove();
-      var scrolH = newSVG.querySelector('g.blocklyScrollbarHorizontal');
-      scrolH.remove();
-      var zoom = newSVG.querySelector('g.blocklyZoom');
-      zoom.remove();
-      //console.log(newSVG);
-      newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
-      window.localStorage.setItem("preview", newSVG.outerHTML); 
-    }
-    function generate() {
-        screenshotPage();
-    }
-    function loadThumbnail(){
-      var previa = window.localStorage.getItem("preview");
-      var thumb = document.getElementById('thumbnail');
-      thumb.innerHTML=previa;
-      thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
-    }
+    //las funciones para obtener el thumbnail se cambiaron al controlFunctions.js
     //las funciones de guardar XML estan en el archivo controlFunctions.js
     //Variable para controlar la subida de archivos
     var control = document.getElementById("your-files");//se hace referencia al input de tipo file
@@ -738,35 +570,9 @@
       control.addEventListener("change", function(event) {
            loadXML();
       }, false);
-    //funcion que habilita el file input
-    function showFileInput(){
-      var openfile =document.getElementById('your-files').click()
-    }
-    //funcion que carga un archivo XML
-    function loadXML() {
-      //se define la funcion Reader, de tipo FileReader
-      var reader = new FileReader();
-      reader.onload = function(event) {
-          var contents = event.target.result;//se almacena el resultado en una variable llamada content
-          console.log("File contents: " + contents);
-          Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
-          var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
-          Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
-      };
-      //en caso de haber error, lo lanza
-      reader.onerror = function(event) {
-          console.error("File could not be read! Code " + event.target.error.code);
-      };
-      //esta función manda llamar al reader como texto, y se pasa como parametro el archivo que almacenamos en la cariable control, como es un arreglo, se pasa el primer (unico) elemento
-      reader.readAsText(control.files[0]);
-    }
-    function pasoHW(){
-      var socket = io.connect('http://edison.local:3000');
-      var code = Blockly.JavaScript.workspaceToCode(workspace);
-      code = code.replace(/[']/gi, "");
-      socket.emit('changefunction',code);
-      //alert(code);
-    } 
+    //para hacer click en el inputfile se paso al controlfunctions.js
+    //loadXML se paso a controlfunctions.js
+    //send to hardware se paso al controlfunctions.js
   </script>
   
 </body>

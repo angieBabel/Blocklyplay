@@ -22,8 +22,8 @@
         canvas.height = alto;
         wimg=8;
 
-        stepsizeX=canvas.width/3;
-        stepsizeY=canvas.height/2;
+        stepsizeX=canvas.width/9;
+        stepsizeY=canvas.height/6;
 
         X = stepsizeX;
         Y = stepsizeY/2;
@@ -50,7 +50,7 @@
                   while(initY<canvas.height-stepsizeY){
                     initY=initY+stepsizeY;
                     ctx.beginPath();
-                    ctx.fillStyle = "black";
+                    ctx.fillStyle = "cyan";
                     ctx.arc(initX,initY,1.5,0,2*Math.PI);
                     ctx.fill();
                   }
@@ -88,20 +88,20 @@
                 }
               };
         led1.onload = function() {
-            ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
+            ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
             acabo=1;
           }
         led2.onload = function() {
-            ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
+            ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
             acabo=1;
           }
         led3.onload = function() {
-            ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
+            ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
             acabo=1;
           }
-          ctx.drawImage(led1,0, stepsizeY/2 ,avatarwith,avatarheight);
-          ctx.drawImage(led2,stepsizeX, stepsizeY/2,avatarwith,avatarheight);
-          ctx.drawImage(led3,stepsizeX*2, stepsizeY/2,avatarwith,avatarheight);
+          ctx.drawImage(led1,0, stepsizeY*1.5 ,avatarwith,avatarheight*2);
+          ctx.drawImage(led2,stepsizeX, stepsizeY*1.5,avatarwith,avatarheight);
+          ctx.drawImage(led3,stepsizeX*2, stepsizeY*1.5,avatarwith,avatarheight);
           //acabo=1;
       }
 
