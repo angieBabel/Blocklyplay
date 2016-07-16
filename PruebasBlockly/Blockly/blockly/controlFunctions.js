@@ -150,10 +150,12 @@ function showCode() {
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   alert(code);
 }
-//Funcion para crear el interprete
+
+var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
     //Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     //permite que funcione el resaltar bloque
+    codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     Blockly.JavaScript.addReservedWords('highlightBlock');
     //lee lo que hay en el workspaces y lo guarda como codigo
@@ -288,10 +290,12 @@ function loadXML() {
 }
 //para enviar el codigo al hardware
 function pasoHW(){
-  var socket = null;
-  socket = io.connect('http://edison.local:3000');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  code = code.replace(/[']/gi, "");
-  code = code.replace(/\n{2,}/,"\n");
-  socket.emit('changefunction',code);
+  //var socket = null;
+  //socket = io.connect('http://edison.local:3000');
+  //var code = Blockly.JavaScript.workspaceToCode(workspace);
+  codeHW = codeHW.replace(/[']/gi, "");
+  codeHW = codeHW.replace(/\n{2,}/,"\n");
+  codeHW = codeHW.replace(/'\t'/gi,"");
+  alert(codeHW);
+  //socket.emit('changefunction',code);
 } 
