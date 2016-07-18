@@ -29,7 +29,13 @@
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
-          while(initX<canvas.width-stepsizeX){
+          var imgback = new Image();
+          imgback.src = "../media/ledV2.png";
+          imgback.onload = function() {
+            ctx.drawImage(imgback, 0, 0,ancho,alto);
+            ctx.beginPath();
+            //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
+             while(initX<canvas.width-stepsizeX){
                 initX=initX+stepsizeX;
                   while(initY<canvas.height-stepsizeY){
                     initY=initY+stepsizeY;
@@ -40,28 +46,27 @@
                   }
                   initY=0;
               }
-              initX=0;
-              Avatar1();
+              initX=0; 
+            Avatar1();
+          }
         }
 
       //Drawing avatar
       function Avatar1(){
         avatarwith=stepsizeX;avatarheight=stepsizeY;
            if (pinled==0) {
-                    led1.src = "../media/ledOff.png";
-                    led2.src = "../media/ledOff.png";
-                    led3.src = "../media/ledOff.png";
+                    led1.src = "../media/led2.png";
               }else if (pinled==1) {
                 if (ledstatus=='On') {
-                    led1.src = "../media/ledOn.png";
+                    led1.src = "../media/led1.png";
                 }else{
-                    led1.src = "../media/ledOff.png";
+                    led1.src = "../media/led2.png";
                 };
               };
         led1.onload = function() {
-            ctx.drawImage(led1,stepsizeX*4, stepsizeY*2.5 ,avatarwith,avatarheight);
+            ctx.drawImage(led1,stepsizeX*4, stepsizeY*.5 ,avatarwith,avatarheight);
           }
-          ctx.drawImage(led1,stepsizeX*4, stepsizeY*2.5 ,avatarwith,avatarheight);
+          ctx.drawImage(led1,stepsizeX*4, stepsizeY*.5 ,avatarwith,avatarheight);
           acabo=1;
       }
 

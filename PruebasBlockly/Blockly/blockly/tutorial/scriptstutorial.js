@@ -45,18 +45,27 @@
      imgback.onload = function() {
       ctx.drawImage(imgback, 0, 0,ancho,alto);
         
-       while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "black";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
+       ctx.fillStyle = screencolor;
+        ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
+        ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
+        //ctx.textAlign = "right";
+        i=0;
+        if (screentext.length!=0) {
+          interval = setInterval(function(){
+            if (i<16) {
+              ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
+            }else{
+              ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
             }
-            initY=0;
-        }
-        initX=0;
+            i++;
+            if(i==screentext.length){
+              stopTimer();
+              acabo=1;
+            }
+          },200);
+
+          
         var casa = new Image();
             casa.src = "../media/cube2";
         casa.onload = function() {
