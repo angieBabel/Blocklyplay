@@ -124,19 +124,24 @@ function initAlert(interpreter, scope) {
     interpreter.setProperty(scope, 'getFloor',
         interpreter.createNativeFunction(wrapper));
     // funciones de hardware
+    //funcion para mover el motor
     var wrapper = function(nosteps,side,speed) {
       return interpreter.createPrimitive(motor(nosteps,side,speed));
     }
     interpreter.setProperty(scope, 'motor',
         interpreter.createNativeFunction(wrapper));
-
-
+    //funcion para manejar los leds
     var wrapper = function(nopin,sate) {
       return interpreter.createPrimitive(led(nopin,sate));
     }
     interpreter.setProperty(scope, 'led',
         interpreter.createNativeFunction(wrapper));
-
+    //funcion para escribir en pantalla y cambiar de color
+    var wrapper = function(texto,color) {
+      return interpreter.createPrimitive(pantalla(texto,color));
+    }
+    interpreter.setProperty(scope, 'pantalla',
+        interpreter.createNativeFunction(wrapper));
 }
 //Funcion para que pueda sobresaltar los bloques
 var highlightPause = false;

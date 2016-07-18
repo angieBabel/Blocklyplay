@@ -31,12 +31,7 @@
     //variables para saber si las luces estan encendidas, y de que lado debe prender, propias para el ejercicio 2
     var luz=0,luzTrasera=0,lightside;
 
-    //variables para el de led
-    var pinled=0;
-      var ledstatus=null;
-    //variables para el texto de la pantalla
-    var screentext;
-    var screencolor;
+   
 
     //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {
@@ -52,21 +47,8 @@
         this.soZ = z;
         this.soColor = color;
       }
-    //objetos para las soluciones de los bloques de hardware
-    //objeto para el led
-    function ledObj(pin,turn){
-      Pin=pin;
-      Turn=turn;
-    };
-    //objeto para el motor
-    function motorObj(px,py,ns,dir,speed){
-        pX= px;
-        pY= py;
-        ns= ns;
-        dirr= dir;
-        speed= speed;
-      };
-//Funciones para dibujar
+
+  //Funciones para dibujar
   var degreesToRadian = function (deg) {
      return deg * Math.PI / 180;
   };
@@ -676,6 +658,27 @@
     },300);
   }
 //Funciones de Hardware
+//iniciacion de variables de hardware
+  //variables para el de led
+    var pinled=0;
+    var ledstatus=null;
+    //variables para el texto de la pantalla
+    var screentext= [];
+    var screencolor;
+    //objetos para las soluciones de los bloques de hardware
+    //objeto para el led
+    function ledObj(pin,turn){
+      Pin=pin;
+      Turn=turn;
+    };
+    //objeto para el motor
+    function motorObj(px,py,ns,dir,speed){
+        pX= px;
+        pY= py;
+        ns= ns;
+        dirr= dir;
+        speed= speed;
+      };
   //funcion para encender el led (verifica si el pin es correcto)
   function led(pin,turn){
     acabo=0;
@@ -699,9 +702,24 @@
   }
 
   //funcion para escribir texto
-  function  pantalla(text,color){
-    screentext=text;
-    screencolor=color;
+  function pantalla(text,color){
+    screentext=text.toString().split("")
+    screencolor=color.toString();
+    switch(currentpanel) {
+      case 1:
+          Avatar1();
+          break;
+      case 2:
+          Avatar2();
+          break;
+      case 3:
+          Avatar3();
+      case 4:
+          Avatar4();
+      default:
+          Avatar1();
+    }
+
   }
 
   //funcion para rotar el motor (hacer girar una imagen)
@@ -746,3 +764,5 @@
       }
     },vel);
   }
+
+

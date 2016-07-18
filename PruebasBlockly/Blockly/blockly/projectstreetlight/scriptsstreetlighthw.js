@@ -99,9 +99,9 @@
             ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
             acabo=1;
           }
-          ctx.drawImage(led1,0, stepsizeY*1.5 ,avatarwith,avatarheight*2);
-          ctx.drawImage(led2,stepsizeX, stepsizeY*1.5,avatarwith,avatarheight);
-          ctx.drawImage(led3,stepsizeX*2, stepsizeY*1.5,avatarwith,avatarheight);
+          ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+          ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
           //acabo=1;
       }
 

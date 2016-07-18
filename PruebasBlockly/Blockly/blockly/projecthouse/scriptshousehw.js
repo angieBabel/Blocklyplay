@@ -17,8 +17,8 @@
         canvas.height = alto;
         wimg=8;
 
-        stepsizeX=canvas.width/9;
-        stepsizeY=canvas.height/6;
+        stepsizeX=canvas.width/21;
+        stepsizeY=canvas.height/14;
 
         X = stepsizeX*10;
         Y = stepsizeY*5;
@@ -35,6 +35,7 @@
         solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
         solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
         solution.push(new solutionObj(X,Y,0,0)); //6
+
         panel1();
 
       }
@@ -50,7 +51,7 @@
             while(initY<canvas.height-stepsizeY){
               initY=initY+stepsizeY;
               ctx.beginPath();
-              ctx.fillStyle = "yellow";
+              ctx.fillStyle = "cyan";
               ctx.arc(initX,initY,1.5,0,2*Math.PI);
               ctx.fill();
             }
@@ -60,18 +61,34 @@
           painroad();
           Avatar1();
         }
-        imgback.src = "../media/Pantall.png";
+        imgback.src = "../media/PantallaV2.png";
       }
-
       //Drawing avatar
+      screencolor='green';
       function Avatar1(){
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "red";
-        //ctx.textAlign = "center";
-        ctx.fillText("Hello World",stepsizeX*3,stepsizeY*2);
+        ctx.fillStyle = screencolor;
+        ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
+        ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
+        //ctx.textAlign = "right";
+        i=0;
+        if (screentext.length!=0) {
+          interval = setInterval(function(){
+            if (i<16) {
+              ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
+            }else{
+              ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
+            }
+            i++;
+            if(i==screentext.length){
+              stopTimer();
+              acabo=1;
+            }
+          },200);
+        };
       }
 
-      function check1(){
+      /*function check1(){
         var verific=0;
         for (var i = 0; i < solution.length; i++) {
               //alert(roadpaint[i].poColor);
@@ -99,4 +116,4 @@
           //alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
-      }
+      }*/
