@@ -44,41 +44,31 @@
           
      imgback.onload = function() {
       ctx.drawImage(imgback, 0, 0,ancho,alto);
+      i=-1;
+      j=-1;
         
-       ctx.fillStyle = screencolor;
-        ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
-        ctx.font = "40px Arial";
-        ctx.fillStyle = "black";
-        //ctx.textAlign = "right";
-        i=0;
-        if (screentext.length!=0) {
-          interval = setInterval(function(){
-            if (i<16) {
-              ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
-            }else{
-              ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
+       while(initX<canvas.width-stepsizeX){
+          initX=initX+stepsizeX;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "black";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+              ctx.font = "40px Arial";
+              ctx.fillStyle = "black";
+              //ctx.textAlign = "right";
+              i++;
+              ctx.fillText(i+1,stepsizeX*i,stepsizeY);
             }
-            i++;
-            if(i==screentext.length){
-              stopTimer();
-              acabo=1;
-            }
-          },200);
-
-          
-        var casa = new Image();
-            casa.src = "../media/cube2";
-        casa.onload = function() {
-          ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
+            initY=0;
+            j++
+            ctx.font = "40px Arial";
+            ctx.fillStyle = "red";
+            ctx.fillText(j,0,stepsizeY*j);
         }
-        ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
-        var carro = new Image();
-            carro.src = "../media/carcube2.png";
-        carro.onload = function() {
-          ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
-        }
-        ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
-        Avatar1();
+        initX=0;
+        //Avatar1();
       }
   }
 

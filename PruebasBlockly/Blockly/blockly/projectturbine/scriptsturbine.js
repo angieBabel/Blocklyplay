@@ -111,7 +111,7 @@
     }else{
       var wrong =document.getElementById('Wrong').click()
       //alert('Esta vez no lo conseguiste, intenta de nuevo')
-      location.reload();
+      
     }
   }   
 
