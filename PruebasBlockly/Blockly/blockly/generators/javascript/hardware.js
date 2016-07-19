@@ -81,7 +81,7 @@ Blockly.JavaScript['pantallaDisplayed'] = function(block) {
   var value_color = Blockly.JavaScript.valueToCode(block, 'color', Blockly.JavaScript.ORDER_NONE);
   // TODO: Assemble JavaScript into code variable.
   var code = '...;\n';
-  return code= "pantalla('"+value_message+"','"+value_color+"');\n";
+  return code= "pantalla("+value_message+","+value_color+");\n";
 };
 Blockly.JavaScript['boton'] = function(block) {
   var dropdown_pin = block.getFieldValue('pin');

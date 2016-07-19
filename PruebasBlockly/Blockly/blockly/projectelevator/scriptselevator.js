@@ -15,6 +15,7 @@
     ancho = document.getElementById('divCanvas').offsetWidth;
     alto = document.getElementById('divCanvas').offsetHeight;
     //canvas.addEventListener("mousedown", getPosition, false);
+    
     canvas.width= ancho;
     canvas.height = alto;
     stepsizeX=canvas.width/9;
@@ -64,21 +65,25 @@
         piso1.onload = function() {
           ctx.drawImage(piso1, (stepsizeX*7),(stepsizeY*4),stepsizeY,stepsizeY);
         }
+        ctx.drawImage(piso1, (stepsizeX*7),(stepsizeY*4),stepsizeY,stepsizeY);
         var piso2 = new Image();
             piso2.src = "../media/piso2.png";
         piso2.onload = function() {
           ctx.drawImage(piso2, (stepsizeX*7),(stepsizeY*3),stepsizeY,stepsizeY);
         }
+        ctx.drawImage(piso2, (stepsizeX*7),(stepsizeY*3),stepsizeY,stepsizeY);
         var piso3 = new Image();
             piso3.src = "../media/piso3.png";
         piso3.onload = function() {
           ctx.drawImage(piso3, (stepsizeX*7),(stepsizeY*2),stepsizeY,stepsizeY);
         }
+        ctx.drawImage(piso3, (stepsizeX*7),(stepsizeY*2),stepsizeY,stepsizeY);
         var piso4 = new Image();
             piso4.src = "../media/piso4.png";
         piso4.onload = function() {
           ctx.drawImage(piso4, (stepsizeX*7),(stepsizeY*1),stepsizeY,stepsizeY);
         }
+        ctx.drawImage(piso4, (stepsizeX*7),(stepsizeY*1),stepsizeY,stepsizeY);
         Avatar1();
       }
 

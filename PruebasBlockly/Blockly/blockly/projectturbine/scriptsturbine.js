@@ -1,14 +1,6 @@
 /*scrips para el primer nivel*/
   /*var image;*/
   //las variables generales se pasaron a moves.js
-  //inicialización de las variables propias del ejercicio 5
-  function solutionObj(x,y,z,color){
-      this.soX= x;
-      this.soY = y;
-      this.soZ = z;
-      this.soColor = color;
-    }
-    var solucion=[],roadpaint=[]; 
     //la variable de positionObj se paso a moves.js
     //el objeto de solutionObj se paso a moves.js
   function begin1(){
@@ -20,14 +12,13 @@
     alto = document.getElementById('divCanvas').offsetHeight;
     canvas.width= ancho;
     canvas.height = alto;
-    alert('ancho= '+canvas.width+' alto='+canvas.height);
     stepsizeX=canvas.width/30 ;
-    stepsizeY=canvas.height/22;
+    stepsizeY=canvas.height/20;
     wimg=stepsizeX/2;
     X = stepsizeX*15;
-    Y = stepsizeY*11;
+    Y = stepsizeY*10;
     positionObj.objX=stepsizeX*14;
-    positionObj.objY=stepsizeY*10;
+    positionObj.objY=stepsizeY*9;
     positionObj.objZ=0;
     Xaux = positionObj.objX;
     Yaux = positionObj.objY;
@@ -120,7 +111,7 @@
     }else{
       var wrong =document.getElementById('Wrong').click()
       //alert('Esta vez no lo conseguiste, intenta de nuevo')
-      location.reload();
+      
     }
   }   
 
@@ -218,9 +209,9 @@
     }
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==solucion.length) {
-      alert('Felicidades haz realizado correctamente el puzzle')
+      var correct =document.getElementById('Correct').click()
     }else{
-      alert('Esta vez no lo conseguiste intenta de nuevo');
+      var wrong =document.getElementById('Wrong').click()
       location.reload();
     }
   }

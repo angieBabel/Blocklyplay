@@ -50,8 +50,8 @@ Blockly.JavaScript['controls_repeat_ext'] = function(block) {
         'repeat_end', Blockly.Variables.NAME_TYPE);
     code += 'var ' + endVar + ' = ' + repeats + ';\n';
   }
-  code += 'for (var ' + loopVar + ' = 0; ' +
-      loopVar + ' < ' + endVar + '; ' +
+  code += 'for (var ' + loopVar + ' = 1; ' +
+      loopVar + ' <= ' + endVar + '; ' +
       loopVar + '++) {\n' +
       branch + '}\n';
   return code;

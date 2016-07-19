@@ -43,7 +43,7 @@
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 <!-- para cargar las funciones de begin y esas cosas -->
-  <script src="scriptsstreetlighthw.js"></script>  
+  <script src="scriptscube.js"></script> 
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
@@ -63,7 +63,7 @@
               </md-button>
             </div>
             <div flex="60">
-              <span>Recorre todos los semaforos</span>
+              <span>¡Tutorial!</span>
             </div>
             <div flex="20">
               <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
@@ -79,7 +79,7 @@
               </svg>
             </md-button>
             <h4>
-              <span>Secuencias complejas</span>
+              <span>Introduccion a BlocklyPlay</span>
             </h4> 
           </div> 
         </div>
@@ -93,17 +93,17 @@
       <!-- container donde ira el canvas -->
       <div flex="60">
         <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
+        <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-active="nivel1A" ng-disabled="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-active="nivel2A" ng-disabled="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-active="nivel3A" ng-disabled="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -114,7 +114,7 @@
               <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
-              <md-button class="md-icon-button" aria-label="More" onclick="stop()">
+              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
                 <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
               </md-button>
               <md-menu>
@@ -160,15 +160,15 @@
           </md-button>
         </div>
       </md-toolbar>
-      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+      <md-content layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:30%;" alt="preview" src="../media/mapa_casa.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
           <div>
-            <strong>Dibuja el área de una casa</strong>
+            <strong>Aprendamos a manejar BlocklyPlay</strong>
           </div>
           <div layout="row" layout-align="start center">
             <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
@@ -188,12 +188,12 @@
           </div>
        </div>
        <!-- instrucciones -->
-       <div layout="column"   layout-align="center center">
+       <div layout="column"  ng-controller="RightCtrl" layout-align="center center">
           <div>
-            <p>¡Seguimos con las secuencias! Para este ejercicio, desplaza el carrito por la carretera y haz una parada de 3 segundos en cada semáforo. Los bloques de movimiento ya los conoces, para hacer una parada utiliza el bloque Wait que se encuentra en la categoría de Control.</p>
+            <p>Aquí se describirán  las instrucciones de lo que debes de hacer, deberas de seguirlas y poner mucha atención para que puedas contestar el ejercicio de manera correcta, si lo haces en menos intentos, mas puntos obtendrás.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
+            <md-button id="comenzar" class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  ng-show="buttonshow" flex-gt-md="auto" ng-click="loadCV()">
                 Comenzar reto 
           </md-button>
           </div>
@@ -216,7 +216,7 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
@@ -247,7 +247,7 @@
             <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
           </div>
           <div>
-            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
                 Comenzar reto 
           </md-button>
           </div>
@@ -255,7 +255,7 @@
       </md-content>
     </md-sidenav>
   <xml id="toolbox" style="display: none">
-    <category name="Control" colour="157">
+    <category name="Control" colour="355">
       <block type="wait"></block>
       <block type="stop"></block>
       <block type="controls_repeat_ext">
@@ -265,24 +265,43 @@
           </shadow>
         </value>
       </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_flow_statements"></block>
     </category>
 
-    <category name="Move" colour="175">
+    <category name="Move" colour="79">
       <block type="mover"></block>
       <block type="mover_pintando"></block>
       <block type="girar"></block>
     </category>
 
-    <category name="Lights" colour="192">
+    <category name="Lights" colour="176">
       <block type="blinker"></block>
       <block type="lights"></block>
     </category>
 
-    <category name="Sounds" colour="247">
+    <category name="Sounds" colour="290">
       <block type="sonido"></block>
     </category>
 
-    <category name="Math" colour="24">
+    <category name="Math" colour="190">
       <block type="math_number" gap="32"></block>
       <block type="math_arithmetic">
         <value name="A">
@@ -298,7 +317,7 @@
       </block>
     </category>
 
-    <category name="Text" colour="53">
+    <category name="Text" colour="210">
       <block type="text"></block>
       <block type="text_isEmpty">
         <value name="VALUE">
@@ -323,7 +342,7 @@
       </block>
     </category>
 
-    <category name="Logic" colour="197">
+    <category name="Logic" colour="25">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -331,7 +350,7 @@
       <block type="logic_boolean"></block>
     </category>
 
-    <category name="Colour" colour="37">
+    <category name="Colour" colour="160">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -369,92 +388,94 @@
         </value>
       </block>
     </category>
+    <sep></sep>
+    <category name="Hardware" colour="354">
+      <block type="ledDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Turn">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="motorDisplayed">
+        <value name="steps">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="direction">
+          <shadow type="direction">
+            <field name="direction">Forward</field>
+          </shadow>
+        </value>
+        <value name="speed">
+          <shadow type="speed">
+            <field name="speed">1</field>
+          </shadow>
+        </value>
+      </block>
+
+      <block type="buzzerDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Tone">
+          <shadow type="tone">
+            <field name="tone">Do</field>
+          </shadow>
+        </value>
+        <value name="Secs">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="pantallaDisplayed">
+        <value name="message">
+          <shadow type="text">
+            <field name="TEXT">Type message here</field>
+          </shadow>
+        </value>
+        <value name="color">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+
+      </block>
+      <block type="botonDisplayed">
+        <value name="PIN">
+          <shadow type="pind">
+            <field name="PIN">1</field>
+          </shadow>
+        </value>
+        <value name="Status">
+          <shadow type="status">
+            <field name="on/off">On</field>
+          </shadow>
+        </value>
+
+
+      </block>
+
+      <block type="status"></block>
+      <block type="speed"></block>
+      <block type="pina"></block>
+      <block type="pind"></block>
+      <block type="tone"></block>
+    </category>
 
     <sep></sep>
-    <category name="Variables" colour="355" custom="VARIABLE"></category>
-    <category name="Functions" colour="287" custom="PROCEDURE"></category>
-    <category name="Hardware" colour="354">
-        <block type="ledDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">1</field>
-            </shadow>
-          </value>
-          <value name="Turn">
-            <shadow type="status">
-              <field name="on/off">On</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="motorDisplayed">
-          <value name="steps">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="direction">
-            <shadow type="direction">
-              <field name="direction">Forward</field>
-            </shadow>
-          </value>
-          <value name="speed">
-            <shadow type="speed">
-              <field name="speed">1</field>
-            </shadow>
-          </value>
-        </block>
-
-        <block type="buzzerDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">1</field>
-            </shadow>
-          </value>
-          <value name="Tone">
-            <shadow type="tone">
-              <field name="tone">Do</field>
-            </shadow>
-          </value>
-          <value name="Secs">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="pantallaDisplayed">
-          <value name="message">
-            <shadow type="text">
-              <field name="TEXT">Type message here</field>
-            </shadow>
-          </value>
-          <value name="color">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#ff0000</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="botonDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">1</field>
-            </shadow>
-          </value>
-          <value name="Status">
-            <shadow type="status">
-              <field name="on/off">On</field>
-            </shadow>
-          </value>
-        </block>
-    </category>
-    <category name="Inputs" colour="210">
-      <block type="status"></block>
-        <block type="speed"></block>
-        <block type="pina"></block>
-        <block type="pind"></block>
-        <block type="tone"></block>
-    </category>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="46" custom="PROCEDURE"></category>
   </xml>
-  <!-- Your application bootstrap  -->
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>
   <script type="text/javascript">
@@ -516,17 +537,17 @@
       var program;
       switch(currentpanel) {
             case 1:
-                program = window.localStorage.getItem("streetlighthw1");
+                program = window.localStorage.getItem("tutorial1");
                 break;
             case 2:
-                program = window.localStorage.getItem("streetlighthw2");
+                program = window.localStorage.getItem("tutorial2");
                 break;
             case 3:
-                program = window.localStorage.getItem("streetlighthw3");
+                program = window.localStorage.getItem("tutorial3");
             case 4:
-                program = window.localStorage.getItem("streetlighthw4");
+                program = window.localStorage.getItem("tutorial4");
             default:
-                program = window.localStorage.getItem("streetlighthw1");
+                program = window.localStorage.getItem("tutorial1");
           }
       Blockly.mainWorkspace.clear();
       var textToDom = Blockly.Xml.textToDom(program);
@@ -549,17 +570,17 @@
       var domToPretty = Blockly.Xml.domToPrettyText(xml);
       switch(currentpanel) {
           case 1:
-              window.localStorage.setItem("streetlighthw1", domToPretty);
+              window.localStorage.setItem("tutorial1", domToPretty);
               break;
           case 2:
-              window.localStorage.setItem("streetlighthw2", domToPretty);
+              window.localStorage.setItem("tutorial2", domToPretty);
               break;
           case 3:
-              window.localStorage.setItem("streetlighthw3", domToPretty);
+              window.localStorage.setItem("tutorial3", domToPretty);
           case 4:
-              window.localStorage.setItem("streetlighthw4", domToPretty);
+              window.localStorage.setItem("tutorial4", domToPretty);
           default:
-              window.localStorage.setItem("streetlighthw1", domToPretty);
+              window.localStorage.setItem("tutorial1", domToPretty);
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }

@@ -12,17 +12,16 @@
         ctx = canvas.getContext('2d');
         ancho = document.getElementById('divCanvas').offsetWidth;
         alto = document.getElementById('divCanvas').offsetHeight;
+
         canvas.width= ancho;
         canvas.height = alto;
         wimg=8;
 
-        stepsizeX=canvas.width/20;
-        stepsizeY=canvas.height/20;
+        stepsizeX=canvas.width/21;
+        stepsizeY=canvas.height/14;
 
         X = stepsizeX*10;
         Y = stepsizeY*5;
-        initX=stepsizeX*7;
-        initY=stepsizeY*3;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -36,6 +35,7 @@
         solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
         solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
         solution.push(new solutionObj(X,Y,0,0)); //6
+
         panel1();
 
       }
@@ -46,49 +46,49 @@
         imgback.onload = function() {
           ctx.drawImage(imgback, 0, 0,ancho,alto);
           //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-          while(initX<canvas.width-(stepsizeX*6)){
+          while(initX<canvas.width-stepsizeX){
           initX=initX+stepsizeX;
-          while(initY<canvas.height-(stepsizeY*10)){
-            initY=initY+stepsizeY;
-            ctx.beginPath();
-            ctx.fillStyle = "#E3E2E2";
-            ctx.arc(initX,initY,2,0,2*Math.PI);
-            ctx.fill();
-          }
-          initY=stepsizeY*4;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "cyan";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+            }
+            initY=0;
         }
-        initX=stepsizeX*7;
+        initX=0;
           painroad();
           Avatar1();
         }
-        imgback.src = "../media/mapa_casa.png";
+        imgback.src = "../media/PantallaV2.png";
       }
-
       //Drawing avatar
+      screencolor='green';
       function Avatar1(){
-        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-        var avatarheight, avatarwith;
-        var positionX, positionY;
-
-        img.id = 'imagen';
-        //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=40;avatarheight=40;
-
-        img.onload = function() {
-          ctx.save();
-          //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-          ctx.translate(positionObj.objX,positionObj.objY);
-          //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
-          ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-          ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
-          ctx.restore();
-        }
-        img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+        ctx.fillStyle = screencolor;
+        ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
+        ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
+        //ctx.textAlign = "right";
+        i=0;
+        if (screentext.length!=0) {
+          interval = setInterval(function(){
+            if (i<16) {
+              ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
+            }else{
+              ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
+            }
+            i++;
+            if(i==screentext.length){
+              stopTimer();
+              acabo=1;
+            }
+          },200);
+        };
       }
 
-      function check1(){
+      /*function check1(){
         var verific=0;
         for (var i = 0; i < solution.length; i++) {
               //alert(roadpaint[i].poColor);
@@ -108,10 +108,12 @@
           }
         }
         if(verific===6){
-          alert('Felicidades, haz completado correctamente el puzzle');
+          var correct =document.getElementById('Correct').click()
+          //alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
         }else{
-          alert('Esta vez no lo conseguiste, intenta de nuevo');
+          var wrong =document.getElementById('Wrong').click()
+          //alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
-      }
+      }*/

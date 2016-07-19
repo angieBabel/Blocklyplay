@@ -31,36 +31,19 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        $scope.showCorrect = function(ev) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          var confirm = $mdDialog.confirm()
-                .title('Felicidades')
-                .textContent('Haz realizado correctamente el puzzle')
-                .ariaLabel('Felicidades')
-                .targetEvent(ev)
-                .ok('Ir al siguiente nivel')
-                .cancel('Volver al nivel actual');
-          $mdDialog.show(confirm).then(function() {
-            switch(currentpanel) {
-              case 1:                  
-                  $scope.nivel2= false;
-                  break;
-              case 2:                  
-                  $scope.nivel3= false;
-                  break;
-              case 3:                  
-                  $scope.nivel4= false;
-              case 4:                  
-                  /*aqui regresaria al menu principal o algo asi*/
-              default:                  
-                  $scope.nivel2= false;
-            }
-
-
-            //$scope.status = 'You decided to get rid of your debt.';
-            //alert('entro al confirm');
+       $scope.showCorrect = function(ev) {
+          $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '../correctanswer.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+          })
+          .then(function(answer) {
+            alert('entro al answer')
+            $scope.status = 'You said the information was "' + answer + '".';
           }, function() {
-            $scope.status = 'You decided to keep your debt.';
+            $scope.status = 'You cancelled the dialog.';
           });
         };
         $scope.showWrong = function(ev) {
@@ -70,12 +53,8 @@
                 .textContent('Esta vez no lo conseguiste, intenta de nuevo.')
                 .ariaLabel('Intenta de nuevo')
                 .targetEvent(ev)
-                .ok('Intentar de nuevo')
-                .cancel('Sounds like a scam');
-          $mdDialog.show(confirm).then(function() {
-            $scope.status = 'You decided to get rid of your debt.';
-          }, function() {
-            $scope.status = 'You decided to keep your debt.';
+                .ok('Intentar de nuevo');
+          $mdDialog.show(confirm).then(function() {location.reload();
           });
         };
         $scope.showTabDialog = function(ev) { 

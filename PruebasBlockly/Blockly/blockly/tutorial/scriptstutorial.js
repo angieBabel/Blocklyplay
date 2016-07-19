@@ -12,18 +12,15 @@
         ctx = canvas.getContext('2d');
         ancho = document.getElementById('divCanvas').offsetWidth;
         alto = document.getElementById('divCanvas').offsetHeight;
-
         canvas.width= ancho;
         canvas.height = alto;
         wimg=8;
 
-        stepsizeX=canvas.width/20;
-        stepsizeY=canvas.height/20;
+        stepsizeX=canvas.width/12;
+        stepsizeY=canvas.height/8;
 
-        X = stepsizeX*10;
-        Y = stepsizeY*5;
-        initX=stepsizeX*7;
-        initY=stepsizeY*3;
+        X = stepsizeX*3;
+        Y = stepsizeY*6;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -41,29 +38,39 @@
 
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
-      function panel1(){
-        var imgback = new Image();
+       function panel1(){
+    var imgback = new Image();
+            imgback.src = "../media/citycube.jpg";
+          
+     imgback.onload = function() {
+      ctx.drawImage(imgback, 0, 0,ancho,alto);
+      i=-1;
+      j=-1;
         
-        imgback.onload = function() {
-          ctx.drawImage(imgback, 0, 0,ancho,alto);
-          //como sobrescribimos la imagen del panel, aqui mandamos llamar el camino a pintar
-          while(initX<canvas.width-(stepsizeX*6)){
+       while(initX<canvas.width-stepsizeX){
           initX=initX+stepsizeX;
-          while(initY<canvas.height-(stepsizeY*10)){
-            initY=initY+stepsizeY;
-            ctx.beginPath();
-            ctx.fillStyle = "#E3E2E2";
-            ctx.arc(initX,initY,2,0,2*Math.PI);
-            ctx.fill();
-          }
-          initY=stepsizeY*4;
+            while(initY<canvas.height-stepsizeY){
+              initY=initY+stepsizeY;
+              ctx.beginPath();
+              ctx.fillStyle = "black";
+              ctx.arc(initX,initY,1.5,0,2*Math.PI);
+              ctx.fill();
+              ctx.font = "40px Arial";
+              ctx.fillStyle = "black";
+              //ctx.textAlign = "right";
+              i++;
+              ctx.fillText(i+1,stepsizeX*i,stepsizeY);
+            }
+            initY=0;
+            j++
+            ctx.font = "40px Arial";
+            ctx.fillStyle = "red";
+            ctx.fillText(j,0,stepsizeY*j);
         }
-        initX=stepsizeX*7;
-          painroad();
-          Avatar1();
-        }
-        imgback.src = "../media/mapa_casa.png";
+        initX=0;
+        //Avatar1();
       }
+  }
 
       //Drawing avatar
       function Avatar1(){
@@ -73,7 +80,7 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=40;avatarheight=40;
+        avatarwith=stepsizeX;avatarheight=stepsizeY*2;
 
         img.onload = function() {
           ctx.save();
@@ -83,10 +90,10 @@
 
           ctx.globalAlpha=1;
           //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-          ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
+          ctx.drawImage(img,0, 0,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/persona2.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
       function check1(){
@@ -110,11 +117,9 @@
         }
         if(verific===6){
           var correct =document.getElementById('Correct').click()
-          //alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
         }else{
           var wrong =document.getElementById('Wrong').click()
-          //alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
       }

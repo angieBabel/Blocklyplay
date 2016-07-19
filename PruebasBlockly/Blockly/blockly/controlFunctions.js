@@ -2,6 +2,9 @@
 function stopTimer(){
     clearInterval(interval);
 }
+function stopwaitTimer(){
+  
+}
 //Funciones para que las reconozca el interprete
 var myInterpreter=null;
 function initAlert(interpreter, scope) {
@@ -97,8 +100,8 @@ function initAlert(interpreter, scope) {
     interpreter.setProperty(scope, 'lights',
         interpreter.createNativeFunction(wrapper));
     //funcion para prender las direccionales
-    var wrapper = function(side) {
-      return interpreter.createPrimitive(blinker(side));
+    var wrapper = function(side,secs) {
+      return interpreter.createPrimitive(blinker(side,secs));
     }
     interpreter.setProperty(scope, 'blinker',
         interpreter.createNativeFunction(wrapper));
@@ -121,19 +124,24 @@ function initAlert(interpreter, scope) {
     interpreter.setProperty(scope, 'getFloor',
         interpreter.createNativeFunction(wrapper));
     // funciones de hardware
+    //funcion para mover el motor
     var wrapper = function(nosteps,side,speed) {
       return interpreter.createPrimitive(motor(nosteps,side,speed));
     }
     interpreter.setProperty(scope, 'motor',
         interpreter.createNativeFunction(wrapper));
-
-
+    //funcion para manejar los leds
     var wrapper = function(nopin,sate) {
       return interpreter.createPrimitive(led(nopin,sate));
     }
     interpreter.setProperty(scope, 'led',
         interpreter.createNativeFunction(wrapper));
-
+    //funcion para escribir en pantalla y cambiar de color
+    var wrapper = function(texto,color) {
+      return interpreter.createPrimitive(pantalla(texto,color));
+    }
+    interpreter.setProperty(scope, 'pantalla',
+        interpreter.createNativeFunction(wrapper));
 }
 //Funcion para que pueda sobresaltar los bloques
 var highlightPause = false;
@@ -147,10 +155,12 @@ function showCode() {
   var code = Blockly.JavaScript.workspaceToCode(workspace);
   alert(code);
 }
-//Funcion para crear el interprete
+
+var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
     //Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     //permite que funcione el resaltar bloque
+    codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     Blockly.JavaScript.addReservedWords('highlightBlock');
     //lee lo que hay en el workspaces y lo guarda como codigo
@@ -287,8 +297,10 @@ function loadXML() {
 function pasoHW(){
   var socket = null;
   socket = io.connect('http://edison.local:3000');
-  var code = Blockly.JavaScript.workspaceToCode(workspace);
-  code = code.replace(/[']/gi, "");
-  code = code.replace(/\n{2,}/,"\n");
+  //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
+  codeHW = codeHW.replace(/[']/gi, "");
+  codeHW = codeHW.replace(/\n{2,}/,"\n");
+  codeHW = codeHW.replace(/\s{3,}/gi,"\n");
+  alert(codeHW);
   socket.emit('changefunction',code);
 } 
