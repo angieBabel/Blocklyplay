@@ -295,12 +295,12 @@ function loadXML() {
 }
 //para enviar el codigo al hardware
 function pasoHW(){
-  //var socket = null;
-  //socket = io.connect('http://edison.local:3000');
-  //var code = Blockly.JavaScript.workspaceToCode(workspace);
+  var socket = null;
+  socket = io.connect('http://edison.local:3000');
+  //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
   codeHW = codeHW.replace(/[']/gi, "");
   codeHW = codeHW.replace(/\n{2,}/,"\n");
-  codeHW = codeHW.replace(/'\t'/gi,"");
+  codeHW = codeHW.replace(/\s{3,}/gi,"\n");
   alert(codeHW);
-  //socket.emit('changefunction',code);
+  socket.emit('changefunction',code);
 } 
