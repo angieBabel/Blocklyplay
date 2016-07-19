@@ -31,36 +31,21 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        $scope.showCorrect = function(ev) { 
-            $mdDialog.show({
-              controller: DialogController,
-              templateUrl: '../correctanswer.html',
-              parent: angular.element(document.body),
-              targetEvent: ev,
-              clickOutsideToClose:true
-            })
+       $scope.showCorrect = function(ev) {
+          $mdDialog.show({
+            controller: DialogController,
+            templateUrl: '../correctanswer.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+          })
           .then(function(answer) {
-           if (answer=='next') {
-            switch(currentpanel) {
-              case 1:                  
-                  $scope.nivel2= false;
-                  break;
-              case 2:                  
-                  $scope.nivel3= false;
-                  break;
-              case 3:                  
-                  $scope.nivel4= false;
-              case 4:                  
-                  /*aqui regresaria al menu principal o algo asi*/
-              default:                  
-                  $scope.nivel2= false;
-            }
-          }else{
-
-          }
+            alert('entro al answer')
+            $scope.status = 'You said the information was "' + answer + '".';
           }, function() {
             $scope.status = 'You cancelled the dialog.';
           });
+        };
         $scope.showWrong = function(ev) {
           // Appending dialog to document.body to cover sidenav in docs app
           var confirm = $mdDialog.confirm()
