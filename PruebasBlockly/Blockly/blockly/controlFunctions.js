@@ -301,6 +301,6 @@ function pasoHW(){
   codeHW = codeHW.replace(/[']/gi, "");
   codeHW = codeHW.replace(/\n{2,}/,"\n");
   codeHW = codeHW.replace(/\s{3,}/gi,"\n");
-  alert(codeHW);
+  //alert(codeHW);
   socket.emit('changefunction',code);
 } 
