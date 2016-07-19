@@ -6,9 +6,7 @@
                 .toggle();
                 navID = 'Instrucciones1';
         });
-        $scope.nivel2= true;
-        $scope.nivel3= true;
-        $scope.nivel4= true;
+        
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -31,20 +29,14 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-       $scope.showCorrect = function(ev) {
+        $scope.showCorrect = function(ev) {
           $mdDialog.show({
-            controller: DialogController,
+            controller: correctController,
             templateUrl: '../correctanswer.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true
           })
-          .then(function(answer) {
-            alert('entro al answer')
-            $scope.status = 'You said the information was "' + answer + '".';
-          }, function() {
-            $scope.status = 'You cancelled the dialog.';
-          });
         };
         $scope.showWrong = function(ev) {
           // Appending dialog to document.body to cover sidenav in docs app
@@ -67,12 +59,6 @@
             });
             generate();
         };
-        /*$scope.loadNewLevel = function(ev){
-
-          {{status}}
-
-        };*/
-
         function buildToggler() {
           return function() {
               switch(currentpanel) {
@@ -121,6 +107,44 @@
             }
           };
         });
+      function correctController($scope,$rootScope, $mdDialog) {
+        $scope.newLevel = function() {         
+          switch(currentpanel) {
+            case 1:
+                $rootScope.nivel2= false;//estos son para ponerlos en enabled, pero no funcionan
+                $rootScope.nivel2A= true;
+                break;
+            case 2:                  
+                $rootScope.nivel3= false;//estos son para ponerlos en enabled, pero no funcionan
+                $rootScope.nivel3A= true;
+                break;
+            case 3:                  
+                $rootScope.nivel4= false;//estos son para ponerlos en enabled, pero no funcionan
+                $rootScope.nivel4A= true;
+                break;
+            default:                  
+                $rootScope.nivel2= false;//estos son para ponerlos en enabled, pero no funcionan
+                //$rootScope.nivel2A= true;
+          }
+         $mdDialog.cancel();
+        }
+        $scope.showPublish = function(ev) { 
+            $mdDialog.show({
+              controller: DialogController,
+              templateUrl: '../publishproduct.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true
+            });
+            generate();
+        };
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
+      }
       function DialogController($scope, $mdDialog) {
         $scope.vistaprevia = function(){
           loadThumbnail();
