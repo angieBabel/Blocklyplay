@@ -31,56 +31,168 @@
           originatorEv = ev;
           $mdOpenMenu(ev);
         };
-        $scope.showCorrect = function(ev) {
+        $scope.showCorrects = function(ev) {
           // Appending dialog to document.body to cover sidenav in docs app
           var confirm = $mdDialog.confirm()
                 .title('Felicidades')
-                .textContent('Haz realizado correctamente el puzzle')
+                .textContent('Haz realizado correctamente el puzzle, publica para guardar tu avance')
                 .ariaLabel('Felicidades')
                 .targetEvent(ev)
                 .ok('Publicar')
                 .cancel('Cancelar');
           $mdDialog.show(confirm).then(function() {
-            switch(currentpanel) {
-              case 1:                  
-                  $scope.nivel2= false;
-                  $scope.nivel2A= true;
-                  break;
-              case 2:                  
-                  $scope.nivel3= false;
-                  $scope.nivel3A= true;
-                  break;
-              case 3:                  
-                  $scope.nivel4= false;
-                  $scope.nivel4A= true;
-              case 4:                  
-                  /*aqui regresaria al menu principal o algo asi*/
-              default:                  
-                  $scope.nivel2= false;
-            }
-            $mdDialog.show({
-              controller: DialogController,
-              templateUrl: '../publishproduct.html',
-              parent: angular.element(document.body),
-              targetEvent: ev,
-              clickOutsideToClose:true
-            });
-            generate();
-            alert('entro al confirm');
+            
           }, function() {
-            alert('entro al cancelar');
-            $scope.status = 'You decided to keep your debt.';
+             switch(currentpanel) {
+                case 1:                  
+                    $scope.nivel2= false;
+                    break;
+                case 2:                  
+                    $scope.nivel3= false;
+                    break;
+                case 3:                  
+                    $scope.nivel4= false;
+                case 4:                  
+                    /*aqui regresaria al menu principal o algo asi*/
+                default:                  
+                    $scope.nivel2= false;
+              }
           });
         };
+        $scope.showCorrect = function(ev) {
+           $mdDialog.show({
+              clickOutsideToClose: true,
+              scope: $scope,        // use parent scope in template
+              preserveScope: true,  // do not forget this if use parent scope
+              // Since GreetingController is instantiated with ControllerAs syntax
+              // AND we are passing the parent '$scope' to the dialog, we MUST
+              // use 'vm.<xxx>' in the template markup
+              template: 
+              '<div flex="50">'+
+                '<md-dialog aria-label="correct answer" id="correct answer">'+
+                  '<md-dialog-content >'+
+                   '<form>'+
+                    '<md-toolbar>'+
+                      '<div class="md-toolbar-tools">'+
+                        '<h2>Felicidades</h2>'+
+                      '</div>'+
+                    '</md-toolbar>'+
+                    '<md-dialog-content>'+
+                      '<div class="md-dialog-content">'+
+                        '<p>Felicidades haz realizado correctamente el puzzle</p>'+
+                      '</div>'+
+                    '</md-dialog-content>'+
+                    '<md-dialog-actions layout="row">'+
+                      '<md-button ng-click="cancelar()">'+
+                        'Cancelar'+
+                      '</md-button>'+
+                      '<span flex></span>'+
+                      '<md-button ng-click="publicar" md-autofocus>'+
+                        'Publicar'+
+                      '</md-button>'+
+                    '</md-dialog-actions>'+
+                  '</form>'+
+                  '</md-dialog-content>'+
+                '</md-dialog>'+
+              '</div>',
+              controller: function correctController($scope, $mdDialog) {
+                $scope.publicar = function() {
+                  switch(currentpanel) {
+                    case 1:                  
+                        $scope.nivel2= false;
+                        $scope.nivel2A= true;
+                        break;
+                    case 2:                  
+                        $scope.nivel3= false;
+                        $scope.nivel3A= true;
+                        break;
+                    case 3:                  
+                        $scope.nivel4= false;
+                        $scope.nivel4A= true;
+                    case 4:                  
+                        /*aqui regresaria al menu principal o algo asi*/
+                    default:                  
+                        $scope.nivel2= false;
+                  }
+                  $mdDialog.show({
+                    controller: DialogController,
+                    templateUrl: '../publishproduct.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose:true
+                  });
+                  generate();
+                };
+                $scope.cancelar = function() {
+                  switch(currentpanel) {
+                    case 1:                  
+                        $scope.nivel2= false;
+                        break;
+                    case 2:                  
+                        $scope.nivel3= false;
+                        break;
+                    case 3:                  
+                        $scope.nivel4= false;
+                    case 4:                  
+                        /*aqui regresaria al menu principal o algo asi*/
+                    default:                  
+                        $scope.nivel2= false;
+                  }
+                   $mdDialog.hide();
+                };
+              }
+           });
+        };
         $scope.showWrong = function(ev) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          var confirm = $mdDialog.confirm()
-                .title('Lo sentimos')
-                .textContent('Esta vez no lo conseguiste, intenta de nuevo.')
-                .ariaLabel('Intenta de nuevo')
-                .targetEvent(ev)
-                .ok('Intentar de nuevo');
-          $mdDialog.show(confirm).then(function() {location.reload();
+           $mdDialog.show({
+              clickOutsideToClose: true,
+              scope: $scope,        // use parent scope in template
+              preserveScope: true,  // do not forget this if use parent scope
+              // Since GreetingController is instantiated with ControllerAs syntax
+              // AND we are passing the parent '$scope' to the dialog, we MUST
+              // use 'vm.<xxx>' in the template markup
+              template: 
+              '<div flex="50">'+
+                '<md-dialog aria-label="correct answer" id="correct answer">'+
+                  '<md-dialog-content >'+
+                   '<form>'+
+                    '<md-toolbar class="md-accent">'+
+                      '<div class="md-toolbar-tools">'+
+                        '<h2>Buen intento</h2>'+
+                      '</div>'+
+                    '</md-toolbar>'+
+                    '<md-dialog-content>'+
+                      '<div class="md-dialog-content">'+
+                        '<p>Esta vez no lo conseguiste, prueba de nuevo.</p>'+
+                      '</div>'+
+                    '</md-dialog-content>'+
+                    '<md-dialog-actions layout="row">'+
+                      '<md-button ng-click="nuevointento()" md-autofocus>'+
+                        'try again'+
+                      '</md-button>'+
+                    '</md-dialog-actions>'+
+                  '</form>'+
+                  '</md-dialog-content>'+
+                '</md-dialog>'+
+              '</div>',
+              controller: function wrongController($scope, $mdDialog) {
+                $scope.nuevointento = function() {
+                  location.reload();
+                };
+              }
+           });
+        };
+        $scope.showWrongs = function(ev) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('#popupContainer')))
+              .clickOutsideToClose(true)
+              .title('Buen intento')
+              .textContent('Esta vez no lo conseguiste, prueba de nuevo.')
+              .ariaLabel('Intenta de nuevo')
+              .ok('Intentar de nuevo')
+              .targetEvent(ev)
+          ).then(function() {location.reload();
           });
         };
         $scope.showTabDialog = function(ev) { 
