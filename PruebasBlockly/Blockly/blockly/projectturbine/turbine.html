@@ -66,7 +66,7 @@
               <span>Dibuja el contorno de una hélice</span>
             </div>
             <div flex="20">
-              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
+              <md-button ng-click="showTabDialog($event)" id="Publish"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
             </div> 
           </div>
         </div>
@@ -143,7 +143,7 @@
       </div>
     </div>
     <!-- para poner los alerts -->
-     <div ng-style="{'display':'none'}">
+     <div ng-style="{'display':'block'}">
       <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
       <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button> 
      </div>

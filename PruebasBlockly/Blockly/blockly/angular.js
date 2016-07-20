@@ -6,7 +6,9 @@
                 .toggle();
                 navID = 'Instrucciones1';
         });
-        
+        $scope.nivel2= true;
+        $scope.nivel3= true;
+        $scope.nivel4= true;
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -30,13 +32,45 @@
           $mdOpenMenu(ev);
         };
         $scope.showCorrect = function(ev) {
-          $mdDialog.show({
-            controller: correctController,
-            templateUrl: '../correctanswer.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose:true
-          })
+          // Appending dialog to document.body to cover sidenav in docs app
+          var confirm = $mdDialog.confirm()
+                .title('Felicidades')
+                .textContent('Haz realizado correctamente el puzzle')
+                .ariaLabel('Felicidades')
+                .targetEvent(ev)
+                .ok('Publicar')
+                .cancel('Cancelar');
+          $mdDialog.show(confirm).then(function() {
+            switch(currentpanel) {
+              case 1:                  
+                  $scope.nivel2= false;
+                  $scope.nivel2A= true;
+                  break;
+              case 2:                  
+                  $scope.nivel3= false;
+                  $scope.nivel3A= true;
+                  break;
+              case 3:                  
+                  $scope.nivel4= false;
+                  $scope.nivel4A= true;
+              case 4:                  
+                  /*aqui regresaria al menu principal o algo asi*/
+              default:                  
+                  $scope.nivel2= false;
+            }
+            $mdDialog.show({
+              controller: DialogController,
+              templateUrl: '../publishproduct.html',
+              parent: angular.element(document.body),
+              targetEvent: ev,
+              clickOutsideToClose:true
+            });
+            generate();
+            alert('entro al confirm');
+          }, function() {
+            alert('entro al cancelar');
+            $scope.status = 'You decided to keep your debt.';
+          });
         };
         $scope.showWrong = function(ev) {
           // Appending dialog to document.body to cover sidenav in docs app
@@ -107,44 +141,6 @@
             }
           };
         });
-      function correctController($scope,$rootScope, $mdDialog) {
-        $scope.newLevel = function() {         
-          switch(currentpanel) {
-            case 1:
-                $rootScope.nivel2= false;//estos son para ponerlos en enabled, pero no funcionan
-                $rootScope.nivel2A= true;
-                break;
-            case 2:                  
-                $rootScope.nivel3= false;//estos son para ponerlos en enabled, pero no funcionan
-                $rootScope.nivel3A= true;
-                break;
-            case 3:                  
-                $rootScope.nivel4= false;//estos son para ponerlos en enabled, pero no funcionan
-                $rootScope.nivel4A= true;
-                break;
-            default:                  
-                $rootScope.nivel2= false;//estos son para ponerlos en enabled, pero no funcionan
-                //$rootScope.nivel2A= true;
-          }
-         $mdDialog.cancel();
-        }
-        $scope.showPublish = function(ev) { 
-            $mdDialog.show({
-              controller: DialogController,
-              templateUrl: '../publishproduct.html',
-              parent: angular.element(document.body),
-              targetEvent: ev,
-              clickOutsideToClose:true
-            });
-            generate();
-        };
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-      }
       function DialogController($scope, $mdDialog) {
         $scope.vistaprevia = function(){
           loadThumbnail();

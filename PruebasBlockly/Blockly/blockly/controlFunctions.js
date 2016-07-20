@@ -249,6 +249,12 @@ function stop(){
                 begin1();
           }
 }
+
+//para mostrar el publicar en caso de que haya hecho bien el ejercicio
+function openpublish(){
+  var publicar =document.getElementById('Publish').click()
+}
+
 //para sacar el thumbnail
 function generate() {
   var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
@@ -264,6 +270,7 @@ function generate() {
   newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
   window.localStorage.setItem("preview", newSVG.outerHTML); 
 }
+
 //para cargar el thumbnail en el preview
 function loadThumbnail(){
   var previa = window.localStorage.getItem("preview");
