@@ -68,33 +68,28 @@
               // AND we are passing the parent '$scope' to the dialog, we MUST
               // use 'vm.<xxx>' in the template markup
               template: 
-              '<div flex="50">'+
-                '<md-dialog aria-label="correct answer" id="correct answer">'+
-                  '<md-dialog-content >'+
-                   '<form>'+
-                    '<md-toolbar>'+
-                      '<div class="md-toolbar-tools">'+
-                        '<h2>Felicidades</h2>'+
-                      '</div>'+
-                    '</md-toolbar>'+
-                    '<md-dialog-content>'+
-                      '<div class="md-dialog-content">'+
-                        '<p>Felicidades haz realizado correctamente el puzzle</p>'+
-                      '</div>'+
+                '<div flex="50">'+
+                  '<md-dialog aria-label="correct answer" id="correct answer">'+
+                    '<md-dialog-content >'+
+                     '<form>'+
+                      '<md-dialog-content>'+
+                        '<div class="md-dialog-content">'+
+                          '<h2>Felicidades! </h2>'+
+                          '<p>Haz realizado correctamente el ejercicio, publicalo para guardar tu avance</p>'+
+                        '</div>'+
+                      '</md-dialog-content>'+
+                      '<md-dialog-actions layout="row">'+
+                        '<md-button ng-click="cancelar()">'+
+                          'Cancelar'+
+                        '</md-button>'+
+                        '<md-button ng-click="publicar()" md-autofocus>'+
+                          'Publicar'+
+                        '</md-button>'+
+                      '</md-dialog-actions>'+
+                    '</form>'+
                     '</md-dialog-content>'+
-                    '<md-dialog-actions layout="row">'+
-                      '<md-button ng-click="cancelar()">'+
-                        'Cancelar'+
-                      '</md-button>'+
-                      '<span flex></span>'+
-                      '<md-button ng-click="publicar" md-autofocus>'+
-                        'Publicar'+
-                      '</md-button>'+
-                    '</md-dialog-actions>'+
-                  '</form>'+
-                  '</md-dialog-content>'+
-                '</md-dialog>'+
-              '</div>',
+                  '</md-dialog>'+
+                '</div>',
               controller: function correctController($scope, $mdDialog) {
                 $scope.publicar = function() {
                   switch(currentpanel) {
@@ -156,13 +151,9 @@
                 '<md-dialog aria-label="correct answer" id="correct answer">'+
                   '<md-dialog-content >'+
                    '<form>'+
-                    '<md-toolbar class="md-accent">'+
-                      '<div class="md-toolbar-tools">'+
-                        '<h2>Buen intento</h2>'+
-                      '</div>'+
-                    '</md-toolbar>'+
                     '<md-dialog-content>'+
                       '<div class="md-dialog-content">'+
+                        '<h2>Buen intento</h2>'+
                         '<p>Esta vez no lo conseguiste, prueba de nuevo.</p>'+
                       '</div>'+
                     '</md-dialog-content>'+
