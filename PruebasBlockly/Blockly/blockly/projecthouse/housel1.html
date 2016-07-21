@@ -54,7 +54,7 @@
       var solution=[];
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
-      function begin(){
+      function begin1(){
         wimg=8;
         canvas = document.getElementById('canvas');
         canvas.style.border='1px solid black';
@@ -80,7 +80,7 @@
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
         answer();
-        panel();
+        panel1();
 
       }
       function answer(){
@@ -97,7 +97,7 @@
 
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
 
-      function panel(){
+      function panel1(){
         var imgback = new Image();
         
         imgback.onload = function() {
@@ -116,7 +116,7 @@
         }
         initX=stepsizeX*7;
           painroad();
-          Avatar();
+          Avatar1();
         }
         imgback.src = "../media/mapa_casa.png";
 
@@ -133,7 +133,7 @@
       }
 
       //Drawing avatar
-      function Avatar(){
+      function Avatar1(){
         var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
         var avatarheight, avatarwith;
         var positionX, positionY;
@@ -171,7 +171,7 @@
       }
   </script>
 </head>
-<body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
+<body onload="begin1()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
     <div flex="10" layout-align="center center" layout="row">
       <md-button class="md-fab md-mini" aria-label="Settings" onclick="ocultar()">
@@ -581,9 +581,6 @@ function nextStep() {
           alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
-    }else{
-      var valor = myInterpreter.createPrimitive(myInterpreter.stateStack[0].node);
-      
     }
 }
 

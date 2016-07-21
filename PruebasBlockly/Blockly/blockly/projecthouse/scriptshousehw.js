@@ -88,7 +88,7 @@
         };
       }
 
-      /*function check1(){
+      function check1(){
         var verific=0;
         for (var i = 0; i < solution.length; i++) {
               //alert(roadpaint[i].poColor);
@@ -116,4 +116,4 @@
           //alert('Esta vez no lo conseguiste, intenta de nuevo');
           location.reload();
         }
-      }*/
+      }

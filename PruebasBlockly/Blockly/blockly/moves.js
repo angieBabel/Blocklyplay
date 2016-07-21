@@ -46,8 +46,13 @@
         this.soY = y;
         this.soZ = z;
         this.soColor = color;
-      }
-
+    }
+    function paintingObj(x,y,z,color){
+      this.poX= x;
+      this.poY = y;
+      this.poZ = z;
+      this.poColor = color;
+    }
   //Funciones para dibujar
   var degreesToRadian = function (deg) {
      return deg * Math.PI / 180;
@@ -79,12 +84,7 @@
         };
       }
   })();
-  function paintingObj(x,y,z,color){
-        this.poX= x;
-        this.poY = y;
-        this.poZ = z;
-        this.poColor = color;
-  }
+  
   //motion functions
   //mover adelante sin pintar
   function forward(nosteps){
