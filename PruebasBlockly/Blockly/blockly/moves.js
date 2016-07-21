@@ -95,6 +95,7 @@
     limtX = positionObj.objX + distX;
     limtY = positionObj.objY + distY;
     i=0;
+   
     interval= setInterval(function(){
       ctx.beginPath();
       //cuadrante inf derecho
@@ -130,6 +131,7 @@
       rotar(positionObj.objZ,'"ahead"');
       i++;
       if(i==nosteps){
+        
         stopTimer();
         acabo=1;
       }
@@ -179,7 +181,6 @@
       rotar(positionObj.objZ, '"ahead"');
       positionObj.objX=Xaux;
       positionObj.objY=Yaux;
-      paint(positionObj.objX,positionObj.objY,nosteps,0);
       i++;
       if(i==nosteps){
         stopTimer();

@@ -39,38 +39,32 @@
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
-    var imgback = new Image();
-            imgback.src = "../media/citycube.jpg";
-          
-     imgback.onload = function() {
-      ctx.drawImage(imgback, 0, 0,ancho,alto);
-      i=-1;
-      j=-1;
-        
-       while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "black";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
-              ctx.font = "20px Arial";
-              ctx.fillStyle = "black";
-              ctx.textAlign = "right";
-              i++;
-              ctx.fillText(i+1,stepsizeX*(i+1),stepsizeY);
+          ii=-1;
+          jj=-1;
+          ctx.clearRect(0,0,ancho,alto);
+           while(initX<canvas.width-stepsizeX){
+              initX=initX+stepsizeX;
+                while(initY<canvas.height-stepsizeY){
+                  initY=initY+stepsizeY;
+                  ctx.beginPath();
+                  ctx.fillStyle = "black";
+                  ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                  ctx.fill();
+                  ctx.font = "20px Arial";
+                  ctx.fillStyle = "black";
+                  ctx.textAlign = "right";
+                  ii++;
+                  ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+                }
+                initY=0;
+                jj++
+                ctx.font = "20px Arial";
+                ctx.fillStyle = "red";
+                ctx.fillText(jj,stepsizeX,stepsizeY*jj);
             }
-            initY=0;
-            j++
-            ctx.font = "20px Arial";
-            ctx.fillStyle = "red";
-            ctx.fillText(j,stepsizeX,stepsizeY*j);
-        }
-        initX=0;
-        //Avatar1();
+            initX=0;
+            Avatar1()
       }
-  }
 
       //Drawing avatar
       function Avatar1(){
@@ -93,33 +87,9 @@
           ctx.drawImage(img,0, 0,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/persona2.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/persona.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
       function check1(){
-        var verific=0;
-        for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
-            if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-              verific=verific+1;
-            }
-          }
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-            }
-          }
-        }
-        if(verific===6){
-          var correct =document.getElementById('Correct').click()
-          roadpaint.splice(0,roadpaint.length);
-        }else{
-          var wrong =document.getElementById('Wrong').click()
-          location.reload();
-        }
+        alert('ejerecicio finalizado')
       }
