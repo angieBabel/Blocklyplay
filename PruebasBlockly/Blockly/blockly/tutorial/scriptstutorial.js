@@ -55,17 +55,17 @@
               ctx.fillStyle = "black";
               ctx.arc(initX,initY,1.5,0,2*Math.PI);
               ctx.fill();
-              ctx.font = "40px Arial";
+              ctx.font = "20px Arial";
               ctx.fillStyle = "black";
-              //ctx.textAlign = "right";
+              ctx.textAlign = "right";
               i++;
-              ctx.fillText(i+1,stepsizeX*i,stepsizeY);
+              ctx.fillText(i+1,stepsizeX*(i+1),stepsizeY);
             }
             initY=0;
             j++
-            ctx.font = "40px Arial";
+            ctx.font = "20px Arial";
             ctx.fillStyle = "red";
-            ctx.fillText(j,0,stepsizeY*j);
+            ctx.fillText(j,stepsizeX,stepsizeY*j);
         }
         initX=0;
         //Avatar1();
