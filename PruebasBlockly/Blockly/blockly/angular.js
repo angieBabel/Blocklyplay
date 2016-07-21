@@ -74,7 +74,7 @@
                      '<form>'+
                       '<md-dialog-content>'+
                         '<div class="md-dialog-content">'+
-                          '<h2>Felicidades! </h2>'+
+                          '<h2>¡Felicidades! </h2>'+
                           '<p>Haz realizado correctamente el ejercicio, publicalo para guardar tu avance</p>'+
                         '</div>'+
                       '</md-dialog-content>'+
@@ -153,13 +153,13 @@
                    '<form>'+
                     '<md-dialog-content>'+
                       '<div class="md-dialog-content">'+
-                        '<h2>Buen intento</h2>'+
+                        '<h2>¡Buen intento!</h2>'+
                         '<p>Esta vez no lo conseguiste, prueba de nuevo.</p>'+
                       '</div>'+
                     '</md-dialog-content>'+
                     '<md-dialog-actions layout="row">'+
                       '<md-button ng-click="nuevointento()" md-autofocus>'+
-                        'try again'+
+                        'Volver'+
                       '</md-button>'+
                     '</md-dialog-actions>'+
                   '</form>'+
