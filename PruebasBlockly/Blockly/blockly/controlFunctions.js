@@ -313,5 +313,5 @@ function pasoHW(){
     socket.emit('changefunction',codeHW);
   }else{
     var correct =document.getElementById('HWError').click()
-  }s;
+  };
 } 
