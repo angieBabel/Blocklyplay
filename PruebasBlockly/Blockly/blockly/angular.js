@@ -173,19 +173,17 @@
               }
            });
         };
-        $scope.showWrongs = function(ev) {
+        $scope.hardwareError = function(ev) {
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('#popupContainer')))
               .clickOutsideToClose(true)
-              .title('Buen intento')
-              .textContent('Esta vez no lo conseguiste, prueba de nuevo.')
-              .ariaLabel('Intenta de nuevo')
-              .ok('Intentar de nuevo')
+              .title('Espera!')
+              .textContent('Debes de probar primero tu codigo')
+              .ariaLabel('Entendido')
+              .ok('Ok')
               .targetEvent(ev)
-          ).then(function() {location.reload();
-          });
-        };
+          )};
         $scope.showTabDialog = function(ev) { 
             $mdDialog.show({
               controller: DialogController,

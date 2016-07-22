@@ -73,39 +73,24 @@
       }
 
        var angle=0;
+      //Drawing avatar
       function Avatar1(){
-          var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-          img.id = 'imagen';
-          avatarwith=stepsizeX;avatarheight=stepsizeY*.5;
-
-          //avatarwith=40;avatarheight=20;
-          img.onload = function() {
-            ctx.save();
-            ctx.translate(positionObj.objX,positionObj.objY);
-            ctx.rotate(positionObj.objZ * (Math.PI/180));
-            ctx.globalAlpha=1;
-
-            if (angle!=positionObj.objZ) {
-              angle=positionObj.objZ;
-              /*if (luz==1) {
-                  luces(avatarwith*.5,0,lightside);
-                }
-              if (luzTrasera==1) {
-                lucesTraseras(-avatarwith*.5,0,lightside);
-              }*/
-              ctx.drawImage(img,-avatarwith*.5,-avatarheight*.5,avatarwith,avatarheight);
-            }else{
-              /*if (luz==1) {
-                  luces(0,0,lightside);
-                }
-              if (luzTrasera==1) {
-                lucesTraseras(-avatarwith,0,lightside);
-              }*/
-              ctx.drawImage(img,-avatarwith,-avatarheight*.5,avatarwith,avatarheight);
-            }
-            ctx.restore();
+        var led1 = new Image();
+        avatarwith=stepsizeX;avatarheight=stepsizeY;
+           if (pinled==0) {
+                    led1.src = "../media/ledOff.png";
+              }else if (pinled==1) {
+                if (ledstatus=='On') {
+                    led1.src = "../media/ledOn.png";
+                }else{
+                    led1.src = "../media/ledOff.png";
+                };
+              };
+        led1.onload = function() {
+            ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5 ,avatarwith,avatarheight);
           }
-          img.src = '../media/carro.png';//el img.src se pone despues del onload para asegurar su carga
+          ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5,avatarwith,avatarheight);
+          acabo=1;
       }
 
       function check1(){

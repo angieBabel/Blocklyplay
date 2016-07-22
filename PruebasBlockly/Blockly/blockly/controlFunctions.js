@@ -302,12 +302,16 @@ function loadXML() {
 }
 //para enviar el codigo al hardware
 function pasoHW(){
-  var socket = null;
-  socket = io.connect('http://edison.local:3000');
-  //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
-  codeHW = codeHW.replace(/[']/gi, "");
-  codeHW = codeHW.replace(/\n{2,}/,"\n");
-  codeHW = codeHW.replace(/\s{3,}/gi,"\n");
-  //alert(codeHW);
-  socket.emit('changefunction',code);
+  if (codeHW!=null) {
+    var socket = null;
+    socket = io.connect('http://edison.local:3000');
+    //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
+    codeHW = codeHW.replace(/[']/gi, "");
+    codeHW = codeHW.replace(/\n{2,}/,"\n");
+    codeHW = codeHW.replace(/\s{3,}/gi,"\n");
+    //alert(codeHW);
+    socket.emit('changefunction',codeHW);
+  }else{
+    var correct =document.getElementById('HWError').click()
+  }s;
 } 
