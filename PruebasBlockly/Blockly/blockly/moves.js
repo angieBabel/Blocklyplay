@@ -46,8 +46,13 @@
         this.soY = y;
         this.soZ = z;
         this.soColor = color;
-      }
-
+    }
+    function paintingObj(x,y,z,color){
+      this.poX= x;
+      this.poY = y;
+      this.poZ = z;
+      this.poColor = color;
+    }
   //Funciones para dibujar
   var degreesToRadian = function (deg) {
      return deg * Math.PI / 180;
@@ -79,12 +84,7 @@
         };
       }
   })();
-  function paintingObj(x,y,z,color){
-        this.poX= x;
-        this.poY = y;
-        this.poZ = z;
-        this.poColor = color;
-  }
+  
   //motion functions
   //mover adelante sin pintar
   function forward(nosteps){
@@ -95,6 +95,7 @@
     limtX = positionObj.objX + distX;
     limtY = positionObj.objY + distY;
     i=0;
+   
     interval= setInterval(function(){
       ctx.beginPath();
       //cuadrante inf derecho
@@ -130,6 +131,7 @@
       rotar(positionObj.objZ,'"ahead"');
       i++;
       if(i==nosteps){
+        
         stopTimer();
         acabo=1;
       }
@@ -179,7 +181,6 @@
       rotar(positionObj.objZ, '"ahead"');
       positionObj.objX=Xaux;
       positionObj.objY=Yaux;
-      paint(positionObj.objX,positionObj.objY,nosteps,0);
       i++;
       if(i==nosteps){
         stopTimer();
@@ -221,7 +222,7 @@
   }
   //Función para ejecutar sonidos de acuerdo a la elección del usuario
   function sound(sonido){
-    var audio = new Audio('audios/'+sonido);
+    var audio = new Audio('../audios/'+sonido);
     audio.play();
   }
   //funcion para que se espere X segundos

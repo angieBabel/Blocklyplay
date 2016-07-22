@@ -89,14 +89,19 @@
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
-      function check1(){
-        var verific=0;
+     function check1(){
+      var verific=0;
         for (var i = 0; i < solution.length; i++) {
               //alert(roadpaint[i].poColor);
-            if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-              verific=verific+1;
-            }
-          }
+            if (roadpaint.length==solution.length) {
+              if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+                verific=verific+1;
+              }
+            }else{
+              i=solution.length
+            };  
+        }
+        //alert(verific);
         if(verific==2) {
           verific=0;
           //alert(solution.length);
@@ -108,13 +113,12 @@
             }
           }
         }
-        if(verific===6){
+        //alert(verific);
+        if(verific===solution.length){
           var correct =document.getElementById('Correct').click()
-          //alert('Felicidades, haz completado correctamente el puzzle');
-          roadpaint.splice(0,roadpaint.length);
+
         }else{
           var wrong =document.getElementById('Wrong').click()
-          //alert('Esta vez no lo conseguiste, intenta de nuevo');
-          location.reload();
         }
-      }
+        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+     }

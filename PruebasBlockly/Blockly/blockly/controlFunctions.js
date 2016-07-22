@@ -249,6 +249,12 @@ function stop(){
                 begin1();
           }
 }
+
+//para mostrar el publicar en caso de que haya hecho bien el ejercicio
+function openpublish(){
+  var publicar =document.getElementById('Publish').click()
+}
+
 //para sacar el thumbnail
 function generate() {
   var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
@@ -264,6 +270,7 @@ function generate() {
   newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
   window.localStorage.setItem("preview", newSVG.outerHTML); 
 }
+
 //para cargar el thumbnail en el preview
 function loadThumbnail(){
   var previa = window.localStorage.getItem("preview");
@@ -295,12 +302,16 @@ function loadXML() {
 }
 //para enviar el codigo al hardware
 function pasoHW(){
-  var socket = null;
-  socket = io.connect('http://edison.local:3000');
-  //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
-  codeHW = codeHW.replace(/[']/gi, "");
-  codeHW = codeHW.replace(/\n{2,}/,"\n");
-  codeHW = codeHW.replace(/\s{3,}/gi,"\n");
-  //alert(codeHW);
-  socket.emit('changefunction',code);
+  if (codeHW!=null) {
+    var socket = null;
+    socket = io.connect('http://edison.local:3000');
+    //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
+    codeHW = codeHW.replace(/[']/gi, "");
+    codeHW = codeHW.replace(/\n{2,}/,"\n");
+    codeHW = codeHW.replace(/\s{3,}/gi,"\n");
+    //alert(codeHW);
+    socket.emit('changefunction',codeHW);
+  }else{
+    var correct =document.getElementById('HWError').click()
+  }s;
 } 

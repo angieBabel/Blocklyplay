@@ -6,7 +6,7 @@
       var pinled=0;
       var ledstatus=null;
       //se crean las variables de las imagenes para que sean globales
-      var led1 = new Image();
+      
       var led2 = new Image();
       var led3 = new Image();
       

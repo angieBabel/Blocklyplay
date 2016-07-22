@@ -66,7 +66,7 @@
               <span>Dibuja el contorno de una hélice</span>
             </div>
             <div flex="20">
-              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
+              <md-button ng-click="showTabDialog($event)" id="Publish"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
             </div> 
           </div>
         </div>
@@ -97,13 +97,13 @@
           <!-- tabs que contienen los canvas -->
           <md-content id="divCanvas">
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" id="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" id="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" id="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -145,12 +145,9 @@
     <!-- para poner los alerts -->
      <div ng-style="{'display':'none'}">
       <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
-      <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button> 
+      <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button>
+      <md-button ng-click="hardwareError($event)" id="HWError">Hardwaee error</md-button> 
      </div>
-     <!-- para cargar un nuevo nivel o dejarte aqui -->
-     <!-- <div ng-if="status" id="status" ng-style="{'display':'none'}">
-       {{status}}
-      </div> -->
     <!-- side nav de instrucciones de nivel 1-->
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
       <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
@@ -261,7 +258,6 @@
 <xml id="toolbox" style="display: none">
   <category name="Control" colour="157">
     <block type="wait"></block>
-    <block type="stop"></block>
     <block type="controls_repeat_ext">
       <value name="TIMES">
         <shadow type="math_number">
@@ -377,86 +373,6 @@
   <sep></sep>
   <category name="Variables" colour="355" custom="VARIABLE"></category>
   <category name="Functions" colour="287" custom="PROCEDURE"></category>
-  <category name="Hardware" colour="354">
-      <block type="ledDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Turn">
-          <shadow type="status">
-            <field name="on/off">On</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="motorDisplayed">
-        <value name="steps">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-        <value name="direction">
-          <shadow type="direction">
-            <field name="direction">Forward</field>
-          </shadow>
-        </value>
-        <value name="speed">
-          <shadow type="speed">
-            <field name="speed">1</field>
-          </shadow>
-        </value>
-      </block>
-
-      <block type="buzzerDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Tone">
-          <shadow type="tone">
-            <field name="tone">Do</field>
-          </shadow>
-        </value>
-        <value name="Secs">
-          <shadow type="math_number">
-            <field name="NUM">1</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="pantallaDisplayed">
-        <value name="message">
-          <shadow type="text">
-            <field name="TEXT">Type message here</field>
-          </shadow>
-        </value>
-        <value name="color">
-          <shadow type="colour_picker">
-            <field name="COLOUR">#ff0000</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="botonDisplayed">
-        <value name="PIN">
-          <shadow type="pind">
-            <field name="PIN">1</field>
-          </shadow>
-        </value>
-        <value name="Status">
-          <shadow type="status">
-            <field name="on/off">On</field>
-          </shadow>
-        </value>
-      </block>
-  </category>
-  <category name="Inputs" colour="210">
-    <block type="status"></block>
-      <block type="speed"></block>
-      <block type="pina"></block>
-      <block type="pind"></block>
-      <block type="tone"></block>
-  </category>
 </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>

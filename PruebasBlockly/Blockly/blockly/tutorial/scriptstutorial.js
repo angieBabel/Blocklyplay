@@ -20,7 +20,7 @@
         stepsizeY=canvas.height/8;
 
         X = stepsizeX*3;
-        Y = stepsizeY*6;
+        Y = stepsizeY*2;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -38,88 +38,61 @@
 
       }
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
-       function panel1(){
-    var imgback = new Image();
-            imgback.src = "../media/citycube.jpg";
-          
-     imgback.onload = function() {
-      ctx.drawImage(imgback, 0, 0,ancho,alto);
-      i=-1;
-      j=-1;
-        
-       while(initX<canvas.width-stepsizeX){
-          initX=initX+stepsizeX;
-            while(initY<canvas.height-stepsizeY){
-              initY=initY+stepsizeY;
-              ctx.beginPath();
-              ctx.fillStyle = "black";
-              ctx.arc(initX,initY,1.5,0,2*Math.PI);
-              ctx.fill();
-              ctx.font = "40px Arial";
-              ctx.fillStyle = "black";
-              //ctx.textAlign = "right";
-              i++;
-              ctx.fillText(i+1,stepsizeX*i,stepsizeY);
-            }
-            initY=0;
-            j++
-            ctx.font = "40px Arial";
-            ctx.fillStyle = "red";
-            ctx.fillText(j,0,stepsizeY*j);
-        }
-        initX=0;
-        //Avatar1();
-      }
-  }
+      function panel1(){
+          var imgback = new Image();
+                imgback.src = "../media/whiteblank.jpg";
 
+          imgback.onload = function() {
+            ctx.drawImage(imgback, 0, 0,ancho,alto);
+              ii=-1;
+              jj=-1;
+              ctx.clearRect(0,0,ancho,alto);
+               while(initX<canvas.width-stepsizeX){
+                  initX=initX+stepsizeX;
+                    while(initY<canvas.height-stepsizeY){
+                      initY=initY+stepsizeY;
+                      ctx.beginPath();
+                      ctx.fillStyle = "black";
+                      ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                      ctx.fill();
+                      ctx.font = "20px Arial";
+                      ctx.fillStyle = "black";
+                      ctx.textAlign = "right";
+                      ii++;
+                      ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+                    }
+                    initY=0;
+                    jj++
+                    ctx.font = "20px Arial";
+                    ctx.fillStyle = "red";
+                    ctx.fillText(jj,stepsizeX,stepsizeY*jj);
+                }
+                initX=0;
+                Avatar1()
+            }
+      }
+
+       var angle=0;
       //Drawing avatar
       function Avatar1(){
-        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-        var avatarheight, avatarwith;
-        var positionX, positionY;
-
-        img.id = 'imagen';
-        //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=stepsizeX;avatarheight=stepsizeY*2;
-
-        img.onload = function() {
-          ctx.save();
-          //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-          ctx.translate(positionObj.objX,positionObj.objY);
-          //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
-          ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-          ctx.drawImage(img,0, 0,avatarwith,avatarheight);
-          ctx.restore();
-        }
-        img.src = '../media/persona2.png';//el img.src se pone despues del onload para asegurar su carga
+        var led1 = new Image();
+        avatarwith=stepsizeX;avatarheight=stepsizeY;
+           if (pinled==0) {
+                    led1.src = "../media/ledOff.png";
+              }else if (pinled==1) {
+                if (ledstatus=='On') {
+                    led1.src = "../media/ledOn.png";
+                }else{
+                    led1.src = "../media/ledOff.png";
+                };
+              };
+        led1.onload = function() {
+            ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5 ,avatarwith,avatarheight);
+          }
+          ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5,avatarwith,avatarheight);
+          acabo=1;
       }
 
       function check1(){
-        var verific=0;
-        for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
-            if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-              verific=verific+1;
-            }
-          }
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-            }
-          }
-        }
-        if(verific===6){
-          var correct =document.getElementById('Correct').click()
-          roadpaint.splice(0,roadpaint.length);
-        }else{
-          var wrong =document.getElementById('Wrong').click()
-          location.reload();
-        }
+        //var correct =document.getElementById('Correct').click()
       }
