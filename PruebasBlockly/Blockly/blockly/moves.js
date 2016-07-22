@@ -222,7 +222,7 @@
   }
   //Función para ejecutar sonidos de acuerdo a la elección del usuario
   function sound(sonido){
-    var audio = new Audio('audios/'+sonido);
+    var audio = new Audio('../audios/'+sonido);
     audio.play();
   }
   //funcion para que se espere X segundos
