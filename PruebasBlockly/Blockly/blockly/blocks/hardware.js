@@ -53,11 +53,13 @@ Blockly.Blocks['motor'] = {
     this.appendDummyInput()
         .appendField("Steps");
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["Right", "forward"], ["Left", "backward"]]), "direction");
+        .appendField(new Blockly.FieldDropdown([["Right", "forward"], ["Left", "backward"]]), "direction")
+        .setCheck("direction");
     this.appendDummyInput()
         .appendField("Speed");
     this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed");
+        .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed")
+        .setCheck("speed");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -75,8 +77,10 @@ Blockly.Blocks['motorDisplayed'] = {
         .appendField("         Laps:")
     this.appendValueInput("direction")
         .appendField("    Direction:")
+        .setCheck("direction");
     this.appendValueInput("speed")
         .appendField("       Speed:")
+        .setCheck("speed");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(354);
@@ -116,13 +120,13 @@ Blockly.Blocks['buzzerDisplayed'] = {
         .appendField("Buzzer:");
     this.appendValueInput("PIN")
             .appendField("            PIN:")
-            .setCheck(null);
+            .setCheck("pind");
     this.appendValueInput("Tone")
             .appendField("          Tone:")
-            .setCheck(null);
+            .setCheck("tone");
     this.appendValueInput("Secs")
             .appendField("    Seconds:")
-            .setCheck(null);
+            .setCheck("Number");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -157,10 +161,10 @@ Blockly.Blocks['pantallaDisplayed'] = {
         .appendField("Display:");
     this.appendValueInput("message")
             .appendField("          Message:")
-            .setCheck(null);
+            .setCheck("String");
     this.appendValueInput("color")
             .appendField("    Screen Color:")
-            .setCheck(null);
+            .setCheck("Colour");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(354);
@@ -192,10 +196,10 @@ Blockly.Blocks['botonDisplayed'] = {
         .appendField("Button:");
     this.appendValueInput("PIN")
             .appendField("            PIN:")
-            .setCheck(null);
+            .setCheck("pind");
     this.appendValueInput("Status")
             .appendField("     Pressed:")
-            .setCheck(null);
+            .setCheck("turn");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -257,7 +261,7 @@ Blockly.Blocks['speed'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"]]), "speed");
-    this.setOutput(true, null);
+    this.setOutput(true, 'speed');
     this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
@@ -269,7 +273,7 @@ Blockly.Blocks['tone'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["Do", "Do"], ["Re", "Re"], ["Mi", "Mi"], ["Fa", "Fa"], ["Sol", "Sol"], ["La", "La"], ["Si", "Si"]]), "tone");
-    this.setOutput(true, null);
+    this.setOutput(true, 'tone');
     this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');

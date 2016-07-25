@@ -256,13 +256,30 @@
        </div>
       </md-content>
     </md-sidenav>
-  <xml id="toolbox" style="display: none">
+ <xml id="toolbox" style="display: none">
     <category name="Control" colour="157">
       <block type="wait"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
             <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
           </shadow>
         </value>
       </block>
@@ -405,7 +422,7 @@
         <block type="buzzerDisplayed">
           <value name="PIN">
             <shadow type="pind">
-              <field name="PIN">1</field>
+              <field name="PIN">2</field>
             </shadow>
           </value>
           <value name="Tone">
@@ -434,7 +451,7 @@
         <block type="botonDisplayed">
           <value name="PIN">
             <shadow type="pind">
-              <field name="PIN">1</field>
+              <field name="PIN">2</field>
             </shadow>
           </value>
           <value name="Status">
@@ -454,7 +471,7 @@
     <sep></sep>
     <category name="Variables" colour="355" custom="VARIABLE"></category>
     <category name="Functions" colour="287" custom="PROCEDURE"></category>
-  </xml>
+ </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>
   <script type="text/javascript">
