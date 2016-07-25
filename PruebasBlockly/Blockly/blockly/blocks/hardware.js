@@ -75,6 +75,7 @@ Blockly.Blocks['motorDisplayed'] = {
         .appendField("MOTOR:");
     this.appendValueInput("steps")
         .appendField("         Laps:")
+        .setCheck("Number");
     this.appendValueInput("direction")
         .appendField("    Direction:")
         .setCheck("direction");
