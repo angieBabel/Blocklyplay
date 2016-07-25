@@ -34,7 +34,7 @@ Blockly.Blocks['ledDisplayed'] = {
             .setCheck(null);
     this.appendValueInput("Turn")
             .appendField("     Turn:")
-    .setCheck("turn");
+            .setCheck("turn");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -211,7 +211,7 @@ Blockly.Blocks['status'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), "on/off");
     this.setInputsInline(true);
-    this.setOutput(true, "String");
+    this.setOutput(true, "turn");
     this.setColour(210);
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
