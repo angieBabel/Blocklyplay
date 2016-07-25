@@ -6,7 +6,8 @@
       var pinled=0;
       var ledstatus=null;
       //se crean las variables de las imagenes para que sean globales
-      
+
+      var led1 = new Image();
       var led2 = new Image();
       var led3 = new Image();
       
@@ -64,25 +65,24 @@
                 };
               };
         led1.onload = function() {
-            ctx.drawImage(led1,stepsizeX*4, stepsizeY*.5 ,avatarwith,avatarheight);
+            ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
           }
-          ctx.drawImage(led1,stepsizeX*4, stepsizeY*.5 ,avatarwith,avatarheight);
+          ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
           acabo=1;
       }
 
       function check1(){
         var coincidencias=0;
-        //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
-        for (var i = 0; i < solucion.length; i++) {
-          if (solucion[i].Pin==respuesta[i].Pin && solucion[i].Turn==respuesta[i].Turn) {
+        //ciclo anidado que recorre y compara todos los elementos del vector solution, contra todos los del vector respuesta del niño
+        for (var i = 0; i < solution.length; i++) {
+          if (solution[i].Pin==respuesta[i].Pin && solution[i].Turn==respuesta[i].Turn) {
             coincidencias+=1;
           };
         }
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-        /*if (coincidencias==solucion.length) {
+        if (coincidencias==solution.length) {
           var correct =document.getElementById('Correct').click()
         }else{
          var wrong =document.getElementById('Wrong').click()
-          location.reload();
-        }*/
+        }
       }

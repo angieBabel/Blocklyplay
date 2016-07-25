@@ -53,7 +53,7 @@
       this.poZ = z;
       this.poColor = color;
     }
-  //Funciones para dibujar
+//Funciones para dibujar
   var degreesToRadian = function (deg) {
      return deg * Math.PI / 180;
   };

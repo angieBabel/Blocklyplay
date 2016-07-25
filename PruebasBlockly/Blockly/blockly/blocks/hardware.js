@@ -31,7 +31,7 @@ Blockly.Blocks['ledDisplayed'] = {
         .appendField("LED:");
     this.appendValueInput("PIN")
             .appendField("     PIN:")
-            .setCheck(null);
+            .setCheck("pind");
     this.appendValueInput("Turn")
             .appendField("     Turn:")
             .setCheck("turn");
@@ -233,8 +233,7 @@ Blockly.Blocks['pina'] = {
 Blockly.Blocks['pind'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput("1"), "PIN")
-        .appendField("digital");
+        .appendField(new Blockly.FieldDropdown([["D2", "2"],["D3", "3"],["D4", "4"],["D5", "5"],["D6", "6"],["D7", "7"],["D8", "8"]]), "PIN");
     this.setOutput(true, "pind");
     this.setColour(210);
     this.setTooltip('');

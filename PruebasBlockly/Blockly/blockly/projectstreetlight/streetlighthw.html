@@ -258,7 +258,6 @@
   <xml id="toolbox" style="display: none">
     <category name="Control" colour="157">
       <block type="wait"></block>
-      <block type="stop"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -370,10 +369,7 @@
         </value>
       </block>
     </category>
-
     <sep></sep>
-    <category name="Variables" colour="355" custom="VARIABLE"></category>
-    <category name="Functions" colour="287" custom="PROCEDURE"></category>
     <category name="Hardware" colour="354">
         <block type="ledDisplayed">
           <value name="PIN">
@@ -450,10 +446,13 @@
     <category name="Inputs" colour="210">
       <block type="status"></block>
         <block type="speed"></block>
-        <block type="pina"></block>
         <block type="pind"></block>
         <block type="tone"></block>
+        <block type="direction"></block>
     </category>
+    <sep></sep>
+    <category name="Variables" colour="355" custom="VARIABLE"></category>
+    <category name="Functions" colour="287" custom="PROCEDURE"></category>
   </xml>
   <!-- Your application bootstrap  -->
   <!-- el script con las funciones de angular se separo al documento angular.js -->

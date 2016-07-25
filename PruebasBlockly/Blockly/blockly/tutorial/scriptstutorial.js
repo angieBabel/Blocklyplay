@@ -19,8 +19,8 @@
         stepsizeX=canvas.width/12;
         stepsizeY=canvas.height/8;
 
-        X = stepsizeX*3;
-        Y = stepsizeY*2;
+        X = stepsizeX*6;
+        Y = stepsizeY*4;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -73,24 +73,21 @@
       }
 
        var angle=0;
-      //Drawing avatar
+       //Drawing avatar
       function Avatar1(){
-        var led1 = new Image();
-        avatarwith=stepsizeX;avatarheight=stepsizeY;
-           if (pinled==0) {
-                    led1.src = "../media/ledOff.png";
-              }else if (pinled==1) {
-                if (ledstatus=='On') {
-                    led1.src = "../media/ledOn.png";
-                }else{
-                    led1.src = "../media/ledOff.png";
-                };
-              };
-        led1.onload = function() {
-            ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5 ,avatarwith,avatarheight);
-          }
-          ctx.drawImage(led1,stepsizeX*5.5, stepsizeY*3.5,avatarwith,avatarheight);
-          acabo=1;
+        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+        var positionX, positionY;
+        avatarwith=stepsizeX*2;avatarheight=stepsizeY*2;
+        img.id = 'imagen';
+        img.onload = function() {
+          ctx.save();
+          ctx.translate(positionObj.objX,positionObj.objY);
+          ctx.rotate(positionObj.objZ * (Math.PI/180));
+          ctx.globalAlpha=1;
+          ctx.drawImage(img,-stepsizeX,-stepsizeX,avatarwith,avatarwith);
+          ctx.restore();
+        }
+        img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
       function check1(){
