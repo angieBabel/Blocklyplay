@@ -63,7 +63,7 @@
               </md-button>
             </div>
             <div flex="60">
-              <span>¡Tutorial!</span>
+              <span>¡Tu primer programa!</span>
             </div>
             <div flex="20">
               <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
@@ -164,12 +164,12 @@
       <md-content layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:30%;" alt="preview" src="../media/mapa_casa.png">
+        <img style="margin: auto; width: 100%; height:30%;" alt="preview" src="../media/citycube.jpg">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
           <div>
-            <strong>Aprendamos a manejar BlocklyPlay</strong>
+            <strong>Tu primer programa con BlocklyPlay</strong>
           </div>
           <div layout="row" layout-align="start center">
             <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
@@ -191,7 +191,7 @@
        <!-- instrucciones -->
        <div layout="column"  ng-controller="RightCtrl" layout-align="center center">
           <div>
-            <p>Aquí se describirán  las instrucciones de lo que debes de hacer, deberas de seguirlas y poner mucha atención para que puedas contestar el ejercicio de manera correcta, si lo haces en menos intentos, mas puntos obtendrás.</p>
+            <p>Con el bloque de move, ayuda al avatar a llegar desde la casa a su coche, asegurate de contar bien los espacios entre la puerta de la casa y la puerta del carro.</p>
           </div>
           <div>
             <md-button id="comenzar" class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  ng-show="buttonshow" flex-gt-md="auto" ng-click="loadCV()">
@@ -435,17 +435,17 @@
       var program;
       switch(currentpanel) {
             case 1:
-                program = window.localStorage.getItem("tutorial1");
+                program = window.localStorage.getItem("cubo1");
                 break;
             case 2:
-                program = window.localStorage.getItem("tutorial2");
+                program = window.localStorage.getItem("cubo2");
                 break;
             case 3:
-                program = window.localStorage.getItem("tutorial3");
+                program = window.localStorage.getItem("cubo3");
             case 4:
-                program = window.localStorage.getItem("tutorial4");
+                program = window.localStorage.getItem("cubo4");
             default:
-                program = window.localStorage.getItem("tutorial1");
+                program = window.localStorage.getItem("cubo1");
           }
       Blockly.mainWorkspace.clear();
       var textToDom = Blockly.Xml.textToDom(program);
@@ -468,17 +468,17 @@
       var domToPretty = Blockly.Xml.domToPrettyText(xml);
       switch(currentpanel) {
           case 1:
-              window.localStorage.setItem("tutorial1", domToPretty);
+              window.localStorage.setItem("cubo1", domToPretty);
               break;
           case 2:
-              window.localStorage.setItem("tutorial2", domToPretty);
+              window.localStorage.setItem("cubo2", domToPretty);
               break;
           case 3:
-              window.localStorage.setItem("tutorial3", domToPretty);
+              window.localStorage.setItem("cubo3", domToPretty);
           case 4:
-              window.localStorage.setItem("tutorial4", domToPretty);
+              window.localStorage.setItem("cubo4", domToPretty);
           default:
-              window.localStorage.setItem("tutorial1", domToPretty);
+              window.localStorage.setItem("cubo1", domToPretty);
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
     }

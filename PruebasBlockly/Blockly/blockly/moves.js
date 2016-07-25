@@ -53,7 +53,7 @@
       this.poZ = z;
       this.poColor = color;
     }
-  //Funciones para dibujar
+//Funciones para dibujar
   var degreesToRadian = function (deg) {
      return deg * Math.PI / 180;
   };
@@ -669,17 +669,17 @@
     //objetos para las soluciones de los bloques de hardware
     //objeto para el led
     function ledObj(pin,turn){
-      Pin=pin;
-      Turn=turn;
-    };
+      this.Pin=pin;
+      this.Turn=turn;
+    }
     //objeto para el motor
     function motorObj(px,py,ns,dir,speed){
-        pX= px;
-        pY= py;
-        ns= ns;
-        dirr= dir;
-        speed= speed;
-      };
+        this.pX= px;
+        this.pY= py;
+        this.ns= ns;
+        this.dirr= dir;
+        this.speed= speed;
+      }
   //funcion para encender el led (verifica si el pin es correcto)
   function led(pin,turn){
     acabo=0;
@@ -728,6 +728,9 @@
 
     respuesta.push(new motorObj(Math.round10((positionObj.objX),2),Math.round10((positionObj.objY),2),nosteps,side,speed));
     acabo=0;  
+    alert(respuesta[0].ns)
+    alert(respuesta[0].dirr)
+    alert(respuesta[0].speed)
     var vel = 7/speed;
     i=0;
     interval= setInterval(function(){
