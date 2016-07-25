@@ -29,13 +29,6 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
-
         panel1();
 
       }
