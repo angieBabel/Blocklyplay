@@ -42,8 +42,8 @@
  <script type="text/javascript"></script>
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-<!-- para cargar las funciones de begin y esas cosas -->
-  <script src="scriptsturbine.js"></script> 
+  <!-- para cargar las funciones de begin y esas cosas -->
+    <script src="scriptsturbine.js"></script> 
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl" >
@@ -255,125 +255,142 @@
        </div>
       </md-content>
     </md-sidenav>
-<xml id="toolbox" style="display: none">
-  <category name="Control" colour="157">
-    <block type="wait"></block>
-    <block type="controls_repeat_ext">
-      <value name="TIMES">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+  <xml id="toolbox" style="display: none">
+    <category name="Control" colour="157">
+      <block type="wait"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Move" colour="175">
-    <block type="mover"></block>
-    <block type="mover_pintando"></block>
-    <block type="girar"></block>
-  </category>
+    <category name="Move" colour="175">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
 
-  <category name="Lights" colour="192">
-    <block type="blinker"></block>
-    <block type="lights"></block>
-  </category>
+    <category name="Lights" colour="192">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
 
-  <category name="Sounds" colour="247">
-    <block type="sonido"></block>
-  </category>
+    <category name="Sounds" colour="247">
+      <block type="sonido"></block>
+    </category>
 
-  <category name="Math" colour="24">
-    <block type="math_number" gap="32"></block>
-    <block type="math_arithmetic">
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Math" colour="24">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Text" colour="53">
-    <block type="text"></block>
-    <block type="text_isEmpty">
-      <value name="VALUE">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_print">
-      <value name="TEXT">
-        <shadow type="text">
-          <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="text_prompt_ext">
-      <value name="TEXT">
-        <shadow type="text">
-           <field name="TEXT">abc</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Text" colour="53">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <category name="Logic" colour="197">
-    <block type="controls_if"></block>
-    <block type="logic_compare"></block>
-    <block type="logic_operation"></block>
-    <block type="logic_negate"></block>
-    <block type="logic_boolean"></block>
-  </category>
+    <category name="Logic" colour="197">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
 
-  <category name="Colour" colour="37">
-    <block type="colour_picker"></block>
-    <block type="colour_random"></block>
-    <block type="colour_rgb">
-      <value name="RED">
-        <shadow type="math_number">
-          <field name="NUM">100</field>
-        </shadow>
-      </value>
-      <value name="GREEN">
-        <shadow type="math_number">
-          <field name="NUM">50</field>
-        </shadow>
-      </value>
-      <value name="BLUE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="colour_blend">
-      <value name="COLOUR1">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#ff0000</field>
-        </shadow>
-      </value>
-      <value name="COLOUR2">
-        <shadow type="colour_picker">
-          <field name="COLOUR">#3333ff</field>
-        </shadow>
-      </value>
-      <value name="RATIO">
-        <shadow type="math_number">
-          <field name="NUM">0.5</field>
-        </shadow>
-      </value>
-    </block>
-  </category>
+    <category name="Colour" colour="37">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
 
-  <sep></sep>
-  <category name="Variables" colour="355" custom="VARIABLE"></category>
-  <category name="Functions" colour="287" custom="PROCEDURE"></category>
-</xml>
+    <sep></sep>
+    <category name="Variables" colour="355" custom="VARIABLE"></category>
+    <category name="Functions" colour="287" custom="PROCEDURE"></category>
+  </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>
   <script type="text/javascript">
@@ -459,6 +476,7 @@
           }
     }
     function runCode() {
+      console.log('run code');
       //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
       parseCode();
       //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso

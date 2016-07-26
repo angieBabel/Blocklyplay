@@ -74,12 +74,14 @@
       function check1(){
         var coincidencias=0;
         //ciclo anidado que recorre y compara todos los elementos del vector solution, contra todos los del vector respuesta del niño
-        for (var i = 0; i < solution.length; i++) {
-          //alert(solution[i].Pin+','+respuesta[i].Pin +' turns'+ solution[i].Turn+','+respuesta[i].Turn)
-          if (solution[i].Pin==respuesta[i].Pin && solution[i].Turn==respuesta[i].Turn) {
-            coincidencias+=1;
-          };
-        }
+        if (solution.length==respuesta.length) {
+          for (var i = 0; i < solution.length; i++) {
+            //alert(solution[i].Pin+','+respuesta[i].Pin +' turns'+ solution[i].Turn+','+respuesta[i].Turn)
+            if (solution[i].Pin==respuesta[i].Pin && solution[i].Turn==respuesta[i].Turn) {
+              coincidencias+=1;
+            };
+          }
+        };
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
         if (coincidencias==solution.length) {
           var correct =document.getElementById('Correct').click()

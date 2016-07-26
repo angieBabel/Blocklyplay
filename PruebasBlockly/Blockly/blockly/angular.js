@@ -178,12 +178,42 @@
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('#popupContainer')))
               .clickOutsideToClose(true)
-              .title('Espera!')
+              .title('¡Espera!')
               .textContent('Debes de probar primero tu codigo')
               .ariaLabel('Entendido')
               .ok('Ok')
               .targetEvent(ev)
           )};
+        $scope.wrongString = function(ev) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('#popupContainer')))
+              .clickOutsideToClose(true)
+              .title('¡Ups! Hay un problema')
+              .textContent('Recuerda que tu mensaje no debe tener mas de 32 caracteres')
+              .ariaLabel('Mensaje mas corto')
+              .ok('Ok')
+              .targetEvent(ev)
+          ).then(function() {
+              myInterpreter=null;
+              acabo==0;
+              loadCode();
+              switch(currentpanel) {
+                      case 1:
+                          begin1();
+                          break;
+                      case 2:
+                          begin2();
+                          break;
+                      case 3:
+                          begin3();
+                      case 4:
+                          begin4();
+                      default:
+                          begin1();
+                    }
+            }
+        )};
         $scope.showTabDialog = function(ev) { 
             $mdDialog.show({
               controller: DialogController,

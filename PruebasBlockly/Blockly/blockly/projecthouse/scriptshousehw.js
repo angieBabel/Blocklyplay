@@ -6,7 +6,8 @@
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
       function begin1(){
-        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+        screentext.splice(0,screentext.length);//inicializa los vectores
+        screencolor='#009900';
         solution.splice(0,solution.length);//inicializa los vectores
         canvas = document.getElementById('canvas1');
         ctx = canvas.getContext('2d');
@@ -29,13 +30,8 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
-
+        answer="Type message here"
+        solution=answer.toString().split("")
         panel1();
 
       }
@@ -64,7 +60,6 @@
         imgback.src = "../media/PantallaV2.png";
       }
       //Drawing avatar
-      screencolor='green';
       function Avatar1(){
         ctx.fillStyle = screencolor;
         ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
@@ -89,31 +84,12 @@
       }
 
       function check1(){
-        var verific=0;
-        for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
-            if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
-              verific=verific+1;
-            }
-          }
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-            }
-          }
-        }
-        if(verific===6){
+        if(screentext.toString()!=solution.toString()){
           var correct =document.getElementById('Correct').click()
           //alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
         }else{
           var wrong =document.getElementById('Wrong').click()
           //alert('Esta vez no lo conseguiste, intenta de nuevo');
-          location.reload();
         }
       }
