@@ -42,8 +42,8 @@
  <script type="text/javascript"></script>
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-<!-- para cargar las funciones de begin y esas cosas -->
-  <script src="scriptsturbine.js"></script> 
+  <!-- para cargar las funciones de begin y esas cosas -->
+    <script src="scriptsturbine.js"></script> 
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl" >
@@ -265,6 +265,23 @@
           </shadow>
         </value>
       </block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
     </category>
 
     <category name="Move" colour="175">
@@ -454,10 +471,7 @@
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
     //funcion de nextep migradas al control functions.js
     function finish(){
-      console.log('finish');
       if(acabo==1){
-        console.log('finish con 1');
-        //console.log('entro al finish con el acabo en 1')
             nextStep();
           }
     }

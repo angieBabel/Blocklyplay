@@ -173,8 +173,8 @@ function parseCode(){
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
-  /*console.log('next step');
-  if (myInterpreter.step()) {
+  console.log('next step');
+  /*if (myInterpreter.step()) {
     console.log('si hay pasos');
   };*/
       if (!myInterpreter.step()) {
@@ -226,7 +226,7 @@ function saveXML(){
 }
 //funcion para detener
 function stop(){
-    acabo==1;
+    acabo=1;
     codeHW=null;
     code=null;
     stopTimer();
