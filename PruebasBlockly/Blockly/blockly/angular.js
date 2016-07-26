@@ -184,7 +184,7 @@
               .ok('Ok')
               .targetEvent(ev)
           )};
-          $scope.wrongString = function(ev) {
+        $scope.wrongString = function(ev) {
           $mdDialog.show(
             $mdDialog.alert()
               .parent(angular.element(document.querySelector('#popupContainer')))
@@ -197,6 +197,7 @@
           ).then(function() {
               myInterpreter=null;
               acabo==0;
+              loadCode();
               switch(currentpanel) {
                       case 1:
                           begin1();
@@ -212,7 +213,7 @@
                           begin1();
                     }
             }
-          )};
+        )};
 
         $scope.showTabDialog = function(ev) { 
             $mdDialog.show({

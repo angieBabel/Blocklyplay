@@ -6,7 +6,6 @@
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
       function begin1(){
-
         screentext.splice(0,screentext.length);//inicializa los vectores
         screencolor='#009900';
         solution.splice(0,solution.length);//inicializa los vectores
@@ -85,7 +84,11 @@
       }
 
       function check1(){
-        if(screentext!=solution){
+/*        for (var i = solution.length - 1; i >= 0; i--) {
+          alert(solution[i]+', '+screentext[i])
+        };
+        alert(screentext.toString()==solution.toString())*/
+        if(screentext.toString()!=solution.toString()){
           var correct =document.getElementById('Correct').click()
           //alert('Felicidades, haz completado correctamente el puzzle');
           roadpaint.splice(0,roadpaint.length);
