@@ -167,12 +167,12 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/semaforohw2.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
           <div>
-            <strong>Dibuja el área de una casa</strong>
+            <strong>¡Hagamos un semaforo!</strong>
           </div>
           <div layout="row" layout-align="start center">
             <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
@@ -194,7 +194,7 @@
        <!-- instrucciones -->
        <div layout="column"   layout-align="center center">
           <div>
-            <p>¡Seguimos con las secuencias! Para este ejercicio, desplaza el carrito por la carretera y haz una parada de 3 segundos en cada semáforo. Los bloques de movimiento ya los conoces, para hacer una parada utiliza el bloque Wait que se encuentra en la categoría de Control.</p>
+            <p>¡Ahora haremos una secuencia con LEDs! Como ya sabes, es posible controlar diferentes LEDs a traves de sus pines, en este ejercicio debes simular un semaforo, en pantalla tienes 3 LEDs, uno verde conectado al PIN D4, uno amarillo conectado al PIN D3 y uno rojo conectado al PIN D5, con el bloque LED haz una secuencia que encienda primero el LED verde, luego el amarillo y finalmente el rojo, igual a un semaforo, recuerda que no puede haber mas de un LED encendido. No olvides anadir algunos bloques wait para mejorar la visualizacion de tu codigo.</p>
           </div>
           <div>
             <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
