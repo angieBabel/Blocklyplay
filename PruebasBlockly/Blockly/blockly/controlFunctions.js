@@ -155,8 +155,8 @@ function showCode() {
 
 var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
-    myInterpreter=null;
-    //Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    /*window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';*/
     //permite que funcione el resaltar bloque
     codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
@@ -170,11 +170,13 @@ function parseCode(){
     //se habilita la funcion para rastrear el workspace
     workspace.traceOn(true);
     workspace.highlightBlock(null);
-    
-    //alert(myInterpreter.getValue());
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
+  /*console.log('next step');
+  if (myInterpreter.step()) {
+    console.log('si hay pasos');
+  };*/
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
         clearInterval(intervalo);
@@ -224,12 +226,12 @@ function saveXML(){
 }
 //funcion para detener
 function stop(){
-    acabo==0;
+    acabo==1;
     codeHW=null;
     code=null;
     stopTimer();
-    clearInterval(intervalo);
     myInterpreter=null;
+    clearInterval(intervalo);
     switch(currentpanel) {
             case 1:
                 begin1();

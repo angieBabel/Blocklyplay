@@ -454,12 +454,15 @@
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
     //funcion de nextep migradas al control functions.js
     function finish(){
+      console.log('finish');
       if(acabo==1){
-        console.log('entro al finish con el acabo en 1')
+        console.log('finish con 1');
+        //console.log('entro al finish con el acabo en 1')
             nextStep();
           }
     }
     function runCode() {
+      console.log('run code');
       //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
       parseCode();
       //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
