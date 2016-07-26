@@ -155,6 +155,7 @@ function showCode() {
 
 var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
+    myInterpreter=null;
     //Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
     //permite que funcione el resaltar bloque
     codeHW = Blockly.JavaScript.workspaceToCode(workspace);
@@ -169,19 +170,15 @@ function parseCode(){
     //se habilita la funcion para rastrear el workspace
     workspace.traceOn(true);
     workspace.highlightBlock(null);
+    
+    //alert(myInterpreter.getValue());
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
-      if (highlightPause) {
-        // A block has been highlighted.  Pause execution here.
-        highlightPause = false;
-      } else {
-        // Keep executing until a highlight statement is reached.
-        /*stepCode();*/
-      }
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
         clearInterval(intervalo);
+        myInterpreter=null;
         switch(currentpanel) {
           case 1:
               check1();
@@ -230,7 +227,7 @@ function stop(){
     acabo==0;
     codeHW=null;
     code=null;
-    clearInterval(interval);
+    stopTimer();
     clearInterval(intervalo);
     myInterpreter=null;
     switch(currentpanel) {

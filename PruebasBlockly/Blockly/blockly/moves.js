@@ -14,6 +14,7 @@
     var initX=0,initY=0;
     //intervalo de tiempo de cada paso
     var interval;
+    var intervalo;
     //Variable para asegurarnos que ya termino de realizar nuestras funciones personalizadas
     var acabo=1;
     //Tamaño de ancho y alto del avatar
@@ -30,8 +31,6 @@
     var respuesta=[]; 
     //variables para saber si las luces estan encendidas, y de que lado debe prender, propias para el ejercicio 2
     var luz=0,luzTrasera=0,lightside;
-
-   
 
     //las posiciones del objeto, en X, Y y el Z representa el angulo hacia el que está mirando
     var positionObj = {

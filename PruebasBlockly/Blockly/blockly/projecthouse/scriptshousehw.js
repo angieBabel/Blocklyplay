@@ -84,10 +84,6 @@
       }
 
       function check1(){
-/*        for (var i = solution.length - 1; i >= 0; i--) {
-          alert(solution[i]+', '+screentext[i])
-        };
-        alert(screentext.toString()==solution.toString())*/
         if(screentext.toString()!=solution.toString()){
           var correct =document.getElementById('Correct').click()
           //alert('Felicidades, haz completado correctamente el puzzle');

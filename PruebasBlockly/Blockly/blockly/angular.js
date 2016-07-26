@@ -214,7 +214,6 @@
                     }
             }
         )};
-
         $scope.showTabDialog = function(ev) { 
             $mdDialog.show({
               controller: DialogController,

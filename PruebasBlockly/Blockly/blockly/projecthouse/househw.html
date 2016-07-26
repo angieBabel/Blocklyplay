@@ -533,7 +533,7 @@
     onresize();
     //para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
     function loadCode(){
-      var program;
+      var program=null;
       switch(currentpanel) {
             case 1:
                 program = window.localStorage.getItem("househw1");
