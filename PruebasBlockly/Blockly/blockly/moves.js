@@ -704,25 +704,29 @@
 
   //funcion para escribir texto
   function pantalla(text,color){
+    acabo=0;
     screentext=text.toString().split("")
     screencolor=color.toString();
-    switch(currentpanel) {
-      case 1:
-          Avatar1();
-          break;
-      case 2:
-          Avatar2();
-          break;
-      case 3:
-          Avatar3();
-      case 4:
-          Avatar4();
-      default:
-          Avatar1();
-    }
-
+    if (screentext.length<=32) {
+      switch(currentpanel) {
+        case 1:
+            Avatar1();
+            break;
+        case 2:
+            Avatar2();
+            break;
+        case 3:
+            Avatar3();
+        case 4:
+            Avatar4();
+        default:
+            Avatar1();
+      }
+    }else{
+      var wrongString =document.getElementById('StrError').click()
+      /*var myInterpreter=null;*/
+    } 
   }
-
   //funcion para rotar el motor (hacer girar una imagen)
   function motor(nosteps,side,speed){
 

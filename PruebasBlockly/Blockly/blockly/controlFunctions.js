@@ -2,9 +2,6 @@
 function stopTimer(){
     clearInterval(interval);
 }
-function stopwaitTimer(){
-  
-}
 //Funciones para que las reconozca el interprete
 var myInterpreter=null;
 function initAlert(interpreter, scope) {
@@ -162,7 +159,7 @@ function parseCode(){
     //permite que funcione el resaltar bloque
     codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    Blockly.JavaScript.addReservedWords('highlightBlock');
+    //Blockly.JavaScript.addReservedWords('highlightBlock');
     //lee lo que hay en el workspaces y lo guarda como codigo
     var code = Blockly.JavaScript.workspaceToCode(workspace);
     //se crea un interprete con el codigo obtenido
@@ -231,6 +228,8 @@ function saveXML(){
 //funcion para detener
 function stop(){
     acabo==0;
+    codeHW=null;
+    code=null;
     clearInterval(interval);
     clearInterval(intervalo);
     myInterpreter=null;
@@ -309,6 +308,7 @@ function pasoHW(){
     codeHW = codeHW.replace(/[']/gi, "");
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
+    codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
     //alert(codeHW);
     socket.emit('changefunction',codeHW);
   }else{
