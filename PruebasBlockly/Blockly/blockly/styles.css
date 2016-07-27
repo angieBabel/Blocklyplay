@@ -1,3 +1,6 @@
+html,body{
+	height:100%;
+}
 canvas {
   background: #fff;
   height: 91.5%;
@@ -12,6 +15,12 @@ canvas {
   color: #26C6DA; 
 }
 
+#divCanvas{
+	position :  relative ;
+	 top :  -10vh ;
+	 z-index :  4 ; 
+	 height :  85vh;
+}
  .md-dialog-content .md-active {
 	color: #26C6DA; 
 }

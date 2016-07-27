@@ -91,9 +91,9 @@
       <!-- container donde ira el canvas -->
       <div flex="60">
         <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
+        <md-card id="divCanvas">
           <!-- tabs que contienen los canvas -->
-          <md-content id="divCanvas">
+          <md-content >
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
               <md-tab label="nivel1" md-active="nivel1A" ng-disabled="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
