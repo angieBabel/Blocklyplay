@@ -1,5 +1,7 @@
 //inicialización de las variables
     
+    var puntaje=[0,0,0,0]; //para saber cuantas veces ha hecho los ejercicios
+    
     var currentpanel=0;//para saber en que panel esta
     var img= new Image();//variable de imagen del avatar
     //coordenadas donde comienza el avatar
