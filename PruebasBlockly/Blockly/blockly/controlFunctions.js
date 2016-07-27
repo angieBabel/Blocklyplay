@@ -155,6 +155,7 @@ function showCode() {
 
 var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
+    puntaje[currentpanel-1]+=1;
     /*window.LoopTrap = 1000;
     Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';*/
     //permite que funcione el resaltar bloque
@@ -226,6 +227,7 @@ function saveXML(){
 }
 //funcion para detener
 function stop(){
+    count=0;//contador para el de painting
     acabo=1;
     codeHW=null;
     code=null;
@@ -286,7 +288,6 @@ function loadXML() {
   var reader = new FileReader();
   reader.onload = function(event) {
       var contents = event.target.result;//se almacena el resultado en una variable llamada content
-      console.log("File contents: " + contents);
       Blockly.mainWorkspace.clear();//se limpia el workspace para cargar el nuevo XML
       var textToDom = Blockly.Xml.textToDom(contents);//se carga el resultado de la lectura del archivo y se pasa como parametro a la funcion textToDom para que se almacene en el DOM
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);//se convierte el Dom a workspace
