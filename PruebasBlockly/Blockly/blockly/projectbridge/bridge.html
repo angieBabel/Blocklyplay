@@ -91,19 +91,19 @@
           <div id="blocklyDiv" style="position: absolute"></div>
       </div>
       <!-- container donde ira el canvas -->
-      <div flex="60">
+       <div flex="60">
         <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card  ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
+        <md-card  id="divCanvas">
           <!-- tabs que contienen los canvas -->
-          <md-content id="divCanvas">
+          <md-content>
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-active="nivel1A" ng-disabled="nivel1"  md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2"  md-active="nivel2A" ng-disabled="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3"  md-active="nivel3A" ng-disabled="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -114,7 +114,7 @@
               <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
-              <md-button class="md-icon-button" aria-label="More" onclick="stop()">
+              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
                 <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
               </md-button>
               <md-menu>
