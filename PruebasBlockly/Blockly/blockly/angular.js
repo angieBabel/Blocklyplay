@@ -196,7 +196,7 @@
               .targetEvent(ev)
           ).then(function() {
               myInterpreter=null;
-              acabo==0;
+              acabo=1;
               loadCode();
               switch(currentpanel) {
                       case 1:
