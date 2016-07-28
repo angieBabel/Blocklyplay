@@ -68,7 +68,6 @@
             ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
           }
           ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
-          acabo=1;
       }
 
       function check1(){
