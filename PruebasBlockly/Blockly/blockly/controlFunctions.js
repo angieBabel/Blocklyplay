@@ -311,10 +311,9 @@ function pasoHW(){
       // handle server error here
       alert('Verifica la conexion de tu tarjeta Edison')
     });
-
-    /*socket.on('error', function(err) {
-      console.log("Error: " + err);
-    });*/
+    socket.on('connect', function() {
+      alert('Se conecto')
+    });
     //alert(codeHW);
     //socket.emit('changefunction',codeHW);
   }else{

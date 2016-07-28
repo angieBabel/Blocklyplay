@@ -110,7 +110,7 @@
           <!-- div con los botones de accion -->
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
             <div ng-style="{'position': 'absolute','left':'70%'}">
-              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
               <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
