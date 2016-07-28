@@ -174,10 +174,6 @@ function parseCode(){
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
-  console.log('next step');
-  /*if (myInterpreter.step()) {
-    console.log('si hay pasos');
-  };*/
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
         clearInterval(intervalo);
@@ -309,8 +305,18 @@ function pasoHW(){
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
+
+    //console.log('check 1', socket.connected);
+    if (socket.connected) {
+      alert('aqui iria el emmit')
+    }else{
+      alert('conexion no alcanzada')
+    }
+    /*socket.on('error', function(err) {
+      console.log("Error: " + err);
+    });*/
     //alert(codeHW);
-    socket.emit('changefunction',codeHW);
+    //socket.emit('changefunction',codeHW);
   }else{
     var correct =document.getElementById('HWError').click()
   };

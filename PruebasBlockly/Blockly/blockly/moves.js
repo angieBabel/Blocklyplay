@@ -732,10 +732,7 @@
   function motor(nosteps,side,speed){
 
     respuesta.push(new motorObj(Math.round10((positionObj.objX),2),Math.round10((positionObj.objY),2),nosteps,side,speed));
-    acabo=0;  
-    alert(respuesta[0].ns)
-    alert(respuesta[0].dirr)
-    alert(respuesta[0].speed)
+    acabo=0;
     var vel = 7/speed;
     i=0;
     interval= setInterval(function(){
