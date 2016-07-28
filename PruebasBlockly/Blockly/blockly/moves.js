@@ -690,12 +690,15 @@
     switch(currentpanel) {
       case 1:
           Avatar1();
+          acabo=1;
           break;
       case 2:
           Avatar2();
+          acabo=1;
           break;
       case 3:
           Avatar3();
+          acabo=1;
       case 4:
           Avatar4();
       default:
@@ -708,21 +711,33 @@
     acabo=0;
     screentext=text.toString().split("")
     screencolor=color.toString();
+    
     if (screentext.length<=32) {
       switch(currentpanel) {
         case 1:
             Avatar1();
+            /*acabo=1;*/
             break;
         case 2:
             Avatar2();
+            /*acabo=1;*/
             break;
         case 3:
             Avatar3();
+            /*acabo=1;*/
         case 4:
             Avatar4();
         default:
             Avatar1();
       }
+      for (var i = 0; i < screentext.length; i++) {
+        if (i<16) {
+          ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
+        }else{
+          ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
+        }
+      };
+      acabo=1;
     }else{
       var wrongString =document.getElementById('StrError').click()
       /*var myInterpreter=null;*/

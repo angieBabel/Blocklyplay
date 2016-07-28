@@ -66,7 +66,7 @@
         ctx.font = "40px Arial";
         ctx.fillStyle = "black";
         //ctx.textAlign = "right";
-        i=0;
+        /*i=0;
         if (screentext.length!=0) {
           interval = setInterval(function(){
             if (i<16) {
@@ -80,7 +80,7 @@
               acabo=1;
             }
           },200);
-        };
+        };*/
       }
 
       function check1(){

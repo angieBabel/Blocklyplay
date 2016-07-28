@@ -98,15 +98,12 @@
               };
         led1.onload = function() {
             ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
-            acabo=1;
           }
         led2.onload = function() {
             ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
-            acabo=1;
           }
         led3.onload = function() {
             ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
-            acabo=1;
           }
           ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
           ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
