@@ -33,7 +33,7 @@
     //la funcion de stopTimer se paso al archivo de controlFunctions.js
     function panel1(){
       var imgback = new Image();
-              imgback.src = "../media/airplane.jpg";
+              imgback.src = "media/airplane.jpg";
        imgback.onload = function() {
         ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
           while(initX<canvas.width-stepsizeX){
@@ -65,7 +65,7 @@
         ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
         ctx.restore();
       }
-      img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
+      img.src = 'media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
     }  
     //Compara si las paradas que hizo el niño estuvieron bien
       function check1(){
