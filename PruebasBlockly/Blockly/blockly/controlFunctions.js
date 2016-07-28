@@ -159,7 +159,6 @@ function parseCode(){
     /*window.LoopTrap = 1000;
     Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';*/
     //permite que funcione el resaltar bloque
-    codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     //Blockly.JavaScript.addReservedWords('highlightBlock');
     //lee lo que hay en el workspaces y lo guarda como codigo
@@ -176,6 +175,7 @@ function parseCode(){
 function nextStep() {
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
+        codeHW = Blockly.JavaScript.workspaceToCode(workspace);
         clearInterval(intervalo);
         myInterpreter=null;
         switch(currentpanel) {
@@ -307,11 +307,11 @@ function pasoHW(){
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
 
     //console.log('check 1', socket.connected);
-    if (socket.connected) {
-      alert('aqui iria el emmit')
-    }else{
-      alert('conexion no alcanzada')
-    }
+    socket.io.on('connect_error', function(err) {
+      // handle server error here
+      alert('Verifica la conexion de tu tarjeta Edison')
+    });
+
     /*socket.on('error', function(err) {
       console.log("Error: " + err);
     });*/
