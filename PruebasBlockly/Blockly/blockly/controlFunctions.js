@@ -156,6 +156,7 @@ function showCode() {
 var codeHW; //variable para enviar el codigo limpio al hardware
 function parseCode(){
     puntaje[currentpanel-1]+=1;
+    codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     /*window.LoopTrap = 1000;
     Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';*/
     //permite que funcione el resaltar bloque
@@ -175,7 +176,6 @@ function parseCode(){
 function nextStep() {
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
-        codeHW = Blockly.JavaScript.workspaceToCode(workspace);
         clearInterval(intervalo);
         myInterpreter=null;
         switch(currentpanel) {
