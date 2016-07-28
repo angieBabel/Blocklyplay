@@ -196,6 +196,17 @@
               .ok('Ok')
               .targetEvent(ev)
           )};
+        $scope.connectionError = function(ev) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('#popupContainer')))
+              .clickOutsideToClose(true)
+              .title('Hubo un problema!')
+              .textContent('Verifica la conexion de tu tarjeta Edison')
+              .ariaLabel('Entendido')
+              .ok('Ok')
+              .targetEvent(ev)
+          )};
         $scope.wrongString = function(ev) {
           $mdDialog.show(
             $mdDialog.alert()

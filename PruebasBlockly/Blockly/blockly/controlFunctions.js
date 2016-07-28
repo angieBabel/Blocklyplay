@@ -306,16 +306,14 @@ function pasoHW(){
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
 
-    //console.log('check 1', socket.connected);
     socket.io.on('connect_error', function(err) {
-      // handle server error here
-      alert('Verifica la conexion de tu tarjeta Edison')
+      socket.destroy();
+      var HWConnection =document.getElementById('HWConnect').click()
     });
     socket.on('connect', function() {
-      alert('Se conecto')
+      //alert('entro al emit')
+      socket.emit('changefunction',codeHW);
     });
-    //alert(codeHW);
-    //socket.emit('changefunction',codeHW);
   }else{
     var correct =document.getElementById('HWError').click()
   };
