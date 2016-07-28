@@ -9,6 +9,8 @@
         $scope.nivel2= true;
         $scope.nivel3= true;
         $scope.nivel4= true;
+        $scope.isHW= false;
+        
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -59,6 +61,9 @@
               }
           });
         };
+        $scope.isHWF = function() {
+          $scope.isHW= true;
+        };
         $scope.showCorrect = function(ev) {
            $mdDialog.show({
               clickOutsideToClose: true,
@@ -81,6 +86,9 @@
                       '<md-dialog-actions layout="row">'+
                         '<md-button ng-click="cancelar()">'+
                           'Cancelar'+
+                        '</md-button>'+
+                        '<md-button ng-click="sendHW()" ng-show="isHW">'+
+                          'Enviar a hardware'+
                         '</md-button>'+
                         '<md-button ng-click="publicar()" md-autofocus>'+
                           'Publicar'+
@@ -135,6 +143,10 @@
                   }
                    $mdDialog.hide();
                 };
+                $scope.sendHW = function(){
+                  pasoHW();
+                  $mdDialog.hide();
+                }
               }
            });
         };
@@ -180,6 +192,17 @@
               .clickOutsideToClose(true)
               .title('¡Espera!')
               .textContent('Debes de probar primero tu codigo')
+              .ariaLabel('Entendido')
+              .ok('Ok')
+              .targetEvent(ev)
+          )};
+        $scope.connectionError = function(ev) {
+          $mdDialog.show(
+            $mdDialog.alert()
+              .parent(angular.element(document.querySelector('#popupContainer')))
+              .clickOutsideToClose(true)
+              .title('Hubo un problema!')
+              .textContent('Verifica la conexion de tu tarjeta Edison')
               .ariaLabel('Entendido')
               .ok('Ok')
               .targetEvent(ev)

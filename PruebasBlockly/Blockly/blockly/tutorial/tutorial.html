@@ -16,8 +16,6 @@
   <!-- lo que blockly necesita -->
   <!-- interprete de JS -->
   <script src="../acorn_interpreter.js"></script>
-  <script src="../acorn.js"></script>
-  <script src="../interpreter.js"></script>
   <!-- <script src="..//storage.js"></script> -->
   <script src="../blockly_compressed.js"></script>
   <script src="../blocks_compressed.js"></script>
@@ -95,15 +93,15 @@
         <!-- tarjeta donde esta el canvas y los botones de accion -->
         <md-card  id="divCanvas" ng-style="{'position': 'relative','top': '-5vw','z-index': '4', 'height': '85%'}">
           <!-- tabs que contienen los canvas -->
-          <md-content id="divCanvas">
+          <md-content>
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" md-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" md-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" md-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -111,7 +109,7 @@
           <!-- div con los botones de accion -->
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
             <div ng-style="{'position': 'absolute','left':'70%'}">
-              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
               <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">

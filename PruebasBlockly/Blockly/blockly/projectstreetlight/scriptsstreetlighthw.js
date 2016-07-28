@@ -12,7 +12,7 @@
       //la variable de positionObj se paso a moves.js
       //el objeto de solutionObj se paso a moves.js
       function begin1(){
-        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+        respuesta.splice(0,respuesta.length);//inicializa los vectores
         solution.splice(0,solution.length);//inicializa los vectores
         canvas = document.getElementById('canvas1');
         ctx = canvas.getContext('2d');
@@ -34,6 +34,7 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
+        pinled=0;
 
         solution.push(new ledObj(4,'On'));
         solution.push(new ledObj(4,'Off'));

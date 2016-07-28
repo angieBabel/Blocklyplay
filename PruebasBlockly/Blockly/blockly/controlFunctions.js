@@ -159,7 +159,6 @@ function parseCode(){
     /*window.LoopTrap = 1000;
     Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if(--window.LoopTrap == 0) throw "Infinite loop.";\n';*/
     //permite que funcione el resaltar bloque
-    codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
     //Blockly.JavaScript.addReservedWords('highlightBlock');
     //lee lo que hay en el workspaces y lo guarda como codigo
@@ -174,12 +173,9 @@ function parseCode(){
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
-  console.log('next step');
-  /*if (myInterpreter.step()) {
-    console.log('si hay pasos');
-  };*/
       if (!myInterpreter.step()) {
         /*window.setTimeout(finish, 15);*/
+        codeHW = Blockly.JavaScript.workspaceToCode(workspace);
         clearInterval(intervalo);
         myInterpreter=null;
         switch(currentpanel) {
@@ -309,8 +305,15 @@ function pasoHW(){
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
-    //alert(codeHW);
-    socket.emit('changefunction',codeHW);
+
+    socket.io.on('connect_error', function(err) {
+      socket.destroy();
+      var HWConnection =document.getElementById('HWConnect').click()
+    });
+    socket.on('connect', function() {
+      //alert('entro al emit')
+      socket.emit('changefunction',codeHW);
+    });
   }else{
     var correct =document.getElementById('HWError').click()
   };

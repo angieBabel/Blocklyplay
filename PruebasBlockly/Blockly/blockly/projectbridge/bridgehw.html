@@ -17,8 +17,6 @@
   <!-- lo que blockly necesita -->
   <!-- interprete de JS -->
   <script src="../acorn_interpreter.js"></script>
-  <script src="../acorn.js"></script>
-  <script src="../interpreter.js"></script>
   <!-- <script src="..//storage.js"></script> -->
   <script src="../blockly_compressed.js"></script>
   <script src="../blocks_compressed.js"></script>
@@ -98,13 +96,13 @@
           <!-- tabs que contienen los canvas -->
           <md-content >
             <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
-              <md-tab label="nivel1" md-active="nivel1A" ng-disabled="nivel1" md-on-select="canvas1();" ng-click="toggle();"> 
+              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
-              <md-tab label="nivel2" md-active="nivel2A" ng-disabled="nivel2" md-on-select="canvas2();" ng-click="toggle();">
+              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
                 <canvas id="canvas2"></canvas>
               </md-tab>
-              <md-tab label="nivel3" md-active="nivel3A" ng-disabled="nivel3" md-on-select="canvas3();" ng-click="toggle();">
+              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
                 <canvas id="canvas3"></canvas>
               </md-tab>
             </md-tabs>
@@ -112,7 +110,7 @@
           <!-- div con los botones de accion -->
           <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
             <div ng-style="{'position': 'absolute','left':'70%'}">
-              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
               <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
@@ -149,7 +147,8 @@
      <div ng-style="{'display':'none'}">
       <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
       <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button>
-      <md-button ng-click="hardwareError($event)" id="HWError">Hardwaee error</md-button> 
+      <md-button ng-click="hardwareError($event)" id="HWError">Hardwaee error</md-button>
+      <md-button ng-click="connectionError($event)" id="HWConnect">Error de conexion</md-button>
      </div>
     <!-- side nav de instrucciones de nivel 1-->
     <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
