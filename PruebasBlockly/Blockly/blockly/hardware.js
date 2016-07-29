@@ -69,18 +69,5 @@
     }  
     //Compara si las paradas que hizo el niño estuvieron bien
       function check1(){
-        var coincidencias=0;
-        //ciclo anidado que recorre y compara todos los elementos del vector solucion, contra todos los del vector respuesta del niño
-        for (var i = 0; i < solucion.length; i++) {
-          if (solucion[i].pX==respuesta[i].pX && solucion[i].pY==respuesta[i].pY && solucion[i].ns==respuesta[i].ns && solucion[i].dirr==respuesta[i].dirr && solucion[i].speed==respuesta[i].speed) {
-            coincidencias+=1;
-          };
-        }
-        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-        if (coincidencias==solucion.length) {
-          var correct =document.getElementById('Correct').click()
-        }else{
-         var wrong =document.getElementById('Wrong').click()
-          location.reload();
-        }
+        alert('Termino la ejecucion del codigo')
       }
