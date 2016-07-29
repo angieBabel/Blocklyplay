@@ -302,25 +302,20 @@ function pasoHW(){
   if (codeHW!=null) {
 
     var socket = null;
-    socket = io.connect('http://edison.local:3000');
+    socket = io.connect('http://edison.local:3000',{'forceNew':true });
     socket.connect();
     //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     codeHW = codeHW.replace(/[']/gi, "");
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
-    if (firstTIME==1) {
-      if (socket.connected) {
-        socket.emit('changefunction',codeHW);
-        //alert('aqui iria el emit')
-      }else{
-        var HWConnection =document.getElementById('HWConnect').click()
-      }
-    };
+    
+
     socket.io.on('connect_error', function(err) {
       firstTIME=1;
-      var HWConnection =document.getElementById('HWConnect').click()
-      socket.close()
+      alert('error')
+      //var HWConnection =document.getElementById('HWConnect').click()
+      socket.disconnect()
     });
     //socket.emit('changefunction',codeHW);
     socket.on('connect', function() {
