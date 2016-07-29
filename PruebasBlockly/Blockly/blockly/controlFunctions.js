@@ -297,7 +297,9 @@ function loadXML() {
 }
 //para enviar el codigo al hardware
 function pasoHW(){
+
   if (codeHW!=null) {
+
     var socket = null;
     socket = io.connect('http://edison.local:3000');
     //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
@@ -307,13 +309,15 @@ function pasoHW(){
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
 
     socket.io.on('connect_error', function(err) {
-      socket.destroy();
       var HWConnection =document.getElementById('HWConnect').click()
+      //socket.destroy();
     });
-    socket.on('connect', function() {
+    socket.emit('changefunction',codeHW);
+    /*socket.on('connect', function() {
       //alert('entro al emit')
-      socket.emit('changefunction',codeHW);
-    });
+      alert('aqui es el emit')
+      //
+    });*/
   }else{
     var correct =document.getElementById('HWError').click()
   };
