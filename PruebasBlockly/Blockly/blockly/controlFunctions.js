@@ -296,6 +296,7 @@ function loadXML() {
   reader.readAsText(control.files[0]);
 }
 //para enviar el codigo al hardware
+firstTIME=0;
 function pasoHW(){
 
   if (codeHW!=null) {
@@ -307,17 +308,33 @@ function pasoHW(){
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
+    if (firstTIME==1) {
+      if (socket.connected) {
+        //socket.emit('changefunction',codeHW);
+        alert('aqui iria el emit')
+      }else{
+        var HWConnection =document.getElementById('HWConnect').click()
+      }
+    };
+   socket.on('error', function (err) {
+        alert(err);
+    });
 
     socket.io.on('connect_error', function(err) {
+      firstTIME=1;
       var HWConnection =document.getElementById('HWConnect').click()
-      //socket.destroy();
+      socket.close()
     });
-    socket.emit('changefunction',codeHW);
-    /*socket.on('connect', function() {
-      //alert('entro al emit')
-      alert('aqui es el emit')
+    //socket.emit('changefunction',codeHW);
+    socket.on('connect', function() {
+      firstTIME=1;
+      //socket.emit('changefunction',codeHW);
+      alert('entro al emit')
+      //alert('aqui es el emit')
+      //alert(socket.connected);
       //
-    });*/
+    });
+
   }else{
     var correct =document.getElementById('HWError').click()
   };
