@@ -303,6 +303,7 @@ function pasoHW(){
 
     var socket = null;
     socket = io.connect('http://edison.local:3000');
+    socket.connect();
     //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     codeHW = codeHW.replace(/[']/gi, "");
     codeHW = codeHW.replace(/\n{2,}/,"\n");
