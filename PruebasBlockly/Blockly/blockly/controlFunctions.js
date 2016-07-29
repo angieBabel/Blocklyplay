@@ -310,16 +310,12 @@ function pasoHW(){
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
     if (firstTIME==1) {
       if (socket.connected) {
-        //socket.emit('changefunction',codeHW);
-        alert('aqui iria el emit')
+        socket.emit('changefunction',codeHW);
+        //alert('aqui iria el emit')
       }else{
         var HWConnection =document.getElementById('HWConnect').click()
       }
     };
-   socket.on('error', function (err) {
-        alert(err);
-    });
-
     socket.io.on('connect_error', function(err) {
       firstTIME=1;
       var HWConnection =document.getElementById('HWConnect').click()
@@ -328,8 +324,8 @@ function pasoHW(){
     //socket.emit('changefunction',codeHW);
     socket.on('connect', function() {
       firstTIME=1;
-      //socket.emit('changefunction',codeHW);
-      alert('entro al emit')
+      socket.emit('changefunction',codeHW);
+      //alert('entro al emit')
       //alert('aqui es el emit')
       //alert(socket.connected);
       //
