@@ -1,5 +1,5 @@
  angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope, $mdSidenav,$mdDialog) {
+      .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
           $mdSidenav('Instrucciones1')
@@ -10,23 +10,44 @@
         $scope.nivel3= true;
         $scope.nivel4= true;
         $scope.isHW= false;
-        
+        $scope.GetXML = function () {
+            $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
+            success(function(data) {
+                  $scope.greeting = data;
+                  console.log(data);
+                 /* {{greeting[0].projects.name}}*/
+                 //alert(data[0].projects.description)
+                  program=data[0].projects.name;//data[0].projects.description;
+                  loadCode();
+                  //alert(program);
+              })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });
+        };
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
-          loadCode();
+          $scope.GetXML();
+          //loadCode();
         }
         $scope.canvas2 = function() {         
           currentpanel=2;
-          loadCode();
+          $scope.GetXML();
+          //loadCode();
         }
         $scope.canvas3 = function() {         
           currentpanel=3;
-          loadCode();
+          $scope.GetXML();
+          //loadCode();
         }
         $scope.canvas4 = function() {          
           currentpanel=4;
-          loadCode();
+          $scope.GetXML();
+          //loadCode();
         }
         var originatorEv;
         $scope.openMenu = function($mdOpenMenu, ev) {
@@ -307,3 +328,21 @@
           $mdDialog.cancel();
         };
       }
+      /*$scope.showData = function(ev){
+          $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
+              success(function(data) {
+                  $scope.project = data;
+              });
+        }
+*/
+       /*ng-controller="Hello"
+            <p>The ID is {{project.id}}</p>
+            <p>The content is {{project.name}}</p>*/
+
+function Hello($scope, $http) {
+    $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
+        success(function(data) {
+            $scope.greeting = data;
+            console.log(data);
+        });
+}
