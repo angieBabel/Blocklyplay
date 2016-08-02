@@ -1,0 +1,27 @@
+<div flex="50">
+  <md-dialog aria-label="correct answer" id="correct answer">
+    <md-dialog-content >
+     <form>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Felicidades</h2>
+        </div>
+      </md-toolbar>
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <p>Felicidades haz realizado correctamente el puzzle</p>
+        </div>
+      </md-dialog-content>
+      <md-dialog-actions layout="row">
+        <md-button ng-click="cancelar()">
+          Volver
+        </md-button>
+        <span flex></span>
+        <md-button ng-click="publicar()" ng-style="{'background-color':'#26C6DA','color':'white'}" md-autofocus>
+          Publicar
+        </md-button>
+      </md-dialog-actions>
+    </form>
+    </md-dialog-content>
+  </md-dialog>
+</div>

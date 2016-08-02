@@ -1,0 +1,588 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+
+  <!-- lo que blockly necesita -->
+  <!-- interprete de JS -->
+  <script src="../acorn_interpreter.js"></script>
+  <!-- <script src="..//storage.js"></script> -->
+  <script src="../blockly_compressed.js"></script>
+  <script src="../blocks_compressed.js"></script>
+  <script src="../javascript_compressed.js"></script>
+  <script src="../core/css.js"></script>
+  <script src="../core/blockly.js"></script>
+  <script src="../msg/js/en.js"></script>
+  <script src="../blocks/custom.js"></script>
+  <script src="../generators/javascript/custom.js"></script>
+
+  <script type="text/javascript" src="../moves.js"></script>
+  <script type="text/javascript" src="../filesaver.js"></script>
+  <script type="text/javascript" src="../Blob.js"></script>
+  <!-- Funciones comunes para controlar el juego -->
+  <script type="text/javascript" src="../controlFunctions.js"></script>
+  <!-- agregar bloques de hardware -->
+  <script src="../blocks/hardware.js"></script>
+  <script src="../generators/javascript/hardware.js"></script>
+    <!-- para agregar las librerias del socket -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.1.js"></script>
+ <script type="text/javascript"></script>
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+  <!-- para cargar las funciones de begin y esas cosas -->
+    <script src="scriptsstreetlighthw.js"></script>  
+</head>
+
+<body ng-app="Blocklyplay"  ng-controller="AppCtrl">
+    <!-- header de la pagina -->
+    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
+        <div class="md-toolbar-tools" layout="row" >
+          <div flex="40" layout="row"   layout-align="start center">
+            <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
+              <md-icon md-svg-icon="../media/icons/arrow-left.svg">
+            </md-button>
+            <h6 class="md-title ">Kite</h6>   
+          </div>
+          <div flex="60" layout="row"   layout-align="start center">
+            <div flex="20">
+              <md-button class="md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex-gt-md="auto" ng-click="toggle()" >
+                Instrucciones 
+              </md-button>
+            </div>
+            <div flex="60">
+              <span>Recorre todos los semaforos</span>
+            </div>
+            <div flex="20">
+              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
+            </div> 
+          </div>
+        </div>
+        <div class="md-toolbar-tools">
+          <div flex="5"></div>
+          <div flex="40" layout="row"   layout-align="start center">
+            <md-button class="md-icon-button" aria-label="Settings" >
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="#FFFFFF" d="M11,6.5V9.33L8.33,12L11,14.67V17.5L5.5,12M13,6.43L18.57,12L13,17.57V14.74L15.74,12L13,9.26M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5Z" />
+              </svg>
+            </md-button>
+            <h4>
+              <span>Secuencias complejas</span>
+            </h4> 
+          </div> 
+        </div>
+    </md-toolbar>
+    <!-- contenedor de los elementos -->
+    <div layout="row">
+      <!-- Contenedor del toolbox y blockly -->
+      <div flex="40" id="blocklyArea">
+          <div id="blocklyDiv" style="position: absolute"></div>
+      </div>
+      <!-- container donde ira el canvas -->
+      <div flex="60">
+        <!-- tarjeta donde esta el canvas y los botones de accion -->
+        <md-card id="divCanvas">
+          <!-- tabs que contienen los canvas -->
+         <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
+              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
+                <canvas id="canvas1"></canvas>               
+              </md-tab>
+              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
+                <canvas id="canvas2"></canvas>
+              </md-tab>
+              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
+                <canvas id="canvas3"></canvas>
+              </md-tab>
+            </md-tabs>
+          </md-content>
+          <!-- div con los botones de accion -->
+          <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
+            <div ng-style="{'position': 'absolute','left':'70%'}">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
+                <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
+                <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Hardware" onclick="pasoHW()">
+                <md-icon md-svg-icon="../media/icons/chip.svg"></md-icon> 
+              </md-button>
+              <md-menu>
+                <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
+                  <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
+                </md-button>
+                <md-menu-content>
+                  <!-- mostrar codigo -->
+                  <md-menu-item>
+                    <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
+                  </md-menu-item>
+                  <!-- Download project -->
+                  <md-menu-item>
+                    <md-button  onclick="saveXML()"><md-icon md-svg-icon="../media/icons/download.svg"></md-icon> Descargar codigo</md-button>
+                  </md-menu-item>
+                  <!-- subir projecto -->
+                  <md-menu-item>
+                    <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="../media/icons/upload.svg"></md-icon> Subir codigo</md-button>
+                    <input type='file' style="display:none" id='your-files'></input>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>
+    <!-- para poner los alerts -->
+     <div ng-style="{'display':'none'}">
+      <md-button ng-click="showCorrect($event)" id="Correct">Felicidades</md-button>
+      <md-button ng-click="showWrong($event)" id="Wrong">Intenta de nuevo</md-button>
+      <md-button ng-click="hardwareError($event)" id="HWError">Hardwaee error</md-button>
+      <md-button ng-click="connectionError($event)" id="HWConnect">Error de conexion</md-button>
+     </div>
+    <!-- side nav de instrucciones de nivel 1-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones1" ng-style="{'background-color':'#0097A7'}" >
+      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Instrucciones</span>
+          </h2>
+          <span flex></span>            
+          <md-button class="md-icon-button" ng-click="close()">
+            <md-icon md-svg-icon="../media/icons/close.svg"></md-icon> 
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+       <!-- imagen previa -->
+       <div>
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/semaforohw2.png">
+       </div>
+       <!-- informacion general del nivel -->
+       <div layout="column">
+          <div>
+            <strong>¡Hagamos un semaforo!</strong>
+          </div>
+          <div layout="row" layout-align="start center">
+            <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
+            <div flex="60" layout="row"   layout-align="center center">
+              <div>
+                <span>Fácil</span>
+              </div>
+              <div>
+                <i class="material-icons">star</i>
+                <i class="material-icons">star_border</i>
+                <i class="material-icons">star_border</i>
+              </div>
+            </div>
+          </div>
+          <div>
+            <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 15 pts
+          </div>
+       </div>
+       <!-- instrucciones -->
+       <div layout="column"   layout-align="center center">
+          <div>
+            <p>¡Ahora haremos una secuencia con LEDs! Como ya sabes, es posible controlar diferentes LEDs a traves de sus pines, en este ejercicio debes simular un semaforo, en pantalla tienes 3 LEDs, uno verde conectado al PIN D4, uno amarillo conectado al PIN D3 y uno rojo conectado al PIN D5, con el bloque LED haz una secuencia que encienda primero el LED verde, luego el amarillo y finalmente el rojo, igual a un semaforo, recuerda que no puede haber mas de un LED encendido. No olvides anadir algunos bloques wait para mejorar la visualizacion de tu codigo.</p>
+          </div>
+          <div>
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
+                Comenzar reto 
+          </md-button>
+          </div>
+       </div>
+      </md-content>
+    </md-sidenav>
+    <!-- side nav de instrucciones de nivel 2-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones2" ng-style="{'background-color':'#0097A7'}" >
+      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Instrucciones</span>
+          </h2>
+          <span flex></span>            
+          <md-button class="md-icon-button" ng-click="close()">
+            <md-icon><i class="material-icons">close</i></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+       <!-- imagen previa -->
+       <div>
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+       </div>
+       <!-- informacion general del nivel -->
+       <div layout="column">
+        <div>
+          <strong>Dibuja el área de una casa</strong>
+        </div>
+        <div layout="row" layout-align="start center">
+          <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel dos</strong></div>
+          <div flex="60" layout="row"   layout-align="center center">
+            <div>
+              <span>Intermedio</span>
+            </div>
+            <div>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star_border</i>
+            </div>
+          </div>
+        </div>
+        <div>
+          <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 30 pts
+        </div>
+
+       </div>
+       <!-- instrucciones -->
+       <div layout="column"   layout-align="center center">
+          <div>
+            <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+          </div>
+          <div>
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-click="close()" >
+                Comenzar reto 
+          </md-button>
+          </div>
+       </div>
+      </md-content>
+    </md-sidenav>
+  <xml id="toolbox" style="display: none">
+    <category name="Hardware" colour="354">
+        <block type="ledDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="Turn">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="motorDisplayed">
+          <value name="steps">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="direction">
+            <shadow type="direction">
+              <field name="direction">Forward</field>
+            </shadow>
+          </value>
+          <value name="speed">
+            <shadow type="speed">
+              <field name="speed">1</field>
+            </shadow>
+          </value>
+        </block>
+
+        <block type="buzzerDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="Tone">
+            <shadow type="tone">
+              <field name="tone">Do</field>
+            </shadow>
+          </value>
+          <value name="Secs">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="pantallaDisplayed">
+          <value name="message">
+            <shadow type="text">
+              <field name="TEXT">Type message here</field>
+            </shadow>
+          </value>
+          <value name="color">
+            <shadow type="colour_picker">
+              <field name="COLOUR">#ff0000</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="botonDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="Status">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
+    </category>
+    <category name="Inputs" colour="210">
+      <block type="status"></block>
+        <block type="speed"></block>
+        <block type="pind"></block>
+        <block type="tone"></block>
+        <block type="direction"></block>
+    </category>
+
+    <sep></sep>
+
+    <category name="Control" colour="157">
+      <block type="wait"></block>
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Math" colour="24">
+      <block type="math_number" gap="32"></block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Text" colour="53">
+      <block type="text"></block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <value name="TEXT">
+          <shadow type="text">
+             <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <category name="Logic" colour="197">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Colour" colour="37">
+      <block type="colour_picker"></block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+
+    <sep></sep>
+    <category name="Variables" colour="355" custom="VARIABLE"></category>
+    <category name="Functions" colour="287" custom="PROCEDURE"></category>
+  </xml>
+  <!-- Your application bootstrap  -->
+  <!-- el script con las funciones de angular se separo al documento angular.js -->
+  <script src="../angular.js"></script>
+  <script type="text/javascript">
+    var myWidth = 0, myHeight = 0;
+      function alertSize() {
+        if( typeof( window.innerWidth ) == 'number' ) {
+          //No-IE
+          myWidth = window.innerWidth;
+          myHeight = window.innerHeight;
+        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+          //IE 6+
+          myWidth = document.documentElement.clientWidth;
+          myHeight = document.documentElement.clientHeight;
+        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+          //IE 4 compatible
+          myWidth = document.body.clientWidth;
+          myHeight = document.body.clientHeight;
+        }
+        /*window.alert( 'Width = ' + myWidth );
+        window.alert( 'Height = ' + myHeight ); */
+      }
+      alertSize();
+    'use strict';
+      var blocklyArea = document.getElementById('blocklyArea');
+      var blocklyDiv = document.getElementById('blocklyDiv');
+      var blocklyCanvas = document.getElementById('divCanvas');
+      var workspace = Blockly.inject(blocklyDiv,
+          { media: '../media/',
+            zoom:
+             {controls: true,
+              wheel: true,
+              startScale: 1.0,
+              maxScale: 3,
+              minScale: 0.3,
+              scaleSpeed: 1.2},
+            toolbox: document.getElementById('toolbox')});
+    var onresize = function(e) {
+      // Compute the absolute coordinates and dimensions of blocklyArea.
+      var element = blocklyArea;
+      var x = 0;
+      var y = 0;
+      do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+      } while (element);
+      //alert(blocklyArea.offsetWidth)
+      // Position blocklyDiv over blocklyArea.
+      blocklyDiv.style.left = x + 'px';
+      //blocklyDiv.style.top = y + 'px';
+      blocklyDiv.style.width = (myWidth*.4) + 'px';
+      blocklyDiv.style.height = (myHeight*.80)+ 'px';
+      //blocklyCanvas.style.height= (myHeight*.80)+ 'px';
+      };
+    window.addEventListener('resize', onresize, false);
+    onresize();
+    //para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
+    function loadCode(){
+      var program;
+      switch(currentpanel) {
+            case 1:
+                program = window.localStorage.getItem("streetlighthw1");
+                break;
+            case 2:
+                program = window.localStorage.getItem("streetlighthw2");
+                break;
+            case 3:
+                program = window.localStorage.getItem("streetlighthw3");
+            case 4:
+                program = window.localStorage.getItem("streetlighthw4");
+            default:
+                program = window.localStorage.getItem("streetlighthw1");
+          }
+      Blockly.mainWorkspace.clear();
+      var textToDom = Blockly.Xml.textToDom(program);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+    }
+    //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
+    //funcion de nextep migradas al control functions.js
+    function finish(){
+      if(acabo==1){
+            nextStep();
+          }
+    }
+    function runCode() {
+      //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+      parseCode();
+      //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+      intervalo= setInterval(function(){finish();},15)
+      //se guarda lo que hay en el workspaces en el almcaneamiento local
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      var domToPretty = Blockly.Xml.domToPrettyText(xml);
+      switch(currentpanel) {
+          case 1:
+              window.localStorage.setItem("streetlighthw1", domToPretty);
+              break;
+          case 2:
+              window.localStorage.setItem("streetlighthw2", domToPretty);
+              break;
+          case 3:
+              window.localStorage.setItem("streetlighthw3", domToPretty);
+          case 4:
+              window.localStorage.setItem("streetlighthw4", domToPretty);
+          default:
+              window.localStorage.setItem("streetlighthw1", domToPretty);
+        }
+      //window.localStorage.setItem("panel5l2", domToPretty);
+    }
+    //las funciones para obtener el thumbnail se cambiaron al controlFunctions.js
+    //las funciones de guardar XML estan en el archivo controlFunctions.js
+    //Variable para controlar la subida de archivos
+    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+      //se agrega un EventListener, para saber que se ha acceido a el
+      control.addEventListener("change", function(event) {
+           loadXML();
+      }, false);
+    //para hacer click en el inputfile se paso al controlfunctions.js
+    //loadXML se paso a controlfunctions.js
+    //send to hardware se paso al controlfunctions.js
+  </script>
+  
+</body>
+</html>
