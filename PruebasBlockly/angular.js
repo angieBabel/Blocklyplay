@@ -10,8 +10,12 @@
         $scope.nivel3= true;
         $scope.nivel4= true;
         $scope.isHW= false;
+
+        $scope.hello = {name: "Boaz"};
+        $scope.newName = "";
+       
         $scope.GetXML = function () {
-            $http.get('http://wegoo-staging.herokuapp.com/v1/projects/').
+            $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
             success(function(data) {
                   $scope.greeting = data;
                   console.log(data);
@@ -31,8 +35,8 @@
         $scope.SendData = function () {
            // use $.param jQuery function to serialize data from JSON 
             var data = $.param({
-                fName: $scope.firstName,
-                lName: $scope.lastName
+                name: $scope.firstName,
+                description: $scope.lastName
             });
         
             var config = {
@@ -41,8 +45,9 @@
                 }
             }
 
-            $http.post('/ServerRequest/PostDataResponse', data, config)
+            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', data, config)
             .success(function (data, status, headers, config) {
+              alert('entro al post')
                 $scope.PostDataResponse = data;
             })
             .error(function (data, status, header, config) {
@@ -370,3 +375,21 @@ function Hello($scope, $http) {
             console.log(data);
         });
 }
+
+angular.module('myApp', [])
+.controller('myCtrl', function ($scope, $http) {
+    $scope.hello = {name: "Boaz"};
+    $scope.newName = "";
+    $scope.sendPost = function() {
+      alert('entro al sendpost')
+        var data = $.param({
+            json: JSON.stringify({
+                name: $scope.newName
+            })
+        });
+        alert(data)
+        $http.post("/echo/json/", data).success(function(data, status) {
+            $scope.hello = data;
+        })
+    }                   
+})

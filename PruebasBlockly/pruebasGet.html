@@ -1,15 +1,49 @@
-<!doctype html>
-<html ng-app>
+<!-- <!doctype html> -->
+<!-- <html ng-app>
 	<head>
 		<title>Hello AngularJS</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
     	<script src="angular.js"></script>
 	</head>
 
-	<body>
+	<body ng-controller="AppCtrl">
 		<div ng-controller="Hello">
 			<p>The ID is {{greeting[0].projects.name}}</p>
 			<p>The content is {{greeting[0].projects.description}}</p>
 		</div>
+		<div>
+		    <p>First Name: <input type="text" name="firstName" ng-model="firstName" required /></p>
+		    <p>First Name: <input type="text" name="lastName" ng-model="lastName" required /></p>
+		    <button ng-click="SendData()">Submit</button>
+		    <hr />
+		    {{ PostDataResponse }}
+		</div>
 	</body>
-</html>
+	
+</html> -->
+
+<!-- <div ng-controller="AppCtrl">
+	{{hello.name}}
+   <form ng-submit="sendPost()">
+	    <input ng-model="newName"/>
+	    <button type="submit">Send</button>
+	</form>
+    
+</div>
+ -->
+ <body ng-app='myApp'>
+ 	<head>
+		<title>Hello AngularJS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+    	<script src="angular.js"></script>
+	</head>
+		<div ng-controller="myCtrl">
+			{{hello.name}}
+
+			<form ng-submit="sendPost()">
+			    <input ng-model="newName"/>
+			    <button type="submit">Send</button>
+			</form>
+		    
+		</div>
+</body>
