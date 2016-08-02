@@ -296,9 +296,9 @@ function loadXML() {
   reader.readAsText(control.files[0]);
 }
 //para enviar el codigo al hardware
-firstTIME=0;
+var SC=0;//contador de sockets, sirve para saber cuantos sockets se crearon
+var CF=false;//connection flag, sirve para en cuanto alguien detecto un error de conexion, los demas no emitan la alerta
 function pasoHW(){
-
   if (codeHW!=null) {
 
     var socket = null;
@@ -309,22 +309,22 @@ function pasoHW(){
     codeHW = codeHW.replace(/\n{2,}/,"\n");
     codeHW = codeHW.replace(/\s{3,}/gi,"\n");
     codeHW = codeHW.replace(/highlightBlock[(].*[);]\n/gi,"");
-    
-
     socket.io.on('connect_error', function(err) {
-      firstTIME=1;
-      alert('error')
-      //var HWConnection =document.getElementById('HWConnect').click()
+      if (!CF) {
+        var HWConnection =document.getElementById('HWConnect').click()
+      };
+      CF=true;
+      SC-=1;
+      if (SC<=0) {
+        CF=false;
+        SC=0;
+      };
       socket.disconnect()
     });
     //socket.emit('changefunction',codeHW);
     socket.on('connect', function() {
-      firstTIME=1;
+      SC+=1;
       socket.emit('changefunction',codeHW);
-      //alert('entro al emit')
-      //alert('aqui es el emit')
-      //alert(socket.connected);
-      //
     });
 
   }else{
