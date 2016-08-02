@@ -269,7 +269,7 @@ function generate() {
 
 //para cargar el thumbnail en el preview
 function loadThumbnail(){
-  var previa = window.localStorage.getItem("preview");
+  previa = window.localStorage.getItem("preview");
   var thumb = document.getElementById('thumbnail');
   thumb.innerHTML=previa;
   thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"

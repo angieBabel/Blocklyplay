@@ -25,30 +25,33 @@
             <!-- titulo del programa -->
             <div>
               <md-input-container class="md-block" >
-                <label>Titulo</label>
-                <input ng-model="product.tittle">
+                <label>Titulos</label>
+                <input ng-model="name">
               </md-input-container>
             </div>
             <!-- si es individual o grupal -->
             <div layout="column" layout-align=" center">
               <md-radio-group ng-model="data.group1">
-                <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
-                <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+                <md-radio-button ng-model="active" value="0"> Es una contribucion individual</md-radio-button>
+                <md-radio-button ng-model="active" value="1"> Es resultado del trabajo en equipo </md-radio-button>
               </md-radio-group>
             </div>
             <!-- comentario -->
             <div>
               <md-input-container class="md-block" >
                 <label>Agrega un comentario (opcional)</label>
-                <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
               </md-input-container>
             </div>
+            <!-- valores escondidos -->
+            <input type="text" id="inputXML" ng-model="question"><!-- para el XML -->
+            <input type="text" id="inputPREV" ng-model="picture"><!-- para el preview -->
             <!-- botones para cancelar y publicar -->
             <div layout="row" layout-align="end center">
               <md-button  class="md-raised" ng-click="cancel()" >
                 Cancelar
               </md-button>
-              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
+              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="postdata(name, description, question, picture, active)" >
                 Publicar
               </md-button>
             </div>
@@ -58,3 +61,9 @@
     </md-dialog-content>
   </md-dialog>
 </div>
+<!-- <div>
+      Name : <input ng-model="name" /><br/><br/>
+      Age : <input ng-model="age" /><br/><br/>
+      Adress : <input ng-model="adress" /><br/><br/>
+      <input type="button" value="Send" ng-click="postdata(name, description, question, picture, active)" /> <br/><br/>
+    </div> -->

@@ -32,31 +32,6 @@
                     "<br />config: " + jsonFilter(config);
             });
         };
-        $scope.SendData = function () {
-           // use $.param jQuery function to serialize data from JSON 
-            var data = $.param({
-                name: $scope.firstName,
-                description: $scope.lastName
-            });
-        
-            var config = {
-                headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-                }
-            }
-
-            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', data, config)
-            .success(function (data, status, headers, config) {
-              alert('entro al post')
-                $scope.PostDataResponse = data;
-            })
-            .error(function (data, status, header, config) {
-                $scope.ResponseDetails = "Data: " + data +
-                    "<hr />status: " + status +
-                    "<hr />headers: " + header +
-                    "<hr />config: " + config;
-            });
-        };
         $scope.toggle = buildToggler();
         $scope.canvas1 = function() {         
           currentpanel=1;
@@ -344,11 +319,20 @@
                   begin1();
             }
           };
+          $scope.name = null;
+          $scope.description = null;
+          $scope.question = null;
+          $scope.picture = null;
+          $scope.active = null;
+          
         });
-      function DialogController($scope, $mdDialog) {
+      function DialogController($scope,$http, $mdDialog) {
         $scope.vistaprevia = function(){
           loadThumbnail();
+          var datosr= document.getElementById("inputXML").value = domToPretty;
+          var datos= document.getElementById("inputPREV").value = previa;
           showTabDialog();
+          
         };
         $scope.hide = function() {
           $mdDialog.hide();
@@ -356,18 +340,28 @@
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
+        $scope.postdata = function (name, description, question, picture, active) {
+            var data = {
+              name: name,
+              description: description,
+              question: question,
+              picture: picture,
+              active: active
+            };
+            //Call the services
+            alert(data.description)
+            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
+                console.log(data);
+              $scope.msg = "Post Data Submitted Successfully!";
+            }, function (response) {
+              alert('error')
+              $scope.msg = "Service not Exists";
+              $scope.statusval = response.status;
+              $scope.statustext = response.statusText;
+              $scope.headers = response.headers();
+            });
+          };
       }
-      /*$scope.showData = function(ev){
-          $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
-              success(function(data) {
-                  $scope.project = data;
-              });
-        }
-*/
-       /*ng-controller="Hello"
-            <p>The ID is {{project.id}}</p>
-            <p>The content is {{project.name}}</p>*/
-
 function Hello($scope, $http) {
     $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
         success(function(data) {
@@ -375,21 +369,3 @@ function Hello($scope, $http) {
             console.log(data);
         });
 }
-
-angular.module('myApp', [])
-.controller('myCtrl', function ($scope, $http) {
-    $scope.hello = {name: "Boaz"};
-    $scope.newName = "";
-    $scope.sendPost = function() {
-      alert('entro al sendpost')
-        var data = $.param({
-            json: JSON.stringify({
-                name: $scope.newName
-            })
-        });
-        alert(data)
-        $http.post("/echo/json/", data).success(function(data, status) {
-            $scope.hello = data;
-        })
-    }                   
-})

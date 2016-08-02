@@ -566,7 +566,8 @@
       intervalo= setInterval(function(){finish();},15)
       //se guarda lo que hay en el workspaces en el almcaneamiento local
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      var domToPretty = Blockly.Xml.domToPrettyText(xml);
+      domToPretty = Blockly.Xml.domToPrettyText(xml);
+      //document.getElementById("inputXML").value = domToPretty;
       switch(currentpanel) {
           case 1:
               window.localStorage.setItem("pruebashw1", domToPretty);
