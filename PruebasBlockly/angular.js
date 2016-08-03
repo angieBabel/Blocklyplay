@@ -329,8 +329,8 @@
       function DialogController($scope,$http, $mdDialog) {
         $scope.vistaprevia = function(){
           loadThumbnail();
-          var datosr= document.getElementById("inputXML").value = domToPretty;
-          var datos= document.getElementById("inputPREV").value = previa;
+          /*var datosr= document.getElementById("inputXML").value = domToPretty;
+          var datos= document.getElementById("inputPREV").value = previa;*/
           showTabDialog();
           
         };
@@ -349,8 +349,8 @@
               active: active
             };
             //Call the services
-            alert(data.description)
-            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
+            alert(data.question)
+            /*$http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
                 console.log(data);
               $scope.msg = "Post Data Submitted Successfully!";
             }, function (response) {
@@ -359,7 +359,7 @@
               $scope.statusval = response.status;
               $scope.statustext = response.statusText;
               $scope.headers = response.headers();
-            });
+            });*/
           };
       }
 function Hello($scope, $http) {
