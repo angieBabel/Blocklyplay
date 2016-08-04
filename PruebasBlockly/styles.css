@@ -66,9 +66,15 @@ text-align : justify;
 		height: 0%;
 	}
 }
+@-moz-document url-prefix() {
+   #divbotones2{
+		position: absolute;
+		left:30vw;
+	}
+}
 #divbotones2{
 	position: absolute;
-	left:40vw;
+	left:45vw;
 }
 #divbotones3{
 	position: absolute;

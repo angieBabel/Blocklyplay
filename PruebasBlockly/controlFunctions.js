@@ -27,7 +27,7 @@ function initAlert(interpreter, scope) {
   interpreter.setProperty(scope, 'highlightBlock',
       interpreter.createNativeFunction(wrapper));
 
-  //Moves Funcitons
+//Moves Funcitons
     //Move forward
     var wrapper = function(nosteps) {
       return interpreter.createPrimitive(forward(nosteps));
@@ -120,7 +120,7 @@ function initAlert(interpreter, scope) {
     }
     interpreter.setProperty(scope, 'getFloor',
         interpreter.createNativeFunction(wrapper));
-    // funciones de hardware
+// funciones de hardware
     //funcion para mover el motor
     var wrapper = function(nosteps,side,speed) {
       return interpreter.createPrimitive(motor(nosteps,side,speed));
@@ -139,6 +139,13 @@ function initAlert(interpreter, scope) {
     }
     interpreter.setProperty(scope, 'pantalla',
         interpreter.createNativeFunction(wrapper));
+    //funcion para manipular el buzzer, ocupa pin, tono y segundos
+    var wrapper = function(nopin,tone,secs) {
+      return interpreter.createPrimitive(buzzer(nopin,tone,secs));
+    }
+    interpreter.setProperty(scope, 'buzzer',
+        interpreter.createNativeFunction(wrapper));
+
 }
 //Funcion para que pueda sobresaltar los bloques
 var highlightPause = false;
