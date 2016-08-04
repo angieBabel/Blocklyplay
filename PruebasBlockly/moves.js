@@ -1,5 +1,6 @@
 //inicialización de las variables
-    
+    var domToPretty;//variable para guardar el XML
+    var previa;//variable para tener la previa
     var puntaje=[0,0,0,0]; //para saber cuantas veces ha hecho los ejercicios
     var program;
     

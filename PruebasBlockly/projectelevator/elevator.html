@@ -46,8 +46,8 @@
 </head>
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
-    <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" ng-style="{'background-color':'#26C6DA'}">
+     <!-- header de la pagina -->
+    <md-toolbar layout="column" class="md-tall" id="maintoolbar">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
@@ -78,7 +78,7 @@
               </svg>
             </md-button>
             <h4>
-              <span>Condiciones y eventos</span>
+              <span>Secuencias complejas</span>
             </h4> 
           </div> 
         </div>
@@ -87,7 +87,7 @@
     <div layout="row">
       <!-- Contenedor del toolbox y blockly -->
       <div flex="40" id="blocklyArea">
-          <div id="blocklyDiv" style="position: absolute"></div>
+          <div id="blocklyDiv"></div>
       </div>
       <!-- container donde ira el canvas -->
        <div flex="60">
@@ -95,7 +95,7 @@
         <md-card  id="divCanvas">
           <!-- tabs que contienen los canvas -->
           <md-content>
-            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  ng-style="{'position': 'relative'}">
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" id="tabs">
               <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
                 <canvas id="canvas1"></canvas>               
               </md-tab>
@@ -108,8 +108,64 @@
             </md-tabs>
           </md-content>
           <!-- div con los botones de accion -->
-          <div ng-style="{'position': 'relative','top': '-99%','z-index': '5','height': '0%'}">
-            <div ng-style="{'position': 'absolute','left':'75%'}">
+          <div id="divbotones">
+            <div id="divbotones2">
+              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
+                <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
+              </md-button>
+              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
+                <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
+              </md-button>
+              <md-menu>
+                <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
+                  <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
+                </md-button>
+                <md-menu-content>
+                  <!-- mostrar codigo -->
+                  <md-menu-item>
+                    <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
+                  </md-menu-item>
+                  <!-- Download project -->
+                  <md-menu-item>
+                    <md-button  onclick="saveXML()"><md-icon md-svg-icon="../media/icons/download.svg"></md-icon> Descargar codigo</md-button>
+                  </md-menu-item>
+                  <!-- subir projecto -->
+                  <md-menu-item>
+                    <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="../media/icons/upload.svg"></md-icon> Subir codigo</md-button>
+                    <input type='file' style="display:none" id='your-files'></input>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </div>
+          </div>
+        </md-card>
+      </div>
+    </div>out="row">
+      <!-- Contenedor del toolbox y blockly -->
+      <div flex="40" id="blocklyArea">
+          <div id="blocklyDiv"></div>
+      </div>
+      <!-- container donde ira el canvas -->
+       <div flex="60">
+        <!-- tarjeta donde esta el canvas y los botones de accion -->
+        <md-card  id="divCanvas">
+          <!-- tabs que contienen los canvas -->
+          <md-content>
+            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" id="tabs">
+              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
+                <canvas id="canvas1"></canvas>               
+              </md-tab>
+              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
+                <canvas id="canvas2"></canvas>
+              </md-tab>
+              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
+                <canvas id="canvas3"></canvas>
+              </md-tab>
+            </md-tabs>
+          </md-content>
+          <!-- div con los botones de accion -->
+          <div id="divbotones">
+            <div id="divbotones2">
               <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
                 <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
               </md-button>
@@ -482,7 +538,7 @@
       intervalo= setInterval(function(){finish();},15)
       //se guarda lo que hay en el workspaces en el almcaneamiento local
       var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      var domToPretty = Blockly.Xml.domToPrettyText(xml);
+      domToPretty = Blockly.Xml.domToPrettyText(xml);
       switch(currentpanel) {
           case 1:
               window.localStorage.setItem("elevator1", domToPretty);

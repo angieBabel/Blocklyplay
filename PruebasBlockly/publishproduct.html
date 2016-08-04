@@ -1,5 +1,4 @@
-<div flex="50">
-  <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()">
+<md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()" >
     <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
       <md-toolbar ng-style="{'background-color':'#fff', 'color':'#9E9E9E'}" ng-controller="RightCtrl">
@@ -14,7 +13,7 @@
         </div>
       </md-toolbar>
       <!-- container con todos los elementos -->
-      <div layout="column">
+      <div layout="column" >
         <!-- imagen de vista previa -->
         <div id="thumbnail">
         </div>
@@ -25,22 +24,22 @@
             <!-- titulo del programa -->
             <div>
               <md-input-container class="md-block" >
-                <label>Titulo</label>
-                <input ng-model="product.tittle">
+                <label>Titulos</label>
+                <input ng-model="name">
               </md-input-container>
             </div>
             <!-- si es individual o grupal -->
             <div layout="column" layout-align=" center">
-              <md-radio-group ng-model="data.group1">
-                <md-radio-button ng-model="product.type" value="individual"> Es una contribucion individual</md-radio-button>
-                <md-radio-button ng-model="product.type" value="grupal"> Es resultado del trabajo en equipo </md-radio-button>
+              <md-radio-group ng-model="active">
+                <md-radio-button ng-model="active" value="0"> Es una contribucion individual</md-radio-button>
+                <md-radio-button ng-model="active" value="1"> Es resultado del trabajo en equipo </md-radio-button>
               </md-radio-group>
             </div>
             <!-- comentario -->
             <div>
               <md-input-container class="md-block" >
                 <label>Agrega un comentario (opcional)</label>
-                <textarea ng-model="product.comment" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
               </md-input-container>
             </div>
             <!-- botones para cancelar y publicar -->
@@ -48,7 +47,7 @@
               <md-button  class="md-raised" ng-click="cancel()" >
                 Cancelar
               </md-button>
-              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="" >
+              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="postdata(name, description, question, picture, active)" >
                 Publicar
               </md-button>
             </div>
@@ -57,4 +56,10 @@
       </div>
     </md-dialog-content>
   </md-dialog>
+
+
+<!-- <div flex="25"></div>
+<div flex="50" >ng-style="{'height': '100vh'}"
+  
 </div>
+<div flex="25"></div> -->
