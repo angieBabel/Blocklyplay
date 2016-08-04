@@ -69,7 +69,12 @@ text-align : justify;
 @-moz-document url-prefix() {
    #divbotones2{
 		/*position: absolute;*/
-
+		left:45vw;
+	}
+}
+@-moz-document url-prefix() {
+   #divbotones3{
+		/*position: absolute;*/
 		left:45vw;
 	}
 }
