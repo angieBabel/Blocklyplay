@@ -1,5 +1,4 @@
-<div flex="50">
-  <md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()">
+<md-dialog aria-label="Publicar producto" id="publishwindow" ng-show="vistaprevia()" >
     <md-dialog-content >
       <!-- barra de herramienta para poner el close -->
       <md-toolbar ng-style="{'background-color':'#fff', 'color':'#9E9E9E'}" ng-controller="RightCtrl">
@@ -14,7 +13,7 @@
         </div>
       </md-toolbar>
       <!-- container con todos los elementos -->
-      <div layout="column">
+      <div layout="column" >
         <!-- imagen de vista previa -->
         <div id="thumbnail">
         </div>
@@ -43,9 +42,6 @@
                 <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
               </md-input-container>
             </div>
-            <!-- valores escondidos -->
-            <input type="text" id="inputXML" ng-model="question"><!-- para el XML -->
-            <input type="text" id="inputPREV" ng-model="picture"><!-- para el preview -->
             <!-- botones para cancelar y publicar -->
             <div layout="row" layout-align="end center">
               <md-button  class="md-raised" ng-click="cancel()" >
@@ -60,10 +56,10 @@
       </div>
     </md-dialog-content>
   </md-dialog>
+
+
+<!-- <div flex="25"></div>
+<div flex="50" >ng-style="{'height': '100vh'}"
+  
 </div>
-<!-- <div>
-      Name : <input ng-model="name" /><br/><br/>
-      Age : <input ng-model="age" /><br/><br/>
-      Adress : <input ng-model="adress" /><br/><br/>
-      <input type="button" value="Send" ng-click="postdata(name, description, question, picture, active)" /> <br/><br/>
-    </div> -->
+<div flex="25"></div> -->

@@ -30,5 +30,73 @@ text-align : justify;
 
 #thumbnail {
 	height: auto;
+	/*height: 30vh;*/
 	padding-left: 35%;
 }
+@-moz-document url-prefix() {
+    #thumbnail {
+		/*height: auto;*/
+		height: 24vh;
+		padding-left: 30vw;
+	}
+}
+#maintoolbar{
+	background-color:#26C6DA;
+
+}
+/*#blocklyDiv{
+	position: absolute;
+
+}*/
+#tabs{
+	position: relative;
+
+}
+#divbotones{
+	position: relative;
+	top: -99%;
+	z-index: 5;
+	height: 0%;
+}
+@-moz-document url-prefix() {
+   #divbotones{
+		position: relative;
+		top: -71%;
+		z-index: 5;
+		height: 0%;
+	}
+}
+#divbotones2{
+	position: absolute;
+	left:40vw;
+}
+#publishwindow{
+	width: 40vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

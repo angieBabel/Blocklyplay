@@ -10,10 +10,6 @@
         $scope.nivel3= true;
         $scope.nivel4= true;
         $scope.isHW= false;
-
-        $scope.hello = {name: "Boaz"};
-        $scope.newName = "";
-       
         $scope.GetXML = function () {
             $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
             success(function(data) {
@@ -21,7 +17,7 @@
                   console.log(data);
                  /* {{greeting[0].projects.name}}*/
                  //alert(data[0].projects.description)
-                  program=data[0].projects.name;//data[0].projects.description;
+                  program=data[data.length-1].projects.question;//data[0].projects.description;
                   loadCode();
                   //alert(program);
               })
@@ -340,17 +336,16 @@
         $scope.cancel = function() {
           $mdDialog.cancel();
         };
-        $scope.postdata = function (name, description, question, picture, active) {
+        $scope.postdata = function (name, description, active) {
             var data = {
               name: name,
               description: description,
-              question: question,
-              picture: picture,
+              question: domToPretty,
+              picture: previa,
               active: active
             };
             //Call the services
-            alert(data.question)
-            /*$http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
+            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
                 console.log(data);
               $scope.msg = "Post Data Submitted Successfully!";
             }, function (response) {
@@ -359,7 +354,7 @@
               $scope.statusval = response.status;
               $scope.statustext = response.statusText;
               $scope.headers = response.headers();
-            });*/
+            });
           };
       }
 function Hello($scope, $http) {
