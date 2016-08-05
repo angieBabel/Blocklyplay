@@ -91,57 +91,57 @@
       </div>
       <!-- container donde ira el canvas -->
       <div flex="60">
-        <!-- tarjeta donde esta el canvas y los botones de accion -->
-        <md-card id="divCanvas">
-          <!-- tabs que contienen los canvas -->
-          <md-content>
-            <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  > <!-- id="tabs" -->
-              <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
-                <canvas id="canvas1"></canvas>               
-              </md-tab>
-              <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
-                <canvas id="canvas2"></canvas>
-              </md-tab>
-              <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
-                <canvas id="canvas3"></canvas>
-              </md-tab>
-            </md-tabs>
-          </md-content>
-          <!-- div con los botones de accion -->
-          <div id="divbotones">
-            <div id="divbotones3">
-              <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
-                <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
-                <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
-              </md-button>
-              <md-button class="md-icon-button" aria-label="Hardware" onclick="pasoHW()">
-                <md-icon md-svg-icon="../media/icons/chip.svg"></md-icon> 
-              </md-button>
-              <md-menu>
-                <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
-                  <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
+          <!-- tarjeta donde esta el canvas y los botones de accion -->
+          <md-card id="divCanvas">
+            <!-- div con los botones de accion -->
+            <div id="divbotones">
+              <div id="divbotones3">
+                <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
+                  <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
                 </md-button>
-                <md-menu-content>
-                  <!-- mostrar codigo -->
-                  <md-menu-item>
-                    <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
-                  </md-menu-item>
-                  <!-- Download project -->
-                  <md-menu-item>
-                    <md-button  onclick="saveXML()"><md-icon md-svg-icon="../media/icons/download.svg"></md-icon> Descargar codigo</md-button>
-                  </md-menu-item>
-                  <!-- subir projecto -->
-                  <md-menu-item>
-                    <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="../media/icons/upload.svg"></md-icon> Subir codigo</md-button>
-                    <input type='file' style="display:none" id='your-files'></input>
-                  </md-menu-item>
-                </md-menu-content>
-              </md-menu>
+                <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
+                  <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Hardware" onclick="pasoHW()">
+                  <md-icon md-svg-icon="../media/icons/chip.svg"></md-icon> 
+                </md-button>
+                <md-menu>
+                  <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
+                    <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
+                  </md-button>
+                  <md-menu-content>
+                    <!-- mostrar codigo -->
+                    <md-menu-item>
+                      <md-button onclick="showCode()"><md-icon md-svg-icon="media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
+                    </md-menu-item>
+                    <!-- Download project -->
+                    <md-menu-item>
+                      <md-button  onclick="saveXML()"><md-icon md-svg-icon="media/icons/download.svg"></md-icon> Descargar codigo</md-button>
+                    </md-menu-item>
+                    <!-- subir projecto -->
+                    <md-menu-item>
+                      <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="media/icons/upload.svg"></md-icon> Subir codigo</md-button>
+                      <input type='file' style="display:none" id='your-files'></input>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </div>
             </div>
-          </div>
-        </md-card>
+            <!-- tabs que contienen los canvas -->
+            <md-content>
+              <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual"  > <!-- id="tabs" -->
+                <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
+                  <canvas id="canvas1"></canvas>               
+                </md-tab>
+                <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
+                  <canvas id="canvas2"></canvas>
+                </md-tab>
+                <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
+                  <canvas id="canvas3"></canvas>
+                </md-tab>
+              </md-tabs>
+            </md-content>
+          </md-card>
       </div>
     </div>
    <!-- para poner los alerts -->
@@ -168,7 +168,7 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../../media/mapa_casa.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">

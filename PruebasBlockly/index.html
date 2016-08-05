@@ -1,139 +1,139 @@
 <!DOCTYPE html >
 <html lang="en">
 <head>
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-<title>Panel inicial</title>
-<!-- Responsive css
-<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel inicial</title>
+  <!-- Responsive css
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+  <link rel="stylesheet" href="styles.css">
 
- <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!-- Angular Material requires Angular.js Libraries-->
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <!-- Angular Material requires Angular.js Libraries-->
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
-  <!-- Angular Material Library -->
-  <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  
+    <!-- Angular Material Library -->
+    <script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    
 
-<!-- interprete de JS -->
-<script type="text/javascript" src="acorn_interpreter.js"></script>
-<script type="text/javascript" src="acorn.js"></script>
-<script type="text/javascript" src="interpreter.js"></script>
-<!-- <script src="/storage.js"></script> -->
-<script type="text/javascript" src="blockly_compressed.js"></script>
-<script type="text/javascript" src="blocks_compressed.js"></script>
-<script type="text/javascript" src="javascript_compressed.js"></script>
-<script type="text/javascript" src="core/css.js"></script>
-<script type="text/javascript" src="core/blockly.js"></script>
-<script type="text/javascript" src="msg/js/en.js"></script>
-<script type="text/javascript" src="blocks/custom.js"></script>
-<script type="text/javascript" src="generators/javascript/custom.js"></script>
-<script type="text/javascript" src="moves.js"></script>
-<script type="text/javascript" src="filesaver.js"></script>
-<script type="text/javascript" src="Blob.js"></script>
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="controlFunctions.js"></script>
-<!-- agregar bloques de hardware -->
-  <script src="blocks/hardware.js"></script>
-  <script src="generators/javascript/hardware.js"></script>
-<script type="text/javascript">
-//'use strict';
-    /*var image;*/
-    var img= new Image();
-    var X;
-    var Y;
-    var r,n=0;
-    var Xaux=0,Yaux=0,limtX,limtY;
-    var stepsize=20;
-    var initX=0,initY=0;
-    var interval,time=2000;
-    var c=0,acabo=1;
-    var colorPath='';
-    var himg=40;
-    var wimg=20;
-    var roadpaint = [];
-    var count=0;
-    var luz=0,luzTrasera=0;
-    var ctx;
-    var ancho,alto;
+  <!-- interprete de JS -->
+  <script type="text/javascript" src="acorn_interpreter.js"></script>
+  <script type="text/javascript" src="acorn.js"></script>
+  <script type="text/javascript" src="interpreter.js"></script>
+  <!-- <script src="/storage.js"></script> -->
+  <script type="text/javascript" src="blockly_compressed.js"></script>
+  <script type="text/javascript" src="blocks_compressed.js"></script>
+  <script type="text/javascript" src="javascript_compressed.js"></script>
+  <script type="text/javascript" src="core/css.js"></script>
+  <script type="text/javascript" src="core/blockly.js"></script>
+  <script type="text/javascript" src="msg/js/en.js"></script>
+  <script type="text/javascript" src="blocks/custom.js"></script>
+  <script type="text/javascript" src="generators/javascript/custom.js"></script>
+  <script type="text/javascript" src="moves.js"></script>
+  <script type="text/javascript" src="filesaver.js"></script>
+  <script type="text/javascript" src="Blob.js"></script>
+  <script type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="controlFunctions.js"></script>
+  <!-- agregar bloques de hardware -->
+    <script src="blocks/hardware.js"></script>
+    <script src="generators/javascript/hardware.js"></script>
+  <script type="text/javascript">
+  //'use strict';
+      /*var image;*/
+      var img= new Image();
+      var X;
+      var Y;
+      var r,n=0;
+      var Xaux=0,Yaux=0,limtX,limtY;
+      var stepsize=20;
+      var initX=0,initY=0;
+      var interval,time=2000;
+      var c=0,acabo=1;
+      var colorPath='';
+      var himg=40;
+      var wimg=20;
+      var roadpaint = [];
+      var count=0;
+      var luz=0,luzTrasera=0;
+      var ctx;
+      var ancho,alto;
 
-    var positionObj = {
-      objX: 0,
-      objY: 0,
-      objZ: 0,
-    };
+      var positionObj = {
+        objX: 0,
+        objY: 0,
+        objZ: 0,
+      };
 
-    function begin(){
-      canvas = document.getElementById('canvas');
+      function begin(){
+        canvas = document.getElementById('canvas');
 
-      canvas.style.margin='0px 0px 0px 10px';
-      ctx = canvas.getContext('2d');
-      ancho = document.getElementById('divCanvas').offsetWidth;
-      alto = document.getElementById('divCanvas').offsetHeight;
-      canvas.width= ancho;
-      canvas.height = alto;
-      //alert(ancho +','+ alto);
-        stepsizeX=canvas.width/20;
-        stepsizeY=canvas.height/20;
+        canvas.style.margin='0px 0px 0px 10px';
+        ctx = canvas.getContext('2d');
+        ancho = document.getElementById('divCanvas').offsetWidth;
+        alto = document.getElementById('divCanvas').offsetHeight;
+        canvas.width= ancho;
+        canvas.height = alto;
+        //alert(ancho +','+ alto);
+          stepsizeX=canvas.width/20;
+          stepsizeY=canvas.height/20;
 
-      X = canvas.width/2;
-      Y = canvas.height/2;
-      r = 10;
-      positionObj.objX=X;
-      positionObj.objY=Y;
-      Xaux = positionObj.objX;
-      Yaux= positionObj.objY;
-      panel();
-    }
-
-    function stopTimer(){
-      clearInterval(interval);
-    }
-
-    function panel(level){
-      var imgback = new Image();
-      //var imgback = document.images.fondo;
-      imgback.src = "media/panelPrincipal.png";
-     imgback.onload = function() {
-        ctx.beginPath();
-        ctx.drawImage(imgback, 0, 0,ancho,alto);
-        Avatar();
+        X = canvas.width/2;
+        Y = canvas.height/2;
+        r = 10;
+        positionObj.objX=X;
+        positionObj.objY=Y;
+        Xaux = positionObj.objX;
+        Yaux= positionObj.objY;
+        panel();
       }
 
-    }
-    //Drawing avatar
-    function Avatar(){
-        var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
-        var avatarheight, avatarwith;
-        var positionX, positionY;
+      function stopTimer(){
+        clearInterval(interval);
+      }
 
-        img.id = 'imagen';
-        //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=100;avatarheight=130;
-
-        img.onload = function() {
-          ctx.save();
-          //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
-          ctx.translate(positionObj.objX,positionObj.objY);
-          //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
-
-          ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
-          ctx.drawImage(img,-(avatarwith/2), 0,avatarwith,avatarheight);
-          ctx.restore();
+      function panel(level){
+        var imgback = new Image();
+        //var imgback = document.images.fondo;
+        imgback.src = "media/panelPrincipal.png";
+       imgback.onload = function() {
+          ctx.beginPath();
+          ctx.drawImage(imgback, 0, 0,ancho,alto);
+          Avatar();
         }
-        img.src = 'media/avatar.png';//el img.src se pone despues del onload para asegurar su carga
 
       }
-</script>
-</head>
+      //Drawing avatar
+      function Avatar(){
+          var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
+          var avatarheight, avatarwith;
+          var positionX, positionY;
+
+          img.id = 'imagen';
+          //el img.src se cambio para asegurar que siempre haga el onload
+          avatarwith=100;avatarheight=130;
+
+          img.onload = function() {
+            ctx.save();
+            //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
+            ctx.translate(positionObj.objX,positionObj.objY);
+            //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
+
+            ctx.globalAlpha=1;
+            //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+            ctx.drawImage(img,-(avatarwith/2), 0,avatarwith,avatarheight);
+            ctx.restore();
+          }
+          img.src = 'media/avatar.png';//el img.src se pone despues del onload para asegurar su carga
+
+        }
+  </script>
+  </head>
 <body onload="begin()" ng-app="Blocklyplay" ng-style="{'background-color':'#EEEEEE'}">
   <div layout="row" layout-wrap id="menu">
     <div flex="10" layout-align="center center" layout="row">

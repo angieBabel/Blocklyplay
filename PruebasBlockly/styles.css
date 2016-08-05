@@ -54,22 +54,28 @@ text-align : justify;
 }
 #divbotones{
 	position: relative;
-	top: -99%;
+	/*top: -99%;*/
 	z-index: 5;
 	height: 0%;
 }
 @-moz-document url-prefix() {
    #divbotones{
 		position: relative;
-		top: -71%;
+		/*top: -60vh;*/
 		z-index: 5;
 		height: 0%;
 	}
 }
 @-moz-document url-prefix() {
    #divbotones2{
-		position: absolute;
-		left:30vw;
+		/*position: absolute;*/
+		left:45vw;
+	}
+}
+@-moz-document url-prefix() {
+   #divbotones3{
+		/*position: absolute;*/
+		left:45vw;
 	}
 }
 #divbotones2{
