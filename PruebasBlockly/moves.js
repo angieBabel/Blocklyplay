@@ -787,5 +787,10 @@
       }
     },vel);
   }
+  //funcion del buzzer
+  function buzzer(nopin,tone,secs){
+    alert('este es el buzzer')
+
+  }
 
 
