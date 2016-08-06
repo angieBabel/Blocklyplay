@@ -21,7 +21,7 @@ canvas {
 	 z-index :  4 ; 
 	 height :  85vh;
 }
- .md-dialog-content .md-active {
+.md-dialog-content .md-active {
 	color: #26C6DA; 
 }
 p {
@@ -69,22 +69,22 @@ text-align : justify;
 @-moz-document url-prefix() {
    #divbotones2{
 		/*position: absolute;*/
-		left:45vw;
+		/*left:45vw;*/
 	}
 }
 @-moz-document url-prefix() {
    #divbotones3{
 		/*position: absolute;*/
-		left:45vw;
+		/*left:45vw;*/
 	}
 }
 #divbotones2{
-	position: absolute;
-	left:45vw;
+	/*position: absolute;*/
+	/*left:40vw;*/
 }
 #divbotones3{
-	position: absolute;
-	left:40vw;
+	/*position: absolute;*/
+	/*left:35vw;*/
 }
 #publishwindow{
 	width: 40vw;

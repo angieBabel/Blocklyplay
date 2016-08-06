@@ -56,15 +56,15 @@
             <h6 class="md-title ">Kite</h6>   
           </div>
           <div flex="60" layout="row"   layout-align="start center">
-            <div flex="20">
+            <div flex-gt-md="20" flex="25">
               <md-button class="md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex-gt-md="auto" ng-click="toggle()" >
                 Instrucciones 
               </md-button>
             </div>
-            <div flex="60">
+            <div flex-gt-md="55" flex="45">
               <span>Pagina para pruebas</span>
             </div>
-            <div flex="20">
+            <div flex-gt-md="25"flex="20">
               <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
             </div> 
           </div>
@@ -94,8 +94,9 @@
           <!-- tarjeta donde esta el canvas y los botones de accion -->
           <md-card id="divCanvas">
             <!-- div con los botones de accion -->
-            <div id="divbotones">
-              <div id="divbotones3">
+            <div id="divbotones" layout="row">
+              <div flex-md="60" flex-gt-md="70" ></div>
+              <div  flex-md="40" flex-gt-md="30" id="divbotones3" >
                 <md-button class="md-icon-button" aria-label="Run" onclick="runCode()" ng-click="isHWF()">
                   <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
                 </md-button>
@@ -112,15 +113,15 @@
                   <md-menu-content>
                     <!-- mostrar codigo -->
                     <md-menu-item>
-                      <md-button onclick="showCode()"><md-icon md-svg-icon="media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
+                      <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
                     </md-menu-item>
                     <!-- Download project -->
                     <md-menu-item>
-                      <md-button  onclick="saveXML()"><md-icon md-svg-icon="media/icons/download.svg"></md-icon> Descargar codigo</md-button>
+                      <md-button  onclick="saveXML()"><md-icon md-svg-icon="../media/icons/download.svg"></md-icon> Descargar codigo</md-button>
                     </md-menu-item>
                     <!-- subir projecto -->
                     <md-menu-item>
-                      <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="media/icons/upload.svg"></md-icon> Subir codigo</md-button>
+                      <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="../media/icons/upload.svg"></md-icon> Subir codigo</md-button>
                       <input type='file' style="display:none" id='your-files'></input>
                     </md-menu-item>
                   </md-menu-content>
