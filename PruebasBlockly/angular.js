@@ -355,6 +355,7 @@
               $scope.statustext = response.statusText;
               $scope.headers = response.headers();
             });
+           $mdDialog.hide(); 
           };
       }
 function Hello($scope, $http) {
