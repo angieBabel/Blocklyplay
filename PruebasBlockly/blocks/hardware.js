@@ -3,7 +3,7 @@
 goog.provide('Blockly.Blocks.hardware');
 
 goog.require('Blockly.Blocks');
-
+//bloques de hardware
 Blockly.Blocks['led'] = {
   init: function() {
     this.appendDummyInput()
@@ -280,3 +280,107 @@ Blockly.Blocks['tone'] = {
     this.setHelpUrl('http://www.example.com/');
   }
 };
+
+//sensores
+//boton
+Blockly.Blocks['button'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Button");
+    this.appendValueInput("PIN")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(".Value");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//temperatura
+Blockly.Blocks['temperature'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Temperature");
+    this.appendValueInput("PIN")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(".Value");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//luz
+Blockly.Blocks['light'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Light");
+    this.appendValueInput("PIN")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(".Value");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+//touch
+Blockly.Blocks['touch'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Touch");
+    this.appendValueInput("PIN")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(".Value");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(210);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
