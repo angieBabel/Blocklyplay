@@ -160,7 +160,7 @@ Blockly.JavaScript['tone'] = function(block) {
 Blockly.JavaScript['button'] = function(block) {
   var value_pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code ="boton("+value_pin+".read)"
+  var code ="boton("+value_pin+".value)"
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -168,7 +168,7 @@ Blockly.JavaScript['button'] = function(block) {
 Blockly.JavaScript['temperature'] = function(block) {
   var value_pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code ="temperatura("+value_pin+".read)"
+  var code ="temperatura("+value_pin+".value)"
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -176,7 +176,7 @@ Blockly.JavaScript['temperature'] = function(block) {
 Blockly.JavaScript['light'] = function(block) {
   var value_pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code ="luz("+value_pin+".read)"
+  var code ="luz("+value_pin+".value)"
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
@@ -184,12 +184,12 @@ Blockly.JavaScript['light'] = function(block) {
 Blockly.JavaScript['touch'] = function(block) {
   var value_pin = Blockly.JavaScript.valueToCode(block, 'PIN', Blockly.JavaScript.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code ="touch("+value_pin+".read)"
+  var code ="touch("+value_pin+".value)"
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-/*"boton("+value_pin+".read);\n"*/
+/*"boton("+value_pin+".value);\n"*/
 
 
 

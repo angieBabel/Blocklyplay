@@ -290,7 +290,7 @@ Blockly.Blocks['button'] = {
     this.appendValueInput("PIN")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField(".Read");
+        .appendField(".Value");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(210);
@@ -306,7 +306,7 @@ Blockly.Blocks['temperature'] = {
     this.appendValueInput("PIN")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField(".Read");
+        .appendField(".Value");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(210);
@@ -322,7 +322,7 @@ Blockly.Blocks['light'] = {
     this.appendValueInput("PIN")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField(".Read");
+        .appendField(".Value");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(210);
@@ -338,7 +338,7 @@ Blockly.Blocks['touch'] = {
     this.appendValueInput("PIN")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField(".Read");
+        .appendField(".Value");
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(210);
