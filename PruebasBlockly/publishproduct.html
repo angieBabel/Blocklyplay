@@ -42,6 +42,9 @@
                 <textarea ng-model="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
               </md-input-container>
             </div>
+            <div id="publisherror" style="display:none"> <!-- errores -->
+              Hubo un error al hacer la publicacion: {{msg}}
+            </div>
             <!-- botones para cancelar y publicar -->
             <div layout="row" layout-align="end center">
               <md-button  class="md-raised" ng-click="cancel()" >

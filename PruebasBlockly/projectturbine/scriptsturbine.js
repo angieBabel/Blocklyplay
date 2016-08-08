@@ -104,8 +104,9 @@
         }
       }
     }
+    alert(coincidencias);
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
-    if (coincidencias==solucion.length) {
+    if (coincidencias=solucion.length-2) {
       var correct =document.getElementById('Correct').click()
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{

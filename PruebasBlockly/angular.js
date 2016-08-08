@@ -348,8 +348,9 @@
             $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
                 console.log(data);
               $scope.msg = "Post Data Submitted Successfully!";
+              $mdDialog.hide(); 
             }, function (response) {
-              alert('error')
+              var erromessage = document.getElementById('publisherror').style="display:block"              
               $scope.msg = "Service not Exists";
               $scope.statusval = response.status;
               $scope.statustext = response.statusText;
