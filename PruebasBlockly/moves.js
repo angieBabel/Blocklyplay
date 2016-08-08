@@ -262,6 +262,8 @@
     i=0;
     if(roadpaint.length===0){
       roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
+      /*alert(roadpaint[roadpaint.length-1].poX+' , '+roadpaint[roadpaint.length-1].poY)
+      alert(solucion[roadpaint.length-1].soX+' , '+solucion[roadpaint.length-1].soY)*/
     }
     interval= setInterval(function(){
       ctx.beginPath();
@@ -314,6 +316,8 @@
     i=0;
     if(roadpaint.length===0){
       roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
+      /*alert(roadpaint[roadpaint.length-1].poX+' , '+roadpaint[roadpaint.length-1].poY)
+      alert(solucion[roadpaint.length-1].soX+' , '+solucion[roadpaint.length-1].soY)*/
     }
     interval= setInterval(function(){
       ctx.beginPath();
@@ -374,6 +378,8 @@
     }
     if(count===0){
       roadpaint.push(new paintingObj(Math.round10(Xend,-2),Math.round10(Yend,-2),0,color));
+      /*alert(roadpaint[roadpaint.length-1].poX+' , '+roadpaint[roadpaint.length-1].poY)
+      alert(solucion[roadpaint.length-1].soX+' , '+solucion[roadpaint.length-1].soY)*/
     }
     if(count<no_steps){
       roadpaint[roadpaint.length-1]=(new paintingObj(Math.round10(Xend,-2),Math.round10(Yend,-2),0,color));
