@@ -382,10 +382,3 @@
             });
           };
       }
-function Hello($scope, $http) {
-    $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
-        success(function(data) {
-            $scope.greeting = data;
-            console.log(data);
-        });
-}
