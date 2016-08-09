@@ -100,6 +100,7 @@
     }
     if(verific===10){
       var correct =document.getElementById('Correct').click()
+      correcto[currentpanel-1]=true;
       //alert('Felicidades, haz completado correctamente el puzzle');
       roadpaint.splice(0,roadpaint.length);
     }else{

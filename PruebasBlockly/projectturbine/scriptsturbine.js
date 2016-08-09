@@ -104,15 +104,14 @@
         }
       }
     }
-    alert(coincidencias);
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias=solucion.length-2) {
       var correct =document.getElementById('Correct').click()
+      correcto[currentpanel-1]=true;
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
       var wrong =document.getElementById('Wrong').click()
-      //alert('Esta vez no lo conseguiste, intenta de nuevo')
-      
+      //alert('Esta vez no lo conseguiste, intenta de nuevo') 
     }
   }   
 

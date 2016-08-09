@@ -46,11 +46,11 @@
               Hubo un error al hacer la publicacion: {{msg}}
             </div>
             <!-- botones para cancelar y publicar -->
-            <div layout="row" layout-align="end center">
+            <div layout="row" layout-align="end center" >
               <md-button  class="md-raised" ng-click="cancel()" >
                 Cancelar
               </md-button>
-              <md-button class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="postdata(name, description, question, picture, active)" >
+              <md-button ng-disabled="publishbutton" id="publishbutton" class="md-raised" ng-style="{'background-color':'#26C6DA','color':'white'}" ng-click="postdata(name, description, question, picture, active)" >
                 Publicar
               </md-button>
             </div>

@@ -94,6 +94,7 @@
       function check1(){
         if (positionObj.objX===stepsizeX*9) {
             var correct =document.getElementById('Correct').click()
+            correcto[currentpanel-1]=true;
             //alert('Felicidades haz completado correctamente el puzzle');
           }
           else{

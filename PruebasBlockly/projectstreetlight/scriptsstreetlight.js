@@ -133,6 +133,7 @@
       //si coincidio en todas las paradas, sin importar el orden lo da por bueno
       if (coincidencias==semaforos.length) {
         var correct =document.getElementById('Correct').click()
+        correcto[currentpanel-1]=true;
         //alert('Felicidades haz realizado correctamente el puzzle')
       }else{
         var wrong =document.getElementById('Wrong').click()
