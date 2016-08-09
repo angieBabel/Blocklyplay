@@ -78,6 +78,7 @@
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
         if (coincidencias==solucion.length) {
           var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
         }else{
          var wrong =document.getElementById('Wrong').click()
           location.reload();

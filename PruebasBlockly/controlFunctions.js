@@ -153,15 +153,93 @@ function highlightBlock(id) {
   workspace.highlightBlock(id);
   highlightPause = true;
 }
+
+/*$scope.showWrong = function(ev) {
+
+        };
+*/
+
+
 //Funcion para mostrar el código
 function showCode() {
-  // Generate JavaScript code and display it.
+  //Generate JavaScript code and display it.
   var code = Blockly.JavaScript.workspaceToCode(workspace);
+  /*$mdDialog.show({
+              clickOutsideToClose: true,
+              scope: $scope,        // use parent scope in template
+              preserveScope: true,  // do not forget this if use parent scope
+              // Since GreetingController is instantiated with ControllerAs syntax
+              // AND we are passing the parent '$scope' to the dialog, we MUST
+              // use 'vm.<xxx>' in the template markup
+              template: 
+              '<div flex="50">'+
+                '<md-dialog aria-label="correct answer" id="correct answer">'+
+                  '<md-dialog-content >'+
+                  code+
+                  '</md-dialog-content>'+
+                '</md-dialog>'+
+              '</div>',
+              controller: function wrongController($scope, $mdDialog) {
+                $scope.nuevointento = function() {
+                  location.reload();
+                };
+              }
+           });*/
   alert(code);
+}
+function loadCode(){
+      /*var program;
+      switch(currentpanel) {
+            case 1:
+                program = window.localStorage.getItem("turbina1");
+                break;
+            case 2:
+                program = window.localStorage.getItem("turbina2");
+                break;
+            case 3:
+                program = window.localStorage.getItem("turbina3");
+            case 4:
+                program = window.localStorage.getItem("turbina4");
+            default:
+                program = window.localStorage.getItem("turbina1");
+          }*/
+      Blockly.mainWorkspace.clear();
+      var textToDom = Blockly.Xml.textToDom(program);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
+    }
+
+/*function runCode() {
+      //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
+      parseCode();
+      //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
+      intervalo= setInterval(function(){finish();},15)
+      //se guarda lo que hay en el workspaces en el almcaneamiento local
+      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+      domToPretty = Blockly.Xml.domToPrettyText(xml);
+      switch(currentpanel) {
+          case 1:
+              window.localStorage.setItem("turbina1", domToPretty);
+              break;
+          case 2:
+              window.localStorage.setItem("turbina2", domToPretty);
+              break;
+          case 3:
+              window.localStorage.setItem("turbina3", domToPretty);
+          case 4:
+              window.localStorage.setItem("turbina4", domToPretty);
+          default:
+              window.localStorage.setItem("turbina1", domToPretty);
+        }
+      //window.localStorage.setItem("panel5l2", domToPretty);
+    }*/
+function finish(){
+  if(acabo==1){
+        nextStep();
+      }
 }
 
 var codeHW; //variable para enviar el codigo limpio al hardware
-function parseCode(){
+function runCode(){//antes era parsecode
     puntaje[currentpanel-1]+=1;
     codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     /*window.LoopTrap = 1000;
@@ -178,6 +256,8 @@ function parseCode(){
     //se habilita la funcion para rastrear el workspace
     workspace.traceOn(true);
     workspace.highlightBlock(null);
+    //la funcion de runcode se cambio a hacer el parsing tambien
+    intervalo= setInterval(function(){finish();},15)
 }
 //funcion para ir recorriendo el interprete, y verificar la respuesta al terminar
 function nextStep() {
@@ -253,13 +333,10 @@ function stop(){
           }
 }
 
-//para mostrar el publicar en caso de que haya hecho bien el ejercicio
-function openpublish(){
-  var publicar =document.getElementById('Publish').click()
-}
-
 //para sacar el thumbnail
 function generate() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  domToPretty = Blockly.Xml.domToPrettyText(xml);
   var newSVG = document.getElementById('blocklyDiv').cloneNode(true);
   var trash = newSVG.querySelector('g.blocklyTrash');
   trash.remove();
@@ -285,7 +362,6 @@ function loadThumbnail(){
 function showFileInput(){
   var openfile =document.getElementById('your-files').click()
 }
-//funcion que carga un archivo XML
 function loadXML() {
   //se define la funcion Reader, de tipo FileReader
   var reader = new FileReader();

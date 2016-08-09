@@ -116,6 +116,7 @@
         //alert(verific);
         if(verific===solution.length){
           var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
 
         }else{
           var wrong =document.getElementById('Wrong').click()

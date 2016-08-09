@@ -2,6 +2,7 @@
     var domToPretty;//variable para guardar el XML
     var previa;//variable para tener la previa
     var puntaje=[0,0,0,0]; //para saber cuantas veces ha hecho los ejercicios
+    var correcto=[false,false,false,false];//define si el ejercicio lo hizo o no correctamente
     var program;
     
     var currentpanel=0;//para saber en que panel esta

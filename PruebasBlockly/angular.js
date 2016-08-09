@@ -1,7 +1,20 @@
+ var usertype=0; //variable para saber si el usuario puede editar o no
+ var yaposteo=[false,false,false,false]; //vairable para saber si ya posteo por lo menos un ejercicio, se usa un vector para validar todos los ejercicios
+ var wantstoexit =[false,false,false,false]; //variable para saber si desea salir, igual vectores para validar cada nivel
+ var nivel=1;
+
  angular.module('Blocklyplay', ['ngMaterial'])
       .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
+          //funcion que compara si el usuario peude editar o no, si no puede deshabilita tanto el toolboox como el div
+          if (usertype==1) {
+            workspace.options.maxBlocks = 0;
+            document.getElementById('blocklyArea').style.pointerEvents = 'none';
+            document.getElementById('menubutton').style.pointerEvents = 'none';
+            //document.getElementById('menubutton').disabled= true;
+          };
+
           $mdSidenav('Instrucciones1')
                 .toggle();
                 navID = 'Instrucciones1';
@@ -11,12 +24,11 @@
         $scope.nivel4= true;
         $scope.isHW= false;
         $scope.GetXML = function () {
-            $http.get('http://wegoo-staging.herokuapp.com/v1/projects').
+          //en nivel esta el nivel que solicitara
+            $http.get('http://wegoo-staging.herokuapp.com/v1/projects/').
             success(function(data) {
                   $scope.greeting = data;
                   console.log(data);
-                 /* {{greeting[0].projects.name}}*/
-                 //alert(data[0].projects.description)
                   program=data[data.length-1].projects.question;//data[0].projects.description;
                   loadCode();
                   //alert(program);
@@ -53,34 +65,6 @@
         $scope.openMenu = function($mdOpenMenu, ev) {
           originatorEv = ev;
           $mdOpenMenu(ev);
-        };
-        $scope.showCorrects = function(ev) {
-          // Appending dialog to document.body to cover sidenav in docs app
-          var confirm = $mdDialog.confirm()
-                .title('Felicidades')
-                .textContent('Haz realizado correctamente el puzzle, publica para guardar tu avance')
-                .ariaLabel('Felicidades')
-                .targetEvent(ev)
-                .ok('Publicar')
-                .cancel('Cancelar');
-          $mdDialog.show(confirm).then(function() {
-            
-          }, function() {
-             switch(currentpanel) {
-                case 1:                  
-                    $scope.nivel2= false;
-                    break;
-                case 2:                  
-                    $scope.nivel3= false;
-                    break;
-                case 3:                  
-                    $scope.nivel4= false;
-                case 4:                  
-                    /*aqui regresaria al menu principal o algo asi*/
-                default:                  
-                    $scope.nivel2= false;
-              }
-          });
         };
         $scope.isHWF = function() {
           $scope.isHW= true;
@@ -121,6 +105,7 @@
                 '</div>',
               controller: function correctController($scope, $mdDialog) {
                 $scope.publicar = function() {
+                  nivel = currentpanel;
                   switch(currentpanel) {
                     case 1:                  
                         $scope.nivel2= false;
@@ -258,7 +243,36 @@
                     }
             }
         )};
-        $scope.showTabDialog = function(ev) { 
+        $scope.volver = function(ev) {
+          wantstoexit[currentpanel-1]=true;
+          if (!yaposteo[currentpanel-1]&&usertype==0) {
+            nivel = currentpanel;
+             var confirm = $mdDialog.confirm()
+                    .title('Espera')
+                    .textContent('Antes de salir guarda tu avance')
+                    .ariaLabel('Guarda')
+                    .targetEvent(ev)
+                    .ok('Publicar')
+                    .cancel('Cancelar');
+              $mdDialog.show(confirm).then(function() {
+                $mdDialog.show({
+                        controller: DialogController,
+                        templateUrl: '../publishproduct.html',
+                        parent: angular.element(document.body),
+                        targetEvent: ev,
+                        clickOutsideToClose:true
+                      });
+                      generate();
+              },function() {
+                wantstoexit[currentpanel-1]=false;
+              });
+          }else{
+            location.href = '../index.html';
+          };
+          // Appending dialog to document.body to cover sidenav in docs app
+        };      
+        $scope.showTabDialog = function(ev) {
+          nivel = currentpanel;
             $mdDialog.show({
               controller: DialogController,
               templateUrl: '../publishproduct.html',
@@ -323,10 +337,12 @@
           
         });
       function DialogController($scope,$http, $mdDialog) {
+        if (usertype==1) {
+            $scope.publishbutton=true;
+            //document.getElementById('publishbutton').style.pointerEvents = 'none';
+          };
         $scope.vistaprevia = function(){
           loadThumbnail();
-          /*var datosr= document.getElementById("inputXML").value = domToPretty;
-          var datos= document.getElementById("inputPREV").value = previa;*/
           showTabDialog();
           
         };
@@ -337,6 +353,11 @@
           $mdDialog.cancel();
         };
         $scope.postdata = function (name, description, active) {
+            yaposteo[nivel-1]=true
+            //alert('current panel '+currentpanel);
+            //en nivel se encuentra el nivel que postea
+            //correcto=[nivel];//en correcto se valida si el ejercicio esta bien o no
+            //alert(correcto[nivel-1]+'si el ejercicio esta correcto del nivel'+nivel)
             var data = {
               name: name,
               description: description,
@@ -348,6 +369,9 @@
             $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
                 console.log(data);
               $scope.msg = "Post Data Submitted Successfully!";
+              if (wantstoexit[currentpanel-1]) {
+                location.href = '../index.html';
+              };
               $mdDialog.hide(); 
             }, function (response) {
               var erromessage = document.getElementById('publisherror').style="display:block"              

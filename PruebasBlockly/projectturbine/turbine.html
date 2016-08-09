@@ -50,7 +50,7 @@
     <md-toolbar layout="column" class="md-tall" id="maintoolbar">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
-            <md-button class="md-icon-button" aria-label="Home" onclick="location.href = '../index.html'">
+            <md-button class="md-icon-button" aria-label="Home" ng-click="volver($event)">
               <md-icon md-svg-icon="../media/icons/arrow-left.svg">
             </md-button>
             <h6 class="md-title ">Kite</h6>   
@@ -103,7 +103,7 @@
                 <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
                   <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
                 </md-button>
-                <md-menu>
+                <md-menu id="menubutton">
                   <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
                     <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
                   </md-button>
@@ -427,6 +427,7 @@
               minScale: 0.3,
               scaleSpeed: 1.2},
             toolbox: document.getElementById('toolbox')});
+      
     var onresize = function(e) {
       // Compute the absolute coordinates and dimensions of blocklyArea.
       var element = blocklyArea;
@@ -447,8 +448,16 @@
       };
     window.addEventListener('resize', onresize, false);
     onresize();
+
+    //Variable para controlar la subida de archivos
+    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+      //se agrega un EventListener, para saber que se ha acceido a el
+      control.addEventListener("change", function(event) {
+           loadXML();
+      }, false);
     //para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
-    function loadCode(){
+    //la funcion de loadcode se paso a control functions
+    /*function loadCode(){
       var program;
       switch(currentpanel) {
             case 1:
@@ -467,15 +476,16 @@
       Blockly.mainWorkspace.clear();
       var textToDom = Blockly.Xml.textToDom(program);
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
-    }
+    }*/
     //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
     //funcion de nextep migradas al control functions.js
-    function finish(){
+    /*function finish(){
       if(acabo==1){
             nextStep();
           }
-    }
-    function runCode() {
+    }*/
+    //la funcion de runcode se paso al contol functions
+    /*function runCode() {
       //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
       parseCode();
       //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
@@ -498,15 +508,15 @@
               window.localStorage.setItem("turbina1", domToPretty);
         }
       //window.localStorage.setItem("panel5l2", domToPretty);
-    }
+    }*/
     //las funciones para obtener el thumbnail se cambiaron al controlFunctions.js
     //las funciones de guardar XML estan en el archivo controlFunctions.js
     //Variable para controlar la subida de archivos
-    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
+   /* var control = document.getElementById("your-files");//se hace referencia al input de tipo file
       //se agrega un EventListener, para saber que se ha acceido a el
       control.addEventListener("change", function(event) {
            loadXML();
-      }, false);
+      }, false);*/
     //para hacer click en el inputfile se paso al controlfunctions.js
     //loadXML se paso a controlfunctions.js
     //send to hardware se paso al controlfunctions.js

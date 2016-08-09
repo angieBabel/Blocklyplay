@@ -83,6 +83,7 @@
         };
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
         if (coincidencias==solution.length) {
+          correcto[currentpanel-1]=true;
           var correct =document.getElementById('Correct').click()
         }else{
          var wrong =document.getElementById('Wrong').click()
