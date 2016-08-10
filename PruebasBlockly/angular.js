@@ -354,7 +354,7 @@
         };
         $scope.postdata = function (name, description, active) {
             yaposteo[nivel-1]=true
-            //alert('current panel '+currentpanel);
+            //alert('current panel '+..);
             //en nivel se encuentra el nivel que postea
             //correcto=[nivel];//en correcto se valida si el ejercicio esta bien o no
             //alert(correcto[nivel-1]+'si el ejercicio esta correcto del nivel'+nivel)
