@@ -19,8 +19,8 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*10;
-        Y = stepsizeY*5;
+        X = stepsizeX*6;
+        Y = stepsizeY*2;
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -30,12 +30,11 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
         panel1();
 
       }
@@ -93,7 +92,7 @@
         for (var i = 0; i < solution.length; i++) {
               //alert(roadpaint[i].poColor);
             if (roadpaint.length==solution.length) {
-              if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
                 verific=verific+1;
               }
             }else{
@@ -109,6 +108,7 @@
             //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
             if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
               verific=verific+1;
+              
             }
           }
         }
@@ -143,8 +143,8 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*10;
-        Y = stepsizeY*5;
+        X = stepsizeX*6;
+        Y = stepsizeY*2;
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -154,12 +154,25 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
+
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
+
+
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
+
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//9
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//10
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//11
+
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//8
+        
+        
+        
         panel2();
 
       }
@@ -215,9 +228,9 @@
      function check2(){
         var verific=0;
         for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
+              //alert(Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
             if (roadpaint.length==solution.length) {
-              if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
                 verific=verific+1;
               }
             }else{
@@ -233,6 +246,7 @@
             //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
             if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
               verific=verific+1;
+              
             }
           }
         }
@@ -268,8 +282,8 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*10;
-        Y = stepsizeY*5;
+        X = stepsizeX*2;
+        Y = stepsizeY;
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -279,12 +293,22 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(X,Y,0,0));//1
-        solution.push(new solutionObj((X+(stepsizeX*4)),Y,0,0));//2
-        solution.push(new solutionObj((X+(stepsizeX*4)),(Y+(stepsizeY*5)),0,0));//3
-        solution.push(new solutionObj((X-(stepsizeX*2)),(Y+(stepsizeY*5)),0,0)); //4
-        solution.push(new solutionObj((X-(stepsizeX*2)),Y,0,0)); //5
-        solution.push(new solutionObj(X,Y,0,0)); //6
+
+        /*solution.push(new solutionObj(stepsizeX*2,stepsizeY,0,0));//1*/
+        solution.push(new solutionObj(stepsizeX*2,stepsizeY,0,0));//1
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY,0,0));//2
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//3
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//4
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//5
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0));//6
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //7
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0)); //8
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//9
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//10
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//11
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//12
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//13
+        
         panel3();
 
       }
@@ -338,11 +362,12 @@
       }
 
      function check3(){
-      var verific=0;
+        var verific=0;
+        alert(roadpaint.length+' , '+solution.length)
         for (var i = 0; i < solution.length; i++) {
-              //alert(roadpaint[i].poColor);
+              alert('punto '+i+':  '+Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
             if (roadpaint.length==solution.length) {
-              if(roadpaint[i].poX === solution[i].soX && roadpaint[i].poY === solution[i].soY){
+              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
                 verific=verific+1;
               }
             }else{
@@ -358,6 +383,7 @@
             //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
             if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
               verific=verific+1;
+              
             }
           }
         }

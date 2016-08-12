@@ -99,6 +99,9 @@
     limtX = positionObj.objX + distX;
     limtY = positionObj.objY + distY;
     i=0;
+    if(roadpaint.length===0){
+      roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
+    }
    
     interval= setInterval(function(){
       ctx.beginPath();
@@ -133,6 +136,7 @@
       positionObj.objX=Xaux;
       positionObj.objY=Yaux;
       rotar(positionObj.objZ,'"ahead"');
+      paint(positionObj.objX,positionObj.objY,nosteps,0);
       i++;
       if(i==nosteps){
         
@@ -149,6 +153,10 @@
     limtX = positionObj.objX - distX;
     limtY = positionObj.objY - distY;
     i=0;
+    if(roadpaint.length===0){
+      roadpaint.push(new paintingObj(positionObj.objX,positionObj.objY,0,0));
+     
+    }
     interval= setInterval(function(){
       ctx.strokeStyle = "#006400";
       ctx.fillStyle = "#6ab150";
@@ -185,6 +193,7 @@
       rotar(positionObj.objZ, '"ahead"');
       positionObj.objX=Xaux;
       positionObj.objY=Yaux;
+      paint(positionObj.objX,positionObj.objY,nosteps,0);
       i++;
       if(i==nosteps){
         stopTimer();
@@ -218,8 +227,10 @@
           break;
       case 3:
           panel3();
+          break;
       case 4:
           panel4();
+          break;
       default:
           panel1();
     }
