@@ -24,12 +24,7 @@
     Yaux= positionObj.objY;
 
     semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
+    
     panel1();
   }
   //dibuja el panel
@@ -38,6 +33,8 @@
           imgback.src = "../media/mapa_semaforo.png";
 
    imgback.onload = function() {
+    ii=-1;
+              jj=-1;
       ctx.drawImage(imgback, 0, 0,ancho,alto);
       while(initX<canvas.width-stepsizeX){
         initX=initX+stepsizeX;
@@ -47,7 +44,11 @@
             ctx.fillStyle = "#E3E2E2";
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
+            ii++;
+            ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
           }
+          jj++
+          ctx.fillText(jj,stepsizeX,stepsizeY*jj);
           initY=0;
       }
       initX=0;
@@ -56,20 +57,10 @@
           semaforo.src = "../media/semaforo.png";
      semaforo.onload = function() {
         ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       }
       ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       Avatar1();
     }
 
@@ -161,18 +152,15 @@
     Yaux= positionObj.objY;
 
     semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
+    
     panel2();
   }
   //dibuja el panel
   function panel2(){
     var imgback = new Image();
           imgback.src = "../media/mapa_semaforo.png";
+
+          ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
 
    imgback.onload = function() {
       ctx.drawImage(imgback, 0, 0,ancho,alto);
@@ -184,7 +172,12 @@
             ctx.fillStyle = "#E3E2E2";
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
+            ii++;
+            ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+
           }
+          jj++
+          ctx.fillText(jj,stepsizeX,stepsizeY*jj);
           initY=0;
       }
       initX=0;
@@ -193,20 +186,10 @@
           semaforo.src = "../media/semaforo.png";
      semaforo.onload = function() {
         ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       }
       ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       Avatar2();
     }
 
@@ -299,12 +282,7 @@
     Yaux= positionObj.objY;
 
     semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*4,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*12,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*21,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*1,-2),Math.round10(stepsizeY*21,-2),0,0));
+    
     panel3();
   }
   //dibuja el panel
@@ -331,20 +309,10 @@
           semaforo.src = "../media/semaforo.png";
      semaforo.onload = function() {
         ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       }
       ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*21),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*12),(stepsizeY*2),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*2),(stepsizeY*12),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*3.5),(stepsizeY*19),stepsizeX,stepsizeY*2);
-        ctx.drawImage(semaforo, (stepsizeX*0),(stepsizeY*19),stepsizeX,stepsizeY*2);
+        
       Avatar3();
     }
 

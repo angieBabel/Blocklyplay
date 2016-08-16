@@ -34,7 +34,7 @@
         solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
         solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
         solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
+        
         panel1();
 
       }
@@ -86,34 +86,37 @@
         }
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
       }
-
      function check1(){
-      var verific=0;
-        for (var i = 0; i < solution.length; i++) {
+        var verific=0;
+        var valido1=false;
+        var valido2=false;
+        var primeroCuadro1=-1;
+        var primeroCuadro2=-1;
+        for (var i = 0; i < roadpaint.length; i++) {
               //alert(roadpaint[i].poColor);
-            if (roadpaint.length==solution.length) {
-              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
-                verific=verific+1;
+            if (roadpaint.length>solution.length) {
+              for (var j = 0; j < solution.length; j++) {
+                if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[j].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[j].soY,-2)){
+                  verific=verific+1;
+                  if (primeroCuadro1>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro1].poX,-2)) {
+                    valido1=true;
+                  };
+                  if (primeroCuadro2>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro2].poX,-2)) {
+                    valido2=true;
+                  };
+                  if (j<=3 && primeroCuadro1==-1) {
+                    primeroCuadro1=i;
+                  }else if (i<=7 && primeroCuadro2==-1) {
+                    primeroCuadro2=i;
+                  };
+                }
               }
             }else{
-              i=solution.length
+              i=roadpaint.length
             };  
         }
-        //alert(verific);
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-              
-            }
-          }
-        }
-        //alert(verific);
-        if(verific===solution.length){
+        alert(verific+' coincidencias');
+        if(verific>solution.length && valido1 ){/*&& valido2*/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
 
@@ -162,14 +165,14 @@
         solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
 
 
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
+        //solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
+        //solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
 
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//9
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//10
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//11
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//8
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//9
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//10
 
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//8
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//11
         
         
         
@@ -225,7 +228,7 @@
       img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
     }
 
-     function check2(){
+     /*function check2(){
         var verific=0;
         for (var i = 0; i < solution.length; i++) {
               //alert(Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
@@ -259,9 +262,46 @@
           var wrong =document.getElementById('Wrong').click()
         }
         roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+     }*/
+    function check2(){
+        var verific=0;
+        var valido1=false;
+        var valido2=false;
+        var primeroCuadro1=-1;
+        var primeroCuadro2=-1;
+        for (var i = 0; i < roadpaint.length; i++) {
+              //alert(roadpaint[i].poColor);
+            if (roadpaint.length>solution.length) {
+              for (var j = 0; j < solution.length; j++) {
+                if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[j].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[j].soY,-2)){
+                  verific=verific+1;
+                  if (primeroCuadro1>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro1].poX,-2)) {
+                    valido1=true;
+                  };
+                  if (primeroCuadro2>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro2].poX,-2)) {
+                    valido2=true;
+                  };
+                  if (j<=3 && primeroCuadro1==-1) {
+                    primeroCuadro1=i;
+                  }else if (i<=7 && primeroCuadro2==-1) {
+                    primeroCuadro2=i;
+                  };
+                }
+              }
+            }else{
+              i=roadpaint.length
+            };  
+        }
+        alert(verific+' coincidencias');
+        if(verific>solution.length && valido1 && valido2){/**/
+          var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
+        }else{
+          var wrong =document.getElementById('Wrong').click()
+        }
+        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
      }
-
-/*scripts para el segundo nivel*/
+/*scripts para el tercer nivel*/
       //las variables generales se pasaron a moves.js
       //inicialización de las variables propias del ejercicio 1
       var solution=[];
@@ -294,20 +334,21 @@
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
 
-        /*solution.push(new solutionObj(stepsizeX*2,stepsizeY,0,0));//1*/
-        solution.push(new solutionObj(stepsizeX*2,stepsizeY,0,0));//1
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY,0,0));//2
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//3
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//4
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//5
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0));//6
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //7
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0)); //8
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//9
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//10
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//11
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//12
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//13
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
+        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
+        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
+
+
+        //solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
+        //solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
+
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//8
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//9
+        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//10
+
+        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//11
         
         panel3();
 
@@ -361,11 +402,11 @@
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
-     function check3(){
+     /*function check3(){
         var verific=0;
         alert(roadpaint.length+' , '+solution.length)
         for (var i = 0; i < solution.length; i++) {
-              alert('punto '+i+':  '+Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
+              //alert('punto '+i+':  '+Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
             if (roadpaint.length==solution.length) {
               if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
                 verific=verific+1;
@@ -392,6 +433,44 @@
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
 
+        }else{
+          var wrong =document.getElementById('Wrong').click()
+        }
+        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
+     }*/
+     function check3(){
+        var verific=0;
+        var valido1=false;
+        var valido2=false;
+        var primeroCuadro1=-1;
+        var primeroCuadro2=-1;
+        for (var i = 0; i < roadpaint.length; i++) {
+              //alert(roadpaint[i].poColor);
+            if (roadpaint.length>solution.length) {
+              for (var j = 0; j < solution.length; j++) {
+                if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[j].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[j].soY,-2)){
+                  verific=verific+1;
+                  if (primeroCuadro1>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro1].poX,-2)) {
+                    valido1=true;
+                  };
+                  if (primeroCuadro2>-1 && Math.round10(roadpaint[i].poX,-2)==Math.round10(roadpaint[primeroCuadro2].poX,-2)) {
+                    valido2=true;
+                  };
+                  if (j<=3 && primeroCuadro1==-1) {
+                    primeroCuadro1=i;
+                  }else if (i<=7 && primeroCuadro2==-1) {
+                    primeroCuadro2=i;
+                  };
+                }
+              }
+            }else{
+              i=roadpaint.length
+            };  
+        }
+        alert(verific+' coincidencias');
+        if(verific>solution.length && valido1 && valido2){/**/
+          var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
         }else{
           var wrong =document.getElementById('Wrong').click()
         }
