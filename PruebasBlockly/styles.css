@@ -17,9 +17,11 @@ canvas {
 
 #divCanvas{
 	position :  relative ;
-	 top :  -10vh ;
+	/* top :  -10vh ;*/
+	 top :  -2vh ;
 	 z-index :  4 ; 
-	 height :  85vh;
+	 height :  90vh;
+
 }
 .md-dialog-content .md-active {
 	color: #26C6DA; 
@@ -41,7 +43,9 @@ text-align : justify;
 	}
 }
 #maintoolbar{
-	background-color:#26C6DA;
+	background-color:#EDE7F6;
+	
+	color: #37474F;
 
 }
 /*#blocklyDiv{
@@ -90,19 +94,24 @@ text-align : justify;
 	width: 40vw;
 }
 
-<div flex-gt-md="20" flex="25">
-<div flex-gt-md="55" flex="45">
-<div flex-gt-md="25"flex="20">
+#blocklyArea{
+	
+	background-color: #EDE7F6;
+}
+#blocklyDiv{
+	position: relative;
+	top: 3vh;
+	background-color: #EDE7F6;
+}
+#canvasArea{
+	background-color: #EDE7F6;
+}
+.md-button {
+	/*min-heig: 60px;*/
+  min-height: 10px !important;
+  /*background-color: black;*/
 
-
-
-
-
-
-
-
-
-
+}
 
 
 

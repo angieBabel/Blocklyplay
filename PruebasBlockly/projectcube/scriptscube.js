@@ -34,7 +34,7 @@
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
           var imgback = new Image();
-                  imgback.src = "../media/citycube.jpg";
+                  imgback.src = "../media/cuboBack.jpg";
                 
            imgback.onload = function() {
             ctx.drawImage(imgback, 0, 0,ancho,alto);
@@ -51,7 +51,7 @@
                   initY=0;
               }
               initX=0;
-              var casa = new Image();
+             /* var casa = new Image();
                   casa.src = "../media/cube2";
               casa.onload = function() {
                 ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
@@ -62,7 +62,7 @@
               carro.onload = function() {
                 ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
               }
-              ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
+              ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);*/
               Avatar1();
             }
         }
