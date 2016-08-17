@@ -258,7 +258,7 @@
         //se restaura el estado de las luces
         luz=bluz;
         luzTrasera=bluzT;
-        altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),0,0));
+        altos.push(new solutionObj(Math.round10(positionObj.objX,-2),Math.round10(positionObj.objY,-2),secs,0));
         stopTimer();
       };
     },100);
@@ -558,8 +558,10 @@
                 break;
             case 3:
                 panel3();
+                break;
             case 4:
                 panel4();
+                break;
             default:
                 panel1();
           }
@@ -573,8 +575,10 @@
                 break;
             case 3:
                 Avatar3();
+                break;
             case 4:
                 Avatar4();
+                break;
             default:
                 Avatar1();
           }
