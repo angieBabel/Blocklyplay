@@ -43,10 +43,10 @@ text-align : justify;
 	}
 }
 #maintoolbar{
-	background-color:#EDE7F6;
-	
-	color: #37474F;
+	background: linear-gradient(#D1C4E9, #EDE7F6); 
+	/*background-color:#EDE7F6;*/
 
+	color: #607D8B;
 }
 /*#blocklyDiv{
 	position: absolute;
@@ -95,16 +95,18 @@ text-align : justify;
 }
 
 #blocklyArea{
-	
-	background-color: #EDE7F6;
+	/*background-color: #EDE7F6;*/
+	background: linear-gradient(#EDE7F6, #fff); 
 }
 #blocklyDiv{
 	position: relative;
 	top: 3vh;
-	background-color: #EDE7F6;
+	/*background-color: #EDE7F6;*/
+	 background: linear-gradient(#EDE7F6, #fff); 
 }
 #canvasArea{
-	background-color: #EDE7F6;
+	/*background-color: #EDE7F6;*/
+	 background: linear-gradient(#EDE7F6, #fff); 
 }
 .md-button {
 	/*min-heig: 60px;*/
