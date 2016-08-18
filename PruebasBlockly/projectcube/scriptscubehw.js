@@ -31,7 +31,7 @@
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
           var imgback = new Image();
-          imgback.src = "../media/ledV2.png";
+          imgback.src = "../media/cubo_hardware.png";
           imgback.onload = function() {
             ctx.drawImage(imgback, 0, 0,ancho,alto);
             ctx.beginPath();
@@ -54,20 +54,20 @@
 
       //Drawing avatar
       function Avatar1(){
-        avatarwith=stepsizeX;avatarheight=stepsizeY;
+        avatarwith=stepsizeX*.8;avatarheight=stepsizeY*1.1;
           if (pinled==0) {
-                led1.src = "../media/led2.png";
+                led1.src = "../media/ledOff.png";
           }else if (pinled==2) {
             if (ledstatus=='On') {
-                led1.src = "../media/led1.png";
+                led1.src = "../media/ledOn3.png";
             }else{
-                led1.src = "../media/led2.png";
+                led1.src = "../media/ledOff.png";
             };
           };
         led1.onload = function() {
-            ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
+            ctx.drawImage(led1,stepsizeX*4.1, stepsizeY*.5,avatarwith,avatarheight);
           }
-          ctx.drawImage(led1,stepsizeX*4, stepsizeY*.2 ,avatarwith,avatarheight);
+          ctx.drawImage(led1,stepsizeX*4.1, stepsizeY*.5,avatarwith,avatarheight);
       }
 
       function check1(){
