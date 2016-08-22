@@ -19,8 +19,8 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*6;
-        Y = stepsizeY*2;
+        X = stepsizeX*8;
+        Y = stepsizeY*4;
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -30,10 +30,10 @@
         //se inicializan los valores auxiliares para poder pintar
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*4,0,0));//1
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*4,0,0));//2
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*8,0,0));//3
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*8,0,0)); //4
         
         panel1();
 
@@ -60,7 +60,7 @@
           painroad();
           Avatar1();
         }
-        imgback.src = "../media/mapa_casa.png";
+        imgback.src = "../media/casaBack.png";
       }
 
       //Drawing avatar
@@ -146,8 +146,9 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*6;
-        Y = stepsizeY*2;
+        X = stepsizeX*8;
+        Y = stepsizeY*4;
+
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -158,21 +159,19 @@
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
 
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*4,0,0));//1
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*4,0,0));//2
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*8,0,0));//3
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*8,0,0)); //4
 
 
         //solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
         //solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
 
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//8
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//9
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//10
-
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//11
+        solution.push(new solutionObj(stepsizeX*7,stepsizeY*5,0,0));//8
+        solution.push(new solutionObj(stepsizeX*7,stepsizeY*7,0,0));//9
+        solution.push(new solutionObj(stepsizeX*4,stepsizeY*7,0,0));//10
+        solution.push(new solutionObj(stepsizeX*4,stepsizeY*5,0,0));//11
         
         
         
@@ -201,7 +200,7 @@
           painroad();
           Avatar2();
         }
-        imgback.src = "../media/mapa_casa.png";
+        imgback.src = "../media/casaBack.png";
       }
 
     //Drawing avatar
@@ -227,42 +226,6 @@
       }
       img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
     }
-
-     /*function check2(){
-        var verific=0;
-        for (var i = 0; i < solution.length; i++) {
-              //alert(Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
-            if (roadpaint.length==solution.length) {
-              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
-                verific=verific+1;
-              }
-            }else{
-              i=solution.length
-            };  
-        }
-        //alert(verific);
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-              
-            }
-          }
-        }
-        //alert(verific);
-        if(verific===solution.length){
-          var correct =document.getElementById('Correct').click()
-          correcto[currentpanel-1]=true;
-
-        }else{
-          var wrong =document.getElementById('Wrong').click()
-        }
-        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
-     }*/
     function check2(){
         var verific=0;
         var valido1=false;
@@ -322,8 +285,8 @@
         stepsizeX=canvas.width/15;
         stepsizeY=canvas.height/10;
 
-        X = stepsizeX*2;
-        Y = stepsizeY;
+        X = stepsizeX*5;
+        Y = stepsizeY*2;
         initX=0;
         initY=0;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
@@ -334,21 +297,19 @@
         Xaux = positionObj.objX;
         Yaux= positionObj.objY;
 
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0));//1
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*2,0,0));//2
-        solution.push(new solutionObj(stepsizeX*11,stepsizeY*5,0,0));//3
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*5,0,0)); //4
-        solution.push(new solutionObj(stepsizeX*6,stepsizeY*2,0,0)); //5
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*4,0,0));//1
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*4,0,0));//2
+        solution.push(new solutionObj(stepsizeX*14,stepsizeY*8,0,0));//3
+        solution.push(new solutionObj(stepsizeX*8,stepsizeY*8,0,0)); //4
 
 
         //solution.push(new solutionObj(stepsizeX*5,stepsizeY*2,0,0));//6
         //solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//7
 
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*5,0,0));//8
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*5,0,0));//9
-        solution.push(new solutionObj(stepsizeX*3,stepsizeY*3,0,0));//10
-
-        solution.push(new solutionObj(stepsizeX*5,stepsizeY*3,0,0));//11
+        solution.push(new solutionObj(stepsizeX*7,stepsizeY*5,0,0));//8
+        solution.push(new solutionObj(stepsizeX*7,stepsizeY*7,0,0));//9
+        solution.push(new solutionObj(stepsizeX*4,stepsizeY*7,0,0));//10
+        solution.push(new solutionObj(stepsizeX*4,stepsizeY*5,0,0));//11
         
         panel3();
 
@@ -375,7 +336,7 @@
           painroad();
           Avatar3();
         }
-        imgback.src = "../media/mapa_casa.png";
+        imgback.src = "../media/casaBack.png";
       }
 
       //Drawing avatar
@@ -401,43 +362,6 @@
         }
         img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
       }
-
-     /*function check3(){
-        var verific=0;
-        alert(roadpaint.length+' , '+solution.length)
-        for (var i = 0; i < solution.length; i++) {
-              //alert('punto '+i+':  '+Math.round10(roadpaint[i].poX,-2)+' , '+ Math.round10(solution[i].soX,-2)+' SEP  '+Math.round10(roadpaint[i].poY,-2)+' , '+ Math.round10(solution[i].soY,-2));
-            if (roadpaint.length==solution.length) {
-              if(Math.round10(roadpaint[i].poX,-2) === Math.round10(solution[i].soX,-2) && Math.round10(roadpaint[i].poY,-2) === Math.round10(solution[i].soY,-2)){
-                verific=verific+1;
-              }
-            }else{
-              i=solution.length
-            };  
-        }
-        //alert(verific);
-        if(verific==2) {
-          verific=0;
-          //alert(solution.length);
-          for (var i = solution.length-1; i >= 0; i--) {
-            //alert(i);
-            //alert(solution[i]+'='+roadpaint[solution.length-1-i]);
-            if(roadpaint[solution.length-1-i].poX === solution[i].soX && roadpaint[solution.length-1-i].poY === solution[i].soY ){
-              verific=verific+1;
-              
-            }
-          }
-        }
-        //alert(verific);
-        if(verific===solution.length){
-          var correct =document.getElementById('Correct').click()
-          correcto[currentpanel-1]=true;
-
-        }else{
-          var wrong =document.getElementById('Wrong').click()
-        }
-        roadpaint.splice(0,roadpaint.length);//inicializa los vectores
-     }*/
      function check3(){
         var verific=0;
         var valido1=false;

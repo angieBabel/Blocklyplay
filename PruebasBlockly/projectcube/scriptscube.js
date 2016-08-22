@@ -86,8 +86,6 @@
       }
 
       function check1(){
-        alert(positionObj.objX);
-        alert(stepsizeX*9);
         if (Math.round10(positionObj.objX,-2) == Math.round10(stepsizeX*9,-2)) {
             var correct =document.getElementById('Correct').click()
             correcto[currentpanel-1]=true;
