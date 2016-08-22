@@ -20,7 +20,7 @@
         stepsizeY=canvas.height/8;
 
         X = stepsizeX*3;
-        Y = stepsizeY*6;
+        Y = stepsizeY*6.5;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -34,7 +34,7 @@
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
           var imgback = new Image();
-                  imgback.src = "../media/citycube.jpg";
+                  imgback.src = "../media/cuboBack.png";
                 
            imgback.onload = function() {
             ctx.drawImage(imgback, 0, 0,ancho,alto);
@@ -51,18 +51,12 @@
                   initY=0;
               }
               initX=0;
-              var casa = new Image();
-                  casa.src = "../media/cube2";
-              casa.onload = function() {
-                ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
-              }
-              ctx.drawImage(casa, (stepsizeX),(stepsizeY*4),stepsizeX*3,stepsizeY*4);
               var carro = new Image();
-                  carro.src = "../media/carcube2.png";
+                  carro.src = "../media/avatarFront2.png";
               carro.onload = function() {
-                ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
+                ctx.drawImage(carro, (stepsizeX*10),(stepsizeY*6.5),stepsizeX*.5,stepsizeY*1.5);
               }
-              ctx.drawImage(carro, (stepsizeX*8),(stepsizeY*7),stepsizeX*3,stepsizeY);
+              ctx.drawImage(carro, (stepsizeX*10),(stepsizeY*6.5),stepsizeX*.5,stepsizeY*1.5);
               Avatar1();
             }
         }
@@ -75,7 +69,7 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=stepsizeX;avatarheight=stepsizeY*2;
+        avatarwith=stepsizeX*1.2;avatarheight=stepsizeY*1.5;
 
         img.onload = function() {
           ctx.save();
@@ -88,11 +82,11 @@
           ctx.drawImage(img,0, 0,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/persona2.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/avatarScooter.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
       function check1(){
-        if (positionObj.objX===stepsizeX*9) {
+        if (Math.round10(positionObj.objX,-2) == Math.round10(stepsizeX*9,-2)) {
             var correct =document.getElementById('Correct').click()
             correcto[currentpanel-1]=true;
             //alert('Felicidades haz completado correctamente el puzzle');

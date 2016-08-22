@@ -47,17 +47,16 @@
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
     <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" id="maintoolbar">
+    <md-toolbar layout="column" id="maintoolbar" ><!-- class="md-tall" -->
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" ng-click="volver($event)">
               <md-icon md-svg-icon="../media/icons/arrow-left.svg">
             </md-button>
-            <h6 class="md-title ">Kite</h6>   
           </div>
           <div flex="60" layout="row"   layout-align="start center">
             <div flex-gt-md="20" flex="25">
-              <md-button class="md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" flex-gt-md="auto" ng-click="toggle()" >
+              <md-button class="md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white'}" ng-click="toggle()" >
                 Instrucciones 
               </md-button>
             </div>
@@ -69,19 +68,7 @@
             </div> 
           </div>
         </div>
-        <div class="md-toolbar-tools">
-          <div flex="5"></div>
-          <div flex="40" layout="row"   layout-align="start center">
-            <md-button class="md-icon-button" aria-label="Settings" >
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                  <path fill="#FFFFFF" d="M11,6.5V9.33L8.33,12L11,14.67V17.5L5.5,12M13,6.43L18.57,12L13,17.57V14.74L15.74,12L13,9.26M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5Z" />
-              </svg>
-            </md-button>
-            <h4>
-              <span>Introduccion a BlocklyPlay</span>
-            </h4> 
-          </div> 
-        </div>
+        
     </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
@@ -90,14 +77,14 @@
           <div id="blocklyDiv"></div>
       </div>
       <!-- container donde ira el canvas -->
-      <div flex="60">
+      <div flex="60" id="canvasArea">
           <!-- tarjeta donde esta el canvas y los botones de accion -->
           <md-card  id="divCanvas">
             <!-- div con los botones de accion -->
             <div id="divbotones" layout="row">
               <div flex-md="70" flex-gt-md="75" ></div>
               <div  flex-md="30" flex-gt-md="25" id="divbotones2">
-                <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
+                <md-button class="md-icon-button md-primary" aria-label="Run" onclick="runCode()">
                   <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
@@ -256,7 +243,7 @@
       </md-content>
     </md-sidenav>
 <xml id="toolbox" style="display: none">
-  <category name="Control" colour="157">
+  <category name="Control" colour="#02D183">
       <block type="wait"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -284,22 +271,22 @@
       </block>
     </category>
 
-  <category name="Move" colour="175">
+  <category name="Move" colour="#0AB6AA">
     <block type="mover"></block>
     <block type="mover_pintando"></block>
     <block type="girar"></block>
   </category>
 
-  <category name="Lights" colour="192">
+  <category name="Lights" colour="#01C1F0">
     <block type="blinker"></block>
     <block type="lights"></block>
   </category>
 
-  <category name="Sounds" colour="247">
+  <category name="Sounds" colour="#412DA1">
     <block type="sonido"></block>
   </category>
 
-  <category name="Math" colour="24">
+  <category name="Math" colour="#FD832E">
     <block type="math_number" gap="32"></block>
     <block type="math_arithmetic">
       <value name="A">
@@ -315,7 +302,7 @@
     </block>
   </category>
 
-  <category name="Text" colour="53">
+  <category name="Text" colour="#EEC721">
     <block type="text"></block>
     <block type="text_isEmpty">
       <value name="VALUE">
@@ -340,7 +327,7 @@
     </block>
   </category>
 
-  <category name="Logic" colour="197">
+  <category name="Logic" colour="#26C6A7">
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
     <block type="logic_operation"></block>
@@ -348,7 +335,7 @@
     <block type="logic_boolean"></block>
   </category>
 
-  <category name="Colour" colour="37">
+  <category name="Colour" colour="#FF8429">
     <block type="colour_picker"></block>
     <block type="colour_random"></block>
     <block type="colour_rgb">
@@ -388,130 +375,11 @@
   </category>
 
   <sep></sep>
-  <category name="Variables" colour="355" custom="VARIABLE"></category>
-  <category name="Functions" colour="287" custom="PROCEDURE"></category>
+  <category name="Variables" colour="#F85D6C" custom="VARIABLE"></category>
+  <category name="Functions" colour="#5E4AD3" custom="PROCEDURE"></category>
 </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="../angular.js"></script>
-  <script type="text/javascript">
-    var myWidth = 0, myHeight = 0;
-      function alertSize() {
-        if( typeof( window.innerWidth ) == 'number' ) {
-          //No-IE
-          myWidth = window.innerWidth;
-          myHeight = window.innerHeight;
-        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-          //IE 6+
-          myWidth = document.documentElement.clientWidth;
-          myHeight = document.documentElement.clientHeight;
-        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-          //IE 4 compatible
-          myWidth = document.body.clientWidth;
-          myHeight = document.body.clientHeight;
-        }
-        /*window.alert( 'Width = ' + myWidth );
-        window.alert( 'Height = ' + myHeight ); */
-      }
-      alertSize();
-    'use strict';
-      var blocklyArea = document.getElementById('blocklyArea');
-      var blocklyDiv = document.getElementById('blocklyDiv');
-      var blocklyCanvas = document.getElementById('divCanvas');
-      var workspace = Blockly.inject(blocklyDiv,
-          { media: '../media/',
-            zoom:
-             {controls: true,
-              wheel: true,
-              startScale: 1.0,
-              maxScale: 3,
-              minScale: 0.3,
-              scaleSpeed: 1.2},
-            toolbox: document.getElementById('toolbox')});
-    var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      //alert(blocklyArea.offsetWidth)
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      //blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = (myWidth*.4) + 'px';
-      blocklyDiv.style.height = (myHeight*.80)+ 'px';
-      //blocklyCanvas.style.height= (myHeight*.80)+ 'px';
-      };
-    window.addEventListener('resize', onresize, false);
-    onresize();
-    //para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
-   /* function loadCode(){
-      //var program;
-      //alert('loadcode '+program)
-      switch(currentpanel) {
-            case 1:
-                program = window.localStorage.getItem("cubo1");
-                break;
-            case 2:
-                program = window.localStorage.getItem("cubo2");
-                break;
-            case 3:
-                program = window.localStorage.getItem("cubo3");
-            case 4:
-                program = window.localStorage.getItem("cubo4");
-            default:
-                program = window.localStorage.getItem("cubo1");
-          }
-      Blockly.mainWorkspace.clear();
-      var textToDom = Blockly.Xml.textToDom(program);
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
-    }
-    //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
-    //funcion de nextep migradas al control functions.js
-    function finish(){
-      if(acabo==1){
-            nextStep();
-          }
-    }
-    function runCode() {
-      //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
-      parseCode();
-      //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
-      intervalo= setInterval(function(){finish();},15)
-      //se guarda lo que hay en el workspaces en el almcaneamiento local
-      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      domToPretty = Blockly.Xml.domToPrettyText(xml);
-      switch(currentpanel) {
-          case 1:
-              window.localStorage.setItem("cubo1", domToPretty);
-              break;
-          case 2:
-              window.localStorage.setItem("cubo2", domToPretty);
-              break;
-          case 3:
-              window.localStorage.setItem("cubo3", domToPretty);
-          case 4:
-              window.localStorage.setItem("cubo4", domToPretty);
-          default:
-              window.localStorage.setItem("cubo1", domToPretty);
-        }
-      //window.localStorage.setItem("panel5l2", domToPretty);
-    }*/
-    //las funciones para obtener el thumbnail se cambiaron al controlFunctions.js
-    //las funciones de guardar XML estan en el archivo controlFunctions.js
-    //Variable para controlar la subida de archivos
-    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-      //se agrega un EventListener, para saber que se ha acceido a el
-      control.addEventListener("change", function(event) {
-           loadXML();
-      }, false);
-    //para hacer click en el inputfile se paso al controlfunctions.js
-    //loadXML se paso a controlfunctions.js
-    //send to hardware se paso al controlfunctions.js
-  </script>
-  
+  <script src="../injectBlockly.js"></script>
 </body>
 </html>

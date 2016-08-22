@@ -47,13 +47,13 @@
 
 <body ng-app="Blocklyplay"  ng-controller="AppCtrl">
     <!-- header de la pagina -->
-    <md-toolbar layout="column" class="md-tall" id="maintoolbar">
+    <md-toolbar layout="column" id="maintoolbar">
         <div class="md-toolbar-tools" layout="row" >
           <div flex="40" layout="row"   layout-align="start center">
             <md-button class="md-icon-button" aria-label="Home" ng-click="volver($event)">
               <md-icon md-svg-icon="../media/icons/arrow-left.svg">
             </md-button>
-            <h6 class="md-title ">Kite</h6>   
+              
           </div>
           <div flex="60" layout="row"   layout-align="start center">
             <div flex-gt-md="20" flex="25">
@@ -69,19 +69,7 @@
             </div> 
           </div>
         </div>
-        <div class="md-toolbar-tools">
-          <div flex="5"></div>
-          <div flex="40" layout="row"   layout-align="start center">
-            <md-button class="md-icon-button" aria-label="Settings" >
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                  <path fill="#FFFFFF" d="M11,6.5V9.33L8.33,12L11,14.67V17.5L5.5,12M13,6.43L18.57,12L13,17.57V14.74L15.74,12L13,9.26M5,3C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3H5Z" />
-              </svg>
-            </md-button>
-            <h4>
-              <span>Secuencias y loops</span>
-            </h4> 
-          </div> 
-        </div>
+        
     </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
@@ -90,7 +78,7 @@
           <div id="blocklyDiv"></div>
       </div>
       <!-- container donde ira el canvas -->
-      <div flex="60">
+      <div flex="60" id="canvasArea">
           <!-- tarjeta donde esta el canvas y los botones de accion -->
           <md-card id="divCanvas">
             <!-- div con los botones de accion -->
@@ -476,215 +464,8 @@
     <category name="Functions" colour="287" custom="PROCEDURE"></category>
   </xml>
   <!-- Your application bootstrap  -->
-  <script type="text/javascript">    
-    /**
-     * You must include the dependency on 'ngMaterial' 
-     */
-    angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $mdDialog) {
-        /*funcion on ready para que despliegue el sideNav de instrucciones*/
-        angular.element(document).ready(function () {
-          $mdSidenav('Instrucciones1')
-                .toggle();
-                navID = 'Instrucciones1';
-        });
-        $scope.toggle = buildToggler();
-        $scope.canvas1 = function() {
-          begin1();
-          currentpanel=1;
-          loadCode();
-        }
-        $scope.canvas2 = function() {
-          begin2();
-          currentpanel=2;
-          loadCode();
-        }
-        $scope.canvas3 = function() {
-          begin3();
-          currentpanel=3;
-          loadCode();
-        }
-        $scope.canvas4 = function() {
-          begin4();
-          currentpanel=4;
-          loadCode();
-        }
-        var originatorEv;
-        $scope.openMenu = function($mdOpenMenu, ev) {
-          originatorEv = ev;
-          $mdOpenMenu(ev);
-        };
-        $scope.showTabDialog = function(ev) { 
-            $mdDialog.show({
-              controller: DialogController,
-              templateUrl: '../publishproduct.html',
-              parent: angular.element(document.body),
-              targetEvent: ev,
-              clickOutsideToClose:true
-            });
-            generate();
-          };
-        function buildToggler() {
-          return function() {
-              switch(currentpanel) {
-                case 1:
-                    navID = 'Instrucciones1';
-                    break;
-                case 2:
-                    navID = 'Instrucciones2';
-                    break;
-                case 3:
-                    navID = 'Instrucciones3';
-                case 4:
-                    navID = 'Instrucciones4';
-                default:
-                    navID = 'Instrucciones1';
-              }
-              // Component lookup should always be available since we are not using `ng-if`
-              $mdSidenav(navID)
-                .toggle()
-                .then(function () {
-                  $log.debug("toggle " + navID + " is done");
-                });
-            }
-          }
-        })
-        .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
-          $scope.close = function () {
-            // Component lookup should always be available since we are not using `ng-if`
-            $mdSidenav(navID).close()
-              .then(function () {
-                $log.debug("close RIGHT is done");
-              });
-          };
-        });
-      function DialogController($scope, $mdDialog) {
-        $scope.vistaprevia = function(){
-          loadThumbnail();
-          showTabDialog();
-        };
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-      }
-  </script> 
-  <script type="text/javascript">
-    var myWidth = 0, myHeight = 0;
-      function alertSize() {
-        if( typeof( window.innerWidth ) == 'number' ) {
-          //No-IE
-          myWidth = window.innerWidth;
-          myHeight = window.innerHeight;
-        } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-          //IE 6+
-          myWidth = document.documentElement.clientWidth;
-          myHeight = document.documentElement.clientHeight;
-        } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-          //IE 4 compatible
-          myWidth = document.body.clientWidth;
-          myHeight = document.body.clientHeight;
-        }
-        /*window.alert( 'Width = ' + myWidth );
-        window.alert( 'Height = ' + myHeight ); */
-      }
-      alertSize();
-    'use strict';
-      var blocklyArea = document.getElementById('blocklyArea');
-      var blocklyDiv = document.getElementById('blocklyDiv');
-      var blocklyCanvas = document.getElementById('divCanvas');
-      var workspace = Blockly.inject(blocklyDiv,
-          { media: '../media/',
-            zoom:
-             {controls: true,
-              wheel: true,
-              startScale: 1.0,
-              maxScale: 3,
-              minScale: 0.3,
-              scaleSpeed: 1.2},
-            toolbox: document.getElementById('toolbox')});
-    var onresize = function(e) {
-      // Compute the absolute coordinates and dimensions of blocklyArea.
-      var element = blocklyArea;
-      var x = 0;
-      var y = 0;
-      do {
-        x += element.offsetLeft;
-        y += element.offsetTop;
-        element = element.offsetParent;
-      } while (element);
-      //alert(blocklyArea.offsetWidth)
-      // Position blocklyDiv over blocklyArea.
-      blocklyDiv.style.left = x + 'px';
-      //blocklyDiv.style.top = y + 'px';
-      blocklyDiv.style.width = (myWidth*.4) + 'px';
-      blocklyDiv.style.height = (myHeight*.80)+ 'px';
-      //blocklyCanvas.style.height= (myHeight*.80)+ 'px';
-      };
-    window.addEventListener('resize', onresize, false);
-    onresize();
-    /*//para cargar el codigo del localstorage correspondiente se ejecuta una funcion extra
-    function loadCode(){
-      var program;
-      switch(currentpanel) {
-            case 1:
-                program = window.localStorage.getItem("turbina1");
-                break;
-            case 2:
-                program = window.localStorage.getItem("turbina2");
-                break;
-            case 3:
-                program = window.localStorage.getItem("turbina3");
-            case 4:
-                program = window.localStorage.getItem("turbina4");
-            default:
-                program = window.localStorage.getItem("turbina1");
-          }
-      Blockly.mainWorkspace.clear();
-      var textToDom = Blockly.Xml.textToDom(program);
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, textToDom);
-    }
-    //La funcion para mostrar el codigo esta en el archivo controlFunctiones.js
-    
-    function finish(){
-      if(acabo==1){
-            nextStep();
-          }
-    }
-    function runCode() {
-      //funcion para convertir el codigo al interprete, esta en el archivo controlFunctions.js
-      parseCode();
-      //se crea un intervalo que estara leyendo el siguiente paso cada que haya terminado la instruccion en curso
-      intervalo= setInterval(function(){finish();},15)
-      //se guarda lo que hay en el workspaces en el almcaneamiento local
-      var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-      domToPretty = Blockly.Xml.domToPrettyText(xml);
-      switch(currentpanel) {
-          case 1:
-              window.localStorage.setItem("turbina1", domToPretty);
-              break;
-          case 2:
-              window.localStorage.setItem("turbina2", domToPretty);
-              break;
-          case 3:
-              window.localStorage.setItem("turbina3", domToPretty);
-          case 4:
-              window.localStorage.setItem("turbina4", domToPretty);
-          default:
-              window.localStorage.setItem("turbina1", domToPretty);
-        }
-      //window.localStorage.setItem("panel5l2", domToPretty);
-    }*/
-    //las funciones de guardar XML estan en el archivo controlFunctions.js
-    //Variable para controlar la subida de archivos
-    var control = document.getElementById("your-files");//se hace referencia al input de tipo file
-      //se agrega un EventListener, para saber que se ha acceido a el
-      control.addEventListener("change", function(event) {
-           loadXML();
-      }, false);
-  </script>
+  <script src="../angular.js"></script>
+  <script src="../injectBlockly.js"></script>
   
 </body>
 </html>

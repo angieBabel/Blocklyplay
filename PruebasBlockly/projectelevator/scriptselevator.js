@@ -18,8 +18,8 @@
     
     canvas.width= ancho;
     canvas.height = alto;
-    stepsizeX=canvas.width/9;
-    stepsizeY=canvas.height/5;
+    stepsizeX=canvas.width/21;
+    stepsizeY=canvas.height/14;
 
     X = stepsizeX*4;
     Y = stepsizeY*4;
@@ -91,6 +91,8 @@
   //Drawing avatar
 
   function Avatar1(){
+    ctx.font = "40px Arial";
+        ctx.fillStyle = "black";
     var img = new Image();//se debe de crear siempre el objeto para que siempre lo carge, sino se queda en el cache y no corre bien en safari
 
     var positionX, positionY;
@@ -126,8 +128,9 @@
      clickY -= canvas.offsetTop;
     }
     //se divide la coordenada entre el número de pasos para obtener la ubicación en el grid generado
-    clickX=clickX/stepsizeX;
-    clickY=clickY/stepsizeY;
+    clickX=clickX/(canvas.width/9);
+    clickY=clickY/(canvas.height/6);
+    alert(clickX);
     /*piso=0;*/
     //Validar los click para saber donde presiono
     if (clickX>13 && clickX<14 && clickY>=5 && clickY<6){//Validar boton piso 1

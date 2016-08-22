@@ -1,7 +1,7 @@
  var usertype=0; //variable para saber si el usuario puede editar o no
  var yaposteo=[false,false,false,false]; //vairable para saber si ya posteo por lo menos un ejercicio, se usa un vector para validar todos los ejercicios
  var wantstoexit =[false,false,false,false]; //variable para saber si desea salir, igual vectores para validar cada nivel
- var nivel=1;
+ var nivel=3;
 
  angular.module('Blocklyplay', ['ngMaterial'])
       .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog) {
@@ -14,21 +14,38 @@
             document.getElementById('menubutton').style.pointerEvents = 'none';
             //document.getElementById('menubutton').disabled= true;
           };
-
           $mdSidenav('Instrucciones1')
                 .toggle();
                 navID = 'Instrucciones1';
+
         });
-        $scope.nivel2= true;
-        $scope.nivel3= true;
-        $scope.nivel4= true;
+        switch(nivel){
+            case 1:
+                $scope.nivel2= true;
+                $scope.nivel3= true;
+                $scope.nivel4= true;
+                break;
+            case 2:
+                $scope.nivel3= true;
+                $scope.nivel4= true;
+                break;
+            case 3:
+                $scope.nivel4= true;
+                break;
+            case 4:
+                break;
+            default:
+                $scope.nivel2= true;
+                $scope.nivel3= true;
+                $scope.nivel4= true;
+                break;
+        }
         $scope.isHW= false;
         $scope.GetXML = function () {
           //en nivel esta el nivel que solicitara
             $http.get('http://wegoo-staging.herokuapp.com/v1/projects/').
             success(function(data) {
                   $scope.greeting = data;
-                  console.log(data);
                   program=data[data.length-1].projects.question;//data[0].projects.description;
                   loadCode();
                   //alert(program);
@@ -293,8 +310,10 @@
                     break;
                 case 3:
                     navID = 'Instrucciones3';
+                    break;
                 case 4:
                     navID = 'Instrucciones4';
+                    break;
                 default:
                     navID = 'Instrucciones1';
               }
@@ -323,8 +342,10 @@
                   break;
               case 3:
                   begin3();
+                  break;
               case 4:
                   begin4();
+                  break;
               default:
                   begin1();
             }
