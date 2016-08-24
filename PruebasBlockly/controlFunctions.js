@@ -347,7 +347,7 @@ function generate() {
   var zoom = newSVG.querySelector('g.blocklyZoom');
   zoom.remove();
   //console.log(newSVG);
-  newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
+  newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0; background-color:#fff;"
   window.localStorage.setItem("preview", newSVG.outerHTML); 
 }
 
@@ -356,7 +356,7 @@ function loadThumbnail(){
   previa = window.localStorage.getItem("preview");
   var thumb = document.getElementById('thumbnail');
   thumb.innerHTML=previa;
-  thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+  thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0; background-color:#fff;"
 }
 //funcion que habilita el file input
 function showFileInput(){

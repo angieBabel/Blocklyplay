@@ -132,8 +132,8 @@ Blockly.Css.setCursor = function(cursor) {
  */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
-  'background: linear-gradient(#EDE7F6, #fff);',
-    //'background-color: #EDE7F6;',//aqui se cambia el background del workspace backchange
+  //'background: linear-gradient(#EDE7F6, #fff);',
+  //  'background-color: #EDE7F6;',//aqui se cambia el background del workspace backchange
     'outline: none;',
     'overflow: hidden;',  /* IE overflows by default. */
   '}',

@@ -102,7 +102,7 @@ text-align : justify;
 	position: relative;
 	top: 3vh;
 	/*background-color: #EDE7F6;*/
-	 background: linear-gradient(#EDE7F6, #fff); 
+	 /*background: linear-gradient(#EDE7F6, #fff); */
 }
 #canvasArea{
 	/*background-color: #EDE7F6;*/
