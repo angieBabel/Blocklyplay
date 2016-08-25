@@ -756,9 +756,9 @@
       }
       for (var i = 0; i < screentext.length; i++) {
         if (i<16) {
-          ctx.fillText(screentext[i],stepsizeX*(2+i),stepsizeY*5);
+          ctx.fillText(screentext[i],stepsizeX*(3+i),stepsizeY*5);
         }else{
-          ctx.fillText(screentext[i],stepsizeX*(2-16+i),stepsizeY*7);
+          ctx.fillText(screentext[i],stepsizeX*(3-16+i),stepsizeY*7);
         }
       };
       acabo=1;

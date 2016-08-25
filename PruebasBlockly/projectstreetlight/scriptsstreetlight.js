@@ -34,7 +34,7 @@
   //dibuja el panel
   function panel1(){
     var imgback = new Image();
-          imgback.src = "../media/mapa_semaforo.png";
+          imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
     ii=-1;
@@ -58,7 +58,7 @@
       initX=0;
       painroad();
       var semaforo = new Image();
-          semaforo.src = "../media/semaforo.png";
+          semaforo.src = "../media/stop_light.png";
      semaforo.onload = function() {
         ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
         ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
@@ -110,7 +110,7 @@
       }
       ctx.restore();
     }
-    img.src = '../media/carro.png';//el img.src se pone despues del onload para asegurar su carga
+    img.src = '../media/car.png';//el img.src se pone despues del onload para asegurar su carga
   }
   //Compara si las paradas que hizo el niño estuvieron bien
   function check1(){
@@ -171,7 +171,7 @@
   //dibuja el panel
    function panel2(){
     var imgback = new Image();
-          imgback.src = "../media/mapa_semaforo.png";
+          imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
     ii=-1;
@@ -195,7 +195,7 @@
       initX=0;
       painroad();
       var semaforo = new Image();
-          semaforo.src = "../media/semaforo.png";
+          semaforo.src = "../media/stop_light.png";
      semaforo.onload = function() {
         ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
         ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
@@ -247,7 +247,7 @@
       }
       ctx.restore();
     }
-    img.src = '../media/carro.png';//el img.src se pone despues del onload para asegurar su carga
+    img.src = '../media/car.png';//el img.src se pone despues del onload para asegurar su carga
   }
   //Compara si las paradas que hizo el niño estuvieron bien
   function check2(){
@@ -308,7 +308,7 @@
   //dibuja el panel
    function panel3(){
     var imgback = new Image();
-          imgback.src = "../media/mapa_semaforo.png";
+          imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
     ii=-1;
@@ -332,7 +332,7 @@
       initX=0;
       painroad();
       var semaforo = new Image();
-          semaforo.src = "../media/semaforo.png";
+          semaforo.src = "../media/stop_light.png";
       semaforo.onload = function() {
         ctx.fillStyle = "red";
         ctx.font = "20px Arial";
@@ -396,7 +396,7 @@
       }
       ctx.restore();
     }
-    img.src = '../media/carro.png';//el img.src se pone despues del onload para asegurar su carga
+    img.src = '../media/car.png';//el img.src se pone despues del onload para asegurar su carga
   }
   //Compara si las paradas que hizo el niño estuvieron bien
   function check3(){

@@ -265,20 +265,25 @@ function nextStep() {
         /*window.setTimeout(finish, 15);*/
         clearInterval(intervalo);
         myInterpreter=null;
-        switch(currentpanel) {
-          case 1:
-              check1();
-              break;
-          case 2:
-              check2();
-              break;
-          case 3:
-              check3();
-          case 4:
-              check4();
-          default:
-              check1();
-        }
+        setTimeout(function(){ 
+           switch(currentpanel) {
+              case 1:
+                  check1();
+                  break;
+              case 2:
+                  check2();
+                  break;
+              case 3:
+                  check3();
+                  break;
+              case 4:
+                  check4();
+                  break;
+              default:
+                  check1();
+           }
+        }, 750);
+       
       }
 }
 //Funcion para guardar el XML
