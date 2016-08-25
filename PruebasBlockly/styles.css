@@ -21,11 +21,10 @@ canvas {
 #divCanvas{
 	position :  relative ;
 	/* top :  -10vh ;*/
-	 top :  -1vh ;
+	 top :  4vh ;
 	 z-index :  4 ; 
 	 height :  70vh;
 	 /*height :  90vh;*/
-
 }
 
 .md-dialog-content .md-active {
@@ -50,17 +49,20 @@ text-align : justify;
 #maintoolbar{
 	/*background: linear-gradient(#D1C4E9, #EDE7F6); */
 	/*background-color:#EDE7F6;*/
+	position: relative;
+	top: 3vh;
+
 	background-color:#F1F1F1;
 	color: #607D8B;
 }
-/*#blocklyDiv{
-	position: absolute;
 
-}*/
-/*#tabs{
+#publishbutton{
 	position: relative;
-
-}*/
+	top: 6vh;
+	margin-left: 44vw;
+	z-index: 5;
+	height: 0%;
+}
 #divbotones{
 	position: relative;
 	/*top: -99%;*/
