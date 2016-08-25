@@ -1,5 +1,6 @@
 html,body{
 	height:100%;
+	background-color:#F1F1F1;
 }
 canvas {
   background: #fff;
@@ -47,19 +48,19 @@ text-align : justify;
 	}
 }
 #maintoolbar{
-	background: linear-gradient(#D1C4E9, #EDE7F6); 
+	/*background: linear-gradient(#D1C4E9, #EDE7F6); */
 	/*background-color:#EDE7F6;*/
-
+	background-color:#F1F1F1;
 	color: #607D8B;
 }
 /*#blocklyDiv{
 	position: absolute;
 
 }*/
-#tabs{
+/*#tabs{
 	position: relative;
 
-}
+}*/
 #divbotones{
 	position: relative;
 	/*top: -99%;*/
@@ -100,7 +101,8 @@ text-align : justify;
 
 #blocklyArea{
 	/*background-color: #EDE7F6;*/
-	background: linear-gradient(#EDE7F6, #fff); 
+	background-color:#F1F1F1;
+	/*background: linear-gradient(#EDE7F6, #fff); */
 }
 #blocklyDiv{
 	position: relative;
@@ -108,31 +110,4 @@ text-align : justify;
 	/*background-color: #EDE7F6;*/
 	 /*background: linear-gradient(#EDE7F6, #fff); */
 }
-#canvasArea{
-	/*background-color: #EDE7F6;*/
-	 background: linear-gradient(#EDE7F6, #fff); 
-}
-.md-button {
-	/*min-heig: 60px;*/
-  min-height: 10px !important;
-  /*background-color: black;*/
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
