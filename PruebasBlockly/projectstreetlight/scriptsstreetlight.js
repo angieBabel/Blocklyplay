@@ -14,8 +14,8 @@
     stepsizeX=canvas.width/30;
     stepsizeY=canvas.height/20;
 
-    X = stepsizeX*15;
-    Y = stepsizeY*14;
+    X = stepsizeX*12;
+    Y = stepsizeY*18;
     positionObj.objX=X;
     positionObj.objY=Y;
     positionObj.objZ=0;
@@ -25,8 +25,8 @@
 
     semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*14,-2),0,0));
     semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*3,-2),0,0));
-    //semaforos.push(new solutionObj(Math.round10(stepsizeX*13,-2),Math.round10(stepsizeY*9,-2),0,0));
-    //semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*9,-2),0,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*13,-2),Math.round10(stepsizeY*9,-2),0,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*9,-2),0,0));
 
     
     panel1();
@@ -45,7 +45,7 @@
           while(initY<canvas.height-stepsizeY){
             initY=initY+stepsizeY;
             ctx.beginPath();
-            ctx.fillStyle = "#E3E2E2";
+            ctx.fillStyle = "black";
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
             ii++;
@@ -60,8 +60,13 @@
       var semaforo = new Image();
           semaforo.src = "../media/stop_light.png";
      semaforo.onload = function() {
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-        ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
+      ctx.save();
+      ctx.translate(stepsizeX*23,stepsizeY*14);
+      ctx.rotate(90 * (Math.PI/180));
+      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+      ctx.restore();
+        
+        //ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX*.3,stepsizeY*.8);
         //ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
         //ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
         

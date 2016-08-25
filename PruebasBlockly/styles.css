@@ -4,7 +4,9 @@ html,body{
 canvas {
   background: #fff;
   height: 91.5%;
- width: 100%;
+  width: 100%;
+  /*margin-top :  10%;
+  height :  70%;*/
 }
 #divCanvas .md-tab {
   color: #CFD8DC; 
@@ -18,11 +20,13 @@ canvas {
 #divCanvas{
 	position :  relative ;
 	/* top :  -10vh ;*/
-	 top :  -2vh ;
+	 top :  -1vh ;
 	 z-index :  4 ; 
-	 height :  90vh;
+	 height :  70vh;
+	 /*height :  90vh;*/
 
 }
+
 .md-dialog-content .md-active {
 	color: #26C6DA; 
 }
