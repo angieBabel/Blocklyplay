@@ -132,7 +132,9 @@ Blockly.Css.setCursor = function(cursor) {
  */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
-  'background: linear-gradient(#EDE7F6, #fff);',
+  //'background: linear-gradient(#EDE7F6, #fff);',
+  //'background-color: #FAFAFA;', //color por defecto
+  'background-color: #F1F1F1;', //color por defecto
     //'background-color: #EDE7F6;',//aqui se cambia el background del workspace backchange
     'outline: none;',
     'overflow: hidden;',  /* IE overflows by default. */
@@ -398,7 +400,9 @@ Blockly.Css.CONTENT = [
 
   /* Category tree in Toolbox. */
   '.blocklyToolboxDiv {',
-  'background: linear-gradient(#EDE7F6, #fff); ',
+  //'background: linear-gradient(#EDE7F6, #fff); ',
+  //'background-color: #FAFAFA;', //color por defecto
+  'background-color: #F1F1F1;', //color por defecto
     //'background-color: #EDE7F6;',// aqui se edita el background color del toolbox backchange
     /*'border-right:  1px solid #E8D7D1;',*/
     'overflow-x: visible;',

@@ -64,9 +64,6 @@
             <div flex-gt-md="55" flex="45">
               <span>Construye un puente</span>
             </div>
-            <div flex-gt-md="25"flex="20">
-              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
-            </div> 
           </div>
         </div>
         
@@ -128,6 +125,9 @@
               </md-tabs>
             </md-content>
           </md-card>
+          <div id="publishbutton">
+            <md-button  class="md-raised md-hue-2" ng-style="{'background-color':'#0097A7','color':'#fff'}" ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button> 
+          </div> 
       </div>
     </div>
     <!-- para poner los alerts -->

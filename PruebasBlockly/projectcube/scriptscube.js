@@ -69,7 +69,7 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=stepsizeX*1.2;avatarheight=stepsizeY*1.5;
+        avatarwith=stepsizeX;avatarheight=stepsizeY*1.5;
 
         img.onload = function() {
           ctx.save();
@@ -82,7 +82,7 @@
           ctx.drawImage(img,0, 0,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/avatarScooter.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/avatar_boy_scooter.png';//el img.src se pone despues del onload para asegurar su carga
       }
 
       function check1(){

@@ -21,8 +21,8 @@
         stepsizeX=canvas.width/21;
         stepsizeY=canvas.height/14;
 
-        X = stepsizeX*10;
-        Y = stepsizeY*5;
+        X = stepsizeX*11;
+        Y = stepsizeY*6;
         //se inicializa la posicion del objeto, aqui es donde se pintara la linea
         positionObj.objX=X;//350;
         positionObj.objY=Y;//142;
@@ -57,12 +57,12 @@
           painroad();
           Avatar1();
         }
-        imgback.src = "../media/PantallaV2.png";
+        imgback.src = "../media/casita_hardware.png";
       }
       //Drawing avatar
       function Avatar1(){
         ctx.fillStyle = screencolor;
-        ctx.fillRect(stepsizeX*2,stepsizeY*3,stepsizeX*16,stepsizeY*5);
+        ctx.fillRect(stepsizeX*3,stepsizeY*4,stepsizeX*16,stepsizeY*5);
         ctx.font = "40px Arial";
         ctx.fillStyle = "black";
         //ctx.textAlign = "right";

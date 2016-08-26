@@ -28,7 +28,7 @@ var myWidth = 0, myHeight = 0;
         zoom:
          {controls: true,
           wheel: true,
-          startScale: 1.0,
+          startScale: .8,
           maxScale: 3,
           minScale: 0.3,
           scaleSpeed: 1.2},

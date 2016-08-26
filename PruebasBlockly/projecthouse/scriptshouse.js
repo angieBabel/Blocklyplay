@@ -71,20 +71,21 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=40;avatarheight=40;
+        avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
         img.onload = function() {
           ctx.save();
           //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
           ctx.translate(positionObj.objX,positionObj.objY);
+          ctx.rotate(positionObj.objZ * (Math.PI/180));
           //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
 
           ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+          //la imagen se dibuja enposicions negativas para que la punta del brush quede donde debe ir el cursor
           ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/brush.png';//el img.src se pone despues del onload para asegurar su carga
       }
      function check1(){
         var verific=0;
@@ -115,7 +116,6 @@
               i=roadpaint.length
             };  
         }
-        alert(verific+' coincidencias');
         if(verific>solution.length && valido1 ){/*&& valido2*/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
@@ -211,20 +211,21 @@
 
       img.id = 'imagen';
       //el img.src se cambio para asegurar que siempre haga el onload
-      avatarwith=40;avatarheight=40;
+      avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
       img.onload = function() {
         ctx.save();
         //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
         ctx.translate(positionObj.objX,positionObj.objY);
+        ctx.rotate(positionObj.objZ * (Math.PI/180));
         //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
 
         ctx.globalAlpha=1;
-        //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+        //la imagen se dibuja enposicions negativas para que la punta del brush quede donde debe ir el cursor
         ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
         ctx.restore();
       }
-      img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+      img.src = '../media/brush.png';//el img.src se pone despues del onload para asegurar su carga
     }
     function check2(){
         var verific=0;
@@ -255,7 +256,6 @@
               i=roadpaint.length
             };  
         }
-        alert(verific+' coincidencias');
         if(verific>solution.length && valido1 && valido2){/**/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
@@ -347,20 +347,21 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=40;avatarheight=40;
+        avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
         img.onload = function() {
           ctx.save();
           //se establece un nuevo punto de origen en las posición actual del cursor (donde se pintara la linea)
           ctx.translate(positionObj.objX,positionObj.objY);
+          ctx.rotate(positionObj.objZ * (Math.PI/180));
           //No es necesario rotar la imagen//ctx.rotate(positionObj.objZ * (Math.PI/180));
 
           ctx.globalAlpha=1;
-          //la imagen se dibuja enposicions negativas para que la punta del pincel quede donde debe ir el cursor
+          //la imagen se dibuja enposicions negativas para que la punta del brush quede donde debe ir el cursor
           ctx.drawImage(img,-5, -40,avatarwith,avatarheight);
           ctx.restore();
         }
-        img.src = '../media/pincel.png';//el img.src se pone despues del onload para asegurar su carga
+        img.src = '../media/brush.png';//el img.src se pone despues del onload para asegurar su carga
       }
      function check3(){
         var verific=0;
@@ -391,7 +392,6 @@
               i=roadpaint.length
             };  
         }
-        alert(verific+' coincidencias');
         if(verific>solution.length && valido1 && valido2){/**/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;

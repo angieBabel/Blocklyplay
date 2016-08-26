@@ -1,10 +1,13 @@
 html,body{
 	height:100%;
+	background-color:#F1F1F1;
 }
 canvas {
   background: #fff;
   height: 91.5%;
- width: 100%;
+  width: 100%;
+  /*margin-top :  10%;
+  height :  70%;*/
 }
 #divCanvas .md-tab {
   color: #CFD8DC; 
@@ -18,11 +21,12 @@ canvas {
 #divCanvas{
 	position :  relative ;
 	/* top :  -10vh ;*/
-	 top :  -2vh ;
+	 top :  4vh ;
 	 z-index :  4 ; 
-	 height :  90vh;
-
+	 height :  70vh;
+	 /*height :  90vh;*/
 }
+
 .md-dialog-content .md-active {
 	color: #26C6DA; 
 }
@@ -43,18 +47,21 @@ text-align : justify;
 	}
 }
 #maintoolbar{
-	background: linear-gradient(#D1C4E9, #EDE7F6); 
+	/*background: linear-gradient(#D1C4E9, #EDE7F6); */
 	/*background-color:#EDE7F6;*/
+	position: relative;
+	top: 3vh;
 
+	background-color:#F1F1F1;
 	color: #607D8B;
 }
-/*#blocklyDiv{
-	position: absolute;
 
-}*/
-#tabs{
+#publishbutton{
 	position: relative;
-
+	top: 6vh;
+	margin-left: 44vw;
+	z-index: 5;
+	height: 0%;
 }
 #divbotones{
 	position: relative;
@@ -96,39 +103,13 @@ text-align : justify;
 
 #blocklyArea{
 	/*background-color: #EDE7F6;*/
-	background: linear-gradient(#EDE7F6, #fff); 
+	background-color:#F1F1F1;
+	/*background: linear-gradient(#EDE7F6, #fff); */
 }
 #blocklyDiv{
 	position: relative;
 	top: 3vh;
 	/*background-color: #EDE7F6;*/
-	 background: linear-gradient(#EDE7F6, #fff); 
+	 /*background: linear-gradient(#EDE7F6, #fff); */
 }
-#canvasArea{
-	/*background-color: #EDE7F6;*/
-	 background: linear-gradient(#EDE7F6, #fff); 
-}
-.md-button {
-	/*min-heig: 60px;*/
-  min-height: 10px !important;
-  /*background-color: black;*/
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

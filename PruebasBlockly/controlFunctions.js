@@ -265,20 +265,25 @@ function nextStep() {
         /*window.setTimeout(finish, 15);*/
         clearInterval(intervalo);
         myInterpreter=null;
-        switch(currentpanel) {
-          case 1:
-              check1();
-              break;
-          case 2:
-              check2();
-              break;
-          case 3:
-              check3();
-          case 4:
-              check4();
-          default:
-              check1();
-        }
+        setTimeout(function(){ 
+           switch(currentpanel) {
+              case 1:
+                  check1();
+                  break;
+              case 2:
+                  check2();
+                  break;
+              case 3:
+                  check3();
+                  break;
+              case 4:
+                  check4();
+                  break;
+              default:
+                  check1();
+           }
+        }, 750);
+       
       }
 }
 //Funcion para guardar el XML
@@ -347,7 +352,7 @@ function generate() {
   var zoom = newSVG.querySelector('g.blocklyZoom');
   zoom.remove();
   //console.log(newSVG);
-  newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0;"
+  newSVG.style.cssText="zoom: 0.6;/* For Firefox */-moz-transform: scale(0.6);-moz-transform-origin: 0 0; background-color:#fff;"
   window.localStorage.setItem("preview", newSVG.outerHTML); 
 }
 
@@ -356,7 +361,7 @@ function loadThumbnail(){
   previa = window.localStorage.getItem("preview");
   var thumb = document.getElementById('thumbnail');
   thumb.innerHTML=previa;
-  thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0;"
+  thumb.style.cssText="zoom: 0.5;/* For Firefox */-moz-transform: scale(0.5);-moz-transform-origin: 0 0; background-color:#fff;"
 }
 //funcion que habilita el file input
 function showFileInput(){

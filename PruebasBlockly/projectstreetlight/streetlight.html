@@ -63,9 +63,6 @@
             <div flex-gt-md="55" flex="45">
               <span>Recorre todos los semaforos</span>
             </div>
-            <div flex-gt-md="25"flex="20">
-              <md-button ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button>       
-            </div> 
           </div>
         </div>
         
@@ -115,7 +112,7 @@
             <!-- tabs que contienen los canvas -->
             <md-content>
               <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" id="tabs">
-                <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
+                <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();">
                   <canvas id="canvas1"></canvas>               
                 </md-tab>
                 <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
@@ -127,6 +124,9 @@
               </md-tabs>
             </md-content>
           </md-card>
+          <div id="publishbutton">
+            <md-button  class="md-raised md-hue-2" ng-style="{'background-color':'#0097A7','color':'#fff'}" ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button> 
+          </div> 
       </div>
     </div>
    <!-- para poner los alerts -->
@@ -151,7 +151,7 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/semaforo_dibujo.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
@@ -204,7 +204,7 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/semaforo_dibujo.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
@@ -257,7 +257,7 @@
       <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
        <!-- imagen previa -->
        <div>
-        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_semaforo.png">
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/semaforo_dibujo.png">
        </div>
        <!-- informacion general del nivel -->
        <div layout="column">
