@@ -71,7 +71,7 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=15;avatarheight=40;
+        avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
         img.onload = function() {
           ctx.save();
@@ -211,7 +211,7 @@
 
       img.id = 'imagen';
       //el img.src se cambio para asegurar que siempre haga el onload
-      avatarwith=40;avatarheight=40;
+      avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
       img.onload = function() {
         ctx.save();
@@ -256,7 +256,6 @@
               i=roadpaint.length
             };  
         }
-        alert(verific+' coincidencias');
         if(verific>solution.length && valido1 && valido2){/**/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
@@ -348,7 +347,7 @@
 
         img.id = 'imagen';
         //el img.src se cambio para asegurar que siempre haga el onload
-        avatarwith=40;avatarheight=40;
+        avatarwith=stepsizeX*.2; avatarheight=stepsizeY*.6;
 
         img.onload = function() {
           ctx.save();
@@ -393,7 +392,6 @@
               i=roadpaint.length
             };  
         }
-        alert(verific+' coincidencias');
         if(verific>solution.length && valido1 && valido2){/**/
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
