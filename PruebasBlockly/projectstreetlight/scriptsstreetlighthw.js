@@ -49,7 +49,7 @@
       //la funcion de stopTimer se paso al archivo de controlFunctions.js
        function panel1(){
           var imgback = new Image();
-                  imgback.src = "../media/semaforohw2.png";
+                  imgback.src = "../media/semaforo_hardware.png";
                 
            imgback.onload = function() {
             ctx.drawImage(imgback, 0, 0,ancho,alto);
@@ -74,26 +74,26 @@
       function Avatar1(){
         avatarwith=stepsizeX;avatarheight=stepsizeY;
            if (pinled==0) {
-                    led1.src = "../media/ledOff.png";
-                    led2.src = "../media/ledOffYellow.png";
-                    led3.src = "../media/ledOffGreen.png";
+                    led1.src = "../media/ledRedOff.png";
+                    led2.src = "../media/ledYellowOff.png";
+                    led3.src = "../media/ledGreenOff.png";
               }else if (pinled==2) {
                 if (ledstatus=='On') {
-                    led1.src = "../media/ledOn.png";
+                    led1.src = "../media/ledRedOn.png";
                 }else{
-                    led1.src = "../media/ledOff.png";
+                    led1.src = "../media/ledRedOff.png";
                 };
               }else if(pinled==3){
                 if (ledstatus=='On') {
-                    led2.src = "../media/ledOnYellow.png";
+                    led2.src = "../media/ledYellowOn.png";
                 }else{
-                    led2.src = "../media/ledOffYellow.png";
+                    led2.src = "../media/ledYellowOff.png";
                 };
               }else if (pinled==4){
                 if (ledstatus=='On') {
-                    led3.src = "../media/ledOnGreen.png";
+                    led3.src = "../media/ledGreenOn.png";
                 }else{
-                    led3.src = "../media/ledOffGreen.png";
+                    led3.src = "../media/ledGreenOff.png";
                 }
               };
         led1.onload = function() {

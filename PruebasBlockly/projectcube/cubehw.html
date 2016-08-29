@@ -128,7 +128,7 @@
               </md-tabs>
             </md-content>
           </md-card>
-          <div id="publishbutton">
+          <div id="publishB">
             <md-button  class="md-raised md-hue-2" ng-style="{'background-color':'#0097A7','color':'#fff'}" ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button> 
           </div> 
       </div>
@@ -339,6 +339,7 @@
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
+      <block type="floor"></block>
     </category>
 
     <category name="Colour" colour="37">
@@ -413,8 +414,8 @@
 
         <block type="buzzerDisplayed">
           <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">2</field>
+            <shadow type="buzzerpin">
+              <field name="PIN">3</field>
             </shadow>
           </value>
           <value name="Tone">
@@ -457,6 +458,7 @@
       <block type="status"></block>
         <block type="speed"></block>
         <block type="pind"></block>
+        <block type="buzzerpin"></block>
         <block type="tone"></block>
         <block type="direction"></block>
     </category>

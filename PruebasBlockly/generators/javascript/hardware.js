@@ -127,6 +127,13 @@ Blockly.JavaScript['pind'] = function(block) {
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
+Blockly.JavaScript['buzzerpin'] = function(block) {
+  var dropdown_pin = block.getFieldValue('PIN');
+  // TODO: Assemble JavaScript into code variable.
+  var code = dropdown_pin;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
+};
 //direccion
 Blockly.JavaScript['direction'] = function(block) {
   var dropdown_direction = block.getFieldValue('direction');

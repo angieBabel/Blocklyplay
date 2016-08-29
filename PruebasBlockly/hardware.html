@@ -286,15 +286,6 @@
           </shadow>
         </value>
       </block>
-      
-      <block type="controls_whileUntil">
-        <value name="BOOL">
-          <shadow type="logic_compare">
-            
-          </shadow>
-        </value>
-      </block> 
-      
     </category>
 
     <category name="Move" colour="175">
@@ -359,6 +350,7 @@
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
+      <block type="floor"></block>
     </category>
 
     <category name="Colour" colour="37">
@@ -433,8 +425,8 @@
 
         <block type="buzzerDisplayed">
           <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">2</field>
+            <shadow type="buzzerpin">
+              <field name="PIN">3</field>
             </shadow>
           </value>
           <value name="Tone">
@@ -477,41 +469,14 @@
       <block type="status"></block>
         <block type="speed"></block>
         <block type="pind"></block>
+        <block type="buzzerpin"></block>
         <block type="tone"></block>
         <block type="direction"></block>
-        <block type="button">
-          <value name="PIN">
-            <block type="pind">
-              <field name="PIN">2</field>
-            </block>
-          </value>
-        </block>
-        <block type="temperature">
-          <value name="PIN">
-            <block type="pind">
-              <field name="PIN">2</field>
-            </block>
-          </value>
-        </block>
-        <block type="light">
-          <value name="PIN">
-            <block type="pind">
-              <field name="PIN">2</field>
-            </block>
-          </value>
-        </block>
-        <block type="touch">
-          <value name="PIN">
-            <block type="pind">
-              <field name="PIN">2</field>
-            </block>
-          </value>
-        </block>
     </category>
     <sep></sep>
     <category name="Variables" colour="355" custom="VARIABLE"></category>
     <category name="Functions" colour="287" custom="PROCEDURE"></category>
- </xml>
+  </xml>
   <!-- el script con las funciones de angular se separo al documento angular.js -->
   <script src="angular.js"></script>
   <script type="text/javascript">
