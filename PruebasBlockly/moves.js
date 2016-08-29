@@ -1,4 +1,5 @@
 //inicialización de las variables
+var navID;
     var domToPretty;//variable para guardar el XML
     var previa;//variable para tener la previa
     var puntaje=[0,0,0,0]; //para saber cuantas veces ha hecho los ejercicios
@@ -797,10 +798,13 @@
           break;
       case 3:
           Avatar3();
+          break;
       case 4:
           Avatar4();
+          break;
       default:
           Avatar1();
+          break;
     }
       i++;
       if(i==nosteps){

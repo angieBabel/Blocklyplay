@@ -248,89 +248,6 @@
       </md-content>
     </md-sidenav>
   <xml id="toolbox" style="display: none">
-    <category name="Hardware" colour="354">
-        <block type="ledDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">2</field>
-            </shadow>
-          </value>
-          <value name="Turn">
-            <shadow type="status">
-              <field name="on/off">On</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="motorDisplayed">
-          <value name="steps">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-          <value name="direction">
-            <shadow type="direction">
-              <field name="direction">Forward</field>
-            </shadow>
-          </value>
-          <value name="speed">
-            <shadow type="speed">
-              <field name="speed">1</field>
-            </shadow>
-          </value>
-        </block>
-
-        <block type="buzzerDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">2</field>
-            </shadow>
-          </value>
-          <value name="Tone">
-            <shadow type="tone">
-              <field name="tone">Do</field>
-            </shadow>
-          </value>
-          <value name="Secs">
-            <shadow type="math_number">
-              <field name="NUM">1</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="pantallaDisplayed">
-          <value name="message">
-            <shadow type="text">
-              <field name="TEXT">Type message here</field>
-            </shadow>
-          </value>
-          <value name="color">
-            <shadow type="colour_picker">
-              <field name="COLOUR">#ff0000</field>
-            </shadow>
-          </value>
-        </block>
-        <block type="botonDisplayed">
-          <value name="PIN">
-            <shadow type="pind">
-              <field name="PIN">2</field>
-            </shadow>
-          </value>
-          <value name="Status">
-            <shadow type="status">
-              <field name="on/off">On</field>
-            </shadow>
-          </value>
-        </block>
-    </category>
-    <category name="Inputs" colour="210">
-      <block type="status"></block>
-        <block type="speed"></block>
-        <block type="pind"></block>
-        <block type="tone"></block>
-        <block type="direction"></block>
-    </category>
-
-    <sep></sep>
-
     <category name="Control" colour="157">
       <block type="wait"></block>
       <block type="controls_repeat_ext">
@@ -357,6 +274,21 @@
           </shadow>
         </value>
       </block>
+    </category>
+
+    <category name="Move" colour="175">
+      <block type="mover"></block>
+      <block type="mover_pintando"></block>
+      <block type="girar"></block>
+    </category>
+
+    <category name="Lights" colour="192">
+      <block type="blinker"></block>
+      <block type="lights"></block>
+    </category>
+
+    <category name="Sounds" colour="247">
+      <block type="sonido"></block>
     </category>
 
     <category name="Math" colour="24">
@@ -406,6 +338,7 @@
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
+      <block type="floor"></block>
     </category>
 
     <category name="Colour" colour="37">
@@ -446,7 +379,88 @@
         </value>
       </block>
     </category>
+    <sep></sep>
+    <category name="Hardware" colour="354">
+        <block type="ledDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="Turn">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="motorDisplayed">
+          <value name="steps">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+          <value name="direction">
+            <shadow type="direction">
+              <field name="direction">Forward</field>
+            </shadow>
+          </value>
+          <value name="speed">
+            <shadow type="speed">
+              <field name="speed">1</field>
+            </shadow>
+          </value>
+        </block>
 
+        <block type="buzzerDisplayed">
+          <value name="PIN">
+            <shadow type="buzzerpin">
+              <field name="PIN">3</field>
+            </shadow>
+          </value>
+          <value name="Tone">
+            <shadow type="tone">
+              <field name="tone">Do</field>
+            </shadow>
+          </value>
+          <value name="Secs">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="pantallaDisplayed">
+          <value name="message">
+            <shadow type="text">
+              <field name="TEXT">Type message here</field>
+            </shadow>
+          </value>
+          <value name="color">
+            <shadow type="colour_picker">
+              <field name="COLOUR">#ff0000</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="botonDisplayed">
+          <value name="PIN">
+            <shadow type="pind">
+              <field name="PIN">2</field>
+            </shadow>
+          </value>
+          <value name="Status">
+            <shadow type="status">
+              <field name="on/off">On</field>
+            </shadow>
+          </value>
+        </block>
+    </category>
+    <category name="Inputs" colour="210">
+      <block type="status"></block>
+        <block type="speed"></block>
+        <block type="pind"></block>
+        <block type="buzzerpin"></block>
+        <block type="tone"></block>
+        <block type="direction"></block>
+    </category>
     <sep></sep>
     <category name="Variables" colour="355" custom="VARIABLE"></category>
     <category name="Functions" colour="287" custom="PROCEDURE"></category>

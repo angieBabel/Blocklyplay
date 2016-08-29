@@ -246,6 +246,18 @@ goog.require('Blockly.Blocks');
       }
     };
 
+    //pin digital para buzzer
+    Blockly.Blocks['buzzerpin'] = {
+      init: function() {
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldDropdown([["D3", "3"],["D5", "5"],["D7", "7"]]), "PIN");
+        this.setOutput(true, "pind");
+        this.setColour(210);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+      }
+    };
+
     //direccion
     Blockly.Blocks['direction'] = {
       init: function() {
