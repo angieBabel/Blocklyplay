@@ -19,6 +19,19 @@
                 navID = 'Instrucciones1';
 
         });
+        $scope.hidden = true;
+        $scope.isOpen = false;
+        $scope.hover = false;
+        $scope.isOpen = false;
+        $scope.selectedMode = 'md-scale';
+        $scope.items = [
+            { name: "Programming", icon: "../media/icons/window-programming.svg", direction: "left" },
+            { name: "Electronics", icon: "../media/icons/computer-chip-shield.svg", direction: "left" },
+            { name: "3d printing", icon: "../media/icons/document-shredder.svg", direction: "left" },
+            { name: "3d modeling", icon: "../media/icons/content-box-4.svg", direction: "left" },
+            { name: "Interactive card", icon: "../media/icons/paint-palette.svg", direction: "left" },
+            { name: "Brainstorming", icon: "../media/icons/chat-bubble-square-smiley.svg", direction: "left" }
+          ];
         switch(nivel){
             case 1:
                 $scope.nivel2= true;

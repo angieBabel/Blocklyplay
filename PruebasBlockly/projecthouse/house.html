@@ -63,16 +63,18 @@
             <div flex-gt-md="55" flex="45">
               <span>Dibuja el área de una casa</span>
             </div>
+            
           </div>
         </div>   
+
     </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
       <!-- Contenedor del toolbox y blockly -->
       <div flex="40" id="blocklyArea">
           <div id="blocklyDiv"></div>
+          
       </div>
-      <!-- container donde ira el canvas -->
       <div flex="60" id="canvasArea">
           <!-- tarjeta donde esta el canvas y los botones de accion -->
           <md-card  id="divCanvas">
@@ -127,6 +129,8 @@
             <md-button  class="md-raised md-hue-2" ng-style="{'background-color':'#0097A7','color':'#fff'}" ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button> 
           </div> 
       </div>
+      <!-- container donde ira el canvas -->
+      
     </div>
     <!-- para poner los alerts -->
      <div ng-style="{'display':'none'}">
