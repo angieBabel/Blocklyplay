@@ -286,8 +286,13 @@
           </shadow>
         </value>
       </block>
-      <block type="controls_whileUntil">
-      </block>
+      <block type="controls_whileUntil">    
+       <value name="BOOL">   
+         <shadow type="logic_compare">   
+               
+         </shadow>   
+       </value>    
+     </block> 
     </category>
 
     <category name="Move" colour="175">
@@ -476,10 +481,34 @@
         <block type="direction"></block>
     </category>
     <category name="Sensors" colour="210">
-        <block type="button"></block>
-        <block type="temperature"></block>
-        <block type="light"></block>
-        <block type="touch"></block>
+        <block type="button">   
+         <value name="PIN">    
+           <block type="pind">   
+             <field name="PIN">2</field>   
+           </block>    
+         </value>    
+       </block>    
+       <block type="temperature">    
+         <value name="PIN">    
+           <block type="pind">   
+             <field name="PIN">2</field>   
+           </block>    
+         </value>    
+       </block>    
+       <block type="light">    
+         <value name="PIN">    
+           <block type="pind">   
+             <field name="PIN">2</field>   
+           </block>    
+         </value>    
+       </block>    
+       <block type="touch">    
+         <value name="PIN">    
+           <block type="pind">   
+             <field name="PIN">2</field>   
+           </block>    
+         </value>    
+       </block>
     </category>
     <sep></sep>
     <category name="Variables" colour="355" custom="VARIABLE"></category>
