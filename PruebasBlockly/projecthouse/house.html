@@ -63,8 +63,10 @@
             <div flex-gt-md="55" flex="45">
               <span>Dibuja el área de una casa</span>
             </div>
+            
           </div>
         </div>   
+
     </md-toolbar>
     <!-- contenedor de los elementos -->
     <div layout="row">
@@ -72,61 +74,29 @@
       <div flex="40" id="blocklyArea">
           <div id="blocklyDiv"></div>
       </div>
-      <!-- container donde ira el canvas -->
-      <div flex="60" id="canvasArea">
-          <!-- tarjeta donde esta el canvas y los botones de accion -->
-          <md-card  id="divCanvas">
-            <!-- div con los botones de accion -->
-            <div id="divbotones" layout="row">
-              <div flex-md="70" flex-gt-md="75" ></div>
-              <div  flex-md="30" flex-gt-md="25" id="divbotones2">
-                <md-button class="md-icon-button" aria-label="Run" onclick="runCode()">
-                  <md-icon md-svg-icon="../media/icons/arrow-right-drop-circle.svg"></md-icon> 
-                </md-button>
-                <md-button class="md-icon-button" aria-label="Stop" onclick="stop()">
-                  <md-icon md-svg-icon="../media/icons/stop-circle.svg"></md-icon> 
-                </md-button>
-                <md-menu id="menubutton">
-                  <md-button class="md-icon-button" aria-label="More" ng-click="openMenu($mdOpenMenu, $event)">
-                    <md-icon md-svg-icon="../media/icons/dots-vertical.svg"></md-icon> 
-                  </md-button>
-                  <md-menu-content>
-                    <!-- mostrar codigo -->
-                    <md-menu-item>
-                      <md-button onclick="showCode()"><md-icon md-svg-icon="../media/icons/code-not-equal-variant.svg"></md-icon>Mostrar codigo</md-button>                    
-                    </md-menu-item>
-                    <!-- Download project -->
-                    <md-menu-item>
-                      <md-button  onclick="saveXML()"><md-icon md-svg-icon="../media/icons/download.svg"></md-icon> Descargar codigo</md-button>
-                    </md-menu-item>
-                    <!-- subir projecto -->
-                    <md-menu-item>
-                      <md-button onclick="showFileInput()" id='loadbutton'><md-icon md-svg-icon="../media/icons/upload.svg"></md-icon> Subir codigo</md-button>
-                      <input type='file' style="display:none" id='your-files'></input>
-                    </md-menu-item>
-                  </md-menu-content>
-                </md-menu>
-              </div>
+      <div>
+        <md-fab-speed-dial md-direction="up" md-open="isOpen" ng-class="selectedMode">
+          <md-fab-trigger>
+            <md-button aria-label="menu" ng-style="{'background-color':'#FF4081','color':'white'}" class="md-fab">
+              <md-icon md-svg-src="../media/icons/plus.svg" aria-label="menu"></md-icon>
+            </md-button>
+          </md-fab-trigger>
+          <md-fab-actions>
+            <div ng-repeat="item in items">
+              <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini"
+                         ng-click="openDialog($event, item)">
+                <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible"
+                            md-autohide="false">
+                  {{item.name}}
+                </md-tooltip>
+                <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+              </md-button>
             </div>
-            <!-- tabs que contienen los canvas -->
-            <md-content>
-              <md-tabs md-dynamic-height md-border-bottom md-selected="tablaactual" id="tabs">
-                <md-tab label="nivel1" ng-disabled="nivel1" md-active="nivel1A" md-on-select="canvas1();" ng-click="toggle();"> 
-                  <canvas id="canvas1"></canvas>               
-                </md-tab>
-                <md-tab label="nivel2" ng-disabled="nivel2" md-active="nivel2A" md-on-select="canvas2();" ng-click="toggle();">
-                  <canvas id="canvas2"></canvas>
-                </md-tab>
-                <md-tab label="nivel3" ng-disabled="nivel3" md-active="nivel3A" md-on-select="canvas3();" ng-click="toggle();">
-                  <canvas id="canvas3"></canvas>
-                </md-tab>
-              </md-tabs>
-            </md-content>
-          </md-card>
-          <div id="publishB">
-            <md-button  class="md-raised md-hue-2" ng-style="{'background-color':'#0097A7','color':'#fff'}" ng-click="showTabDialog($event)"><md-icon md-svg-icon="../media/icons/cloud-upload.svg"></md-icon> Publicar reto</md-button> 
-          </div> 
+          </md-fab-actions>
+        </md-fab-speed-dial>
       </div>
+      <!-- container donde ira el canvas -->
+      
     </div>
     <!-- para poner los alerts -->
      <div ng-style="{'display':'none'}">
