@@ -5,17 +5,15 @@
       //el objeto de solutionObj se paso a moves.js
     function begin1(){
       canvas = document.getElementById('canvas1');
-      canvas.style.border='1px solid black';
-      canvas.style.margin='0px 0px 0px 10px';
       ctx = canvas.getContext('2d');
       ancho = document.getElementById('divCanvas').offsetWidth;
       alto = document.getElementById('divCanvas').offsetHeight;
       canvas.width= ancho;
       canvas.height = alto;
-      stepsizeX=canvas.width/30 ;
-      stepsizeY=canvas.height/22;
-      X = stepsizeX*12;
-      Y = stepsizeY*12;
+      stepsizeX=canvas.width/9 ;
+      stepsizeY=canvas.height/6;
+      X = stepsizeX*4.5;
+      Y = stepsizeY*3;
       positionObj.objX=X;
       positionObj.objY=Y;
       positionObj.objZ=0;
@@ -33,7 +31,7 @@
     //la funcion de stopTimer se paso al archivo de controlFunctions.js
     function panel1(){
       var imgback = new Image();
-              imgback.src = "../media/airplane.jpg";
+              imgback.src = "../media/mesa.png";
        imgback.onload = function() {
         ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
           while(initX<canvas.width-stepsizeX){
@@ -61,10 +59,10 @@
         ctx.translate(positionObj.objX,positionObj.objY);
         ctx.rotate(positionObj.objZ * (Math.PI/180));
         ctx.globalAlpha=1;
-        ctx.drawImage(img,stepsizeX*-4,stepsizeY*-4,stepsizeX*8,stepsizeY*8); 
+        ctx.drawImage(img,-stepsizeX*2,-stepsizeY*2,stepsizeX*4,stepsizeY*4); 
         ctx.restore();
       }
-      img.src = '../media/turbina2.png';//el img.src se pone despues del onload para asegurar su carga
+      img.src = '../media/Turbine.png';//el img.src se pone despues del onload para asegurar su carga
     }  
     //Compara si las paradas que hizo el niño estuvieron bien
       function check1(){

@@ -75,6 +75,27 @@
           <div id="blocklyDiv"></div>
           
       </div>
+      <!-- <div>
+        <md-fab-speed-dial md-direction="up" md-open="isOpen" ng-class="selectedMode">
+            <md-fab-trigger>
+              <md-button aria-label="menu" ng-style="{'background-color':'#FF4081','color':'white'}" class="md-fab" ng-click="tooltip();">
+                <md-icon md-svg-src="../media/icons/plus.svg" aria-label="menu"></md-icon>
+              </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+              <div ng-repeat="item in items">
+                <md-button aria-label="{{item.name}}" class="md-fab md-raised md-mini"
+                           ng-click="openDialog($event, item)">
+                  <md-tooltip md-direction="{{item.direction}}" md-visible="tooltipVisible"
+                              md-autohide="false">
+                    {{item.name}}
+                  </md-tooltip>
+                  <md-icon md-svg-src="{{item.icon}}" aria-label="{{item.name}}"></md-icon>
+                </md-button>
+              </div>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+      </div> -->
       <div flex="60" id="canvasArea">
           <!-- tarjeta donde esta el canvas y los botones de accion -->
           <md-card  id="divCanvas">

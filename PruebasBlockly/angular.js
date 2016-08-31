@@ -4,7 +4,7 @@
  var nivel=3;
 
  angular.module('Blocklyplay', ['ngMaterial'])
-      .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog) {
+      .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog,$timeout) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
           //funcion que compara si el usuario peude editar o no, si no puede deshabilita tanto el toolboox como el div
@@ -19,6 +19,8 @@
                 navID = 'Instrucciones1';
 
         });
+        /*$scope.teamRequests = [];
+        $scope.allStudents = [];
         $scope.hidden = true;
         $scope.isOpen = false;
         $scope.hover = false;
@@ -32,6 +34,16 @@
             { name: "Interactive card", icon: "../media/icons/paint-palette.svg", direction: "left" },
             { name: "Brainstorming", icon: "../media/icons/chat-bubble-square-smiley.svg", direction: "left" }
           ];
+        //$scope.tooltipVisible = $scope.isOpen;
+        $scope.tooltip = function() {
+          if ($scope.tooltipVisible) {
+            $scope.tooltipVisible = false;
+          }else{
+            $timeout(function() {
+              $scope.tooltipVisible = true;
+            }, 600);
+          }
+        };*/
         switch(nivel){
             case 1:
                 $scope.nivel2= true;
