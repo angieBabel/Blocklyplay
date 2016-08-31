@@ -1,3 +1,4 @@
+exerciseLevels = 3;
 /*scripts para el primer nievel*/
     /*var image;*/
     //las variables generales se pasaron a moves.js
@@ -34,7 +35,7 @@
               imgback.src = "../media/mesa.png";
        imgback.onload = function() {
         ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
-          while(initX<canvas.width-stepsizeX){
+          /*while(initX<canvas.width-stepsizeX){
             initX=initX+stepsizeX;
               while(initY<canvas.height-stepsizeY){
                 initY=initY+stepsizeY;
@@ -45,7 +46,7 @@
               }
               initY=0;
           }
-          initX=0;
+          initX=0;*/
           Avatar1();
         }
     }

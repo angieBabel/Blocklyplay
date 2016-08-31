@@ -1,5 +1,6 @@
 //inicialización de las variables
-var navID;
+    var navID;
+    var exerciseLevels;
     var domToPretty;//variable para guardar el XML
     var previa;//variable para tener la previa
     var puntaje=[0,0,0,0]; //para saber cuantas veces ha hecho los ejercicios
@@ -790,19 +791,24 @@ var navID;
       //rotar(positionObj.objZ,side)
       switch(currentpanel) {
       case 1:
-          Avatar1();
+          //Avatar1();
+          panel1();
           break;
       case 2:
-          Avatar2();
+          //Avatar2();
+          panel2();
           break;
       case 3:
-          Avatar3();
+          //Avatar3();
+          panel3();
           break;
       case 4:
-          Avatar4();
+          //Avatar4();
+          panel4();
           break;
       default:
-          Avatar1();
+          //Avatar1();
+          panel1();
           break;
     }
       i++;

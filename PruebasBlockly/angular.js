@@ -383,7 +383,7 @@
           
         });
       function DialogController($scope,$http, $mdDialog) {
-        if (usertype==1) {
+        if (usertype==1 || domToPretty=='<xml xmlns="http://www.w3.org/1999/xhtml"></xml>') {
             $scope.publishbutton=true;
             //document.getElementById('publishbutton').style.pointerEvents = 'none';
           };
@@ -411,20 +411,26 @@
               picture: previa,
               active: active
             };
-            //Call the services
-            $http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
-                console.log(data);
-              $scope.msg = "Post Data Submitted Successfully!";
-              if (wantstoexit[currentpanel-1]) {
+            //alert(exerciseLevels);
+            alert(domToPretty);
+            if (wantstoexit[currentpanel-1] || currentpanel >= exerciseLevels) {
                 location.href = '../index.html';
               };
-              $mdDialog.hide(); 
-            }, function (response) {
+            //Call the services
+            /*$http.post('http://wegoo-staging.herokuapp.com/v1/projects', JSON.stringify(data)).then(function (response) {
+                console.log(data);
+                $scope.msg = "Post Data Submitted Successfully!";
+                if (wantstoexit[currentpanel-1]) {
+                  location.href = '../index.html';
+                };
+                $mdDialog.hide(); 
+            }, 
+            function (response) {
               var erromessage = document.getElementById('publisherror').style="display:block"              
               $scope.msg = "Service not Exists";
               $scope.statusval = response.status;
               $scope.statustext = response.statusText;
               $scope.headers = response.headers();
-            });
+            });*/
           };
       }

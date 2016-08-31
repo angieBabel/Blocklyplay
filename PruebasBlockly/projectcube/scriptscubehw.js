@@ -1,3 +1,4 @@
+exerciseLevels = 1;
 /*scripts para el primer nivel*/
       //las variables generales se pasaron a moves.js
       //inicialización de las variables propias del ejercicio 1

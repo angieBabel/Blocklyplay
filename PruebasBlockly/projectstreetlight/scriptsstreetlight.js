@@ -1,3 +1,4 @@
+exerciseLevels = 3;
 /*scripts para el primer nivel*/
   //vector de posiciones donde estaban los semaforos y donde hizo un alto
   var semaforos=[],altos=[]; 

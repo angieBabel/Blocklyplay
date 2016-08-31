@@ -1,3 +1,4 @@
+exerciseLevels = 3;
 /*scrips para el primer nivel*/
   /*var image;*/
   //las variables generales se pasaron a moves.js
