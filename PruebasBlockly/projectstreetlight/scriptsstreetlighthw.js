@@ -60,7 +60,7 @@ exerciseLevels = 3;
                   while(initY<canvas.height-stepsizeY){
                     initY=initY+stepsizeY;
                     ctx.beginPath();
-                    ctx.fillStyle = "cyan";
+                    ctx.fillStyle = "#fff";
                     ctx.arc(initX,initY,1.5,0,2*Math.PI);
                     ctx.fill();
                   }
@@ -97,18 +97,26 @@ exerciseLevels = 3;
                     led3.src = "../media/ledGreenOff.png";
                 }
               };
+        ctx.font="20px arial";
+        ctx.textAlign="center"; 
         led1.onload = function() {
             ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
           }
         led2.onload = function() {
             ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
           }
         led3.onload = function() {
             ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
           }
           ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
           ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
           ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
           //acabo=1;
       }
 
@@ -125,6 +133,293 @@ exerciseLevels = 3;
         };
         //si coincidio en todas las paradas, sin importar el orden lo da por bueno
         if (coincidencias==solution.length) {
+          var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
+        }else{
+         var wrong =document.getElementById('Wrong').click()
+        }
+      }
+/*scripts para el segundo nivel*/
+      //las variables generales se pasaron a moves.js
+      //inicialización de las variables propias del ejercicio 1
+      var pasitos=4;
+      var solution=[];
+      var altos=[];
+      
+      //se crean las variables de las imagenes para que sean globales
+      var led1 = new Image();
+      var led2 = new Image();
+      var led3 = new Image();
+      
+      //la variable de positionObj se paso a moves.js
+      //el objeto de solutionObj se paso a moves.js
+      function begin2(){
+        alert('begin 2')
+        respuesta.splice(0,respuesta.length);//inicializa los vectores
+        solution.splice(0,solution.length);//inicializa los vectores
+        canvas = document.getElementById('canvas2');
+        ctx = canvas.getContext('2d');
+        ancho = document.getElementById('divCanvas').offsetWidth;
+        alto = document.getElementById('divCanvas').offsetHeight;
+        canvas.width= ancho;
+        canvas.height = alto;
+        wimg=8;
+
+        stepsizeX=canvas.width/9;
+        stepsizeY=canvas.height/6;
+
+        X = stepsizeX;
+        Y = stepsizeY/2;
+        //se inicializa la posicion del objeto, aqui es donde se pintara la linea
+        positionObj.objX=X;//350;
+        positionObj.objY=Y;//142;
+        positionObj.objZ=0;
+        //se inicializan los valores auxiliares para poder pintar
+        Xaux = positionObj.objX;
+        Yaux= positionObj.objY;
+        pinled=0;
+
+        solution.push(new ledObj(4,'On'));
+        solution.push(new ledObj(4,'Off'));
+
+        solution.push(new ledObj(3,'On'));
+        solution.push(new ledObj(3,'Off'));
+
+        solution.push(new ledObj(2,'On'));
+        solution.push(new ledObj(2,'Off'));        
+        panel2();
+      }
+      //la funcion de stopTimer se paso al archivo de controlFunctions.js
+       function panel2(){
+          var imgback = new Image();
+                  imgback.src = "../media/semaforo_hardware.png";
+                
+           imgback.onload = function() {
+            ctx.drawImage(imgback, 0, 0,ancho,alto);
+              
+             while(initX<canvas.width-stepsizeX){
+                initX=initX+stepsizeX;
+                  while(initY<canvas.height-stepsizeY){
+                    initY=initY+stepsizeY;
+                    ctx.beginPath();
+                    ctx.fillStyle = "cyan";
+                    ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                    ctx.fill();
+                  }
+                  initY=0;
+              }
+              initX=0;
+              Avatar2();
+            }
+        }
+
+      //Drawing avatar
+      function Avatar2(){
+        avatarwith=stepsizeX;avatarheight=stepsizeY;
+           if (pinled==0) {
+                    led1.src = "../media/ledRedOff.png";
+                    led2.src = "../media/ledYellowOff.png";
+                    led3.src = "../media/ledGreenOff.png";
+              }else if (pinled==2) {
+                if (ledstatus=='On') {
+                    led1.src = "../media/ledRedOn.png";
+                }else{
+                    led1.src = "../media/ledRedOff.png";
+                };
+              }else if(pinled==3){
+                if (ledstatus=='On') {
+                    led2.src = "../media/ledYellowOn.png";
+                }else{
+                    led2.src = "../media/ledYellowOff.png";
+                };
+              }else if (pinled==4){
+                if (ledstatus=='On') {
+                    led3.src = "../media/ledGreenOn.png";
+                }else{
+                    led3.src = "../media/ledGreenOff.png";
+                }
+              };
+        ctx.font="20px arial";
+        ctx.textAlign="center"; 
+        led1.onload = function() {
+            ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
+          }
+        led2.onload = function() {
+            ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
+          }
+        led3.onload = function() {
+            ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
+          }
+          ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
+          ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
+          ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
+          //acabo=1;
+      }
+
+      function check2(){
+        var coincidencias=0;
+        //ciclo anidado que recorre y compara todos los elementos del vector solution, contra todos los del vector respuesta del niño
+        if (solution.length==respuesta.length) {
+          for (var i = 0; i < solution.length; i++) {
+            //alert(solution[i].Pin+','+respuesta[i].Pin +' turns'+ solution[i].Turn+','+respuesta[i].Turn)
+            if (solution[i].Pin==respuesta[i].Pin && solution[i].Turn==respuesta[i].Turn) {
+              coincidencias+=1;
+            };
+          }
+        };
+        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+        if (coincidencias==solution.length && altos.length>=2) {
+          var correct =document.getElementById('Correct').click()
+          correcto[currentpanel-1]=true;
+        }else{
+         var wrong =document.getElementById('Wrong').click()
+        }
+      }
+/*scripts para el tercer nivel*/
+      //las variables generales se pasaron a moves.js
+      //inicialización de las variables propias del ejercicio 1
+      var pasitos=4;
+      var solution=[];
+      
+      //se crean las variables de las imagenes para que sean globales
+      var led1 = new Image();
+      var led2 = new Image();
+      var led3 = new Image();
+      
+      //la variable de positionObj se paso a moves.js
+      //el objeto de solutionObj se paso a moves.js
+      function begin3(){
+        respuesta.splice(0,respuesta.length);//inicializa los vectores
+        solution.splice(0,solution.length);//inicializa los vectores
+        canvas = document.getElementById('canvas3');
+        ctx = canvas.getContext('2d');
+        ancho = document.getElementById('divCanvas').offsetWidth;
+        alto = document.getElementById('divCanvas').offsetHeight;
+        canvas.width= ancho;
+        canvas.height = alto;
+        wimg=8;
+
+        stepsizeX=canvas.width/9;
+        stepsizeY=canvas.height/6;
+
+        X = stepsizeX;
+        Y = stepsizeY/2;
+        //se inicializa la posicion del objeto, aqui es donde se pintara la linea
+        positionObj.objX=X;//350;
+        positionObj.objY=Y;//142;
+        positionObj.objZ=0;
+        //se inicializan los valores auxiliares para poder pintar
+        Xaux = positionObj.objX;
+        Yaux= positionObj.objY;
+        pinled=0;
+
+        solution.push(new ledObj(4,'On'));
+        solution.push(new ledObj(4,'Off'));
+        solution.push(new ledObj(4,'On'));
+        solution.push(new ledObj(4,'Off'));
+        solution.push(new ledObj(4,'On'));
+        solution.push(new ledObj(4,'Off'));
+        solution.push(new ledObj(4,'On'));
+        solution.push(new ledObj(4,'Off'));
+        solution.push(new ledObj(3,'On'));
+        solution.push(new ledObj(3,'Off'));
+
+        solution.push(new ledObj(2,'On'));
+        solution.push(new ledObj(2,'Off'));        
+        panel3();
+      }
+      //la funcion de stopTimer se paso al archivo de controlFunctions.js
+       function panel3(){
+          var imgback = new Image();
+                  imgback.src = "../media/semaforo_hardware.png";
+                
+           imgback.onload = function() {
+            ctx.drawImage(imgback, 0, 0,ancho,alto);
+              
+             while(initX<canvas.width-stepsizeX){
+                initX=initX+stepsizeX;
+                  while(initY<canvas.height-stepsizeY){
+                    initY=initY+stepsizeY;
+                    ctx.beginPath();
+                    ctx.fillStyle = "cyan";
+                    ctx.arc(initX,initY,1.5,0,2*Math.PI);
+                    ctx.fill();
+                  }
+                  initY=0;
+              }
+              initX=0;
+              Avatar3();
+            }
+        }
+
+      //Drawing avatar
+      function Avatar3(){
+        avatarwith=stepsizeX;avatarheight=stepsizeY;
+           if (pinled==0) {
+                    led1.src = "../media/ledRedOff.png";
+                    led2.src = "../media/ledYellowOff.png";
+                    led3.src = "../media/ledGreenOff.png";
+              }else if (pinled==2) {
+                if (ledstatus=='On') {
+                    led1.src = "../media/ledRedOn.png";
+                }else{
+                    led1.src = "../media/ledRedOff.png";
+                };
+              }else if(pinled==3){
+                if (ledstatus=='On') {
+                    led2.src = "../media/ledYellowOn.png";
+                }else{
+                    led2.src = "../media/ledYellowOff.png";
+                };
+              }else if (pinled==4){
+                if (ledstatus=='On') {
+                    led3.src = "../media/ledGreenOn.png";
+                }else{
+                    led3.src = "../media/ledGreenOff.png";
+                }
+              };
+        ctx.font="20px arial";
+        ctx.textAlign="center"; 
+        led1.onload = function() {
+            ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
+          }
+        led2.onload = function() {
+            ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
+          }
+        led3.onload = function() {
+            ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+            ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
+          }
+          ctx.drawImage(led1,stepsizeX*.5, stepsizeY*2 ,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 2',stepsizeX*1.5,stepsizeY*4.2);
+          ctx.drawImage(led2,stepsizeX*3.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 3',stepsizeX*4.5,stepsizeY*4.2);
+          ctx.drawImage(led3,stepsizeX*6.5, stepsizeY*2,avatarwith*2,avatarheight*2);
+          ctx.fillText('PIN 4',stepsizeX*7.5,stepsizeY*4.2);
+          //acabo=1;
+      }
+
+      function check3(){
+        var coincidencias=0;
+        //ciclo anidado que recorre y compara todos los elementos del vector solution, contra todos los del vector respuesta del niño
+        if (solution.length==respuesta.length) {
+          for (var i = 0; i < solution.length; i++) {
+            //alert(solution[i].Pin+','+respuesta[i].Pin +' turns'+ solution[i].Turn+','+respuesta[i].Turn)
+            if (solution[i].Pin==respuesta[i].Pin && solution[i].Turn==respuesta[i].Turn) {
+              coincidencias+=1;
+            };
+          }
+        };
+        //si coincidio en todas las paradas, sin importar el orden lo da por bueno
+        if (coincidencias==solution.length && altos.length>=2) {
           var correct =document.getElementById('Correct').click()
           correcto[currentpanel-1]=true;
         }else{

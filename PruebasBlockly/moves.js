@@ -795,24 +795,24 @@
       //rotar(positionObj.objZ,side)
       switch(currentpanel) {
       case 1:
-          //Avatar1();
-          panel1();
+          Avatar1();
+          //panel1();
           break;
       case 2:
-          //Avatar2();
-          panel2();
+          Avatar2();
+          //panel2();
           break;
       case 3:
-          //Avatar3();
-          panel3();
+          Avatar3();
+          //panel3();
           break;
       case 4:
-          //Avatar4();
-          panel4();
+          Avatar4();
+          //panel4();
           break;
       default:
-          //Avatar1();
-          panel1();
+          Avatar1();
+          //panel1();
           break;
     }
       i++;

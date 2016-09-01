@@ -23,7 +23,7 @@ canvas {
 	/* top :  -10vh ;*/
 	 top :  4vh ;
 	 z-index :  4 ; 
-	 height :  70vh;
+	 height :  73vh;
 	 /*height :  90vh;*/
 }
 
@@ -58,7 +58,7 @@ text-align : justify;
 
 #publishB{
 	position: relative;
-	top: 6vh;
+	top: 5vh;
 	margin-left: 44vw;
 	z-index: 5;
 	height: 0%;

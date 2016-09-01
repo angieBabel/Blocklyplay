@@ -35,7 +35,7 @@ exerciseLevels = 3;
               imgback.src = "../media/mesa.png";
        imgback.onload = function() {
         ctx.drawImage(imgback, 0,0,canvas.width,canvas.height);
-          /*while(initX<canvas.width-stepsizeX){
+          while(initX<canvas.width-stepsizeX){
             initX=initX+stepsizeX;
               while(initY<canvas.height-stepsizeY){
                 initY=initY+stepsizeY;
@@ -46,7 +46,7 @@ exerciseLevels = 3;
               }
               initY=0;
           }
-          initX=0;*/
+          initX=0;
           Avatar1();
         }
     }
