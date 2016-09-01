@@ -231,7 +231,21 @@
               '</div>',
               controller: function wrongController($scope, $mdDialog) {
                 $scope.nuevointento = function() {
-                  location.reload();
+                  switch(currentpanel) {
+                    case 1:
+                        begin1();
+                        break;
+                    case 2:
+                        begin2();
+                        break;
+                    case 3:
+                        begin3();
+                    case 4:
+                        begin4();
+                    default:
+                        begin1();
+                  }
+                  $mdDialog.hide();
                 };
               }
            });

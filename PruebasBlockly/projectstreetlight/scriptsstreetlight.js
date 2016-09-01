@@ -24,10 +24,10 @@ exerciseLevels = 3;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
 
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*3,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*13,-2),Math.round10(stepsizeY*9,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*9,-2),0,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*23,-2),Math.round10(stepsizeY*13,-2),2,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),4,0));
+    //semaforos.push(new solutionObj(Math.round10(stepsizeX*4,-2),Math.round10(stepsizeY*3,-2),3,0));
+    //semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),5,0));
 
     
     panel1();
@@ -38,8 +38,8 @@ exerciseLevels = 3;
           imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
-    ii=-1;
-              jj=-1;
+      ii=-1;
+      jj=-1;
       ctx.drawImage(imgback, 0, 0,ancho,alto);
       while(initX<canvas.width-stepsizeX){
         initX=initX+stepsizeX;
@@ -50,10 +50,10 @@ exerciseLevels = 3;
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
             ii++;
-            ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+            //ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
           }
           jj++
-          ctx.fillText(jj,stepsizeX,stepsizeY*jj);
+          //ctx.fillText(jj,stepsizeX,stepsizeY*jj);
           initY=0;
       }
       initX=0;
@@ -61,40 +61,56 @@ exerciseLevels = 3;
       var semaforo = new Image();
           semaforo.src = "../media/stop_light.png";
      semaforo.onload = function() {
-      //semaforo uno
-      ctx.save();
-      ctx.translate(stepsizeX*23.5,stepsizeY*14);
-      ctx.rotate(90 * (Math.PI/180));
-      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
-      ctx.restore();
-      //semaforo dos
-      ctx.save();
-      ctx.translate(stepsizeX*25,stepsizeY*3.5);
-      //ctx.rotate(90 * (Math.PI/180));
-      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
-      ctx.restore();
-      //semaforo tres
-      ctx.save();
-      ctx.translate(stepsizeX*3.5,stepsizeY*2);
-      ctx.rotate(270 * (Math.PI/180));
-      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
-      ctx.restore();
-      //semaforo cuatro
-      ctx.save();
-      ctx.translate(stepsizeX*2,stepsizeY*14);
-      ctx.rotate(180 * (Math.PI/180));
-      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
-      ctx.restore();
-      
-        //ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX*.3,stepsizeY*.8);
-        //ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-        //ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
+        //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo tres
+        /*ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();*/
         
       }
-      ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-      ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
-      //ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-      //ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
+       //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo tres
+        ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
         
       Avatar1();
     }
@@ -155,9 +171,13 @@ exerciseLevels = 3;
     if (coincidencias==semaforos.length) {
       var correct =document.getElementById('Correct').click()
       correcto[currentpanel-1]=true;
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
       var wrong =document.getElementById('Wrong').click()
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
       //alert('Te ha faltado hacer una parada')
     }
   }
@@ -173,11 +193,12 @@ exerciseLevels = 3;
     alto = document.getElementById('divCanvas').offsetHeight;
     canvas.width= ancho;
     canvas.height = alto;
+
     stepsizeX=canvas.width/30;
     stepsizeY=canvas.height/20;
 
-    X = stepsizeX*15;
-    Y = stepsizeY*14;
+    X = stepsizeX*12;
+    Y = stepsizeY*18;
 
     positionObj.objX=X;
     positionObj.objY=Y;
@@ -186,10 +207,10 @@ exerciseLevels = 3;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
 
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*14,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*3,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*13,-2),Math.round10(stepsizeY*9,-2),0,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*9,-2),0,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*23,-2),Math.round10(stepsizeY*13,-2),2,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),4,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*4,-2),Math.round10(stepsizeY*3,-2),3,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),5,0));
     
     panel2();
   }
@@ -199,39 +220,79 @@ exerciseLevels = 3;
           imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
-    ii=-1;
-              jj=-1;
+      ii=-1;
+      jj=-1;
       ctx.drawImage(imgback, 0, 0,ancho,alto);
       while(initX<canvas.width-stepsizeX){
         initX=initX+stepsizeX;
           while(initY<canvas.height-stepsizeY){
             initY=initY+stepsizeY;
             ctx.beginPath();
-            ctx.fillStyle = "#E3E2E2";
+            ctx.fillStyle = "black";
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
             ii++;
-            ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+            /*ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);*/
           }
           jj++
-          ctx.fillText(jj,stepsizeX,stepsizeY*jj);
+          /*ctx.fillText(jj,stepsizeX,stepsizeY*jj);*/
           initY=0;
       }
       initX=0;
       painroad();
       var semaforo = new Image();
           semaforo.src = "../media/stop_light.png";
-     semaforo.onload = function() {
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-        ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-        ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
+      semaforo.onload = function() {
+        //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo tres
+        ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
         
       }
-      ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-      ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
-      ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-      ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
+       //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo tres
+        ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
         
       Avatar2();
     }
@@ -284,6 +345,7 @@ exerciseLevels = 3;
         //si en algun punto coinciden incrementa las coincidencias en 1
         if (semaforos[i].soX==altos[j].soX && semaforos[i].soY==altos[j].soY ) {
           //alert(i+'sema '+semaforos[i].soX+','+semaforos[i].soY+' altos '+altos[j].soX+','+altos[j].soY);
+          
           coincidencias+=1;
         }
       }
@@ -292,10 +354,14 @@ exerciseLevels = 3;
     if (coincidencias==semaforos.length) {
       var correct =document.getElementById('Correct').click()
       correcto[currentpanel-1]=true;
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
       var wrong =document.getElementById('Wrong').click()
       //alert('Te ha faltado hacer una parada')
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
     }
   }
 /*scripts para el segundo nivel*/
@@ -314,8 +380,8 @@ exerciseLevels = 3;
     stepsizeX=canvas.width/30;
     stepsizeY=canvas.height/20;
 
-    X = stepsizeX*15;
-    Y = stepsizeY*14;
+    X = stepsizeX*12;
+    Y = stepsizeY*18;
     positionObj.objX=X;
     positionObj.objY=Y;
     positionObj.objZ=0;
@@ -323,10 +389,10 @@ exerciseLevels = 3;
     Xaux = positionObj.objX;
     Yaux= positionObj.objY;
 
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*14,-2),2,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*3,-2),4,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*13,-2),Math.round10(stepsizeY*9,-2),3,0));
-    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*9,-2),5,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*23,-2),Math.round10(stepsizeY*13,-2),2,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*24,-2),Math.round10(stepsizeY*4,-2),4,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*4,-2),Math.round10(stepsizeY*3,-2),3,0));
+    semaforos.push(new solutionObj(Math.round10(stepsizeX*3,-2),Math.round10(stepsizeY*14,-2),5,0));
     
     panel3();
   }
@@ -336,22 +402,22 @@ exerciseLevels = 3;
           imgback.src = "../media/semaforo_dibujo.png";
 
    imgback.onload = function() {
-    ii=-1;
-              jj=-1;
+      ii=-1;
+      jj=-1;
       ctx.drawImage(imgback, 0, 0,ancho,alto);
       while(initX<canvas.width-stepsizeX){
         initX=initX+stepsizeX;
           while(initY<canvas.height-stepsizeY){
             initY=initY+stepsizeY;
             ctx.beginPath();
-            ctx.fillStyle = "#E3E2E2";
+            ctx.fillStyle = "black";
             ctx.arc(initX,initY,1.5,0,2*Math.PI);
             ctx.fill();
             ii++;
-            ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);
+            /*ctx.fillText(ii+1,stepsizeX*(ii+1),stepsizeY);*/
           }
           jj++
-          ctx.fillText(jj,stepsizeX,stepsizeY*jj);
+          /*ctx.fillText(jj,stepsizeX,stepsizeY*jj);*/
           initY=0;
       }
       initX=0;
@@ -359,28 +425,65 @@ exerciseLevels = 3;
       var semaforo = new Image();
           semaforo.src = "../media/stop_light.png";
       semaforo.onload = function() {
-        ctx.fillStyle = "red";
-        ctx.font = "20px Arial";
-        ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-        ctx.fillText(2,stepsizeX*23,stepsizeY*12);
-        ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
-        ctx.fillText(4,stepsizeX*25,stepsizeY*1.5);
-        ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-        ctx.fillText(3,stepsizeX*13,stepsizeY*7);
-        ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-        ctx.fillText(5,stepsizeX*4,stepsizeY*7);
+        //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(2,stepsizeX*23,stepsizeY*14.8);
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(4,stepsizeX*25,stepsizeY*3.5);
+        //semaforo tres
+        ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(3,stepsizeX*3.2,stepsizeY*2);
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(5,stepsizeX*2,stepsizeY*14.5);
         
       }
-      ctx.fillStyle = "red";
-      ctx.font = "20px Arial";
-      ctx.drawImage(semaforo, (stepsizeX*23),(stepsizeY*12),stepsizeX,stepsizeY*1.5);
-      ctx.fillText(2,stepsizeX*23,stepsizeY*12);
-      ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX,stepsizeY*1.5);
-      ctx.fillText(4,stepsizeX*25,stepsizeY*1.5);
-      ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-      ctx.fillText(3,stepsizeX*13,stepsizeY*7);
-      ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
-      ctx.fillText(5,stepsizeX*4,stepsizeY*7);
+       //semaforo uno
+        ctx.save();
+          ctx.translate(stepsizeX*23.5,stepsizeY*14);
+          ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(2,stepsizeX*23,stepsizeY*14.8);
+        //semaforo dos
+        ctx.save();
+          ctx.translate(stepsizeX*25,stepsizeY*3.5);
+          //ctx.rotate(90 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(4,stepsizeX*25,stepsizeY*3.5);
+        //semaforo tres
+        ctx.save();
+          ctx.translate(stepsizeX*3.5,stepsizeY*2);
+          ctx.rotate(270 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(3,stepsizeX*3.2,stepsizeY*2);
+        //semaforo cuatro
+        ctx.save();
+          ctx.translate(stepsizeX*2.3,stepsizeY*14);
+          ctx.rotate(180 * (Math.PI/180));
+          ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+        ctx.restore();
+          ctx.fillText(5,stepsizeX*2,stepsizeY*14.5);
+        
         
       Avatar3();
     }
@@ -437,14 +540,19 @@ exerciseLevels = 3;
         }
       }
     }
-    alert(coincidencias+' coincidencias');
     //si coincidio en todas las paradas, sin importar el orden lo da por bueno
     if (coincidencias==semaforos.length) {
       var correct =document.getElementById('Correct').click()
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
+
       correcto[currentpanel-1]=true;
       //alert('Felicidades haz realizado correctamente el puzzle')
     }else{
       var wrong =document.getElementById('Wrong').click()
+      semaforos.splice(0,semaforos.length);
+      altos.splice(0,altos.length);
+
       //alert('Te ha faltado hacer una parada')
     }
   }
