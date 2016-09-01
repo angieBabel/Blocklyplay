@@ -7,6 +7,9 @@
       .controller('AppCtrl', function ($scope,$http, $mdSidenav,$mdDialog,$timeout) {
         /*funcion on ready para que despliegue el sideNav de instrucciones*/
         angular.element(document).ready(function () {
+          $scope.nivel2= true;
+          $scope.nivel3= true;
+          $scope.nivel4= true;
           //funcion que compara si el usuario peude editar o no, si no puede deshabilita tanto el toolboox como el div
           if (usertype==1) {
             workspace.options.maxBlocks = 0;

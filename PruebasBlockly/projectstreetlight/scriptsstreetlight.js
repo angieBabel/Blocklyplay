@@ -61,12 +61,31 @@ exerciseLevels = 3;
       var semaforo = new Image();
           semaforo.src = "../media/stop_light.png";
      semaforo.onload = function() {
+      //semaforo uno
       ctx.save();
-      ctx.translate(stepsizeX*23,stepsizeY*14);
+      ctx.translate(stepsizeX*23.5,stepsizeY*14);
       ctx.rotate(90 * (Math.PI/180));
       ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
       ctx.restore();
-        
+      //semaforo dos
+      ctx.save();
+      ctx.translate(stepsizeX*25,stepsizeY*3.5);
+      //ctx.rotate(90 * (Math.PI/180));
+      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+      ctx.restore();
+      //semaforo tres
+      ctx.save();
+      ctx.translate(stepsizeX*3.5,stepsizeY*2);
+      ctx.rotate(270 * (Math.PI/180));
+      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+      ctx.restore();
+      //semaforo cuatro
+      ctx.save();
+      ctx.translate(stepsizeX*2,stepsizeY*14);
+      ctx.rotate(180 * (Math.PI/180));
+      ctx.drawImage(semaforo, 0,0,stepsizeX*.3,stepsizeY*.8);
+      ctx.restore();
+      
         //ctx.drawImage(semaforo, (stepsizeX*25),(stepsizeY*1.5),stepsizeX*.3,stepsizeY*.8);
         //ctx.drawImage(semaforo, (stepsizeX*13),(stepsizeY*7),stepsizeX,stepsizeY*1.5);
         //ctx.drawImage(semaforo, (stepsizeX*4),(stepsizeY*7),stepsizeX,stepsizeY*1.5);

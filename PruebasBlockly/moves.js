@@ -751,11 +751,15 @@
         case 3:
             Avatar3();
             /*acabo=1;*/
+            break;
         case 4:
             Avatar4();
+            break;
         default:
             Avatar1();
       }
+      respuesta.push(text);
+      //alert(respuesta[re;spuesta.length-1]);
       for (var i = 0; i < screentext.length; i++) {
         if (i<16) {
           ctx.fillText(screentext[i],stepsizeX*(3+i),stepsizeY*5);
