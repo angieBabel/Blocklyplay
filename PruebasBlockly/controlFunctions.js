@@ -387,10 +387,14 @@ function loadXML() {
 var SC=0;//contador de sockets, sirve para saber cuantos sockets se crearon
 var CF=false;//connection flag, sirve para en cuanto alguien detecto un error de conexion, los demas no emitan la alerta
 function pasoHW(){
+  var correct =document.getElementById('SelEdison').click()
+}
+function pasoHWE(edison){
+  //alert(edison);
   if (codeHW!=null) {
 
     var socket = null;
-    socket = io.connect('http://edison.local:3000',{'forceNew':true });
+    socket = io.connect('http://'+edison+':3000',{'forceNew':true });
     socket.connect();
     //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     codeHW = codeHW.replace(/[']/gi, "");

@@ -10,6 +10,7 @@
           $scope.nivel2= true;
           $scope.nivel3= true;
           $scope.nivel4= true;
+          $scope.edison= 'edison1'
           //funcion que compara si el usuario peude editar o no, si no puede deshabilita tanto el toolboox como el div
           if (usertype==1) {
             workspace.options.maxBlocks = 0;
@@ -195,7 +196,21 @@
                    $mdDialog.hide();
                 };
                 $scope.sendHW = function(){
-                  pasoHW();
+                  $scope.selectEdision();
+                  switch(currentpanel) {
+                    case 1:                  
+                        $scope.nivel2= false;
+                        break;
+                    case 2:                  
+                        $scope.nivel3= false;
+                        break;
+                    case 3:                  
+                        $scope.nivel4= false;
+                    case 4:                  
+                        /*aqui regresaria al menu principal o algo asi*/
+                    default:                  
+                        $scope.nivel2= false;
+                  }
                   $mdDialog.hide();
                 }
               }
@@ -245,6 +260,54 @@
                     default:
                         begin1();
                   }
+                  $mdDialog.hide();
+                };
+              }
+           });
+        };
+        $scope.selectEdision = function(ev) {
+           $mdDialog.show({
+              clickOutsideToClose: true,
+              scope: $scope,        // use parent scope in template
+              preserveScope: true,  // do not forget this if use parent scope
+              // Since GreetingController is instantiated with ControllerAs syntax
+              // AND we are passing the parent '$scope' to the dialog, we MUST
+              // use 'vm.<xxx>' in the template markup
+              template: 
+              '<div flex="50">'+
+                '<md-dialog aria-label="correct answer" id="correct answer">'+
+                  '<md-dialog-content >'+
+                   '<form>'+
+                    '<md-dialog-content>'+
+                      '<div class="md-dialog-content">'+
+                        '<h2>¡Elige tu tarjeta edison!</h2>'+
+                        '<p>Elige la tarjeta a la que deseas enviar el codigo.</p>'+
+                        '<select id="edison">'+
+                          '<option value="edison1">Edison 1</option>'+
+                          '<option value="edison2">Edison 2</option>'+
+                          '<option value="edison3">Edison 3</option>'+
+                        '</select>'+
+                      '</div>'+
+                    '</md-dialog-content>'+
+                    '<md-dialog-actions layout="row">'+
+                      '<md-button ng-click="canncel()" md-autofocus>'+
+                        'Cancelar'+
+                      '</md-button>'+
+                      '<md-button ng-click="sendHW()" md-autofocus>'+
+                        'Enviar'+
+                      '</md-button>'+
+                    '</md-dialog-actions>'+
+                  '</form>'+
+                  '</md-dialog-content>'+
+                '</md-dialog>'+
+              '</div>',
+              controller: function wrongController($scope, $mdDialog) {
+                $scope.sendHW = function() {
+                  var edisonn = document.getElementById('edison').value;
+                  pasoHWE(edisonn);
+                  $mdDialog.hide();
+                };
+                $scope.canncel = function() {
                   $mdDialog.hide();
                 };
               }
