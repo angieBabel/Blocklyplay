@@ -394,7 +394,7 @@ function pasoHWE(edison){
   if (codeHW!=null) {
 
     var socket = null;
-    socket = io.connect('http://'+edison+':3000',{'forceNew':true });
+    socket = io.connect('http://'+edison+'.local:3000',{'forceNew':true });
     socket.connect();
     //var codeHW = Blockly.JavaScript.workspaceToCode(workspace);
     codeHW = codeHW.replace(/[']/gi, "");
