@@ -18,8 +18,8 @@
     
     canvas.width= ancho;
     canvas.height = alto;
-    stepsizeX=canvas.width/21;
-    stepsizeY=canvas.height/14;
+    stepsizeX=canvas.width/9;
+    stepsizeY=canvas.height/6;
 
     X = stepsizeX*4;
     Y = stepsizeY*4;

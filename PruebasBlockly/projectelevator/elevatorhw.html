@@ -161,7 +161,7 @@
        <!-- informacion general del nivel -->
        <div layout="column">
           <div>
-            <strong>Haz funcionar una turbina</strong>
+            <strong>Controlemos un elevador</strong>
           </div>
           <div layout="row" layout-align="start center">
             <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel uno</strong></div>
@@ -177,13 +177,13 @@
             </div>
           </div>
           <div>
-            <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 15 pts
+            <md-icon md-svg-icon="../media/icons/cube.svg"></md-icon> 10 pts
           </div>
        </div>
        <!-- instrucciones -->
        <div layout="column"  ng-controller="RightCtrl" layout-align="center center">
           <div>
-            <p>Con los bloques de hardware haz un programa que gire el motor 3 veces hacia la derecha en 5ta velocidad, despues que gire 2 veces hacia la izquierda en 7ma velocidad, por ultimo media vuelta hacia la derecha en 2da velocidad y media hacia la izquierda en 5ta velocidad, no olivdes hacer tu programa mas optimo utilizando bloques de ciclos.</p>
+            <p>Controlemos un elevador! con los bloques de hardware movamos el motor del elevador para que suba o baje a los diferentes pisos, en este ejercicio deberas llevar el elevador hasta el primer piso, e imprime el piso al que llega (ej. "piso n"), toma en cuenta que estas en el lobby del edificio y debes de subir un piso, puedes hacerlo a la velocidad que desees e imprimir el texto que quieras, asegurate de imprimir el piso después de haber movido el elevador y poner el piso con numero (ej. piso 1).</p>
           </div>
           <div>
             <md-button id="comenzar" class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  ng-show="buttonshow" flex-gt-md="auto" ng-click="loadCV()">
@@ -230,6 +230,60 @@
           </div>
         </div>
         <div>
+          <md-icon md-svg-icon="../../media/icons/cube.svg"></md-icon> 20 pts
+        </div>
+
+       </div>
+       <!-- instrucciones -->
+       <div layout="column"   layout-align="center center">
+          <div>
+            <p>¡Bien hecho! ahora supongamos que estás en el 4 piso y deseas llegar hasta el segundo piso, arma tu codigo para bajar 2 pisos y llegar a donde deseas, puedes hacerlo a la velocidad que desees e imprimir el texto que quieras, asegúrate de imprimir el piso después de haber movido el elevador y poner el piso con numero (ej. piso 1).</p>
+          </div>
+          <div>
+            <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
+                Comenzar reto 
+          </md-button>
+          </div>
+       </div>
+      </md-content>
+    </md-sidenav>
+    <!-- side nav de instrucciones de nivel 3-->
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="Instrucciones3" ng-style="{'background-color':'#0097A7'}" >
+      <md-toolbar ng-style="{'background-color':'#0097A7'}" ng-controller="RightCtrl">
+        <div class="md-toolbar-tools">
+          <h2>
+            <span>Instrucciones</span>
+          </h2>
+          <span flex></span>            
+          <md-button class="md-icon-button" ng-click="close()">
+            <md-icon><i class="material-icons">close</i></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" layout-padding ng-style="{'background-color':'#0097A7','color':'white'}">
+       <!-- imagen previa -->
+       <div>
+        <img style="margin: auto; width: 100%; height:20%;" alt="preview" src="../media/mapa_casa.png">
+       </div>
+       <!-- informacion general del nivel -->
+       <div layout="column">
+        <div>
+          <strong>Dibuja el área de una casa</strong>
+        </div>
+        <div layout="row" layout-align="start center">
+          <div ng-style="{'color':'yellow'}" flex="40"><strong>Nivel tres</strong></div>
+          <div flex="60" layout="row"   layout-align="center center">
+            <div>
+              <span>Avanzado</span>
+            </div>
+            <div>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star</i>
+              <i class="material-icons">star</i>
+            </div>
+          </div>
+        </div>
+        <div>
           <md-icon md-svg-icon="../../media/icons/cube.svg"></md-icon> 30 pts
         </div>
 
@@ -237,7 +291,7 @@
        <!-- instrucciones -->
        <div layout="column"   layout-align="center center">
           <div>
-            <p >Para que una turbina funcione es importante que tenga una hélice, ayudanos a crear la nuestra! Con los bloques de mover pintando, dibuja el contorno de la hélice que esta en tu canvas, recuerda utilizar un ciclo para que uses los menos bloques posibles.</p>
+            <p>¡Gran trabajo! Ahora deberás de llevar a diferentes personas en el elevador, primero, desde el lobby sube hasta el 4to piso e indica que estás en ese piso, después baja hasta el piso 2 e indicarles a los pasajeros que haz llegado al piso 2, después regresa al piso 3 e imprime en la pantalla en que piso estas, finalmente baja hasta el piso 1 e indica que haz llegado al piso 1.</p>
           </div>
           <div>
             <md-button class="md-warn md-raised md-hue-2" ng-style="{'background-color':'#FF4081','color':'white', 'align': 'center'}" flex="100"  flex-gt-md="auto" ng-show="buttonshow" ng-click="loadCV()" >
@@ -402,7 +456,7 @@
           </value>
           <value name="direction">
             <shadow type="direction">
-              <field name="direction">Forward</field>
+              <field name="direction">forward</field>
             </shadow>
           </value>
           <value name="speed">
